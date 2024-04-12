@@ -207,7 +207,7 @@ TITLE {
     type: title;
 
     # 移動先のスクリプトファイル
-    file: init.s2sc;
+    file: init.txt;
 
     # 座標とサイズ
     x: 800;

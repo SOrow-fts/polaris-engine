@@ -11,7 +11,7 @@
 :start-rain
 @layer effect1 effect/rain/1.png
 @layer effect2 effect/rain/1.png
-@anime rain.anime async,reg00
+@anime rain.txt async,reg00
 @return
 
 # 雨エフェクト終了
@@ -30,7 +30,7 @@
 :start-snow
 @layer effect1 effect/snow/snow-circle1.png
 @layer effect2 effect/snow/snow-circle1.png
-@anime snow.anime async,reg00
+@anime snow.txt async,reg00
 @return
 
 # 粉雪エフェクト開始
@@ -38,7 +38,7 @@
 :start-powder-snow
 @layer effect1 effect/snow/snow-powder-small2.png
 @layer effect2 effect/snow/snow-powder-small2.png
-@anime snow-2.anime async,reg00
+@anime snow-2.txt async,reg00
 @return
 
 # 雪エフェクト終了

@@ -38,7 +38,7 @@
 
 # メニューを表示する
 :MENU
-@メニュー ファイル=title.gui
+@メニュー ファイル=title.txt
 
 # メニューで"START"が選択されたとき、ここにジャンプしてくる
 :START
@@ -48,12 +48,12 @@
 
 # メニューで"LOAD"が選択されたとき、ここにジャンプしてくる
 :LOAD
-@メニュー ファイル=load.gui cancel
+@メニュー ファイル=load.txt cancel
 @ジャンプ 行き先=MENU
 
 # メニューで"CONFIG"が選択されたとき、ここにジャンプしてくる
 :CONFIG
-@メニュー ファイル=system.gui cancel
+@メニュー ファイル=system.txt cancel
 @ジャンプ 行き先=MENU
 
 
@@ -76,8 +76,8 @@
 
 #wmsでメッセージボックスをクリア状態にした後、
 #animeを使用してメッセージボックスをフェードインさせる
-@wms clear-msgbox.wms
-@anime msgbox-show.anime forcemsgbox
+@wms clear-msgbox.txt
+@anime msgbox-show.txt forcemsgbox
 
 
 背景を変更しますか？
@@ -87,15 +87,15 @@
 :L1
 
 #animeを使用してメッセージボックスをフェードアウトさせる
-@anime msgbox-out.anime forcemsgbox
+@anime msgbox-out.txt forcemsgbox
 
 #背景を変更する
 @bg roof.png 1.0
 
 #animeを使用してメッセージボックスをフェードインさせる
 #（フェードアウト後、フェードインを忘れると文字が表示されなくなります）
-@wms clear-msgbox.wms
-@anime msgbox-show.anime forcemsgbox
+@wms clear-msgbox.txt
+@anime msgbox-show.txt forcemsgbox
 
 :L2
 
@@ -127,10 +127,10 @@
 ###
 
 #animeを使用してメッセージボックスをフェードアウトさせる
-@anime msgbox-out.anime forcemsgbox
+@anime msgbox-out.txt forcemsgbox
 
 #背景を真っ白にする
 @bg #ffffff 1.0
 
 #タイトルへ戻る
-@load init.s2sc
+@load init.txt

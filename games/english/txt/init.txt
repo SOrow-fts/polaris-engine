@@ -44,7 +44,7 @@
 @chapter "Menu"
 
 # Call the menu.
-@gui file=title.gui nofadein
+@gui file=title.txt nofadein
 
 # When START is selected:
 :START
@@ -53,15 +53,15 @@
 # When LOAD is selected:
 :LOAD
 @chapter Load
-@gui file=load.gui cancellable
+@gui file=load.txt cancellable
 @goto MENU
 
 # When CONFIG is selected:
 :CONFIG
 @chapter Config
-@gui system.gui cancellable
+@gui system.txt cancellable
 
-# Note that we'll come here only when system.gui is canceled
+# Note that we'll come here only when system.txt is canceled
 @goto MENU
 
 # When QUIT is selected:
@@ -293,7 +293,7 @@ If there's anything you want to customize, but can't, please contact the Team.
 *Midori*e031.ogg*I hope you'll send me an e-mail with your questions, feedback, issues, or even just to say hi! – See you next time!
 
 # Shake the message box.
-@anime msgbox-shake.anime sync,showmsgbox
+@anime msgbox-shake.txt sync,showmsgbox
 
 @vol bgm 0.0 1.0
 
@@ -320,4 +320,4 @@ It's still a secret, but Suika2 will be renamed Polaris Engine.
 :END
 
 # Reload this file.
-@load init.s2sc
+@load init.txt

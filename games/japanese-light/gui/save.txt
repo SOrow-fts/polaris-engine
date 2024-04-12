@@ -1,14 +1,14 @@
 ###
-### ロード画面のGUI定義
+### セーブ画面のGUI定義
 ###
 
 # このファイルの基本設定
 global {
     # 下記の画像を使用する
-    base:   system/load/base.png;
-    idle:   system/load/idle.png;
-    hover:  system/load/hover.png;
-    active: system/load/active.png;
+    base:   system/save/base.png;
+    idle:   system/save/idle.png;
+    hover:  system/save/hover.png;
+    active: system/save/active.png;
 
     # 1画面あたりのセーブデータ表示数を指定
     saveslots: 3;
@@ -23,7 +23,7 @@ global {
     fadeout: 0.5;
 
     # 読み上げテキスト
-    alt: ロード画面が表示されています。左右のキーを押してください。;
+    alt: セーブ画面が表示されています。左右のキーを押してください。;
 }
 
 # 元の画面に戻るボタン
@@ -49,8 +49,8 @@ BACK {
 
 # セーブデータ1番目
 SAVESLOT1 {
-    # 種類:ロード
-    type: load;
+    # 種類:セーブ
+    type: save;
 
     # セーブデータ番号0
     index: 0;
@@ -76,13 +76,13 @@ SAVESLOT1 {
     clickse: click.ogg;
 
     # 読み上げテキスト
-    alt: このボタンを押すとセーブスロット1からロードします。;
+    alt: このボタンを押すとセーブスロット1にセーブします。;
 }
 
 # セーブデータ2番目
 SAVESLOT2 {
-    # 種類:ロード
-    type: load;
+    # 種類:セーブ
+    type: save;
 
     # セーブデータ番号1
     index: 1;
@@ -108,13 +108,13 @@ SAVESLOT2 {
     clickse: click.ogg;
 
     # 読み上げテキスト
-    alt: このボタンを押すとセーブスロット2からロードします。;
+    alt: このボタンを押すとセーブスロット2にセーブします。;
 }
 
 # セーブデータ3番目
 SAVESLOT3 {
-    # 種類:ロード
-    type: load;
+    # 種類:セーブ
+    type: save;
 
     # セーブデータ番号2
     index: 2;
@@ -140,7 +140,7 @@ SAVESLOT3 {
     clickse: click.ogg;
 
     # 読み上げテキスト
-    alt: このボタンを押すとセーブスロット3からロードします。;
+    alt: このボタンを押すとセーブスロット3にセーブします。;
 }
 
 # セーブデータページ1のボタン
@@ -216,25 +216,25 @@ PAGE3 {
 }
 
 # タイトルへ戻るボタン
-TITLE {
-    # 種類:タイトルへ戻る
-    type: title;
-
-    # 移動先のシナリオファイル
-    file: init.s2sc;
-
-    # 座標とサイズ
-    x: 967;
-    y: 625;
-    width: 174;
-    height: 80;
-
-    # ポイントされたときの効果音
-    pointse: btn-change.ogg;
-
-    # クリックされたときの効果音
-    clickse: click.ogg;
-
-    # 読み上げテキスト
-    alt: このボタンはゲームのタイトル画面に戻るものです。;
-}
+#TITLE {
+#    # 種類:タイトルへ戻る
+#    type: title;
+#
+#    # 移動先のシナリオファイル
+#    file: init.txt;
+#
+#    # 座標とサイズ
+#    x: 922;
+#    y: 41;
+#    width: 80;
+#    height: 80;
+#
+#    # ポイントされたときの効果音
+#    pointse: btn-change.ogg;
+#
+#    # クリックされたときの効果音
+#    clickse: click.ogg;
+#
+#    # 読み上げテキスト
+#    alt: このボタンはゲームのタイトル画面に戻るものです。;
+#}

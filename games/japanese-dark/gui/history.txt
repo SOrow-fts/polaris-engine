@@ -143,7 +143,7 @@ SCROLL {
 #    type: title;
 #
 #    # 移動先のシナリオファイル
-#    file: init.s2sc;
+#    file: init.txt;
 #
 #    # 座標とサイズ
 #    x: 967;

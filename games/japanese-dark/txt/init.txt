@@ -43,7 +43,7 @@
 
 # メニューを表示する
 :MENU
-@メニュー ファイル=title.gui
+@メニュー ファイル=title.txt
 
 # メニューで"START"が選択されたとき、ここにジャンプしてくる
 :START
@@ -53,12 +53,12 @@
 
 # メニューで"LOAD"が選択されたとき、ここにジャンプしてくる
 :LOAD
-@メニュー ファイル=load.gui cancel
+@メニュー ファイル=load.txt cancel
 @ジャンプ 行き先=MENU
 
 # メニューで"CONFIG"が選択されたとき、ここにジャンプしてくる
 :CONFIG
-@メニュー ファイル=system.gui cancel
+@メニュー ファイル=system.txt cancel
 @ジャンプ 行き先=MENU
 
 ###
@@ -282,7 +282,7 @@ Suika2で制作されたゲームが続々とストア公開されています�
 *みどり*025.ogg*それじゃ、また会おうね！
 
 # メッセージボックスを揺らす
-@anime msgbox-shake.anime sync,showmsgbox
+@anime msgbox-shake.txt sync,showmsgbox
 
 ###
 ### シーン6 (おまけ)
@@ -327,7 +327,7 @@ Suika2で制作されたゲームが続々とストア公開されています�
 ###  - 終了のラベルより手前で、直接実行されない箇所に書く
 ###
 
-using effect.s2sc
+using effect.txt
 
 ###
 ### 終了
@@ -337,8 +337,8 @@ using effect.s2sc
 
 :END
 
-# init.s2scを読み込み直して、先頭から実行する
-@load init.s2sc
+# init.txtを読み込み直して、先頭から実行する
+@load init.txt
 
 ###
 ### いかがでしたか？いろいろな記法がありますが、お好みのものをお使いください！
