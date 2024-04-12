@@ -2,7 +2,7 @@ DESTDIR=/usr/local
 
 build: polaris-engine-runtime polaris-engine
 
-polaris-engine:
+polaris-engine-runtime:
 	@# Guard if macOS.
 	@if [ ! -z "`uname | grep Darwin`" ]; then \
 		echo 'You cannot run Makefile on macOS.'; \
