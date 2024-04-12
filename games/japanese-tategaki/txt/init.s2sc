@@ -1,0 +1,136 @@
+###
+### ロゴ
+###
+### この章は、省略なしの英語で書かれています。
+###
+
+# スキップを禁止して、ロゴ表示をスキップできなくする
+@skip disable
+
+# ステージを白い背景でクリアします
+@bg file=white.png duration=0
+
+# Suikaロゴを表示します
+@ch position=center file=logo.png duration=1.0
+
+# Suikaボイスを再生します
+@se file=suika.ogg
+
+# 2秒待ちます
+@wait duration=2.0
+
+# Suikaロゴを消します
+@ch position=center file=none duration=1.0
+
+# スキップを許可します
+@skip enable
+
+###
+### メニュー
+###
+
+# BGMを再生する
+@音量 トラック=音楽 音量=1.0
+@音楽 ファイル=01.ogg
+
+# メニューの背景を表示する
+@背景 ファイル=title.png 1.0
+
+# メニューを表示する
+:MENU
+@メニュー ファイル=title.gui
+
+# メニューで"START"が選択されたとき、ここにジャンプしてくる
+:START
+
+# シーン1にジャンプする
+@ジャンプ 行き先=シーン1
+
+# メニューで"LOAD"が選択されたとき、ここにジャンプしてくる
+:LOAD
+@メニュー ファイル=load.gui cancel
+@ジャンプ 行き先=MENU
+
+# メニューで"CONFIG"が選択されたとき、ここにジャンプしてくる
+:CONFIG
+@メニュー ファイル=system.gui cancel
+@ジャンプ 行き先=MENU
+
+
+
+
+
+:シーン1
+
+#BGMをストップする
+@vol bgm 0 1.0
+@wait 1.0
+
+@bgm stop
+
+#背景を真っ暗にする
+@bg #000000 1.0
+
+#背景を変更する
+@bg coast.png 1.0
+
+#wmsでメッセージボックスをクリア状態にした後、
+#animeを使用してメッセージボックスをフェードインさせる
+@wms clear-msgbox.wms
+@anime msgbox-show.anime forcemsgbox
+
+
+背景を変更しますか？
+
+@ichoose L1 はい L2 いいえ
+
+:L1
+
+#animeを使用してメッセージボックスをフェードアウトさせる
+@anime msgbox-out.anime forcemsgbox
+
+#背景を変更する
+@bg roof.png 1.0
+
+#animeを使用してメッセージボックスをフェードインさせる
+#（フェードアウト後、フェードインを忘れると文字が表示されなくなります）
+@wms clear-msgbox.wms
+@anime msgbox-show.anime forcemsgbox
+
+:L2
+
+キャラクタを表示します。
+
+@ch center 001-happy.png 1.0
+
+１番目の文章画面。ここで一度クリックを待ちます。
+\クリック後に行を継続します。
+\何回でも継続できますが自動スクロールは今のところありません。
+
+２番目の文章画面。改行の方法について説明します。
+\この記述だと改行されずに行が継続されますが、
+\\nこの記述だと改行されます。
+
+３番目の文章画面。セリフを継続する方法がいくつかあるため、ここで説明します。
+みどり「\この記法でセリフを継続することができます。」
+*みどり*\この記法でもセリフを継続することができます。
+*みどり*\\nしかしながら、セリフを継続する場合は改行を入れた方がいいですね。
+
+以上です。
+
+
+
+
+
+###
+###終了処理
+###
+
+#animeを使用してメッセージボックスをフェードアウトさせる
+@anime msgbox-out.anime forcemsgbox
+
+#背景を真っ白にする
+@bg #ffffff 1.0
+
+#タイトルへ戻る
+@load init.s2sc

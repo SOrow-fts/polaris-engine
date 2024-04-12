@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Polaris Engine</string>
+    <style name="Theme.AppCompat" parent="android:Theme.Light" />
+</resources>
