@@ -33,7 +33,7 @@
         <li class="nav-item"><a class="nav-link" aria-current="page" href="/en/dl/">Downloads</a></li>
 				<li class="nav-item dropdown" aria-current="page">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-						Document
+						Documents
 					</a>
 					<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
 						<li><a class="dropdown-item" href="/en/wiki/">Index</a></li>
@@ -42,7 +42,6 @@
 						<li><a class="dropdown-item" href="/en/wiki/?cmd=search">Search</a></li>
 					</ul>
 				</li>
-        <li class="nav-item"><a class="nav-link" href="/en/works/">Works</a></li>
         <li class="nav-item"><a class="nav-link" href="/">Japanese</a></li>
         <li class="nav-item dropdown d-block d-md-none">
           <a class="btn btn-outline-success rounded-0 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-moon"></i></a>
