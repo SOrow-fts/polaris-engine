@@ -1,5 +1,5 @@
-polaris-engine (1.0.0-1) jammy; urgency=medium
+polaris-engine (1.0.2-1) jammy; urgency=medium
 
   * Sync upstream
 
- -- Keiichi Tabata <tabata@polaris-engine.com>  Fri, 11 Apr 2024 06:47:57 +0900
+ -- Keiichi Tabata <ktabata@polaris-engine.com>  Sat, 13 Apr 2024 22:18:44 +0900

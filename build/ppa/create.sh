@@ -4,7 +4,7 @@ set -eu
 
 # Get the version Polaris Engine.
 VERSION=`grep -a1 '<!-- BEGIN-LATEST-JP -->' ../../ChangeLog | tail -n1`
-VERSION=`echo $VERSION | cut -d '>' -f 3`
+VERSION=`echo $VERSION | cut -d ' ' -f 3`
 
 # Get the minor version.
 MINOR=1
@@ -42,7 +42,7 @@ debuild -S -sa
 cd ..
 
 # Sign.
-debsign -k E9C18AA6087AA39F5114E668EEB70B9FAF1F01C5 "polaris-engine_${VERSION}-${MINOR}_source.changes"
+debsign -k 9ECC850965003AE23EC2B32723D69C6FB2E053E4 "polaris-engine_${VERSION}-${MINOR}_source.changes"
 
 # Upload.
 dput ppa:ktabata/ppa polaris-engine_${VERSION}-${MINOR}_source.changes 
