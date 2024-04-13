@@ -84,10 +84,9 @@ echo "Building Game.app (runtime-mac.dmg)."
 say "Mac用のエンジンをビルドしています" &
 cd engine-macos
 rm -f game-mac.dmg game-mac-nosign.dmg
-#make game-mac.dmg
-#cp game-mac.dmg game-mac-nosign.dmg
-#codesign --sign 'Developer ID Application: Keiichi TABATA' game-mac.dmg
-touch game-mac.dmg game-mac-nosign.dmg
+make game-mac.dmg
+cp game-mac.dmg game-mac-nosign.dmg
+codesign --sign 'Developer ID Application: Keiichi TABATA' game-mac.dmg
 cd ..
 
 #
@@ -203,8 +202,7 @@ echo "Building Polaris Engine Pro.app (polaris-engine.dmg)"
 say "Mac用の開発ツールをビルドしています" &
 cd pro-macos
 rm -f polaris-engine.dmg
-#make
-touch polaris-engine.dmg
+make
 cd ..
 
 #
