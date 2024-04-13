@@ -4,8 +4,7 @@ set -eu
 
 # Get the version Polaris Engine.
 VERSION=`grep -a1 '<!-- BEGIN-LATEST-JP -->' ../../ChangeLog | tail -n1`
-VERSION=`echo $VERSION | cut -d '>' -f 2 | cut -d ' ' -f 1`
-VERSION=`echo $VERSION | cut -d '/' -f 2`
+VERSION=`echo $VERSION | cut -d '>' -f 3`
 
 # Get the minor version.
 MINOR=1
