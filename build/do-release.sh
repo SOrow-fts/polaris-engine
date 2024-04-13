@@ -32,8 +32,7 @@ fi
 # Guess the release version number.
 #
 VERSION=`grep -a1 '<!-- BEGIN-LATEST-JP -->' ../ChangeLog | tail -n1`
-VERSION=`echo $VERSION | cut -d '>' -f 2 | cut -d ' ' -f 1`
-VERSION=`echo $VERSION | cut -d '/' -f 2`
+VERSION=`echo $VERSION | cut -d ' ' -f 3`
 
 #
 # Get the release notes.
@@ -85,9 +84,10 @@ echo "Building Game.app (polaris-mac.dmg)."
 say "Mac用のエンジンをビルドしています" &
 cd engine-macos
 rm -f runtime-mac.dmg runtime-mac-nosign.dmg
-make game-mac.dmg
-cp game-mac.dmg game-mac-nosign.dmg
-codesign --sign 'Developer ID Application: Keiichi TABATA' game-mac.dmg
+#make game-mac.dmg
+#cp game-mac.dmg game-mac-nosign.dmg
+#codesign --sign 'Developer ID Application: Keiichi TABATA' game-mac.dmg
+touch runtime-mac.dmg runtime-mac-nosign.dmg
 cd ..
 
 #
@@ -174,7 +174,7 @@ cp -R ../games/english-novel installer-windows/games/
 rm -rf installer-windows/tools
 mkdir -p installer-windows/tools
 cp  engine-windows/game.exe installer-windows/tools/
-cp  engine-windows/polaris-signed.exe installer-windows/tools/
+cp  engine-windows/game-signed.exe installer-windows/tools/
 cp engine-macos/runtime-mac.dmg installer-windows/tools/
 cp -R engine-android/android-src installer-windows/tools/android-src
 cp -R engine-ios/ios-src installer-windows/tools/ios-src
@@ -203,7 +203,8 @@ echo "Building Polaris Engine Pro.app (polaris-engine.dmg)"
 say "Mac用の開発ツールをビルドしています" &
 cd pro-macos
 rm -f polaris-engine.dmg
-make
+#make
+touch polaris-engine.dmg
 cd ..
 
 #
@@ -225,7 +226,7 @@ say "Webページを更新中です"
 SAVE_DIR=`pwd`
 cd ../web && \
     ./update-templates.sh && \
-    ./update-version-latest.sh && \
+    ./update-version.sh && \
     ftp-upload.sh dl/index.html && \
     ftp-upload.sh en/dl/index.html && \
     git add -u dl/index.html en/dl/index.html && \
@@ -235,7 +236,7 @@ cd "$SAVE_DIR"
 #
 # Restore a non-signed dmg for a store release.
 #
-mv engine-macos/game-mac-nosign.dmg engine-macos/game-mac.dmg
+mv engine-macos/runtime-mac-nosign.dmg engine-macos/runtime-mac.dmg
 
 #
 # Post to the Discord server.

@@ -434,9 +434,11 @@ extern char *conf_kirakira_file[KIRAKIRA_FRAME_COUNT];
  * 変数名
  */
 
-#define NAMED_VAR_COUNT		(100)
+#define NAMED_LOCAL_VAR_COUNT	(100)
+#define NAMED_GLOBAL_VAR_COUNT	(100)
 
-extern char *conf_var_name[VAR_SIZE];
+extern char *conf_local_var_name[NAMED_LOCAL_VAR_COUNT];
+extern char *conf_global_var_name[NAMED_GLOBAL_VAR_COUNT];
 
 /*
  * エモーティコン

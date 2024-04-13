@@ -109,17 +109,27 @@ static bool process_normal_var(const char *lhs, const char *op,
 		}
 		len = (int)(stop - lhs) - 2;
 		lval_index = -1;
-		for (i = 0; i < NAMED_VAR_COUNT; i++) {
-			if (conf_var_name[i] == NULL)
+		for (i = 0; i < NAMED_LOCAL_VAR_COUNT; i++) {
+			if (conf_local_var_name[i] == NULL)
 				continue;
-			if (strncmp(lhs + 2, conf_var_name[i], (size_t)len) == 0){
+			if (strncmp(lhs + 2, conf_local_var_name[i], (size_t)len) == 0){
 				lval_index = i;
 				break;
 			}
 		}
 		if (lval_index == -1) {
-			log_script_not_variable(lhs);
-			return false;
+			for (i = 0; i < NAMED_GLOBAL_VAR_COUNT; i++) {
+				if (conf_global_var_name[i] == NULL)
+					continue;
+				if (strncmp(lhs + 2, conf_global_var_name[i], (size_t)len) == 0){
+					lval_index = LOCAL_VAR_SIZE + i;
+					break;
+				}
+			}
+			if (lval_index == -1) {
+				log_script_not_variable(lhs);
+				return false;
+			}
 		}
 	} else {
 		lval_index = atoi(&lhs[1]);

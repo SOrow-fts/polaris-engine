@@ -6,7 +6,7 @@
  */
 
 /*
- * Polaris Engine Pro for Windows
+ * Polaris Engine (Editor) for Windows
  *
  * [Changes]
  *  2014-05-24 Created (conskit)
@@ -29,7 +29,7 @@
 /* Polaris Engine Base */
 #include "../polaris.h"
 
-/* Polaris Engine Pro */
+/* Polaris Engine (Editor) */
 #include "../pro.h"
 #include "../package.h"
 
@@ -66,7 +66,7 @@
  */
 
 /* The window title of message boxes. */
-#define TITLE				L"Polaris Engine Pro"
+#define TITLE				L"Polaris Engine"
 
 /* The font name for the controls. */
 #define CONTROL_FONT		L"Yu Gothic UI"
@@ -76,7 +76,7 @@
 #define SCRIPT_FONT_EN		L"Courier New"
 
 /* The version string. */
-#define PROGRAM				"Polaris Engine Pro"
+#define PROGRAM				"Polaris Engine"
 #define VERSION_HELPER(x)	#x
 #define VERSION_STR(x)		VERSION_HELPER(x)
 #define COPYRIGHT			"Copyright (c) 2001-2024, Keiichi Tabata. All rights reserved."
@@ -4508,14 +4508,14 @@ VOID OnExportWin(void)
 	RecreateDirectory(L".\\windows-export");
 
 	/* ファイルをコピーする */
-	if (!CopyLibraryFiles(L"tools\\polaris.exe", L".\\windows-export\\polaris.exe"))
+	if (!CopyLibraryFiles(L"tools\\game.exe", L".\\windows-export\\game.exe"))
 	{
 		log_info(bEnglish ?
 				 "Failed to copy exe file." :
 				 "実行ファイルのコピーに失敗しました。");
 		return;
 	}
-	if (!CopyLibraryFiles(L"tools\\polaris-signed.exe", L".\\windows-export\\polaris-signed.exe"))
+	if (!CopyLibraryFiles(L"tools\\game-signed.exe", L".\\windows-export\\game-signed.exe"))
 	{
 		log_info(bEnglish ?
 				 "Failed to copy exe file." :
@@ -4542,7 +4542,7 @@ VOID OnExportWin(void)
 				   TITLE,
 				   MB_ICONQUESTION | MB_YESNO) == IDYES)
 	{
-		/* polaris.exeを実行する */
+		/* game.exeを実行する */
 		RunWindowsGame();
 	}
 	else
@@ -4561,7 +4561,7 @@ VOID RunWindowsGame(void)
 	/* プロセスを実行する */
 	ZeroMemory(&si, sizeof(STARTUPINFOW));
 	si.cb = sizeof(STARTUPINFOW);
-	CreateProcessW(L".\\windows-export\\polaris.exe",	/* lpApplication */
+	CreateProcessW(L".\\windows-export\\game.exe",	/* lpApplication */
 				   NULL,	/* lpCommandLine */
 				   NULL,	/* lpProcessAttribute */
 				   NULL,	/* lpThreadAttributes */
@@ -4605,7 +4605,7 @@ VOID OnExportWinInst(void)
 	CreateDirectory(L".\\windows-installer-export\\asset", 0);
 
 	/* ファイルをコピーする */
-	if (!CopyLibraryFiles(L"tools\\polaris.exe", L".\\windows-installer-export\\asset\\polaris.exe"))
+	if (!CopyLibraryFiles(L"tools\\game.exe", L".\\windows-installer-export\\asset\\game.exe"))
 	{
 		log_info(bEnglish ?
 				 "Failed to copy exe file." :
@@ -4695,14 +4695,14 @@ VOID OnExportWinMac(void)
 	RecreateDirectory(L".\\windows-mac-export");
 
 	/* ファイルをコピーする */
-	if (!CopyLibraryFiles(L"tools\\polaris.exe", L".\\windows-mac-export\\polaris.exe"))
+	if (!CopyLibraryFiles(L"tools\\game.exe", L".\\windows-mac-export\\game.exe"))
 	{
 		log_info(bEnglish ?
 				 "Failed to copy exe file." :
 				 "実行ファイルのコピーに失敗しました。");
 		return;
 	}
-	if (!CopyLibraryFiles(L"tools\\polaris-signed.exe", L".\\windows-export\\polaris-signed.exe"))
+	if (!CopyLibraryFiles(L"tools\\game-signed.exe", L".\\windows-export\\game-signed.exe"))
 	{
 		log_info(bEnglish ?
 				 "Failed to copy exe file." :

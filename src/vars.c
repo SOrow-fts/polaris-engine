@@ -129,10 +129,18 @@ bool get_variable_by_string(const char *var, int32_t *val)
 			return false;
 		}
 		len = (int)(stop - var) - 2;
-		for (i = 0; i < NAMED_VAR_COUNT; i++) {
-			if (conf_var_name[i] == NULL)
+		for (i = 0; i < NAMED_LOCAL_VAR_COUNT; i++) {
+			if (conf_local_var_name[i] == NULL)
 				continue;
-			if (strncmp(var + 2, conf_var_name[i], (size_t)len) == 0){
+			if (strncmp(var + 2, conf_local_var_name[i], (size_t)len) == 0){
+				*val = get_variable(i);
+				return true;
+			}
+		}
+		for (i = 0; i < NAMED_GLOBAL_VAR_COUNT; i++) {
+			if (conf_global_var_name[i] == NULL)
+				continue;
+			if (strncmp(var + 2, conf_global_var_name[i], (size_t)len) == 0){
 				*val = get_variable(i);
 				return true;
 			}
@@ -173,15 +181,23 @@ bool set_variable_by_string(const char *var, int32_t val)
 			return false;
 		}
 		len = (int)(stop - var) - 2;
-		for (i = 0; i < NAMED_VAR_COUNT; i++) {
-			if (conf_var_name[i] == NULL)
+		for (i = 0; i < NAMED_LOCAL_VAR_COUNT; i++) {
+			if (conf_local_var_name[i] == NULL)
 				continue;
-			if (strncmp(var + 2, conf_var_name[i], (size_t)len) == 0){
+			if (strncmp(var + 2, conf_local_var_name[i], (size_t)len) == 0){
 				index = i;
 				break;
 			}
 		}
 		if (index == -1) {
+			for (i = 0; i < NAMED_GLOBAL_VAR_COUNT; i++) {
+				if (conf_global_var_name[i] == NULL)
+					continue;
+				if (strncmp(var + 2, conf_global_var_name[i], (size_t)len) == 0){
+					index = i;
+					break;
+				}
+			}
 			log_script_not_variable(var);
 			return false;
 		}
@@ -302,12 +318,22 @@ const char *expand_variable_with_increment(const char *msg, int inc)
 					return false;
 				}
 				len = (int)(stop - var) - 2;
-				for (i = 0; i < NAMED_VAR_COUNT; i++) {
-					if (conf_var_name[i] == NULL)
+				for (i = 0; i < NAMED_LOCAL_VAR_COUNT; i++) {
+					if (conf_local_var_name[i] == NULL)
 						continue;
-					if (strncmp(var + 2, conf_var_name[i], (size_t)len) == 0){
+					if (strncmp(var + 2, conf_local_var_name[i], (size_t)len) == 0){
 						index = i;
 						break;
+					}
+				}
+				if (index == -1) {
+					for (i = 0; i < NAMED_GLOBAL_VAR_COUNT; i++) {
+						if (conf_global_var_name[i] == NULL)
+							continue;
+						if (strncmp(var + 2, conf_global_var_name[i], (size_t)len) == 0){
+							index = LOCAL_VAR_SIZE + i;
+							break;
+						}
 					}
 				}
 			} else {
