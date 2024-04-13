@@ -5,13 +5,18 @@ This file is referred by some automatic release scripts.
 [Release History (Japanese)]
 
 <!-- BEGIN-LATEST-JP -->
+<li>Polaris Engine 1.0.4 2024/4/13
+  <ul>
+    <li>Ubuntuパッケージ</li>
+  </ul>
+</li>
+<!-- END-LATEST-JP -->
+
 <li>Polaris Engine 1.0.2 2024/4/13
   <ul>
     <li>変数名のバグを修正</li>
   </ul>
 </li>
-<!-- END-LATEST-JP -->
-
 <li>Polaris Engine 1.0.1 2024/4/12
   <ul>
     <li>コンフィグの誤字を修正</li>
@@ -27,13 +32,18 @@ This file is referred by some automatic release scripts.
 [Release History (English)]
 
 <!-- BEGIN-LATEST-EN -->
+<li>Polaris Engine 1.0.4 2024/4/13
+  <ul>
+    <li>Ubuntu package</li>
+  </ul>
+</li>
+<!-- END-LATEST-EN -->
+
 <li>Polaris Engine 1.0.2 2024/4/13
   <ul>
     <li>Fixed a bug of names of variables</li>
   </ul>
 </li>
-<!-- END-LATEST-EN -->
-
 <li>Polaris Engine 1.0.1 2024/4/12
   <ul>
     <li>Fixed typo in config.txt</li>
