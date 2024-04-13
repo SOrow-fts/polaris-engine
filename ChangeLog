@@ -5,13 +5,18 @@ This file is referred by some automatic release scripts.
 [Release History (Japanese)]
 
 <!-- BEGIN-LATEST-JP -->
+<li>Polaris Engine 1.0.6 2024/4/14
+  <ul>
+    <li>Mac版の公開</li>
+  </ul>
+</li>
+<!-- END-LATEST-JP -->
+
 <li>Polaris Engine 1.0.5 2024/4/14
   <ul>
     <li>変数名のコンフィグを修正</li>
   </ul>
 </li>
-<!-- END-LATEST-JP -->
-
 <li>Polaris Engine 1.0.2 2024/4/13
   <ul>
     <li>変数名のバグを修正</li>
@@ -32,13 +37,18 @@ This file is referred by some automatic release scripts.
 [Release History (English)]
 
 <!-- BEGIN-LATEST-EN -->
+<li>Polaris Engine 1.0.6 2024/4/14
+  <ul>
+    <li>Released a Mac version</li>
+  </ul>
+</li>
+<!-- END-LATEST-EN -->
+
 <li>Polaris Engine 1.0.5 2024/4/14
   <ul>
     <li>Fixed a bug of name config</li>
   </ul>
 </li>
-<!-- END-LATEST-EN -->
-
 <li>Polaris Engine 1.0.2 2024/4/13
   <ul>
     <li>Fixed a bug of names of variables</li>
