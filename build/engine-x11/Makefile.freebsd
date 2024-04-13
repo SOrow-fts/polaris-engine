@@ -91,7 +91,7 @@ OBJS = \
 	$(CC) -c $(CPPFLAGS) $(CFLAGS) $<
 
 %.o: ../../src/linux/%.c
-	$(CC) -c $(CPPFLAGS) $(CFLAGS) `pkg-config --cflags gstreamer-1.0 gstreamer-video-1.0` $<
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $<
 
 %.o: ../../src/%.c
 	$(CC) -c $(CPPFLAGS) $(CFLAGS) $<
@@ -103,7 +103,7 @@ OBJS = \
 all: polaris-engine-runtime
 
 polaris-engine-runtime: $(OBJS) $(HDRS) $(HDRS_MAIN)
-	$(CC) -o polaris-engine-runtime $(OBJS) $(LDFLAGS) `pkg-config --libs gstreamer-1.0 gstreamer-video-1.0`
+	$(CC) -o polaris-engine-runtime $(OBJS) $(LDFLAGS)
 
 #
 # Phony
