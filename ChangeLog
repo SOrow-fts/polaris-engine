@@ -5,9 +5,9 @@ This file is referred by some automatic release scripts.
 [Release History (Japanese)]
 
 <!-- BEGIN-LATEST-JP -->
-<li>Polaris Engine 1.0.4 2024/4/13
+<li>Polaris Engine 1.0.5 2024/4/14
   <ul>
-    <li>Ubuntuパッケージ</li>
+    <li>変数名のコンフィグを修正</li>
   </ul>
 </li>
 <!-- END-LATEST-JP -->
@@ -32,9 +32,9 @@ This file is referred by some automatic release scripts.
 [Release History (English)]
 
 <!-- BEGIN-LATEST-EN -->
-<li>Polaris Engine 1.0.4 2024/4/13
+<li>Polaris Engine 1.0.5 2024/4/14
   <ul>
-    <li>Ubuntu package</li>
+    <li>Fixed a bug of name config</li>
   </ul>
 </li>
 <!-- END-LATEST-EN -->

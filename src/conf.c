@@ -1570,7 +1570,7 @@ static struct rule {
 	{"var.global.name97", 's', &conf_global_var_name[97], OPTIONAL, NOSAVE},
 	{"var.global.name98", 's', &conf_global_var_name[98], OPTIONAL, NOSAVE},
 	{"var.global.name99", 's', &conf_global_var_name[99], OPTIONAL, NOSAVE},
-	/* <!-- For compatibility:
+	/* <!-- For compatibility: */
 	{"var.name0", 's', &conf_local_var_name[0], OPTIONAL, NOSAVE},
 	{"var.name1", 's', &conf_local_var_name[1], OPTIONAL, NOSAVE},
 	{"var.name2", 's', &conf_local_var_name[2], OPTIONAL, NOSAVE},
@@ -1771,7 +1771,7 @@ static struct rule {
 	{"var.name10097", 's', &conf_global_var_name[97], OPTIONAL, NOSAVE},
 	{"var.name10098", 's', &conf_global_var_name[98], OPTIONAL, NOSAVE},
 	{"var.name10099", 's', &conf_global_var_name[99], OPTIONAL, NOSAVE},
-	--> */
+	/* --> */
 	{"cursor", 's', &conf_cursor, OPTIONAL, NOSAVE},
 	{"kirakira.on", 'i', &conf_kirakira_on, OPTIONAL, SAVE},
 	{"kirakira.frame", 'f', &conf_kirakira_frame, OPTIONAL, SAVE},
