@@ -154,7 +154,7 @@ gstplay_loop_iteration (void)
 
 #else /* #ifndef NO_GST */
 
-#include "types.h"
+#include "../types.h"
 
 void
 gstplay_init (int argc, char *argv[])
