@@ -183,7 +183,7 @@
 		2610CCDD2B287ACD00300004 /* cmd_setsave.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_setsave.c; path = ../../src/cmd_setsave.c; sourceTree = "<group>"; };
 		2610CCDE2B287ACD00300004 /* glyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = glyph.h; path = ../../src/glyph.h; sourceTree = "<group>"; };
 		2610CCDF2B287ACD00300004 /* log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = log.c; path = ../../src/log.c; sourceTree = "<group>"; };
-		2617DE222B3C5EB2006F4211 /* game-mac.dmg */ = {isa = PBXFileReference; lastKnownFileType = file; name = "game-mac.dmg"; path = "../../engine-macos/game-mac.dmg"; sourceTree = "<group>"; };
+		2617DE222B3C5EB2006F4211 /* game-mac.dmg */ = {isa = PBXFileReference; lastKnownFileType = text; name = "game-mac.dmg"; path = "../../engine-macos/game-mac.dmg"; sourceTree = "<group>"; };
 		26495D0A2B2A7BFD0050EDDF /* GameViewControllerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameViewControllerProtocol.h; path = ../../src/apple/GameViewControllerProtocol.h; sourceTree = "<group>"; };
 		26495D0B2B2A7BFD0050EDDF /* aunit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = aunit.h; path = ../../src/apple/aunit.h; sourceTree = "<group>"; };
 		26495D0C2B2A7BFD0050EDDF /* GameShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = GameShaders.metal; path = ../../src/apple/GameShaders.metal; sourceTree = "<group>"; };
@@ -744,7 +744,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.6;
 				OTHER_CFLAGS = (
 					"-I./libroot/include",
 					"-I./libroot/include/freetype2",
@@ -796,7 +796,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.6;
 				OTHER_CFLAGS = (
 					"-I./libroot/include",
 					"-I./libroot/include/freetype2",
