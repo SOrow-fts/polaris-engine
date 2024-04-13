@@ -80,14 +80,14 @@ cd ..
 # Build the "Game.app".
 #
 echo ""
-echo "Building Game.app (polaris-mac.dmg)."
+echo "Building Game.app (runtime-mac.dmg)."
 say "Mac用のエンジンをビルドしています" &
 cd engine-macos
-rm -f runtime-mac.dmg runtime-mac-nosign.dmg
+rm -f game-mac.dmg game-mac-nosign.dmg
 #make game-mac.dmg
 #cp game-mac.dmg game-mac-nosign.dmg
 #codesign --sign 'Developer ID Application: Keiichi TABATA' game-mac.dmg
-touch runtime-mac.dmg runtime-mac-nosign.dmg
+touch game-mac.dmg game-mac-nosign.dmg
 cd ..
 
 #
@@ -175,7 +175,7 @@ rm -rf installer-windows/tools
 mkdir -p installer-windows/tools
 cp  engine-windows/game.exe installer-windows/tools/
 cp  engine-windows/game-signed.exe installer-windows/tools/
-cp engine-macos/runtime-mac.dmg installer-windows/tools/
+cp engine-macos/game-mac.dmg installer-windows/tools/
 cp -R engine-android/android-src installer-windows/tools/android-src
 cp -R engine-ios/ios-src installer-windows/tools/ios-src
 mkdir -p installer-windows/tools/web
@@ -236,7 +236,7 @@ cd "$SAVE_DIR"
 #
 # Restore a non-signed dmg for a store release.
 #
-mv engine-macos/runtime-mac-nosign.dmg engine-macos/runtime-mac.dmg
+mv engine-macos/game-mac-nosign.dmg engine-macos/game-mac.dmg
 
 #
 # Post to the Discord server.
