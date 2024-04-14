@@ -160,7 +160,7 @@ cp -v pro-windows/polaris-engine.exe installer-windows/polaris-engine.exe
 
 # /games
 rm -rf installer-windows/games
-find ../games -name '.*' | xargs rm
+find ../games -name '.DS_Store' | xargs rm
 mkdir installer-windows/games
 cp -R ../games/japanese-light installer-windows/games/
 cp -R ../games/japanese-dark installer-windows/games/
@@ -184,7 +184,7 @@ cp engine-wasm/html/index.wasm installer-windows/tools/web/index.wasm
 cp  ../tools/web-test/web-test.exe installer-windows/tools/web-test.exe
 cp -R ../tools/installer installer-windows/tools/installer
 
-# Make an installer
+# Make an installe
 cd installer-windows
 make
 sign.sh polaris-engine-installer.exe
@@ -239,8 +239,7 @@ mv engine-macos/game-mac-nosign.dmg engine-macos/game-mac.dmg
 echo ""
 echo "Posting to the Discord server."
 say "Discordサーバにポストします"
-discord-release-finish-dev-bot.sh
-discord-release-finish-user-bot.sh
+discord-release.sh
 
 #
 # Make a release on GitHub.
