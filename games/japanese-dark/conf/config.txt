@@ -353,7 +353,7 @@ switch.font.size=38
 #  - 0: メッセージボックスと同じ設定
 #  - 1: ふちどりあり
 #  - 2: ふちどりなし
-switch.font.outline=0
+switch.font.outline=1
 
 # [選択肢の位置]
 switch.x=200
@@ -363,18 +363,29 @@ switch.y=129
 switch.margin.y=20
 
 # [選択肢画像のテキストの縦方向マージン]
-switch.text.margin.y=12
+switch.text.margin.y=14
+
+# [ポイントされていない項目のテキスト色] (省略可)
+#  - inactive=0: 無効
+#  - inactive=1: 有効
+switch.color.inactive=1
+switch.color.inactive.body.r=255
+switch.color.inactive.body.g=255
+switch.color.inactive.body.b=255
+switch.color.inactive.outline.r=0
+switch.color.inactive.outline.g=32
+switch.color.inactive.outline.b=0
 
 # [ポイントされた項目のテキスト色] (省略可)
 #  - active=0: 無効
 #  - active=1: 有効
-switch.color.active=0
-switch.color.active.body.r=128
-switch.color.active.body.g=64
-switch.color.active.body.b=64
-switch.color.active.outline.r=255
-switch.color.active.outline.g=255
-switch.color.active.outline.b=255
+switch.color.active=1
+switch.color.active.body.r=255
+switch.color.active.body.g=255
+switch.color.active.body.b=255
+switch.color.active.outline.r=0
+switch.color.active.outline.g=80
+switch.color.active.outline.b=10
 
 # [選択肢を選択したときの効果音] (省略可)
 switch.parent.click.se.file=click.ogg
@@ -387,27 +398,32 @@ switch.change.se=btn-change.ogg
 
 # [選択肢ごとに画像や位置を変える場合] (省略可)
 #  - 指定しなければ縦方向にswitch.margin.yピクセルの間隔で配置される
-#switch.fg.file2=switch-fg-2.png
+#  - 座標を変えるだけの場合もbg.file～・fg.file～の指定が必要（switch.bg.file・switch.fg.fileと同じでもOK）
+#  - 10まで指定可能（選択肢の最大表示個数も10）
+#  - ゲーム中に座標を変更したい場合、あらかじめswitch.bg.file～の#を外して有効にしたうえで設定する
+#    - @setconfig switch.x2 300
+#switch.bg.file2=system/choose/idle-2.png
+#switch.fg.file2=system/choose/hover-2.png
 #switch.x2=200
 #switch.y2=200
-#switch.bg.file3=switch-bg-2.png
-#switch.fg.file3=switch-fg-2.png
+#switch.bg.file3=system/choose/idle-2.png
+#switch.fg.file3=system/choose/hover-2.png
 #switch.x3=200
 #switch.y3=300
-#switch.bg.file4=switch-bg-2.png
-#switch.fg.file4=switch-fg-2.png
+#switch.bg.file4=system/choose/idle-2.png
+#switch.fg.file4=system/choose/hover-2.png
 #switch.x4=200
 #switch.y4=400
-#switch.bg.file5=switch-bg-2.png
-#switch.fg.file5=switch-fg-2.png
+#switch.bg.file5=system/choose/idle-2.png
+#switch.fg.file5=system/choose/hover-2.png
 #switch.x5=200
 #switch.y5=500
-#switch.bg.file6=switch-bg-2.png
-#switch.fg.file6=switch-fg-2.png
+#switch.bg.file6=system/choose/idle-2.png
+#switch.fg.file6=system/choose/hover-2.png
 #switch.x6=200
 #switch.y6=600
-#switch.bg.file7=switch-bg-2.png
-#switch.fg.file7=switch-fg-2.png
+#switch.bg.file7=system/choose/idle-2.png
+#switch.fg.file7=system/choose/hover-2.png
 #switch.x7=200
 #switch.y7=700
 
@@ -785,6 +801,14 @@ stage.ch.margin.left=0
 stage.ch.margin.right=0
 
 ###
+### カーソル画像
+###
+
+#  - 使う場合は#を外して有効にする
+#  - cgフォルダ内の画像を指定する
+#cursor=cursor.png
+
+###
 ### タップ時のキラキラエフェクト
 ###
 
@@ -809,9 +833,24 @@ kirakira.frame=0.333
 #kirakira.file9=kira9.png
 
 ###
+### 独自の絵文字を使う（16個まで）
+###
+
+# - スクリプトで使う時は\e{絵文字名}と書く
+#  - cgフォルダ内の画像を指定する
+#emoticon.name1=emoticon
+#emoticon.file1=emoticon.png
+
+###
 ### 通常の変数の別名 (0..99)
 ###
 
+#  - ローカル変数（セーブデータごと）、0～99まで指定可能
+#  - ローカル変数の0～99が対象
+#  - 1から開始するため0を未使用という名称にしているが、0も使用可能
+#  - 下の名称を使う場合、スクリプトでは以下のように書ける。
+#    - @set ${選択肢1を読んだか} = true
+#    - @if ${選択肢1を読んだか} = true エンディングA
 var.local.name0=未使用
 var.local.name1=選択肢1を読んだか
 var.local.name2=選択肢2を読んだか
@@ -822,6 +861,9 @@ var.local.name4=選択肢4を読んだか
 ### 実績解除用の変数の別名(0..99)
 ###
 
+#  - グローバル変数（すべてのセーブデータ共通）、0～99まで指定可能
+#  - グローバル変数の10000～10099が対象
+#  - スクリプトでの使用方法は通常の変数と同じ。初クリアかどうかなどに使える
 var.global.name0=名前をつけてくださいA
 var.global.name1=名前をつけてくださいB
 var.global.name2=名前をつけてくださいC
@@ -885,6 +927,36 @@ sysmenu.transition=0
 msgbox.history.disable=0
 
 ###
+### 一時的に使う項目
+### - スクリプトで@setconfigを使い一時的に有効にする項目
+### - WMSのs2_set_configでも設定可能
+###
+
+# [メッセージの瞬間表示を行う] (省略可)
+#  - 0: 瞬間表示しない
+#  - 1: 瞬間表示する
+#  - ゲーム中1を入れるとnowaitに。0で元の速度に戻る。
+#    - @setconfig msgbox.nowait 1
+#msgbox.nowait=0
+
+# [選択肢に制限時間を付与する] (省略可)
+#  - スクリプトでは以下のように秒数を設定する
+#   - @setconfig switch.timed 1.0
+#  - 解除する時は以下のように0を設定する
+#   - @setconfig switch.timed 0
+#switch.timed=0
+
+# [メッセージをヒストリに追加するか] (省略可)
+#  - no-history: 追加しない
+#  - only-history: メッセージをヒストリに追加するが表示はしない
+#  - normal: 追加する（デフォルト）
+#  - ゲーム中ヒストリ（ログ）にメッセージを追加したくない時、あるいは追加したいが表示したくない時に使う
+#   - @setconfig msgbox.history.control no-history
+#   - @setconfig msgbox.history.control only-history
+#   - @setconfig msgbox.history.control normal
+#msgbox.history.control=normal
+
+###
 ### テキスト読み上げ
 ###
 
@@ -899,6 +971,21 @@ tts.enable=0
 #  1: Vキーで有効/無効にできる (視覚障害者モード)
 #  2: Vキーで有効/無効にできる (晴眼者モード)
 tts.user=1
+
+###
+### 縦書きでのみ使う設定
+###  - 横書きのテンプレートでは使用しません
+###
+
+#[メッセージを縦書きにする]（省略可）
+#  - 0: 無効
+#  - 1: 有効（縦書きにする）
+#msgbox.tategaki=0
+
+# [ヒストリーの最後の項目を表示しない調整を行う]（省略可）
+#  - 0: 調整を行わない
+#  - 1: 調整を行う (最後の項目を表示しない)
+#gui.history.ignore.last=0
 
 ###
 ### 言語設定 (省略可)
