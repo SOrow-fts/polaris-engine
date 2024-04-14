@@ -2,7 +2,7 @@
     "name": "polaris-engine-extension",
     "displayName": "Polaris Engine Extension",
     "description": "Polaris Engine Extension",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "publisher": "ktabata",
     "repository": "https://github.com/ktabata/polaris-engine",
     "engines": {
