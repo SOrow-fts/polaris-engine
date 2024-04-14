@@ -3,9 +3,9 @@
 #
 # Only on Xcode Cloud.
 #
-if [ -z "$FTP_USER_PW" ]; then
-    exit 0;
-fi
+#if [ -z "$FTP_USER_PW" ]; then
+#    exit 0;
+#fi
 
 #
 # Initialize.

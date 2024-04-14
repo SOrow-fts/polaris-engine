@@ -3,9 +3,9 @@
 #
 # Only for cloud.
 #
-if [ -z "$FTP_USER_PW" ]; then
-    exit 0;
-fi
+#if [ -z "$FTP_USER_PW" ]; then
+#    exit 0;
+#fi
 
 #
 # Initialize.
@@ -26,6 +26,8 @@ VERSION=`grep -a1 '<!-- BEGIN-LATEST-JP -->' ../ChangeLog | tail -n1 | cut -d ' 
 #
 echo ""
 echo "Installing brew dependencies."
+
+export PATH=/opt/homebrew/bin:$PATH
 brew install mingw-w64 emscripten gsed wget makensis create-dmg
 
 #
