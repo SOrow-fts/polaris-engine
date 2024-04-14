@@ -14,10 +14,12 @@ set -eu
 export LANG=en_US.UTF-8
 export LANGUAGE=english
 
+cd ..
+
 #
 # Get the release version number.
 #
-VERSION=`grep -a1 '<!-- BEGIN-LATEST-JP -->' ../../ChangeLog | tail -n1 | cut -d ' ' -f 3`
+VERSION=`grep -a1 '<!-- BEGIN-LATEST-JP -->' ../ChangeLog | tail -n1 | cut -d ' ' -f 3`
 
 #
 # Install dependencies.
