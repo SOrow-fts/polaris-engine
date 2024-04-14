@@ -153,8 +153,10 @@
 		<div class="tab-pane fade" id="linux-tab-pane" role="tabpanel" aria-labelledby="linux-tab" tabindex="0">
 			<div style="margin-left:1em;margin-top:1em;">
 				<h3>Linux/Chromebook</h3>
-				<p>ソースコードからビルド (推奨):</p>
-				<pre><code>sudo apt-get install -y git build-essential libasound2-dev libx11-dev mesa-common-dev qt6-base-dev qt6-multimedia-dev libwebp-dev<br>git clone https://github.com/ktabata/polaris-engine.git<br>cd polaris-engine<br>make<br>sudo make install<br>polaris-engine</code></pre>
+				<p>お手軽:</p>
+				<pre><code>wget https://raw.githubusercontent.com/ktabata/polaris-engine/master/install-polaris-engine.sh && sh ./install-polaris-engine.sh<br>poaris-engine</code></pre>
+				<p>本格的:</p>
+				<pre><code>git clone https://github.com/ktabata/polaris-engine.git<br>cd polaris-engine<br>make<br>sudo make install<br>polaris-engine</code></pre>
 			</div>
 		</div>
 
@@ -224,7 +226,6 @@
 								</ul>
 							</li>
 							<li>Unityエクスポートに限り、Unityを使用 (家庭用ゲーム機専用)</li>
-							<li>Unreal Engineエクスポートに限り、Unreal Engineを使用 (家庭用ゲーム機専用)</li>
 						</ul>
 					</li>
 				</ul>
@@ -354,6 +355,19 @@
 	<li>開発ツール (まだ制作中)
 		<ul>
 			<li><a href="/vls/">Google Chromeのみ対応</a></li>
+		</ul>
+	</li>
+</ul>
+
+<br>
+
+<h3>家庭用ゲーム機版(Unity)</h3>
+<ul>
+	<li>出力ゲーム
+		<ul>
+			<li>Nintendo Switch</li>
+			<li>PlayStation 4/5</li>
+			<li>Xbox Series X|S</li>
 		</ul>
 	</li>
 </ul>
