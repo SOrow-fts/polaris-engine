@@ -5,14 +5,19 @@ This file is referred by some automatic release scripts.
 [Release History (Japanese)]
 
 <!-- BEGIN-LATEST-JP -->
+<li>Polaris Engine 1.0.12 2024/4/14
+  <ul>
+    <li>日本語ノベルテンプレートのルビサイズを修正</li>
+  </ul>
+</li>
+<!-- END-LATEST-JP -->
+
 <li>Polaris Engine 1.0.11 2024/4/14
   <ul>
     <li>テンプレートのロゴを変更</li>
     <li>縦書きテンプレートにフォントライセンス画像を追加</li>
   </ul>
 </li>
-<!-- END-LATEST-JP -->
-
 <li>Polaris Engine 1.0.10 2024/4/14
   <ul>
     <li>公式Visual Studio Code拡張の追加 (VScodeからPolaris Engine Extensionをインストール。既存ゲームでは新規テンプレ内の.vscodeフォルダをコピーで有効になります)</li>
@@ -58,13 +63,18 @@ This file is referred by some automatic release scripts.
 [Release History (English)]
 
 <!-- BEGIN-LATEST-EN -->
+<li>Polaris Engine 1.0.12 2024/4/14
+  <ul>
+    <li>Fixed the ruby size of the Japanese Novel template</li>
+  </ul>
+</li>
+<!-- END-LATEST-EN -->
+
 <li>Polaris Engine 1.0.11 2024/4/14
   <ul>
     <li>Changed the logo</li>
   </ul>
 </li>
-<!-- END-LATEST-EN -->
-
 <li>Polaris Engine 1.0.10 2024/4/14
   <ul>
     <li>Added the official Visual Studio Code extension (Please install Polaris Engine Extension from VScode, then copy .vscode folder from a new template)</li>
