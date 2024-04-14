@@ -5,13 +5,18 @@ This file is referred by some automatic release scripts.
 [Release History (Japanese)]
 
 <!-- BEGIN-LATEST-JP -->
+<li>Polaris Engine 1.0.9 2024/4/14
+  <ul>
+    <li>コンフィグの改善</li>
+  </ul>
+</li>
+<!-- END-LATEST-JP -->
+
 <li>Polaris Engine 1.0.8 2024/4/14
   <ul>
     <li>Ubuntu PPA</li>
   </ul>
 </li>
-<!-- END-LATEST-JP -->
-
 <li>Polaris Engine 1.0.6 2024/4/14
   <ul>
     <li>Mac版の公開</li>
@@ -42,13 +47,18 @@ This file is referred by some automatic release scripts.
 [Release History (English)]
 
 <!-- BEGIN-LATEST-EN -->
+<li>Polaris Engine 1.0.9 2024/4/14
+  <ul>
+    <li>Improved config.txt</li>
+  </ul>
+</li>
+<!-- END-LATEST-EN -->
+
 <li>Polaris Engine 1.0.8 2024/4/14
   <ul>
     <li>Ubuntu PPA</li>
   </ul>
 </li>
-<!-- END-LATEST-EN -->
-
 <li>Polaris Engine 1.0.6 2024/4/14
   <ul>
     <li>Released a Mac version</li>
