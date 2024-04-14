@@ -135,7 +135,7 @@ cp engine-wasm/html/index.wasm installer-windows/tools/web/index.wasm
 cp  ../tools/web-test/web-test.exe installer-windows/tools/web-test.exe
 cp -R ../tools/installer installer-windows/tools/installer
 
-# Make an installe
+# Make an installer
 cd installer-windows
 export LANG=en_US.UTF-8
 export LANGUAGE=english

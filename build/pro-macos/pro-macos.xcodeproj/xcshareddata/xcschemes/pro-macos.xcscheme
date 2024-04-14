@@ -10,10 +10,19 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "cd &quot;$WORKSPACE_PATH&quot;&#10;if [ ! -d ../../libroot ]; then&#10;    curl -O https://polaris-engine.com/dl/libroot-mac.tar.gz;&#10;    tar xzf libroot-mac.tar.gz;&#10;fi&#10;">
+               scriptText = "cd &quot;$WORKSPACE_PATH&quot;&#10;cd ../..&#10;if [ ! -d libroot ]; then&#10;    curl -O https://polaris-engine.com/dl/libroot-mac.tar.gz;&#10;    tar xzf libroot-mac.tar.gz;&#10;fi&#10;./pre-build.sh&#10;">
             </ActionContent>
          </ExecutionAction>
       </PreActions>
+      <PostActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Run Script"
+               scriptText = "cd &quot;$WORKSPACE_PATH&quot;&#10;cd ../../&#10;./post-build.sh&#10;">
+            </ActionContent>
+         </ExecutionAction>
+      </PostActions>
       <BuildActionEntries>
          <BuildActionEntry
             buildForTesting = "YES"
@@ -82,23 +91,5 @@
    <ArchiveAction
       buildConfiguration = "Release"
       revealArchiveInOrganizer = "YES">
-      <PreActions>
-         <ExecutionAction
-            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
-            <ActionContent
-               title = "Run Script"
-               scriptText = "if [ -z &quot;$FTP_USER_PW&quot; ]; then&#10;    cd &quot;$WORKSPACE_PATH&quot;;&#10;    cd ../../;&#10;    curl -O https://polaris-engine.com/dl/libroot-mac.tar.gz;&#10;    tar xzf libroot-mac.tar.gz;&#10;    ./pre-archive.sh;&#10;fi&#10;">
-            </ActionContent>
-         </ExecutionAction>
-      </PreActions>
-      <PostActions>
-         <ExecutionAction
-            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
-            <ActionContent
-               title = "Run Script"
-               scriptText = "if [ -z &quot;$FTP_USER_PW&quot; ]; then&#10;    cd &quot;$WORKSPACE_PATH&quot;;&#10;    cd ../../;&#10;    ./post-archive.sh;&#10;fi&#10;">
-            </ActionContent>
-         </ExecutionAction>
-      </PostActions>
    </ArchiveAction>
 </Scheme>
