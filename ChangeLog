@@ -5,13 +5,22 @@ This file is referred by some automatic release scripts.
 [Release History (Japanese)]
 
 <!-- BEGIN-LATEST-JP -->
+<li>Polaris Engine 1.0.14 2024/4/15
+  <ul>
+    <li>フォントファイルを修正</li>
+  </ul>
+</li>
+<!-- END-LATEST-JP -->
+<li>Polaris Engine 1.0.13 2024/4/15
+  <ul>
+    <li>コンフィグを修正</li>
+  </ul>
+</li>
 <li>Polaris Engine 1.0.12 2024/4/14
   <ul>
     <li>日本語ノベルテンプレートのルビサイズを修正</li>
   </ul>
 </li>
-<!-- END-LATEST-JP -->
-
 <li>Polaris Engine 1.0.11 2024/4/14
   <ul>
     <li>テンプレートのロゴを変更</li>
@@ -63,13 +72,22 @@ This file is referred by some automatic release scripts.
 [Release History (English)]
 
 <!-- BEGIN-LATEST-EN -->
+<li>Polaris Engine 1.0.14 2024/4/15
+  <ul>
+    <li>Fixed the font files</li>
+  </ul>
+</li>
+<!-- END-LATEST-EN -->
+<li>Polaris Engine 1.0.13 2024/4/15
+  <ul>
+    <li>Fixed the configs</li>
+  </ul>
+</li>
 <li>Polaris Engine 1.0.12 2024/4/14
   <ul>
     <li>Fixed the ruby size of the Japanese Novel template</li>
   </ul>
 </li>
-<!-- END-LATEST-EN -->
-
 <li>Polaris Engine 1.0.11 2024/4/14
   <ul>
     <li>Changed the logo</li>

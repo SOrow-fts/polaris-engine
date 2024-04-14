@@ -68,6 +68,7 @@
 		26495D112B2A7BFD0050EDDF /* GameShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 26495D0C2B2A7BFD0050EDDF /* GameShaders.metal */; };
 		26495D122B2A7BFD0050EDDF /* GameRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 26495D0D2B2A7BFD0050EDDF /* GameRenderer.m */; };
 		26495D132B2A7BFD0050EDDF /* aunit.c in Sources */ = {isa = PBXBuildFile; fileRef = 26495D0F2B2A7BFD0050EDDF /* aunit.c */; };
+		265AF0102BCC41AB007C0B25 /* release.sh in Resources */ = {isa = PBXBuildFile; fileRef = 265AF00F2BCC41AA007C0B25 /* release.sh */; };
 		2662D0E82B5A5E860019B596 /* WindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2662D0E72B5A5E860019B596 /* WindowController.m */; };
 		2669F7CB2B2843D5001AEF17 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2669F7CA2B2843D5001AEF17 /* AVFoundation.framework */; };
 		2669F7D72B284675001AEF17 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2669F7CD2B284675001AEF17 /* AppDelegate.m */; };
@@ -191,6 +192,7 @@
 		26495D0E2B2A7BFD0050EDDF /* GameRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameRenderer.h; path = ../../src/apple/GameRenderer.h; sourceTree = "<group>"; };
 		26495D0F2B2A7BFD0050EDDF /* aunit.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = aunit.c; path = ../../src/apple/aunit.c; sourceTree = "<group>"; };
 		26495D102B2A7BFD0050EDDF /* GameShaderTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameShaderTypes.h; path = ../../src/apple/GameShaderTypes.h; sourceTree = "<group>"; };
+		265AF00F2BCC41AA007C0B25 /* release.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = release.sh; sourceTree = "<group>"; };
 		2662D0E62B5A5E860019B596 /* WindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WindowController.h; sourceTree = "<group>"; };
 		2662D0E72B5A5E860019B596 /* WindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WindowController.m; sourceTree = "<group>"; };
 		2669F7082B283866001AEF17 /* Polaris Engine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Polaris Engine.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -380,6 +382,7 @@
 		2669F6FF2B283866001AEF17 = {
 			isa = PBXGroup;
 			children = (
+				265AF00F2BCC41AA007C0B25 /* release.sh */,
 				2669F70A2B283866001AEF17 /* pro-macos */,
 				2610CC822B2878AE00300004 /* polaris-engine */,
 				2610CD1B2B287C9100300004 /* Resources */,
@@ -489,6 +492,7 @@
 				2610CC842B2878C900300004 /* Assets.xcassets in Resources */,
 				26F4E5AF2B32CE61003E4B5A /* Main.storyboard in Resources */,
 				26B806C62BC2901700A92A02 /* japanese-tategaki in Resources */,
+				265AF0102BCC41AB007C0B25 /* release.sh in Resources */,
 				26B806B72BC2900A00A92A02 /* japanese-tategaki.png in Resources */,
 				26B806C52BC2901700A92A02 /* english in Resources */,
 				26B806B62BC2900A00A92A02 /* english-novel.png in Resources */,
@@ -765,7 +769,7 @@
 					"-lbrotlidec",
 					"-lbrotlicommon",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.polaris-engine.pro-macos";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.polaris-engine.app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
@@ -817,7 +821,7 @@
 					"-lbrotlidec",
 					"-lbrotlicommon",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.polaris-engine.pro-macos";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.polaris-engine.app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 			};

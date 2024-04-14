@@ -24,7 +24,7 @@ game-mac.dmg: libroot $(SRCS_MAIN) $(HDRS_MAIN) $(FILES_APPLE)
 	@xcodebuild -quiet -exportArchive -archivePath `pwd`/build/Release/engine-macos.xcarchive -exportOptionsPlist export-options.plist
 	@rm -rf build/Release/Game.app
 	@until \
-		xcodebuild -quiet -exportNotarizedApp -archivePath `pwd`/build/Release/engine-macos.xcarchive -exportPath `pwd`/build/Release; \
+		xcodebuild -quiet -exportNotarizedApp -archivePath `pwd`/build/Release/engine-macos.xcarchive -exportPath `pwd`/build/Release > /dev/null; \
 	do \
 		echo "Waiting..."; \
 		sleep 10; \
