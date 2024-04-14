@@ -3946,8 +3946,8 @@ static BOOL CreateProjectFromTemplate(const wchar_t *pszTemplate)
 		ofn.nMaxFile = sizeof(wszPath) / sizeof(wchar_t);
 		ofn.Flags = OFN_OVERWRITEPROMPT;
 		ofn.lpstrFilter = bEnglish ?
-			L"Polaris Engine Project Files\0*.polaris;\0Old Project Files\0*.polaris2project\0\0" :
-			L"Polaris Engine プロジェクトファイル\0*.polaris\0旧プロジェクトファイル\0*.polaris2project\0\0";
+			L"Polaris Engine Project Files\0*.polaris;\0Old Project Files\0*.suika2project\0\0" :
+			L"Polaris Engine プロジェクトファイル\0*.polaris\0旧プロジェクトファイル\0*.suika2project\0\0";
 		ofn.lpstrDefExt = L".polaris";
 		if (!GetSaveFileNameW(&ofn))
 			return FALSE;
@@ -3998,15 +3998,6 @@ static BOOL CreateProjectFromTemplate(const wchar_t *pszTemplate)
 	hFile = CreateFileW(pFile, GENERIC_WRITE, 0, NULL, CREATE_NEW, 0, NULL);
 	CloseHandle(hFile);
 
-#if 0
-	/* .vscodeを生成する */
-	CreateDirectory(L".\\.vscode", 0);
-	CopyLibraryFiles(bEnglish ?
-					 L"plaintext.code-snippets.en" :
-					 L"plaintext.code-snippets.jp",
-					 L".\\.vscode\\plaintext.code-snippets");
-#endif
-
 	/* コピーを行う */
 	if (!CopyLibraryFiles(pszTemplate, L".\\"))
 		return FALSE;
@@ -4029,8 +4020,8 @@ static BOOL ChooseProject(void)
 	ofn.nMaxFile = sizeof(wszPath) / sizeof(wchar_t);
 	ofn.Flags = OFN_FILEMUSTEXIST;
 	ofn.lpstrFilter = bEnglish ?
-		L"Polaris Engine Project Files\0*.polaris;\0Old Project Files\0*.polaris2project\0\0" :
-		L"Polaris Engine プロジェクトファイル\0*.polaris\0旧プロジェクトファイル\0*.polaris2project\0\0";
+		L"Polaris Engine Project Files\0*.polaris;\0Old Project Files\0*.suika2project\0\0" :
+		L"Polaris Engine プロジェクトファイル\0*.polaris\0旧プロジェクトファイル\0*.suika2project\0\0";
 	ofn.lpstrDefExt = L".polaris";
 
 	/* This will set the working directory to the game directory. */

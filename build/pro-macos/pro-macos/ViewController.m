@@ -374,7 +374,7 @@ static ViewController *theViewController;
 }
 
 - (BOOL)copyResourceTemplate:(NSString *)from {
-    NSArray *subfolderArray = @[@"/anime", @"/bg", @"/bgm", @"/cg", @"/ch", @"/conf", @"/cv", @"/font", @"/gui", @"/mov", @"/rule", @"/se", @"/txt", @"/wms"];
+    NSArray *subfolderArray = @[@"/anime", @"/bg", @"/bgm", @"/cg", @"/ch", @"/conf", @"/cv", @"/font", @"/gui", @"/mov", @"/rule", @"/se", @"/txt", @"/wms", @"/.vscode"];
     for (NSString *sub in subfolderArray) {
         NSString *src = [NSString stringWithFormat:@"%@/Contents/Resources/%@%@", [[NSBundle mainBundle] bundlePath], from, sub];
         NSString *dst = [[[NSFileManager defaultManager] currentDirectoryPath] stringByAppendingString:sub];
