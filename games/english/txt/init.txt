@@ -11,17 +11,14 @@
 # Clear the stage by white background.
 @bg file=white.png duration=0
 
-# Show our Suika logo.
-@ch position=center file=suika.png duration=1.0
-
-# Play the Suika voice.
-@se file=suika.ogg
+# Show the logo.
+@bg file=logo.png duration=0.5
 
 # Wait for 2 seconds.
 @wait duration=2.0
 
-# Remove the Suika logo.
-@ch position=center file=none duration=1.0
+# White out.
+@bg white.png duration=0.5
 
 # Re-enable skip
 @skip enable
