@@ -56,6 +56,18 @@
             ],
             "configuration": "./language-anime.json"
         }],
+        "grammars": [
+            {
+            "language": "polaris-engine-scenario",
+            "scopeName": "source.txt",
+            "path": "./syntaxes/suika2-scenario.tmLanguage.json"
+            },
+            {
+                "language": "polaris-engine-wms",
+                "scopeName": "source.txt",
+                "path": "./syntaxes/suika2-wms.tmLanguage.json"
+            }
+        ],
         "snippets": [{
             "language": "polaris-engine-scenario",
             "path": "./snippets-scenario.json"
