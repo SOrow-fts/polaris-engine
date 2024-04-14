@@ -189,9 +189,6 @@ cd installer-windows
 make
 sign.sh polaris-engine-installer.exe
 
-# Also, make a zip
-#make zip
-
 cd ..
 
 #
@@ -242,8 +239,8 @@ mv engine-macos/game-mac-nosign.dmg engine-macos/game-mac.dmg
 echo ""
 echo "Posting to the Discord server."
 say "Discordサーバにポストします"
-#discord-release-finish-dev-bot.sh
-#discord-release-finish-user-bot.sh
+discord-release-finish-dev-bot.sh
+discord-release-finish-user-bot.sh
 
 #
 # Make a release on GitHub.
