@@ -1,0 +1,76 @@
+{
+    "name": "polaris-engine-extension",
+    "displayName": "Polaris Engine Extension",
+    "description": "Polaris Engine Extension",
+    "version": "0.0.1",
+    "publisher": "ktabata",
+    "repository": "https://github.com/ktabata/polaris-engine",
+    "engines": {
+        "vscode": "^1.28.0"
+    },
+    "categories": [
+        "Snippets", "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "polaris-engine-scenario",
+            "extensions": [
+                ".txt"
+            ],
+            "aliases": [
+                "txt",
+                "Polaris Engine Scenario"
+            ],
+            "configuration": "./language-scenario.json"
+        },
+        {
+            "id": "polaris-engine-gui",
+            "extensions": [
+                ".txt"
+            ],
+            "aliases": [
+                "txt",
+                "Polaris Engine GUI"
+            ],
+            "configuration": "./language-gui.json"
+        },
+        {
+            "id": "polaris-engine-wms",
+            "extensions": [
+                ".txt"
+            ],
+            "aliases": [
+                "txt",
+                "Polaris Engine WMS"
+            ],
+            "configuration": "./language-wms.json"
+        },
+        {
+            "id": "polaris-engine-anime",
+            "extensions": [
+                ".txt"
+            ],
+            "aliases": [
+                "txt",
+                "Polaris Engine Anime"
+            ],
+            "configuration": "./language-anime.json"
+        }],
+        "snippets": [{
+            "language": "polaris-engine-scenario",
+            "path": "./snippets-scenario.json"
+        },
+        {
+            "language": "polaris-engine-gui",
+            "path": "./snippets-gui.json"
+        },
+        {
+            "language": "polaris-engine-wms",
+            "path": "./snippets-wms.json"
+        },
+        {
+            "language": "polaris-engine-anime",
+            "path": "./snippets-anime.json"
+        }]
+    }
+}

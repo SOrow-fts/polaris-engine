@@ -1,0 +1,127 @@
+{
+    "bg":{
+	"prefix": ["@bg"],
+	"body": "@bg file=$1 duration=$2 effect=$3",
+	"description": "背景を表示します。"
+    },
+    "bgm":{
+	"prefix": ["@bgm"],
+	"body": "@bgm file=$1",
+	"description": "BGMを再生します。"
+    },
+    "ch":{
+	"prefix": ["@ch"],
+	"body": "@ch position=$1 file=$2 duration=$3 effect=$4 right=$5 down=$6 alpha=$7",
+	"description": "キャラクタを表示します。"
+    },
+    "cha":{
+	"prefix": ["@cha"],
+	"body": "@cha position=$1 duration=$2 acceleration=$3 x=$4 y=$5 alpha=$6",
+	"description": "キャラクタを移動します。"
+    },
+    "chapter":{
+	"prefix": ["@chapter"],
+	"body":"@chapter title=$1",
+	"description": "章タイトルを設定します。"
+    },
+    "choose":{
+	"prefix": ["@choose"],
+	"body":"@choose destination1=$1 option1=$2 destination2=$3 option2=$4",
+	"description": "選択肢を表示します。"
+    },
+    "ichoose":{
+	"prefix": ["@ichoose"],
+	"body":"@ichoose destination1=$1 option1=$2 destination2=$3 option2=$4",
+	"description": "メッセージボックス内に選択肢を表示します。"
+    },
+    "chs":{
+	"prefix": ["@all"],
+	"body":"@all center=$1 right=$2 left=$3 duration=$5 background=$6 effect=$7",
+	"description": "ステージのキャラクタと背景を一括変更します。"
+    },
+    "click":{
+	"prefix": ["@click"],
+	"body":"@click",
+	"description": "クリックを待ちます。"
+    },
+    "gosub":{
+	"prefix": ["@gosub"],
+	"body":"@gosub $1",
+	"description": "マクロを呼び出します。"
+    },
+    "goto":{
+	"prefix": ["@goto"],
+	"body":"@goto destination=$1",
+	"description": "ラベルにジャンプします。"
+    },
+    "gui":{
+	"prefix": ["@gui"],
+	"body":"@gui file=$1",
+	"description": "GUIを表示します。"
+    },
+    "if":{
+	"prefix": ["@if"],
+	"body":"@if $1 $2 $3 $4",
+	"description": "条件で分岐します。@if <variable> <condition> <value> <label>"
+    },
+    "load":{
+	"prefix": ["@load"],
+	"body":"@load file=$1 label=$2",
+	"description": "他のシナリオファイルに移動します。"
+    },
+    "return":{
+	"prefix": ["@return"],
+	"body": "@return",
+	"description": "マクロから戻ります。"
+    },
+    "se":{
+	"prefix": ["@se"],
+	"body": "@se file=$1",
+	"description": "効果音を再生します。"
+    },
+    "set":{
+	"prefix": ["@set"],
+	"body":"@set $1 $2 $3",
+	"description": "変数をセットします。 @set <variable> <operator> <value>"
+    },
+    "setsave":{
+	"prefix": ["@setsave"],
+	"body":"@setsave enable/disable",
+	"description": "セーブとロードの許可/禁止を設定します。"
+    },
+    "shake":{
+	"prefix": ["@shake","@振動"],
+	"body": "@shake direction=$1 duration=$2 times=$3 amplitude=$4",
+	"description": "Shake Screen @shake <direction> <duration> <times> <amplitude>"
+    },
+    "skip":{
+	"prefix": ["@skip"],
+	"body": "@skip enable/disable",
+	"description": "スキップの許可/禁止を設定します。"
+    },
+    "video":{
+	"prefix": ["@video"],
+	"body": "@video file=$1",
+	"description": "動画を再生します。"
+    },
+    "vol":{
+	"prefix": ["@vol"],
+	"body": "@vol track=$1 volume=$2 duration=$3",
+	"description": "音量を設定します。"
+    },
+    "wait":{
+	"prefix": ["@wait"],
+	"body": "@wait duration=$1",
+	"description": "秒数を指定して待ちます。"
+    },
+    "wms":{
+	"prefix": ["@wms"],
+	"body": "@wms file=$1",
+	"description": "WMSを実行します。"
+    },
+    "anime":{
+	"prefix": ["@anime"],
+	"body": "@anime $1 sync/async",
+	"description": "アニメファイルを実行します。"
+    }
+}
