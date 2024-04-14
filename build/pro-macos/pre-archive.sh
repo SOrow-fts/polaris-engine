@@ -15,32 +15,9 @@ export LANG=en_US.UTF-8
 export LANGUAGE=english
 
 #
-# Show a message.
+# Get the release version number.
 #
-echo "CI/CD pipeline started."
-
-#
-# Guess the release version number.
-#
-VERSION=`grep -a1 '<!-- BEGIN-LATEST-JP -->' ../ChangeLog | tail -n1`
-VERSION=`echo $VERSION | cut -d ' ' -f 3`
-
-#
-# Get the release notes.
-#
-NOTE_JP=`cat ../ChangeLog | awk '/BEGIN-LATEST-JP/,/END-LATEST-JP/' | tail -n +2 | sed '$d'`
-NOTE_EN=`cat ../ChangeLog | awk '/BEGIN-LATEST-EN/,/END-LATEST-EN/' | tail -n +2 | sed '$d'`
-
-#
-# Debug Output
-#
-echo ""
-echo "[Japanese Note]"
-echo "$NOTE_JP"
-echo ""
-echo "[English Note]"
-echo "$NOTE_EN"
-echo ""
+VERSION=`grep -a1 '<!-- BEGIN-LATEST-JP -->' ../../ChangeLog | tail -n1 | cut -d ' ' -f 3`
 
 #
 # Install dependencies.
@@ -164,49 +141,3 @@ make
 #sign.sh polaris-engine-installer.exe
 
 cd ..
-
-#
-# Build "Polaris Engine Pro.app".
-#
-echo ""
-echo "Building Polaris Engine Pro.app (polaris-engine.dmg)"
-cd pro-macos
-make
-cd ..
-
-#
-# Upload.
-#
-echo ""
-echo "Uploading files."
-curl -v -T installer-windows/polaris-engine-installer.exe -u $FTP_USER_PW ftp://ftp.lolipop.jp/sites/polaris-engine.com/polaris-engine-installer-$VERSION.exe
-curl -v -T pro-macos/polaris-engine.dmg -u $FTP_USER_PW ftp://ftp.lolipop.jp/sites/polaris-engine.com/polaris-engine-installer-$VERSION.dmg
-echo "Upload completed."
-
-#
-# Update the Web site.
-#
-echo ""
-echo "Updating the Web site."
-SAVE_DIR=`pwd`
-cd ../web && \
-    curl -o dl/index.html https://polaris-engine.com/dl/index.html
-    curl -o en/dl/index.html https://polaris-engine.com/en/dl/index.html
-    ./update-templates.sh && \
-    ./update-version.sh && \
-curl -v -T dl/index.html  -u $FTP_USER_PW ftp://ftp.lolipop.jp/sites/polaris-engine.com/dl/index.html
-curl -v -T en/dl/index.html  -u $FTP_USER_PW ftp://ftp.lolipop.jp/sites/polaris-engine.com/en/dl/index.html
-cd "$SAVE_DIR"
-
-#
-# Post to the Discord server.
-#
-echo ""
-echo "Posting to the Discord server."
-#TODO
-
-#
-# Finish.
-#
-echo ""
-echo "Finished. $VERSION was released!"

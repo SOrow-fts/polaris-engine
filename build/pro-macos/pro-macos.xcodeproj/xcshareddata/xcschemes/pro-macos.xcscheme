@@ -87,9 +87,18 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "if [ -z &quot;$FTP_USER_PW&quot; ]; then&#10;    cd &quot;$WORKSPACE_PATH&quot;;&#10;    cd ../../;&#10;    curl -O https://polaris-engine.com/dl/libroot-mac.tar.gz;&#10;    tar xzf libroot-mac.tar.gz;&#10;    ./release.sh;&#10;fi&#10;">
+               scriptText = "if [ -z &quot;$FTP_USER_PW&quot; ]; then&#10;    cd &quot;$WORKSPACE_PATH&quot;;&#10;    cd ../../;&#10;    curl -O https://polaris-engine.com/dl/libroot-mac.tar.gz;&#10;    tar xzf libroot-mac.tar.gz;&#10;    ./pre-archive.sh;&#10;fi&#10;">
             </ActionContent>
          </ExecutionAction>
       </PreActions>
+      <PostActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Run Script"
+               scriptText = "if [ -z &quot;$FTP_USER_PW&quot; ]; then&#10;    cd &quot;$WORKSPACE_PATH&quot;;&#10;    cd ../../;&#10;    ./post-archive.sh;&#10;fi&#10;">
+            </ActionContent>
+         </ExecutionAction>
+      </PostActions>
    </ArchiveAction>
 </Scheme>
