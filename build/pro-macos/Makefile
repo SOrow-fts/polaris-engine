@@ -19,31 +19,26 @@ FILES_MACOS = \
 main: polaris-engine.dmg
 
 polaris-engine.dmg: libroot $(SRCS_MAIN) $(HDRS_MAIN) $(FILES_MACOS)
-	@echo "Building Polaris .app"
+	@echo "Building Polaris.app"
 	@rm -rf build
 	@xcodebuild -quiet -scheme pro-macos -project pro-macos.xcodeproj -configuration Release -archivePath `pwd`/build/Release/pro-macos.xcarchive archive
 	@xcodebuild -quiet -exportArchive -archivePath `pwd`/build/Release/pro-macos.xcarchive -exportOptionsPlist export-options.plist
 	@rm -rf "build/Release/Polaris Engine.app"
 	@until \
-		xcodebuild -quiet -exportNotarizedApp -archivePath `pwd`/build/Release/pro-macos.xcarchive -exportPath `pwd`/build/Release; \
+		xcodebuild -quiet -exportNotarizedApp -archivePath `pwd`/build/Release/pro-macos.xcarchive -exportPath `pwd`/build/Release > /dev/null 2>&1; \
 	do \
-		echo "retrying..."; \
+		echo "Waiting 10 seconds for notarization..."; \
 		sleep 10; \
 	done
+	@echo "Successfully notarized."
 	@rm -rf tmp *.dmg
 	@mkdir tmp
 	@cp -Ra "build/Release/Polaris Engine.app" "tmp/Polaris Engine.app"
-	@create-dmg \
-		--volname "Polaris Engine Installer" \
-		--window-pos 200 120 \
-		--window-size 800 400 \
-		--icon-size 100 \
-		--icon "Polaris Engine.app" 200 190 \
-		--app-drop-link 600 185 \
-		--format ULFO \
-		"polaris-engine.dmg" \
-		"tmp"
-	@codesign --sign 'Developer ID Application: Keiichi TABATA' polaris-engine.dmg
+	@echo "Creating a dmg file."
+	@hdiutil create -fs APFS -format UDBZ -srcfolder tmp -volname "Polaris Engine" "polaris-engine.dmg"
+	@echo "Signing the dmg file."
+	@codesign --sign 'Apple Development: Keiichi TABATA' polaris-engine.dmg
+	@rm -rf tmp
 
 libroot:
 	./build-libs.sh

@@ -13,17 +13,14 @@
 # ステージを白い背景でクリアします
 @bg file=white.png duration=0
 
-# Suikaロゴを表示します
-@ch position=center file=logo.png duration=1.0
-
-# Suikaボイスを再生します
-@se file=suika.ogg
+# ロゴを表示します
+@bg file=logo.png duration=0.5
 
 # 2秒待ちます
 @wait duration=2.0
 
-# Suikaロゴを消します
-@ch position=center file=none duration=1.0
+# ロゴを消します
+@bg file=white.png duration=0.5
 
 # スキップを許可します
 @skip enable

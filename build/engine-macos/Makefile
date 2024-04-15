@@ -24,15 +24,17 @@ game-mac.dmg: libroot $(SRCS_MAIN) $(HDRS_MAIN) $(FILES_APPLE)
 	@xcodebuild -quiet -exportArchive -archivePath `pwd`/build/Release/engine-macos.xcarchive -exportOptionsPlist export-options.plist
 	@rm -rf build/Release/Game.app
 	@until \
-		xcodebuild -quiet -exportNotarizedApp -archivePath `pwd`/build/Release/engine-macos.xcarchive -exportPath `pwd`/build/Release; \
+		xcodebuild -quiet -exportNotarizedApp -archivePath `pwd`/build/Release/engine-macos.xcarchive -exportPath `pwd`/build/Release > /dev/null 2>&1; \
 	do \
-		echo "Waiting..."; \
+		echo "Waiting 10 seconds for notarization..."; \
 		sleep 10; \
 	done
+	@echo "Successfully notarized."
 	@rm -f game-mac.dmg
 	@mkdir tmp
 	@cp -Rv build/Release/Game.app tmp/
 	@hdiutil create -fs HFS+ -format UDBZ -srcfolder tmp -volname game-mac game-mac.dmg
+	@codesign --sign 'Apple Development: Keiichi TABATA' game-mac.dmg
 	@rm -rf tmp
 
 libroot:
