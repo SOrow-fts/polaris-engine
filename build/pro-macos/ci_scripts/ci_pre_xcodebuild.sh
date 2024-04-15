@@ -14,7 +14,6 @@ LANGUAGE=english
 
 # Get the version number.
 echo "\nGetting the version number."
-cd build/
 VERSION=`grep -a1 '<!-- BEGIN-LATEST-JP -->' ../ChangeLog | tail -n1 | cut -d ' ' -f 3`
 echo "VERSION=$VERSION"
 
