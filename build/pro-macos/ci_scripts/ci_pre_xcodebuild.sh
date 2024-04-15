@@ -1,8 +1,12 @@
 #!/bin/sh
 
+set -eu
+
 echo PWD=`pwd`
 cd ../../
 echo PWD=`pwd`
+
+# Assume we are in build/
 
 # Initialize.
 LANG=en_US.UTF-8
@@ -17,25 +21,23 @@ echo "VERSION=$VERSION"
 # Install brew dependencies.
 echo "\nInstalling the brew packages."
 brew install mingw-w64 emscripten makensis
-echo gcc is `which i686-w64-mingw32-gcc`
-echo gcc is `which emcc`
+rehash
+echo "gcc is `which i686-w64-mingw32-gcc`"
+echo "emcc is `which emcc`"
 
 # Build game.exe
 echo "\nBuilding game.exe file."
 cd engine-windows
-curl -O https://polaris-engine.com/dl/libroot-windows.tar.gz
-tar xzf libroot-windows.tar.gz
-make -j8
+./build-libs.sh
+make -j16
 cd ..
 
 # Build Game.app (game-mac.dmg)
 echo "\nBuilding Game.app (game-mac.dmg)."
 cd engine-macos
-curl -O https://polaris-engine.com/dl/libroot-mac.tar.gz
-tar xzf libroot-mac.tar.gz
+./build-libs.sh
+make -j16
 make game-mac.dmg
-cp game-mac.dmg
-codesign --sign 'Developer ID Application: Keiichi TABATA' game-mac.dmg
 cd ..
 
 # Build Wasm files.
@@ -61,7 +63,7 @@ cd ..
 echo "\nBuilding polaris-engine.exe"
 cd pro-windows
 mv ../engine-windows/libroot .
-make -j8 VERSION="$VERSION"
+make -j16 VERSION="$VERSION"
 cd ..
 
 # Build web-test.exe
