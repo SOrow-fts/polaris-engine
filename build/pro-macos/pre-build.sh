@@ -30,20 +30,20 @@ echo "Installing brew dependencies."
 export PATH=/opt/homebrew/bin:$PATH
 brew install mingw-w64 emscripten gsed wget makensis create-dmg
 
-exit 0
-
 #
 # Build "game.exe".
 #
 echo ""
 echo "Building game.exe"
 cd engine-windows
-#tar xzf libroot-windows.tar.gz
-#make -j16
-./build-libs.sh
+curl -O https://polaris-engine.com/dl/libroot-windows.tar.gz
+tar xzf libroot-windows.tar.gz
+make -j16
 cp game.exe game-signed.exe
 #sign.sh game-signed.exe
 cd ..
+
+exit 0
 
 #
 # Build the "Game.app".
@@ -51,7 +51,8 @@ cd ..
 echo ""
 echo "Building Game.app (runtime-mac.dmg)."
 cd engine-macos
-./build-libs.sh
+curl -O https://polaris-engine.com/dl/libroot-mac.tar.gz
+tar xzf libroot-mac.tar.gz
 make game-mac.dmg
 cp game-mac.dmg game-mac-nosign.dmg
 #codesign --sign 'Developer ID Application: Keiichi TABATA' game-mac.dmg
