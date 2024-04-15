@@ -1,7 +1,7 @@
 #!/bin/sh
 
 echo PWD=`pwd`
-cd ../../../..
+cd ../../
 echo PWD=`pwd`
 
 # Initialize.
