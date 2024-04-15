@@ -35,11 +35,9 @@ brew install mingw-w64 emscripten gsed wget makensis create-dmg
 echo ""
 echo "Building game.exe"
 cd engine-windows
-curl -O https://polaris-engine.com/dl/libroot-windows.tar.gz
-tar xzf libroot-windows.tar.gz
+./build-libs.sh
 exit 0
-
-make -j16
+make
 cp game.exe game-signed.exe
 #sign.sh game-signed.exe
 cd ..
