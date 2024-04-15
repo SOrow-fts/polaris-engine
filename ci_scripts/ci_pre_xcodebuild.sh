@@ -99,8 +99,8 @@ cd ..
 
 # Upload the exe and dmg to the Web server.
 echo "\nUploading files."
-curl -T installer-windows/polaris-engine-installer.exe -u ${{ secrets.ftp }} ftp://ftp.lolipop.jp/sites/polaris-engine.com/polaris-engine-installer-$VERSION.exe
-curl -T pro-macos/polaris-engine.dmg -u ${{ secrets.ftp }} ftp://ftp.lolipop.jp/sites/polaris-engine.com/polaris-engine-installer-$VERSION.dmg
+curl -T installer-windows/polaris-engine-installer.exe -u $FTP ftp://ftp.lolipop.jp/sites/polaris-engine.com/polaris-engine-installer-$VERSION.exe
+curl -T pro-macos/polaris-engine.dmg -u $FTP ftp://ftp.lolipop.jp/sites/polaris-engine.com/polaris-engine-installer-$VERSION.dmg
 echo "Upload completed."
 cd ..
 
