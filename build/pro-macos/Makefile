@@ -37,7 +37,7 @@ polaris-engine.dmg: libroot $(SRCS_MAIN) $(HDRS_MAIN) $(FILES_MACOS)
 	@echo "Creating a dmg file."
 	@hdiutil create -fs APFS -format UDBZ -srcfolder tmp -volname "Polaris Engine" "polaris-engine.dmg"
 	@echo "Signing the dmg file."
-	@codesign --sign 'Apple Development: Keiichi TABATA' polaris-engine.dmg
+	@codesign --sign 'Developer ID Application: Keiichi Tabata' polaris-engine.dmg
 	@rm -rf tmp
 
 libroot:

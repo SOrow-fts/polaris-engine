@@ -3,18 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-
 	<title>Polaris Engine | Visual Novel Game Engine</title>
 	<meta name="description" content="Polaris Engine is a visual novel game engine.">
 	<meta name="theme-color" content="#eb8334">
-
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <link rel="stylesheet" href="/css/bootstrap.css">
   <link rel="stylesheet" href="/css/adjustments.css">
   <script src="/js/bootstrap.bundle.min.js"></script>
-
-	<!-- INSERT-GTAG-HERE -->
 </head>
 <body>
 
@@ -82,43 +78,18 @@
 <!-- ----------- -->
 
 <!-- ------------------------- -->
+<br>
+<h4>Downloads</h4>
+<p>
+<!-- LATEST-VERSION-AND-DATE -->Latest 1.0.14 (2024/4/15):<br>
+<!-- LATEST-EXE --><a href="/dl/polaris-engine-1.0.14.exe">Windows: Polaris Engine</a><br>
+<!-- LATEST-DMG --><a href="/dl/polaris-engine-1.0.14.exe">Mac: Polaris Engine</a><br>
+<a href="https://raw.githubusercontent.com/ktabata/polaris-engine/master/install-polaris-engine.sh">Linux/BSD: Polaris Engine</a><br>
+<br>
+<a href="#relnote">Release Notes</a>
+</p>
 
-	<!-- Tabs -->
-	<ul class="nav nav-pills" id="myTab" role="tablist">
-		<li class="nav-item" role="presentation">
-			<button class="nav-link active" id="preview-tab" data-bs-toggle="tab" data-bs-target="#preview-tab-pane" type="button" role="tab" aria-controls="preview-tab-pane" aria-selected="true">Direct</button>
-		</li>
-		<li class="nav-item" role="presentation">
-			<button class="nav-link" id="linux-tab" data-bs-toggle="tab" data-bs-target="#linux-tab-pane" type="button" role="tab" aria-controls="windows-tab-pane" aria-selected="false">Linux/Chromebook</button>
-		</li>
-	</ul>
-
-	<!-- Contents of Tabs -->
-	<div class="tab-content" id="myTabContent">
-
-		<!-- Self Hosted Distribution -->
-		<div class="tab-pane fade show active" id="preview-tab-pane" role="tabpanel" aria-labelledby="preview-tab" tabindex="0">
-			<br>
-			<h4>The Official Distributions</h4>
-			<p>
-<!-- LATEST-VERSION-AND-DATE -->Latest 1.0.14 (Engine):<br>
-<!-- LATEST-EXE --><a href="/dl/polaris-engine-1.0.14.exe">Download Polaris Engine for Windows</a><br>
-<!-- LATEST-DMG --><a href="/dl/polaris-engine-1.0.14.exe">Download Polaris Engine for Mac</a><br>
-			</p>
-			<br>
-		</div>
-
-		<!-- Linux/Chromebook -->
-		<div class="tab-pane fade" id="linux-tab-pane" role="tabpanel" aria-labelledby="linux-tab" tabindex="0">
-			<div style="margin-left:1em;margin-top:1em;">
-				<h3>Linux/Chromebook</h3>
-				<p>From the source code on Ubuntu/Debian/Chromebook (recommended):</p>
-				<pre><code>sudo apt-get install -y git build-essential libasound2-dev libx11-dev mesa-common-dev qt6-base-dev qt6-multimedia-dev libwebp-dev<br>git clone https://github.com/ktabata/polaris-engine.git<br>cd polaris-engine<br>make<br>sudo make install<br>polaris-engine</code></pre>
-			</div>
-		</div>
-
-	</div>
-
+<br>
 <hr>
 <br>
 
@@ -142,6 +113,7 @@
 		</li>
 	</ul>
 </div>
+<br>
 <h3>macOS</h3>
 <div style="margin-left: 2em;">
 	<ul>
@@ -166,6 +138,25 @@
 		</li>
 	</ul>
 </div>
+<br>
+<h3>Linux/BSD</h3>
+<div style="margin-left: 2em;">
+	<ul>
+		<li>Development Tool
+			<ul>
+				<li>Linux / FreeBSD / NetBSD</li>
+				<li>OpenGL</li>
+			</ul>
+		</li>
+		<li>Exported Games
+			<ul>
+				<li>Linux / FreeBSD / NetBSD</li>
+				<li>OpenGL</li>
+			</ul>
+		</li>
+	</ul>
+</div>
+<br>
 <h3>iOS/iPadOS</h3>
 <div style="margin-left: 2em;">
 	<ul>
@@ -188,16 +179,18 @@
 				<li>iOS 15 / iPadOS 15</li>
 				<li>iOS 16 / iPadOS 16</li>
 				<li>iOS 17 / iPadOS 17</li>
+				<li>visionOS 1</li>
 			</ul>
 		</li>
 	</ul>
 </div>
+<br>
 <h3>Android</h3>
 <div style="margin-left: 2em;">
 	<ul>
 		<li>Development Tool
 			<ul>
-				<li>Not supported yet</li>
+				<li>Android 10 and later</li>
 			</ul>
 		</li>
 		<li>Exported Games
@@ -223,8 +216,23 @@
 		</li>
 	</ul>
 </div>
+<br>
+<h3>Gaming Consoles</h3>
+<div style="margin-left: 2em;">
+	<ul>
+		<li>Exported Games (Unity Export)
+			<ul>
+				<li>Nintendo Switch</li>
+				<li>PlayStation 4/5</li>
+				<li>Xbox Series X|S</li>
+			</ul>
+		</li>
+	</ul>
+</div>
 
+<br>
 <hr>
+<br>
 
 <a name="relnote"><h2 class="spacer">Release Notes</h2></a>
 <div class="accordion" id="accordionPanelsStayOpenExample">
@@ -242,7 +250,6 @@
 <li>Polaris Engine 1.0.14 2024/4/15 <ul> <li>Fixed the font files</li> </ul> </li>
 <li>Polaris Engine 1.0.13 2024/4/15 <ul> <li>Fixed the configs</li> </ul> </li>
 <li>Polaris Engine 1.0.12 2024/4/14 <ul> <li>Fixed the ruby size of the Japanese Novel template</li> </ul> </li>
-
 <li>Polaris Engine 1.0.11 2024/4/14 <ul> <li>Changed the logo</li> </ul> </li>
 <li>Polaris Engine 1.0.10 2024/4/14 <ul> <li>Added the official Visual Studio Code extension (Please install Polaris Engine Extension from VScode, then copy .vscode folder from a new template)</li> </ul> </li>
 <li>Polaris Engine 1.0.9 2024/4/14 <ul> <li>Improved config.txt</li> </ul> </li>
@@ -250,7 +257,7 @@
 <li>Polaris Engine 1.0.5 2024/4/14 <ul> <li>Fixed a bug of name config</li> </ul> </li>
 <li>Polaris Engine 1.0.2 2024/4/13 <ul> <li>Fixed a bug of names of variables</li> </ul> </li>
 <li>Polaris Engine 1.0.1 2024/4/12 <ul> <li>Fixed typo in config.txt</li> </ul> </li>
-<li>Polaris Engine 1.0.0 2024/4/12 <ul> <li>Polaris Engine 1.0.0</li> </ul> </li>
+<li>Polaris Engine 1.0.0 2024/4/12 <ul> <li>Polaris Engine 1.0.0 (without Mac version)</li> </ul> </li>
 			</div>
 		</div>
   </div>

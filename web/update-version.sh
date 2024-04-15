@@ -3,7 +3,7 @@
 # Get the version and the date strings.
 HEADER=`grep -a1 '<!-- BEGIN-LATEST-JP -->' ../ChangeLog | tail -n1`
 VERSION=`echo $HEADER | cut -d '>' -f 2 | cut -d ' ' -f 3`
-DATE=`echo $HEADER | cut -d ' ' -f 2`
+DATE=`echo $HEADER | cut -d ' ' -f 3`
 
 # Get the release notes for Japanese and English.
 NOTE_JP=`cat ../ChangeLog | awk '/BEGIN-LATEST-JP/,/END-LATEST-JP/' | tail -n +2 | sed '$d'`

@@ -12,6 +12,17 @@ echo PWD=`pwd`
 LANG=en_US.UTF-8
 LANGUAGE=english
 
+# Load certificates.
+CERTIFICATE_PATH=`pwd`/certificate.p12
+KEYCHAIN_PATH=`pwd`/app-signing.keychain-db
+echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
+security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
+security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+security set-key-partition-list -S apple-tool:,apple: -k "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+security list-keychain -d user -s $KEYCHAIN_PATH
+
 # Get the version number.
 echo "\nGetting the version number."
 VERSION=`grep -a1 '<!-- BEGIN-LATEST-JP -->' ../ChangeLog | tail -n1 | cut -d ' ' -f 3`

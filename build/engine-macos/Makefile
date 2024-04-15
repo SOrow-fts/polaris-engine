@@ -34,7 +34,7 @@ game-mac.dmg: libroot $(SRCS_MAIN) $(HDRS_MAIN) $(FILES_APPLE)
 	@mkdir tmp
 	@cp -Rv build/Release/Game.app tmp/
 	@hdiutil create -fs HFS+ -format UDBZ -srcfolder tmp -volname game-mac game-mac.dmg
-	@codesign --sign 'Apple Development: Keiichi TABATA' game-mac.dmg
+	@codesign --sign 'Developer ID Application: Keiichi Tabata' game-mac.dmg
 	@rm -rf tmp
 
 libroot:
