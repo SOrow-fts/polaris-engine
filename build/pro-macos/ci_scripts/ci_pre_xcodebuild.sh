@@ -1,7 +1,8 @@
 #!/bin/sh
 
-echo `pwd`
+echo PWD=`pwd`
 cd ../../../..
+echo PWD=`pwd`
 
 # Initialize.
 LANG=en_US.UTF-8
