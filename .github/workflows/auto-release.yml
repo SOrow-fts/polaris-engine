@@ -1,0 +1,126 @@
+name: auto-release
+on:
+  push:
+    paths:
+      - 'ChangeLog'
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Release
+        run: |
+          cd build/
+          export LANG=en_US.UTF-8
+          export LANGUAGE=english
+          VERSION=`grep -a1 '<!-- BEGIN-LATEST-JP -->' ../ChangeLog | tail -n1 | cut -d ' ' -f 3`
+          brew install mingw-w64 emscripten makensis create-dmg
+          echo ""
+          echo "Building game.exe"
+          cd engine-windows
+          curl -O https://polaris-engine.com/dl/libroot-windows.tar.gz
+          tar xzf libroot-windows.tar.gz
+          make -j8
+          cp game.exe game-signed.exe
+          echo 'sign.sh game-signed.exe'
+          cd ..
+          echo ""
+          echo "Building Game.app (game-mac.dmg)."
+          cd engine-macos
+          curl -O https://polaris-engine.com/dl/libroot-mac.tar.gz
+          tar xzf libroot-mac.tar.gz
+          make game-mac.dmg
+          cp game-mac.dmg
+          codesign --sign 'Developer ID Application: Keiichi TABATA' game-mac.dmg
+          cd ..
+          echo ""
+          echo "Building Wasm files."
+          cd engine-wasm
+          make
+          cd ..
+          echo ""
+          echo "Building iOS source tree."
+          cd engine-ios
+          make src > /dev/null
+          cd ..
+          echo ""
+          echo "Building Android source tree."
+          cd engine-android
+          make src > /dev/null
+          cd ..
+          echo ""
+          echo "Building polaris-engine.exe"
+          cd pro-windows
+          cp -Rav ../engine-windows/libroot .
+          make -j16 VERSION="$VERSION"
+          echo 'sign.sh polaris-engine.exe'
+          cd ..
+          echo ""
+          echo "Building web-test.exe"
+          cd ../tools/web-test
+          make
+          cd ../../build
+          echo ""
+          echo "Creating an installer for Windows."
+          cp -v pro-windows/polaris-engine.exe installer-windows/polaris-engine.exe
+          rm -rf installer-windows/games
+          find ../games -name '.DS_Store' | xargs rm
+          mkdir installer-windows/games
+          cp -R ../games/japanese-light installer-windows/games/
+          cp -R ../games/japanese-dark installer-windows/games/
+          cp -R ../games/japanese-novel installer-windows/games/
+          cp -R ../games/japanese-tategaki installer-windows/games/
+          cp -R ../games/english installer-windows/games/
+          cp -R ../games/english-novel installer-windows/games/
+          rm -rf installer-windows/tools
+          mkdir -p installer-windows/tools
+          cp engine-windows/game.exe installer-windows/tools/
+          cp engine-windows/game-signed.exe installer-windows/tools/
+          cp engine-macos/game-mac.dmg installer-windows/tools/
+          cp -R engine-android/android-src installer-windows/tools/android-src
+          cp -R engine-ios/ios-src installer-windows/tools/ios-src
+          mkdir -p installer-windows/tools/web
+          cp engine-wasm/html/index.html installer-windows/tools/web/index.html
+          cp engine-wasm/html/index.js installer-windows/tools/web/index.js
+          cp engine-wasm/html/index.wasm installer-windows/tools/web/index.wasm
+          cp  ../tools/web-test/web-test.exe installer-windows/tools/web-test.exe
+          cp -R ../tools/installer installer-windows/tools/installer
+          cd installer-windows
+          make
+          cd ..
+          echo ""
+          echo "Building Polaris Engine.app (polaris-engine.dmg)"
+          cd pro-macos
+          make
+          cd ..
+          echo ""
+          echo "Uploading files."
+          curl -T installer-windows/polaris-engine-installer.exe -u ${{ secrets.ftp }} ftp://ftp.lolipop.jp/sites/polaris-engine.com/polaris-engine-installer-$VERSION.exe
+          curl -T pro-macos/polaris-engine.dmg -u ${{ secrets.ftp }} ftp://ftp.lolipop.jp/sites/polaris-engine.com/polaris-engine-installer-$VERSION.dmg
+          echo "Upload completed."
+          echo ""
+          echo "Updating the Web site."
+          cd ../web
+          curl -o dl/index.html https://polaris-engine.com/dl/index.html
+          curl -o en/dl/index.html https://polaris-engine.com/en/dl/index.html
+          ./update-templates.sh
+          ./update-version.sh
+          curl -T dl/index.html -u ${{ secrets.ftp }} ftp://ftp.lolipop.jp/sites/polaris-engine.com/dl/index.html
+          curl -T en/dl/index.html -u ${{ secrets.ftp }} ftp://ftp.lolipop.jp/sites/polaris-engine.com/en/dl/index.html
+          cd ..
+          cd ..
+          echo ""
+          echo "Post to the Discord servers."
+          NOTE_JP=`cat ChangeLog | awk '/BEGIN-LATEST-JP/,/END-LATEST-JP/' | tail -n +2 | sed '$d'`
+          NOTE_JP=`echo "$NOTE_JP" | sed -e 's/<li>Polaris Engine/## Polaris Engine/g'`
+          NOTE_JP=`echo "$NOTE_JP" | sed -e 's/    <li>/* /g'`
+          NOTE_JP=`echo "$NOTE_JP" | sed -e 's/<ul>//g'`
+          NOTE_JP=`echo "$NOTE_JP" | sed -e 's/<\/ul>//g'`
+          NOTE_JP=`echo "$NOTE_JP" | sed -e 's/<\/li>/\n/g'`
+          NOTE_JP=`echo "$NOTE_JP" | sed -e 's/^ *$//g'`
+          NOTE_JP=`echo "$NOTE_JP" | awk '$0 != ""{print $0}'`
+          NOTE_JP=`printf "$NOTE_JP\n\nダウンロードはこちら: https://polaris-engine.com/dl/"`
+          NOTE_JP=`echo "$NOTE_JP" | sed -z 's/\n/\\\\n/g'`
+          echo $NOTE_JP
+          curl -H 'Content-Type: application/json' -X 'POST' -d "{\"username\": \"リリース\", \"content\": \"$NOTE_JP\"}" ${{ secrets.devhook }}
+          curl -H 'Content-Type: application/json' -X 'POST' -d "{\"username\": \"リリース\", \"content\": \"$NOTE_JP\"}" ${{ secrets.userhook }}
