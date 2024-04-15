@@ -10,19 +10,10 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "cd &quot;$WORKSPACE_PATH&quot;&#10;cd ../../&#10;if [ ! -d libroot ]; then&#10;    curl -O https://polaris-engine.com/dl/libroot-mac.tar.gz;&#10;    tar xzf libroot-mac.tar.gz;&#10;fi&#10;./pre-build.sh&#10;">
+               scriptText = "cd &quot;$WORKSPACE_PATH&quot;&#10;cd ../../&#10;if [ ! -d libroot ]; then&#10;    curl -O https://polaris-engine.com/dl/libroot-mac.tar.gz;&#10;    tar xzf libroot-mac.tar.gz;&#10;fi&#10;">
             </ActionContent>
          </ExecutionAction>
       </PreActions>
-      <PostActions>
-         <ExecutionAction
-            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
-            <ActionContent
-               title = "Run Script"
-               scriptText = "cd &quot;$WORKSPACE_PATH&quot;&#10;cd ../../&#10;./post-build.sh&#10;">
-            </ActionContent>
-         </ExecutionAction>
-      </PostActions>
       <BuildActionEntries>
          <BuildActionEntry
             buildForTesting = "YES"
