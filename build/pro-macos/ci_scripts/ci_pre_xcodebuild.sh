@@ -18,6 +18,7 @@ echo "VERSION=$VERSION"
 echo "\nInstalling the brew packages."
 brew install mingw-w64 emscripten makensis
 echo gcc is `which i686-w64-mingw32-gcc`
+echo gcc is `which emcc`
 
 # Build game.exe
 echo "\nBuilding game.exe file."
@@ -40,6 +41,7 @@ cd ..
 # Build Wasm files.
 echo "\nBuilding Wasm files."
 cd engine-wasm
+rm -rf html
 make
 cd ..
 

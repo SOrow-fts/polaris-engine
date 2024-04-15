@@ -63,6 +63,7 @@ SRC = \
 all: html
 
 html: emsdk $(SRC)
+	if [ -f emsdk/emsdk.sh ]; then source ./emsdk/emsdk_env.sh; fi && \
 	tar xzf ../libsrc/libwebp-1.3.2.tar.gz && \
 	rm -f html/index.* && \
 	mkdir -p html && \
@@ -73,19 +74,10 @@ emsdk:
 		git clone https://github.com/emscripten-core/emsdk.git; \
 		cd emsdk && ./emsdk install latest && cd ..; \
 		cd emsdk && ./emsdk activate latest && cd ..; \
-		source ./emsdk/emsdk_env.sh; \
 	fi
 
 run:
 	python3 -m http.server
-
-upload:
-	ftp-upload.sh html/index.html test-20240301k/
-	ftp-upload.sh html/index.js test-20240301k/
-	ftp-upload.sh html/index.wasm test-20240301k/
-
-update-game:
-	ftp-upload.sh data01.arc test-20240301k/
 
 clean:
 	rm -rf html
