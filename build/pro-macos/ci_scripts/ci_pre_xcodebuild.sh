@@ -18,7 +18,7 @@ VERSION=`grep -a1 '<!-- BEGIN-LATEST-JP -->' ../ChangeLog | tail -n1 | cut -d ' 
 echo "VERSION=$VERSION"
 
 # Install the Command Line Tools
-xcode-select -s /Applications/Xcode.app
+sudo xcode-select -s /Applications/Xcode.app
 brew upgrade python
 
 # Install brew dependencies.
