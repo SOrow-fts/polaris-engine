@@ -13,22 +13,25 @@ LANG=en_US.UTF-8
 LANGUAGE=english
 
 # Load the certificate of "Developer ID Application: Keiichi Tabata".
-CERTIFICATE_PATH=`pwd`/certificate.p12
-KEYCHAIN_PATH=`pwd`/app-signing.keychain-db
-KEYCHAIN_PASSWORD="AutoReleaseCICDPipeLine2024"
-echo "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
-echo "create-keychain"
-security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
-echo "set-keychain-settings"
-security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
-echo "unlock-keychain"
-security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
-echo "import"
-security import $CERTIFICATE_PATH -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
-echo "set-key-partition-list"
-security set-key-partition-list -S apple-tool:,apple: -k "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
-echo "list-keychain"
-security list-keychain -d user -s $KEYCHAIN_PATH
+security list-keychain
+security find-certificate -c "Developer ID Application"
+#CERTIFICATE_PATH=`pwd`/certificate.p12
+#KEYCHAIN_PATH=`pwd`/app-signing.keychain-db
+#KEYCHAIN_PASSWORD="AutoReleaseCICDPipeLine2024"
+#echo "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
+#echo "create-keychain"
+#security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+#echo "set-keychain-settings"
+#security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
+#echo "unlock-keychain"
+#security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+#echo "import"
+#security import $CERTIFICATE_PATH -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+#echo "set-key-partition-list"
+#security set-key-partition-list -S apple-tool:,apple: -k "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+#echo "list-keychain"
+#security list-keychain -d user -s $KEYCHAIN_PATH
+exit 1
 
 # Get the version number.
 echo "\nGetting the version number."
