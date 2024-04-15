@@ -27,8 +27,9 @@ VERSION=`grep -a1 '<!-- BEGIN-LATEST-JP -->' ../ChangeLog | tail -n1 | cut -d ' 
 echo ""
 echo "Installing brew dependencies."
 
-export PATH=/opt/homebrew/bin:$PATH
 brew install mingw-w64 emscripten gsed wget makensis create-dmg
+
+exit 0
 
 #
 # Build "game.exe".
@@ -42,8 +43,6 @@ make -j16
 cp game.exe game-signed.exe
 #sign.sh game-signed.exe
 cd ..
-
-exit 0
 
 #
 # Build the "Game.app".
