@@ -18,15 +18,8 @@ VERSION=`grep -a1 '<!-- BEGIN-LATEST-JP -->' ../ChangeLog | tail -n1 | cut -d ' 
 echo "VERSION=$VERSION"
 
 # Install the Command Line Tools
-xcode-select -p
-if [ $? -ne 0 ]; then
-  echo "Command Line Tools for Xcode not found. Installing from softwareupdate…"
-  touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress;
-  PROD=$(softwareupdate -l | grep "\*.*Command Line" | tail -n 1 | sed 's/^[^C]* //')
-  softwareupdate -i "$PROD" --verbose;
-else
-  echo "Command Line Tools for Xcode have been installed."
-fi
+xcode-select -s /Applications/Xcode.app
+brew upgrade python
 
 # Install brew dependencies.
 echo "\nInstalling the brew packages."
