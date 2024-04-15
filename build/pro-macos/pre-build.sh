@@ -29,8 +29,6 @@ echo "Installing brew dependencies."
 
 brew install mingw-w64 emscripten gsed wget makensis create-dmg
 
-exit 0
-
 #
 # Build "game.exe".
 #
@@ -39,6 +37,8 @@ echo "Building game.exe"
 cd engine-windows
 curl -O https://polaris-engine.com/dl/libroot-windows.tar.gz
 tar xzf libroot-windows.tar.gz
+exit 0
+
 make -j16
 cp game.exe game-signed.exe
 #sign.sh game-signed.exe
