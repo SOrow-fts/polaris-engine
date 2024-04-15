@@ -15,8 +15,8 @@ LANGUAGE=english
 # Load the certificate of "Developer ID Application: Keiichi Tabata".
 CERTIFICATE_PATH=`pwd`/certificate.p12
 KEYCHAIN_PATH=`pwd`/app-signing.keychain-db
-echo -n "$BUILD_CERTIFICATE_BASE64"
-echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
+KEYCHAIN_PASSWORD="AutoReleaseCICDPipeLine2024"
+echo "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
 echo "create-keychain"
 security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
 echo "set-keychain-settings"
@@ -24,7 +24,7 @@ security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
 echo "unlock-keychain"
 security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
 echo "import"
-security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+security import $CERTIFICATE_PATH -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
 echo "set-key-partition-list"
 security set-key-partition-list -S apple-tool:,apple: -k "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
 echo "list-keychain"
