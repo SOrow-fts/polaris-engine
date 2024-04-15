@@ -17,11 +17,14 @@ echo "\nGetting the version number."
 VERSION=`grep -a1 '<!-- BEGIN-LATEST-JP -->' ../ChangeLog | tail -n1 | cut -d ' ' -f 3`
 echo "VERSION=$VERSION"
 
+# Install the Command Line Tools
+yes | xcode-select --install
+
 # Install brew dependencies.
 echo "\nInstalling the brew packages."
-brew install mingw-w64 emscripten makensis
+brew install mingw-w64 emscripten makensis || true
 
-echo "Testing paths..."
+echo "\nTesting paths..."
 echo "gcc is `which i686-w64-mingw32-gcc`"
 echo "emcc is `which emcc`"
 echo "Testing paths OK."
