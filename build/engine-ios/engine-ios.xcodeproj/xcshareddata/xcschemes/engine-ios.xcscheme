@@ -24,8 +24,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "26BF12AF2B29E225006A0F6E"
-               BuildableName = "Polaris Engine Runtime.app"
-               BlueprintName = "Polaris Engine Runtime"
+               BuildableName = "Game.app"
+               BlueprintName = "Game"
                ReferencedContainer = "container:engine-ios.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -53,8 +53,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "26BF12AF2B29E225006A0F6E"
-            BuildableName = "Polaris Engine Runtime.app"
-            BlueprintName = "Polaris Engine Runtime"
+            BuildableName = "Game.app"
+            BlueprintName = "Game"
             ReferencedContainer = "container:engine-ios.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -70,8 +70,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "26BF12AF2B29E225006A0F6E"
-            BuildableName = "Polaris Engine Runtime.app"
-            BlueprintName = "Polaris Engine Runtime"
+            BuildableName = "Game.app"
+            BlueprintName = "Game"
             ReferencedContainer = "container:engine-ios.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

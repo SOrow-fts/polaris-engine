@@ -10,13 +10,13 @@
 		260EDAE92B2A7C30006C214F /* GameRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 260EDAE22B2A7C30006C214F /* GameRenderer.m */; };
 		260EDAEA2B2A7C30006C214F /* aunit.c in Sources */ = {isa = PBXBuildFile; fileRef = 260EDAE42B2A7C30006C214F /* aunit.c */; };
 		260EDAEB2B2A7C30006C214F /* GameShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 260EDAE82B2A7C30006C214F /* GameShaders.metal */; };
+		267492BE2BCDB34F00943F71 /* data01.arc in Resources */ = {isa = PBXBuildFile; fileRef = 267492BD2BCDB34F00943F71 /* data01.arc */; };
 		26A500062B29E4BA00C1ED7D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A5FFFC2B29E4BA00C1ED7D /* main.m */; };
 		26A500072B29E4BA00C1ED7D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A5FFFD2B29E4BA00C1ED7D /* AppDelegate.m */; };
 		26A500092B29E4BA00C1ED7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26A500012B29E4BA00C1ED7D /* Assets.xcassets */; };
 		26A5000A2B29E4BA00C1ED7D /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A500022B29E4BA00C1ED7D /* SceneDelegate.m */; };
 		26A5000B2B29E4BA00C1ED7D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A500032B29E4BA00C1ED7D /* ViewController.m */; };
 		26A5000F2B29E55400C1ED7D /* GameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A5000E2B29E55400C1ED7D /* GameView.m */; };
-		26A500142B29F40400C1ED7D /* data01.arc in Resources */ = {isa = PBXBuildFile; fileRef = 26A500132B29F40400C1ED7D /* data01.arc */; };
 		26A500152B29F54100C1ED7D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26A5000D2B29E4CB00C1ED7D /* Main.storyboard */; };
 		26A500162B29F54500C1ED7D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26A5000C2B29E4C700C1ED7D /* LaunchScreen.storyboard */; };
 		26BF13252B29E2EB006A0F6E /* cmd_bgm.c in Sources */ = {isa = PBXBuildFile; fileRef = 26BF12CD2B29E2EA006A0F6E /* cmd_bgm.c */; };
@@ -86,6 +86,7 @@
 		260EDAE72B2A7C30006C214F /* GameRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameRenderer.h; path = ../../src/apple/GameRenderer.h; sourceTree = "<group>"; };
 		260EDAE82B2A7C30006C214F /* GameShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = GameShaders.metal; path = ../../src/apple/GameShaders.metal; sourceTree = "<group>"; };
 		2652EACD2BC8CB0800B0F5EA /* polaris.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = polaris.h; path = ../../src/polaris.h; sourceTree = "<group>"; };
+		267492BD2BCDB34F00943F71 /* data01.arc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = data01.arc; sourceTree = "<group>"; };
 		26A500002B29E4BA00C1ED7D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		26A500012B29E4BA00C1ED7D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		26A500022B29E4BA00C1ED7D /* SceneDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
@@ -95,12 +96,11 @@
 		26A5000D2B29E4CB00C1ED7D /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		26A5000E2B29E55400C1ED7D /* GameView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameView.m; sourceTree = "<group>"; };
 		26A500102B29E58700C1ED7D /* GameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameView.h; sourceTree = "<group>"; };
-		26A500132B29F40400C1ED7D /* data01.arc */ = {isa = PBXFileReference; lastKnownFileType = text; path = data01.arc; sourceTree = "<group>"; };
 		26A5FFFC2B29E4BA00C1ED7D /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		26A5FFFD2B29E4BA00C1ED7D /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		26A5FFFE2B29E4BA00C1ED7D /* SceneDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		26A5FFFF2B29E4BA00C1ED7D /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		26BF12B02B29E225006A0F6E /* Polaris Engine Runtime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Polaris Engine Runtime.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		26BF12B02B29E225006A0F6E /* Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Game.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26BF12CD2B29E2EA006A0F6E /* cmd_bgm.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_bgm.c; path = ../../src/cmd_bgm.c; sourceTree = "<group>"; };
 		26BF12CE2B29E2EA006A0F6E /* cmd_shake.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_shake.c; path = ../../src/cmd_shake.c; sourceTree = "<group>"; };
 		26BF12D02B29E2EA006A0F6E /* cmd_cha.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_cha.c; path = ../../src/cmd_cha.c; sourceTree = "<group>"; };
@@ -210,10 +210,17 @@
 			name = apple;
 			sourceTree = "<group>";
 		};
+		267492BC2BCDB2FC00943F71 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				267492BD2BCDB34F00943F71 /* data01.arc */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		26A5FFFA2B29E4A500C1ED7D /* engine-ios */ = {
 			isa = PBXGroup;
 			children = (
-				26A500132B29F40400C1ED7D /* data01.arc */,
 				26A5000C2B29E4C700C1ED7D /* LaunchScreen.storyboard */,
 				26A5000D2B29E4CB00C1ED7D /* Main.storyboard */,
 				26A500012B29E4BA00C1ED7D /* Assets.xcassets */,
@@ -235,7 +242,8 @@
 			isa = PBXGroup;
 			children = (
 				26A5FFFA2B29E4A500C1ED7D /* engine-ios */,
-				26BF12CC2B29E290006A0F6E /* lib */,
+				26BF12CC2B29E290006A0F6E /* polaris-engine */,
+				267492BC2BCDB2FC00943F71 /* Resources */,
 				26BF12B12B29E225006A0F6E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -243,12 +251,12 @@
 		26BF12B12B29E225006A0F6E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				26BF12B02B29E225006A0F6E /* Polaris Engine Runtime.app */,
+				26BF12B02B29E225006A0F6E /* Game.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		26BF12CC2B29E290006A0F6E /* lib */ = {
+		26BF12CC2B29E290006A0F6E /* polaris-engine */ = {
 			isa = PBXGroup;
 			children = (
 				260EDAE12B2A7C21006C214F /* apple */,
@@ -336,15 +344,15 @@
 				26BF12DE2B29E2EA006A0F6E /* wms_parser.tab.h */,
 				26BF131A2B29E2EB006A0F6E /* wms.h */,
 			);
-			name = lib;
+			name = "polaris-engine";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		26BF12AF2B29E225006A0F6E /* Polaris Engine Runtime */ = {
+		26BF12AF2B29E225006A0F6E /* Game */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 26BF12C92B29E225006A0F6E /* Build configuration list for PBXNativeTarget "Polaris Engine Runtime" */;
+			buildConfigurationList = 26BF12C92B29E225006A0F6E /* Build configuration list for PBXNativeTarget "Game" */;
 			buildPhases = (
 				26BF12AC2B29E225006A0F6E /* Sources */,
 				26BF12AD2B29E225006A0F6E /* Frameworks */,
@@ -354,9 +362,9 @@
 			);
 			dependencies = (
 			);
-			name = "Polaris Engine Runtime";
+			name = Game;
 			productName = "Polaris Engine";
-			productReference = 26BF12B02B29E225006A0F6E /* Polaris Engine Runtime.app */;
+			productReference = 26BF12B02B29E225006A0F6E /* Game.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -386,7 +394,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				26BF12AF2B29E225006A0F6E /* Polaris Engine Runtime */,
+				26BF12AF2B29E225006A0F6E /* Game */,
 			);
 		};
 /* End PBXProject section */
@@ -397,9 +405,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				26A500162B29F54500C1ED7D /* LaunchScreen.storyboard in Resources */,
+				267492BE2BCDB34F00943F71 /* data01.arc in Resources */,
 				26A500152B29F54100C1ED7D /* Main.storyboard in Resources */,
 				26A500092B29E4BA00C1ED7D /* Assets.xcassets in Resources */,
-				26A500142B29F40400C1ED7D /* data01.arc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -601,9 +609,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7S742FWR63;
+				DEVELOPMENT_TEAM = DT727R68TR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "engine-ios/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -636,8 +645,9 @@
 					"-lbrotlidec",
 					"-lbrotlicommon",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "software.hokuto.polaris.engine-ios";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.polaris-engine.engine-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -648,9 +658,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7S742FWR63;
+				DEVELOPMENT_TEAM = DT727R68TR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "engine-ios/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -683,8 +694,9 @@
 					"-lbrotlidec",
 					"-lbrotlicommon",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "software.hokuto.polaris.engine-ios";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.polaris-engine.engine-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -702,7 +714,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		26BF12C92B29E225006A0F6E /* Build configuration list for PBXNativeTarget "Polaris Engine Runtime" */ = {
+		26BF12C92B29E225006A0F6E /* Build configuration list for PBXNativeTarget "Game" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				26BF12CA2B29E225006A0F6E /* Debug */,

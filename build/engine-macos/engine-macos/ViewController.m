@@ -484,6 +484,24 @@ bool make_sav_dir(void)
 char *make_valid_path(const char *dir, const char *fname)
 {
     @autoreleasepool {
+        if (dir != NULL)
+            return strdup("");
+        if (fname == NULL)
+            return strdup("");
+        if (strcmp(fname, "data01.arc") != 0)
+            return strdup("");
+
+        NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
+        NSString *filePath = [NSString stringWithFormat:@"%@/Contents/Resources/data01.arc", bundlePath];
+
+        const char *cstr = [filePath UTF8String];
+        char *ret = strdup(cstr);
+        if (ret == NULL) {
+            log_memory();
+            return NULL;
+        }
+        return ret;
+#if 0
         if (conf_release && dir != NULL && strcmp(dir, SAVE_DIR) == 0) {
             // リリースモードの場合
             assert(fname != NULL);
@@ -524,6 +542,7 @@ char *make_valid_path(const char *dir, const char *fname)
             return NULL;
         }
         return ret;
+#endif
     }
 }
 

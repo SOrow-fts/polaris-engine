@@ -4,7 +4,7 @@ set -eu
 
 PREFIX=`pwd`/libroot-device
 
-rm -rf tmp libroot-device
+rm -rf tmp libroot libroot-sim libroot-device
 mkdir -p tmp libroot-device libroot-device/include libroot-device/lib libroot-device/bin
 
 cd tmp
@@ -13,7 +13,9 @@ echo 'Building brotli...'
 tar xzf ../../libsrc/brotli-1.1.0.tar.gz
 cp ../Makefile.brotli brotli-1.1.0/Makefile
 cd brotli-1.1.0
-make
+make TARGET=../../libroot-device
+cp libbrotlicommon.a ../../libroot-device/lib/
+cp libbrotlidec.a ../../libroot-device/lib/
 cd ..
 
 echo 'building bzip2...'

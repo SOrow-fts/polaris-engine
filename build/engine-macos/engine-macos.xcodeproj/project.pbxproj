@@ -12,6 +12,7 @@
 		2662CFDA2B2A7BC800CB3DBE /* GameShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 2662CFD32B2A7BC800CB3DBE /* GameShaders.metal */; };
 		2662CFDB2B2A7BC800CB3DBE /* GameRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2662CFD52B2A7BC800CB3DBE /* GameRenderer.m */; };
 		268EAEAC2B21E41400CF559E /* GameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 268EAEAB2B21E41400CF559E /* GameView.m */; };
+		269C49C72BCD9FFD00D02C14 /* data01.arc in Resources */ = {isa = PBXBuildFile; fileRef = 269C49C62BCD9FFD00D02C14 /* data01.arc */; };
 		26EAF25C2B1F9B1F003530F4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 26EAF25B2B1F9B1F003530F4 /* AppDelegate.m */; };
 		26EAF2612B1F9B20003530F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26EAF2602B1F9B20003530F4 /* Assets.xcassets */; };
 		26EAF2642B1F9B20003530F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26EAF2622B1F9B20003530F4 /* Main.storyboard */; };
@@ -90,6 +91,7 @@
 		268EAEAA2B21E41400CF559E /* GameView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameView.h; sourceTree = "<group>"; };
 		268EAEAB2B21E41400CF559E /* GameView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameView.m; sourceTree = "<group>"; };
 		268EAEAE2B23C12800CF559E /* hal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hal.h; path = ../../src/hal.h; sourceTree = "<group>"; };
+		269C49C62BCD9FFD00D02C14 /* data01.arc */ = {isa = PBXFileReference; lastKnownFileType = file; path = data01.arc; sourceTree = "<group>"; };
 		26EAF2572B1F9B1F003530F4 /* Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Game.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26EAF25A2B1F9B1F003530F4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		26EAF25B2B1F9B1F003530F4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -210,10 +212,19 @@
 			name = apple;
 			sourceTree = "<group>";
 		};
+		269C49C52BCD9FDC00D02C14 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				269C49C62BCD9FFD00D02C14 /* data01.arc */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		26EAF24E2B1F9B1F003530F4 = {
 			isa = PBXGroup;
 			children = (
 				26EAF2592B1F9B1F003530F4 /* engine-macos */,
+				269C49C52BCD9FDC00D02C14 /* Resources */,
 				26EAF2712B202CA6003530F4 /* polaris-engine */,
 				26EAF2582B1F9B1F003530F4 /* Products */,
 				26EAF3082B2049DE003530F4 /* Frameworks */,
@@ -403,6 +414,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				269C49C72BCD9FFD00D02C14 /* data01.arc in Resources */,
 				26EAF2612B1F9B20003530F4 /* Assets.xcassets in Resources */,
 				26EAF2642B1F9B20003530F4 /* Main.storyboard in Resources */,
 			);
@@ -618,12 +630,11 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = "engine-macos/engine_macos.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=macosx*]" = DT727R68TR;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Polaris Engine";
@@ -675,12 +686,11 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = "engine-macos/engine_macos.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=macosx*]" = DT727R68TR;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Polaris Engine";

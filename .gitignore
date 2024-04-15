@@ -63,6 +63,7 @@ build/engine-macos/libroot-mac.tar.gz
 build/engine-macos/game-mac.dmg
 build/engine-macos/game-mac-nosign.dmg
 build/engine-macos/build
+build/engine-macos/macos-src
 
 # Wasm
 build/engine-wasm/html

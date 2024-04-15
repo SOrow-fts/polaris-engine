@@ -12,27 +12,6 @@ echo PWD=`pwd`
 LANG=en_US.UTF-8
 LANGUAGE=english
 
-# Load the certificate of "Developer ID Application: Keiichi Tabata".
-security list-keychain
-security find-certificate -c "Keiichi"
-#CERTIFICATE_PATH=`pwd`/certificate.p12
-#KEYCHAIN_PATH=`pwd`/app-signing.keychain-db
-#KEYCHAIN_PASSWORD="AutoReleaseCICDPipeLine2024"
-#echo "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
-#echo "create-keychain"
-#security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
-#echo "set-keychain-settings"
-#security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
-#echo "unlock-keychain"
-#security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
-#echo "import"
-#security import $CERTIFICATE_PATH -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
-#echo "set-key-partition-list"
-#security set-key-partition-list -S apple-tool:,apple: -k "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
-#echo "list-keychain"
-#security list-keychain -d user -s $KEYCHAIN_PATH
-exit 1
-
 # Get the version number.
 echo "\nGetting the version number."
 VERSION=`grep -a1 '<!-- BEGIN-LATEST-JP -->' ../ChangeLog | tail -n1 | cut -d ' ' -f 3`
@@ -57,19 +36,17 @@ cd engine-windows
 make -j16
 cd ..
 
-# Build Game.app (game-mac.dmg)
-echo "\nBuilding Game.app (game-mac.dmg)."
-cd engine-macos
-./build-libs.sh
-make -j16
-make game-mac.dmg
-cd ..
-
 # Build Wasm files.
 echo "\nBuilding Wasm files."
 cd engine-wasm
 rm -rf html
 make
+cd ..
+
+# Make a macOS source tree.
+echo "\nBuilding macOS source tree."
+cd engine-macos
+make src > /dev/null
 cd ..
 
 # Make an iOS source tree.
@@ -123,44 +100,3 @@ cp -R ../tools/installer installer-windows/tools/installer
 cd installer-windows
 make
 cd ..
-
-# Build Polaris Engine.app (polaris-engine.dmg)
-echo "\nBuilding Polaris Engine.app (polaris-engine.dmg)"
-cd pro-macos
-make
-cd ..
-
-# Upload the exe and dmg to the Web server.
-echo "\nUploading files."
-curl -T installer-windows/polaris-engine-installer.exe -u $FTP ftp://ftp.lolipop.jp/sites/polaris-engine.com/polaris-engine-installer-$VERSION.exe
-curl -T pro-macos/polaris-engine.dmg -u $FTP ftp://ftp.lolipop.jp/sites/polaris-engine.com/polaris-engine-installer-$VERSION.dmg
-echo "Upload completed."
-cd ..
-
-# Update the Web site.
-echo "\nUpdating the Web site."
-cd web
-curl -o dl/index.html https://polaris-engine.com/dl/index.html
-curl -o en/dl/index.html https://polaris-engine.com/en/dl/index.html
-./update-templates.sh
-./update-version.sh
-curl -T dl/index.html -u $FTP ftp://ftp.lolipop.jp/sites/polaris-engine.com/dl/index.html
-curl -T en/dl/index.html -u $FTP ftp://ftp.lolipop.jp/sites/polaris-engine.com/en/dl/index.html
-cd ..
-
-# Post to Discord.
-cd build
-echo "\nPosting to Discord."
-NOTE_JP=`cat ChangeLog | awk '/BEGIN-LATEST-JP/,/END-LATEST-JP/' | tail -n +2 | sed '$d'`
-NOTE_JP=`echo "$NOTE_JP" | sed -e 's/<li>Polaris Engine/## Polaris Engine/g'`
-NOTE_JP=`echo "$NOTE_JP" | sed -e 's/    <li>/* /g'`
-NOTE_JP=`echo "$NOTE_JP" | sed -e 's/<ul>//g'`
-NOTE_JP=`echo "$NOTE_JP" | sed -e 's/<\/ul>//g'`
-NOTE_JP=`echo "$NOTE_JP" | sed -e 's/<\/li>/\n/g'`
-NOTE_JP=`echo "$NOTE_JP" | sed -e 's/^ *$//g'`
-NOTE_JP=`echo "$NOTE_JP" | awk '$0 != ""{print $0}'`
-NOTE_JP=`printf "$NOTE_JP\n\nダウンロードはこちら: https://polaris-engine.com/dl/"`
-NOTE_JP=`echo "$NOTE_JP" | sed -z 's/\n/\\\\n/g'`
-echo $NOTE_JP
-curl -H 'Content-Type: application/json' -X 'POST' -d "{\"username\": \"リリース\", \"content\": \"$NOTE_JP\"}" $DEVHOOK
-curl -H 'Content-Type: application/json' -X 'POST' -d "{\"username\": \"リリース\", \"content\": \"$NOTE_JP\"}" $USERHOOK

@@ -26,10 +26,10 @@ OBJ_DEC = $(SRC_DEC:c/dec/%.c=%.o)
 	$(CC) -c $(CPPFLAGS) -O3 -arch arm64 -isysroot `xcrun -sdk iphoneos --show-sdk-path` -fembed-bitcode -mios-version-min=8.0 $<
 
 all: libbrotlicommon.a libbrotlidec.a
-	cp -R c/include/brotli ../../libroot/include/
+	cp -R c/include/brotli ${TARGET}/include/
 
 libbrotlicommon.a: $(OBJ_COMMON)
-	$(AR) rcs ../../libroot/lib/libbrotlicommon.a $(OBJ_COMMON)
+	$(AR) rcs libbrotlicommon.a $(OBJ_COMMON)
 
 libbrotlidec.a: $(OBJ_DEC)
-	$(AR) rcs ../../libroot/lib/libbrotlidec.a $(OBJ_DEC)
+	$(AR) rcs libbrotlidec.a $(OBJ_DEC)

@@ -2,26 +2,28 @@
 
 set -eu
 
-PREFIX=`pwd`/libroot
+PREFIX=`pwd`/libroot-sim
 
-rm -rf tmp libroot
-mkdir -p tmp libroot libroot/include libroot/lib libroot/bin
+rm -rf tmp libroot libroot-sim
+mkdir -p tmp libroot libroot-sim/include libroot-sim/lib libroot-sim/bin
 
 cd tmp
 
 echo 'Building brotli...'
 tar xzf ../../libsrc/brotli-1.1.0.tar.gz
-cp ../Makefile.brotli-sim brotli-1.1.0/Makefile
+cp ../Makefile.brotli brotli-1.1.0/Makefile
 cd brotli-1.1.0
-make
+make TARGET=../../libroot-sim
+cp libbrotlicommon.a ../../libroot-sim/lib/
+cp libbrotlidec.a ../../libroot-sim/lib/
 cd ..
 
 echo 'building bzip2...'
 tar xzf ../../libsrc/bzip2-1.0.6.tar.gz
 cd bzip2-1.0.6
 make libbz2.a CFLAGS="-O3 -arch arm64 -arch x86_64 -isysroot `xcrun -sdk iphonesimulator --show-sdk-path`"
-cp bzlib.h ../../libroot/include/
-cp libbz2.a ../../libroot/lib/
+cp bzlib.h ../../libroot-sim/include/
+cp libbz2.a ../../libroot-sim/lib/
 cd ..
 
 echo 'building libwebp...'
@@ -97,5 +99,7 @@ cd ..
 
 cd ..
 rm -rf tmp
+
+rm -rf libroot-sim/bin libroot-sim/share
 
 echo 'finished.'

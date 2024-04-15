@@ -64,7 +64,6 @@
 		2610CD182B287ACD00300004 /* cmd_cha.c in Sources */ = {isa = PBXBuildFile; fileRef = 2610CCDC2B287ACD00300004 /* cmd_cha.c */; };
 		2610CD192B287ACD00300004 /* cmd_setsave.c in Sources */ = {isa = PBXBuildFile; fileRef = 2610CCDD2B287ACD00300004 /* cmd_setsave.c */; };
 		2610CD1A2B287ACD00300004 /* log.c in Sources */ = {isa = PBXBuildFile; fileRef = 2610CCDF2B287ACD00300004 /* log.c */; };
-		2617DE232B3C5EB2006F4211 /* game-mac.dmg in Resources */ = {isa = PBXBuildFile; fileRef = 2617DE222B3C5EB2006F4211 /* game-mac.dmg */; };
 		26495D112B2A7BFD0050EDDF /* GameShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 26495D0C2B2A7BFD0050EDDF /* GameShaders.metal */; };
 		26495D122B2A7BFD0050EDDF /* GameRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 26495D0D2B2A7BFD0050EDDF /* GameRenderer.m */; };
 		26495D132B2A7BFD0050EDDF /* aunit.c in Sources */ = {isa = PBXBuildFile; fileRef = 26495D0F2B2A7BFD0050EDDF /* aunit.c */; };
@@ -94,6 +93,7 @@
 		26B806C52BC2901700A92A02 /* english in Resources */ = {isa = PBXBuildFile; fileRef = 26B806BF2BC2901700A92A02 /* english */; };
 		26B806C62BC2901700A92A02 /* japanese-tategaki in Resources */ = {isa = PBXBuildFile; fileRef = 26B806C02BC2901700A92A02 /* japanese-tategaki */; };
 		26B806C72BC2901700A92A02 /* japanese-novel in Resources */ = {isa = PBXBuildFile; fileRef = 26B806C12BC2901700A92A02 /* japanese-novel */; };
+		26CC0D432BCDA2FA000F490E /* macos-src in Resources */ = {isa = PBXBuildFile; fileRef = 26CC0D422BCDA2FA000F490E /* macos-src */; };
 		26F4E5AF2B32CE61003E4B5A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26F4E5B12B32CE61003E4B5A /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -182,7 +182,6 @@
 		2610CCDD2B287ACD00300004 /* cmd_setsave.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd_setsave.c; path = ../../src/cmd_setsave.c; sourceTree = "<group>"; };
 		2610CCDE2B287ACD00300004 /* glyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = glyph.h; path = ../../src/glyph.h; sourceTree = "<group>"; };
 		2610CCDF2B287ACD00300004 /* log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = log.c; path = ../../src/log.c; sourceTree = "<group>"; };
-		2617DE222B3C5EB2006F4211 /* game-mac.dmg */ = {isa = PBXFileReference; lastKnownFileType = text; name = "game-mac.dmg"; path = "../../engine-macos/game-mac.dmg"; sourceTree = "<group>"; };
 		26495D0A2B2A7BFD0050EDDF /* GameViewControllerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameViewControllerProtocol.h; path = ../../src/apple/GameViewControllerProtocol.h; sourceTree = "<group>"; };
 		26495D0B2B2A7BFD0050EDDF /* aunit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = aunit.h; path = ../../src/apple/aunit.h; sourceTree = "<group>"; };
 		26495D0C2B2A7BFD0050EDDF /* GameShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = GameShaders.metal; path = ../../src/apple/GameShaders.metal; sourceTree = "<group>"; };
@@ -205,6 +204,15 @@
 		2669F7D62B284675001AEF17 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		267E34132BAB7D0A007AE3BE /* ciel.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ciel.c; path = ../../src/ciel.c; sourceTree = "<group>"; };
 		2681A2862BCCE23E00DD8C7A /* ci_pre_xcodebuild.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_pre_xcodebuild.sh; sourceTree = "<group>"; };
+		2697A2CF2BCD966400C9ACA1 /* ci_post_xcodebuild.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_xcodebuild.sh; sourceTree = "<group>"; };
+		2697A2D72BCD9B0500C9ACA1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		2697A2D82BCD9B0500C9ACA1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		2697A2DA2BCD9B0500C9ACA1 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		2697A2DB2BCD9B0500C9ACA1 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		2697A2DD2BCD9B0600C9ACA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2697A2E02BCD9B0600C9ACA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2697A2E22BCD9B0600C9ACA1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2697A2E42BCD9B0600C9ACA1 /* engine_macos.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = engine_macos.entitlements; sourceTree = "<group>"; };
 		269D04702B28891C00934EE2 /* ScriptTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScriptTextView.h; sourceTree = "<group>"; };
 		269D04712B28891C00934EE2 /* ScriptTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScriptTextView.m; sourceTree = "<group>"; };
 		26A1BAE22B2AD78700761444 /* ios-src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "ios-src"; path = "../../engine-ios/ios-src"; sourceTree = "<group>"; };
@@ -226,6 +234,7 @@
 		26B806C02BC2901700A92A02 /* japanese-tategaki */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "japanese-tategaki"; path = "../../../games/japanese-tategaki"; sourceTree = "<group>"; };
 		26B806C12BC2901700A92A02 /* japanese-novel */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "japanese-novel"; path = "../../../games/japanese-novel"; sourceTree = "<group>"; };
 		26B806C92BC2978E00A92A02 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
+		26CC0D422BCDA2FA000F490E /* macos-src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "macos-src"; path = "../../engine-macos/macos-src"; sourceTree = "<group>"; };
 		26DB400C2BC8E348008F6F9C /* polaris.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = polaris.h; path = ../../src/polaris.h; sourceTree = "<group>"; };
 		26F4E5B02B32CE61003E4B5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -350,9 +359,9 @@
 				26B806B22BC2900A00A92A02 /* japanese-light.png */,
 				26B806B42BC2900A00A92A02 /* japanese-novel.png */,
 				26B806B12BC2900A00A92A02 /* japanese-tategaki.png */,
+				26CC0D422BCDA2FA000F490E /* macos-src */,
 				26A1BAE22B2AD78700761444 /* ios-src */,
 				26A1BAE62B2AD79E00761444 /* android-src */,
-				2617DE222B3C5EB2006F4211 /* game-mac.dmg */,
 				26A1BAF82B2AD7F600761444 /* game.exe */,
 				26A1BAF12B2AD7D700761444 /* index.html */,
 				26A1BAF02B2AD7D700761444 /* index.js */,
@@ -382,6 +391,7 @@
 				2669F70A2B283866001AEF17 /* pro-macos */,
 				2610CC822B2878AE00300004 /* polaris-engine */,
 				2610CD1B2B287C9100300004 /* Resources */,
+				2697A2D62BCD9B0500C9ACA1 /* engine-macos */,
 				2669F7092B283866001AEF17 /* Products */,
 				2669F7C92B2843D5001AEF17 /* Frameworks */,
 			);
@@ -429,8 +439,24 @@
 			isa = PBXGroup;
 			children = (
 				2681A2862BCCE23E00DD8C7A /* ci_pre_xcodebuild.sh */,
+				2697A2CF2BCD966400C9ACA1 /* ci_post_xcodebuild.sh */,
 			);
 			path = ci_scripts;
+			sourceTree = "<group>";
+		};
+		2697A2D62BCD9B0500C9ACA1 /* engine-macos */ = {
+			isa = PBXGroup;
+			children = (
+				2697A2D72BCD9B0500C9ACA1 /* AppDelegate.h */,
+				2697A2D82BCD9B0500C9ACA1 /* AppDelegate.m */,
+				2697A2DA2BCD9B0500C9ACA1 /* ViewController.h */,
+				2697A2DB2BCD9B0500C9ACA1 /* ViewController.m */,
+				2697A2DD2BCD9B0600C9ACA1 /* Assets.xcassets */,
+				2697A2DF2BCD9B0600C9ACA1 /* Main.storyboard */,
+				2697A2E22BCD9B0600C9ACA1 /* main.m */,
+				2697A2E42BCD9B0600C9ACA1 /* engine_macos.entitlements */,
+			);
+			path = "engine-macos";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -497,12 +523,12 @@
 				26F4E5AF2B32CE61003E4B5A /* Main.storyboard in Resources */,
 				26B806C62BC2901700A92A02 /* japanese-tategaki in Resources */,
 				26B806B72BC2900A00A92A02 /* japanese-tategaki.png in Resources */,
+				26CC0D432BCDA2FA000F490E /* macos-src in Resources */,
 				26B806C52BC2901700A92A02 /* english in Resources */,
 				26B806B62BC2900A00A92A02 /* english-novel.png in Resources */,
 				26B806B82BC2900A00A92A02 /* japanese-light.png in Resources */,
 				26A1BAE32B2AD78800761444 /* ios-src in Resources */,
 				26B806B92BC2900A00A92A02 /* english.png in Resources */,
-				2617DE232B3C5EB2006F4211 /* game-mac.dmg in Resources */,
 				26B806BB2BC2900A00A92A02 /* japanese-dark.png in Resources */,
 				26B806C72BC2901700A92A02 /* japanese-novel in Resources */,
 				26A1BAF92B2AD7F600761444 /* game.exe in Resources */,
@@ -594,6 +620,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		2697A2DF2BCD9B0600C9ACA1 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2697A2E02BCD9B0600C9ACA1 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		26F4E5B12B32CE61003E4B5A /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

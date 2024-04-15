@@ -18,24 +18,12 @@ FILES_IOS= \
 	../../src/apple/GameRenderer.m \
 	../../src/apple/GameShaders.metal
 
-build-only: $(SRCS_MAIN) $(HDRS_MAIN) $(FILES_IOS)
-	@curl -O https://polaris-engine.com/dl/libroot-ios.tar.gz
-	@tar xzf libroot-ios.tar.gz
-	@ln -sf libroot-device libroot
-	@if [ ! -z "`uname -a | grep arm64`" ]; then \
-		xcodebuild -target "Polaris Engine Runtime" -project engine-ios.xcodeproj -configuration Debug build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO; \
-	else \
-		echo 'We cannot build on a x86_64 host.'; \
-	fi
-
-src:
+src: libroot-device libroot-sim
 	@rm -rf ios-src
 	@mkdir ios-src
-	@
 	@cp -R engine-ios engine-ios.xcodeproj ios-src/
-	@rm -f ios-src/engine-ios/data01.arc
-	@sed -e 's|../../src/apple/|engine-ios/apple/|g' < ios-src/engine-ios.xcodeproj/project.pbxproj > tmp && mv tmp ios-src/engine-ios.xcodeproj/project.pbxproj
-	@sed -e 's|../../src/|engine-ios/|g' < ios-src/engine-ios.xcodeproj/project.pbxproj > tmp && mv tmp ios-src/engine-ios.xcodeproj/project.pbxproj
+	@sed -e 's|../../src/apple/|engine-ios/apple/|g' < ios-src/engine-ios.xcodeproj/project.pbxproj > tmpfile && mv tmpfile ios-src/engine-ios.xcodeproj/project.pbxproj
+	@sed -e 's|../../src/|engine-ios/|g' < ios-src/engine-ios.xcodeproj/project.pbxproj > tmpfile && mv tmpfile ios-src/engine-ios.xcodeproj/project.pbxproj
 	@mkdir -p ios-src/engine-ios/apple
 	@cp ../../src/apple/GameRenderer.h ios-src/engine-ios/apple/
 	@cp ../../src/apple/GameRenderer.m ios-src/engine-ios/apple/
@@ -47,6 +35,7 @@ src:
 	@cp ../../src/anime.c ios-src/engine-ios/
 	@cp ../../src/anime.h ios-src/engine-ios/
 	@cp ../../src/ciel.c ios-src/engine-ios/
+	@cp ../../src/ciel.h ios-src/engine-ios/
 	@cp ../../src/conf.c ios-src/engine-ios/
 	@cp ../../src/conf.h ios-src/engine-ios/
 	@cp ../../src/event.c ios-src/engine-ios/
@@ -84,10 +73,10 @@ src:
 	@cp ../../src/seen.h ios-src/engine-ios/
 	@cp ../../src/stage.c ios-src/engine-ios/
 	@cp ../../src/stage.h ios-src/engine-ios/
+	@cp ../../src/uimsg.c ios-src/engine-ios/
+	@cp ../../src/uimsg.h ios-src/engine-ios/
 	@cp ../../src/polaris.h ios-src/engine-ios/
 	@cp ../../src/types.h ios-src/engine-ios/
-	@cp ../../src/uimsg.h ios-src/engine-ios/
-	@cp ../../src/uimsg.c ios-src/engine-ios/
 	@cp ../../src/vars.c ios-src/engine-ios/
 	@cp ../../src/vars.h ios-src/engine-ios/
 	@cp ../../src/wave.c ios-src/engine-ios/
@@ -127,8 +116,12 @@ src:
 	@cp ../../src/cmd_vol.c ios-src/engine-ios/
 	@cp ../../src/cmd_wait.c ios-src/engine-ios/
 	@cp ../../src/cmd_wms.c ios-src/engine-ios/
-	@
-	@rm -f libroot-ios.tar.gz
-	@wget 'https://polaris-engine.com/dl/libroot-ios.tar.gz'
-	@tar xzf libroot-ios.tar.gz -C ios-src/
-	@rm -rf ios-src/libroot ios-src/libroot-device/bin ios-src/libroot-device/share ios-src/libroot-sim/bin ios-src/libroot-sim/share
+	@cp -Ra libroot-device ios-src/
+	@cp -Ra libroot-sim ios-src/
+	@mkdir ios-src/Resources
+
+libroot-device:
+	./build-libs-device.sh
+
+libroot-sim:
+	./build-libs-sim.sh

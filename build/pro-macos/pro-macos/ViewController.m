@@ -1106,40 +1106,69 @@ static ViewController *theViewController;
         [self insertText:[NSString stringWithFormat:@"@シナリオ ファイル=%@", file]];
 }
 
-- (IBAction)onMenuExportForDesktop:(id)sender {
+- (IBAction)onMenuExportForMac:(id)sender {
     if (!create_package("")) {
         log_info("Export error.");
         return;
     }
-   
+
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *exportPath = [NSString stringWithFormat:@"%@/export-desktop", [fileManager currentDirectoryPath]];
+    NSString *exportPath = [NSString stringWithFormat:@"%@/export-mac", [fileManager currentDirectoryPath]];
     [fileManager removeItemAtURL:[NSURL fileURLWithPath:exportPath] error:nil];
     if (![fileManager createDirectoryAtURL:[NSURL fileURLWithPath:exportPath] withIntermediateDirectories:NO attributes:nil error:nil]) {
         log_warn("mkdir error.");
         return;
     }
 
-    if (![fileManager copyItemAtPath:[NSString stringWithFormat:@"%@/data01.arc", [fileManager currentDirectoryPath]]
-                            toPath:[NSString stringWithFormat:@"%@/export-desktop/data01.arc", [fileManager currentDirectoryPath]]
-                               error:nil]) {
-        log_warn("Copy error (1).");
-        return;
-    }
-
-    NSArray *appArray = @[@"game-mac.dmg", @"game.exe", @"game-signed.exe"];
+    NSArray *appArray = @[@"libroot", @"engine-macos", @"engine-macos.xcodeproj", @"Resources"];
     for (NSString *sub in appArray) {
-        if (![fileManager copyItemAtPath:[NSString stringWithFormat:@"%@/Contents/Resources/%@", [[NSBundle  mainBundle] bundlePath], sub]
-                                  toPath:[NSString stringWithFormat:@"%@/export-desktop/%@", [fileManager currentDirectoryPath], sub]
+        if (![fileManager copyItemAtPath:[NSString stringWithFormat:@"%@/Contents/Resources/macos-src/%@", [[NSBundle  mainBundle] bundlePath], sub]
+                                  toPath:[NSString stringWithFormat:@"%@/%@", exportPath, sub]
                                    error:nil]) {
-            log_warn("Copy error (2).");
+            log_warn("Copy error (1).");
             return;
         }
     }
 
+    if (![fileManager copyItemAtPath:[NSString stringWithFormat:@"%@/data01.arc", [fileManager currentDirectoryPath]]
+                              toPath:[NSString stringWithFormat:@"%@/Resources/data01.arc", exportPath]
+                               error:nil]) {
+        log_warn("Copy error (2).");
+        return;
+    }
+
     log_info(_isEnglish ? "Successflully exported" : "エクスポートに成功しました。");
 
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL fileURLWithPath:[[fileManager currentDirectoryPath] stringByAppendingString:@"/export-desktop"]]];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL fileURLWithPath:[[fileManager currentDirectoryPath] stringByAppendingString:@"/export-mac"]]];
+}
+
+- (IBAction)onMenuExportForPC:(id)sender {
+    if (!create_package("")) {
+        log_info("Export error.");
+        return;
+    }
+
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *exportPath = [NSString stringWithFormat:@"%@/export-pc", [fileManager currentDirectoryPath]];
+    [fileManager removeItemAtURL:[NSURL fileURLWithPath:exportPath] error:nil];
+    if (![fileManager createDirectoryAtURL:[NSURL fileURLWithPath:exportPath] withIntermediateDirectories:NO attributes:nil error:nil]) {
+        log_warn("mkdir error.");
+        return;
+    }
+
+    if (![fileManager copyItemAtPath:[NSString stringWithFormat:@"%@/data01.arc", [fileManager currentDirectoryPath]] toPath:[NSString stringWithFormat:@"%@/export-pc/data01.arc", [fileManager currentDirectoryPath]] error:nil]) {
+        log_warn("Copy error (1).");
+        return;
+    }
+
+    if (![fileManager copyItemAtPath:[NSString stringWithFormat:@"%@/Contents/Resources/game.exe", [[NSBundle mainBundle] bundlePath]] toPath:[NSString stringWithFormat:@"%@/export-pc/game.exe", [fileManager currentDirectoryPath]] error:nil]) {
+        log_warn("Copy error (2).");
+        return;
+    }
+
+    log_info(_isEnglish ? "Successflully exported" : "エクスポートに成功しました。");
+
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL fileURLWithPath:[[fileManager currentDirectoryPath] stringByAppendingString:@"/export-pc"]]];
 }
 
 - (IBAction)onMenuExportForWeb:(id)sender {
@@ -1189,11 +1218,10 @@ static ViewController *theViewController;
     [fileManager removeItemAtURL:[NSURL fileURLWithPath:exportPath] error:nil];
     if (![fileManager createDirectoryAtURL:[NSURL fileURLWithPath:exportPath] withIntermediateDirectories:NO attributes:nil error:nil]) {
         log_warn("mkdir error.");
-        log_warn("mkdir error.");
         return;
     }
 
-    NSArray *appArray = @[@"libroot-device", @"libroot-sim", @"engine-ios", @"engine-ios.xcodeproj"];
+    NSArray *appArray = @[@"libroot-device", @"libroot-sim", @"engine-ios", @"engine-ios.xcodeproj", @"Resources"];
     for (NSString *sub in appArray) {
         if (![fileManager copyItemAtPath:[NSString stringWithFormat:@"%@/Contents/Resources/ios-src/%@", [[NSBundle  mainBundle] bundlePath], sub]
                                   toPath:[NSString stringWithFormat:@"%@/export-ios/%@", [fileManager currentDirectoryPath], sub]
@@ -1204,7 +1232,7 @@ static ViewController *theViewController;
     }
 
     if (![fileManager copyItemAtPath:[NSString stringWithFormat:@"%@/data01.arc", [fileManager currentDirectoryPath]]
-                              toPath:[NSString stringWithFormat:@"%@/engine-ios/data01.arc", exportPath]
+                              toPath:[NSString stringWithFormat:@"%@/Resources/data01.arc", exportPath]
                                error:nil]) {
         log_warn("Copy error (2).");
         return;

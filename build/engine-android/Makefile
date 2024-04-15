@@ -58,8 +58,6 @@ debug:
 	@cp ../../src/uimsg.h app/src/main/cpp/
 	@cp ../../src/uimsg.c app/src/main/cpp/
 	@cp ../../src/types.h app/src/main/cpp/
-	@cp ../../src/uimsg.h app/src/main/cpp/
-	@cp ../../src/uimsg.c app/src/main/cpp/
 	@cp ../../src/vars.h app/src/main/cpp/
 	@cp ../../src/vars.c app/src/main/cpp/
 	@cp ../../src/wave.h app/src/main/cpp/
