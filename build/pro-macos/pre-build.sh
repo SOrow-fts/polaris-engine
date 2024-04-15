@@ -30,6 +30,8 @@ echo "Installing brew dependencies."
 export PATH=/opt/homebrew/bin:$PATH
 brew install mingw-w64 emscripten gsed wget makensis create-dmg
 
+exit 0
+
 #
 # Build "game.exe".
 #
