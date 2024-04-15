@@ -29,6 +29,9 @@ echo "Installing brew dependencies."
 
 brew install mingw-w64 emscripten gsed wget makensis create-dmg
 
+i686-w64-mingw32-gcc -v
+exit 0
+
 #
 # Build "game.exe".
 #
@@ -36,7 +39,6 @@ echo ""
 echo "Building game.exe"
 cd engine-windows
 ./build-libs.sh
-exit 0
 make
 cp game.exe game-signed.exe
 #sign.sh game-signed.exe
