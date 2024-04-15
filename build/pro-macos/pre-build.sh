@@ -36,9 +36,9 @@ brew install mingw-w64 emscripten gsed wget makensis create-dmg
 echo ""
 echo "Building game.exe"
 cd engine-windows
-curl -O https://polaris-engine.com/dl/libroot-windows.tar.gz
-tar xzf libroot-windows.tar.gz
-make -j16
+#tar xzf libroot-windows.tar.gz
+#make -j16
+./build-libs.sh
 cp game.exe game-signed.exe
 #sign.sh game-signed.exe
 cd ..
@@ -49,10 +49,10 @@ cd ..
 echo ""
 echo "Building Game.app (runtime-mac.dmg)."
 cd engine-macos
-rm -f game-mac.dmg game-mac-nosign.dmg
+./build-libs.sh
 make game-mac.dmg
 cp game-mac.dmg game-mac-nosign.dmg
-codesign --sign 'Developer ID Application: Keiichi TABATA' game-mac.dmg
+#codesign --sign 'Developer ID Application: Keiichi TABATA' game-mac.dmg
 cd ..
 
 #

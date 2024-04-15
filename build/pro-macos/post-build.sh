@@ -25,7 +25,7 @@ VERSION=`grep -a1 '<!-- BEGIN-LATEST-JP -->' ../ChangeLog | tail -n1 | cut -d ' 
 # Make DMG.
 #
 cd pro-macos
-unset FTP_USER_PW
+unset µFTP_USER_PW
 make
 cd ..
 
