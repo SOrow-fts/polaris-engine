@@ -27,6 +27,8 @@ brew install mingw-w64 emscripten makensis || true
 echo "\nTesting paths..."
 echo "gcc is `which i686-w64-mingw32-gcc`"
 echo "emcc is `which emcc`"
+export EMCC=`find /usr/local -name emcc | head -n1`
+echo "emcc is $EMCC"
 echo "Testing paths OK."
 
 # Build game.exe
@@ -40,7 +42,7 @@ cd ..
 echo "\nBuilding Wasm files."
 cd engine-wasm
 rm -rf html
-make
+make EMCC=$EMCC
 cd ..
 
 # Make a macOS source tree.

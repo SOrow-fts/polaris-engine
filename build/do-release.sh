@@ -97,6 +97,7 @@ echo "Building Wasm files."
 say "Web用のエンジンをビルドしています" &
 cd engine-wasm
 make clean
+make emsdk
 make
 cd ..
 
