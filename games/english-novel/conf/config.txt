@@ -22,7 +22,7 @@ window.menubar=0
 ###
 
 # フォントファイル名
-font.file=07LogoTypeGothic7.ttf
+font.file=rounded-l-mplus-1c-bold.ttf
 
 # フォントサイズ
 font.size=38

@@ -94,7 +94,6 @@
 		26B806C52BC2901700A92A02 /* english in Resources */ = {isa = PBXBuildFile; fileRef = 26B806BF2BC2901700A92A02 /* english */; };
 		26B806C62BC2901700A92A02 /* japanese-tategaki in Resources */ = {isa = PBXBuildFile; fileRef = 26B806C02BC2901700A92A02 /* japanese-tategaki */; };
 		26B806C72BC2901700A92A02 /* japanese-novel in Resources */ = {isa = PBXBuildFile; fileRef = 26B806C12BC2901700A92A02 /* japanese-novel */; };
-		26C9DF0B2BC1608F004FCF96 /* game-signed.exe in Resources */ = {isa = PBXBuildFile; fileRef = 26C9DF0A2BC1608F004FCF96 /* game-signed.exe */; };
 		26F4E5AF2B32CE61003E4B5A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26F4E5B12B32CE61003E4B5A /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -205,6 +204,7 @@
 		2669F7D52B284675001AEF17 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		2669F7D62B284675001AEF17 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		267E34132BAB7D0A007AE3BE /* ciel.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ciel.c; path = ../../src/ciel.c; sourceTree = "<group>"; };
+		2681A2862BCCE23E00DD8C7A /* ci_pre_xcodebuild.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_pre_xcodebuild.sh; sourceTree = "<group>"; };
 		269D04702B28891C00934EE2 /* ScriptTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScriptTextView.h; sourceTree = "<group>"; };
 		269D04712B28891C00934EE2 /* ScriptTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScriptTextView.m; sourceTree = "<group>"; };
 		26A1BAE22B2AD78700761444 /* ios-src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "ios-src"; path = "../../engine-ios/ios-src"; sourceTree = "<group>"; };
@@ -226,7 +226,6 @@
 		26B806C02BC2901700A92A02 /* japanese-tategaki */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "japanese-tategaki"; path = "../../../games/japanese-tategaki"; sourceTree = "<group>"; };
 		26B806C12BC2901700A92A02 /* japanese-novel */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "japanese-novel"; path = "../../../games/japanese-novel"; sourceTree = "<group>"; };
 		26B806C92BC2978E00A92A02 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
-		26C9DF0A2BC1608F004FCF96 /* game-signed.exe */ = {isa = PBXFileReference; lastKnownFileType = file; name = "game-signed.exe"; path = "../../engine-windows/game-signed.exe"; sourceTree = "<group>"; };
 		26DB400C2BC8E348008F6F9C /* polaris.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = polaris.h; path = ../../src/polaris.h; sourceTree = "<group>"; };
 		26F4E5B02B32CE61003E4B5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -354,7 +353,6 @@
 				26A1BAE22B2AD78700761444 /* ios-src */,
 				26A1BAE62B2AD79E00761444 /* android-src */,
 				2617DE222B3C5EB2006F4211 /* game-mac.dmg */,
-				26C9DF0A2BC1608F004FCF96 /* game-signed.exe */,
 				26A1BAF82B2AD7F600761444 /* game.exe */,
 				26A1BAF12B2AD7D700761444 /* index.html */,
 				26A1BAF02B2AD7D700761444 /* index.js */,
@@ -380,6 +378,7 @@
 		2669F6FF2B283866001AEF17 = {
 			isa = PBXGroup;
 			children = (
+				2681A2852BCCE21100DD8C7A /* ci_scripts */,
 				2669F70A2B283866001AEF17 /* pro-macos */,
 				2610CC822B2878AE00300004 /* polaris-engine */,
 				2610CD1B2B287C9100300004 /* Resources */,
@@ -424,6 +423,14 @@
 				2669F7CA2B2843D5001AEF17 /* AVFoundation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2681A2852BCCE21100DD8C7A /* ci_scripts */ = {
+			isa = PBXGroup;
+			children = (
+				2681A2862BCCE23E00DD8C7A /* ci_pre_xcodebuild.sh */,
+			);
+			path = ci_scripts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -496,7 +503,6 @@
 				26A1BAE32B2AD78800761444 /* ios-src in Resources */,
 				26B806B92BC2900A00A92A02 /* english.png in Resources */,
 				2617DE232B3C5EB2006F4211 /* game-mac.dmg in Resources */,
-				26C9DF0B2BC1608F004FCF96 /* game-signed.exe in Resources */,
 				26B806BB2BC2900A00A92A02 /* japanese-dark.png in Resources */,
 				26B806C72BC2901700A92A02 /* japanese-novel in Resources */,
 				26A1BAF92B2AD7F600761444 /* game.exe in Resources */,
@@ -726,6 +732,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = "pro-macos/pro_macos.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -750,7 +757,7 @@
 					"-I./libroot/include/freetype2",
 					"-DUSE_EDITOR",
 				);
-				OTHER_CODE_SIGN_FLAGS = "--deep";
+				OTHER_CODE_SIGN_FLAGS = "--deep --force";
 				OTHER_LDFLAGS = (
 					"-L./libroot/lib",
 					"-lpng",
@@ -765,8 +772,9 @@
 					"-lbrotlidec",
 					"-lbrotlicommon",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.polaris-engine.pro-macos";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.polaris-engine.app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
 			name = Debug;
@@ -778,6 +786,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = "pro-macos/pro_macos.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -802,7 +811,7 @@
 					"-I./libroot/include/freetype2",
 					"-DUSE_EDITOR",
 				);
-				OTHER_CODE_SIGN_FLAGS = "--deep";
+				OTHER_CODE_SIGN_FLAGS = "--deep --force";
 				OTHER_LDFLAGS = (
 					"-L./libroot/lib",
 					"-lpng",
@@ -817,8 +826,9 @@
 					"-lbrotlidec",
 					"-lbrotlicommon",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.polaris-engine.pro-macos";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.polaris-engine.app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
 			name = Release;
