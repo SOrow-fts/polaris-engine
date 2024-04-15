@@ -14,7 +14,7 @@ LANGUAGE=english
 
 # Load the certificate of "Developer ID Application: Keiichi Tabata".
 security list-keychain
-security find-certificate -c "Developer ID Application"
+security find-certificate -c "Keiichi"
 #CERTIFICATE_PATH=`pwd`/certificate.p12
 #KEYCHAIN_PATH=`pwd`/app-signing.keychain-db
 #KEYCHAIN_PASSWORD="AutoReleaseCICDPipeLine2024"
