@@ -20,7 +20,7 @@ echo "VERSION=$VERSION"
 # Install brew dependencies.
 echo "\nInstalling the brew packages."
 brew install mingw-w64 emscripten makensis
-rehash
+
 echo "gcc is `which i686-w64-mingw32-gcc`"
 echo "emcc is `which emcc`"
 
