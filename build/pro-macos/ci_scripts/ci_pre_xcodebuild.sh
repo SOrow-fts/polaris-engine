@@ -1,5 +1,8 @@
 #!/bin/sh
 
+echo `pwd`
+cd ../../../..
+
 # Initialize.
 LANG=en_US.UTF-8
 LANGUAGE=english
