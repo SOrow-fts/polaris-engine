@@ -107,5 +107,5 @@
 			"match": "\".*?\""
 		}
 	},
-	"scopeName": "source.txt"
+	"scopeName": "source-wms.txt"
 }

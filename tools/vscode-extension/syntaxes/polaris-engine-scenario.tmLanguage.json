@@ -127,5 +127,5 @@
 			"match": "&.*?(\\n|\\s)"
 		}
 	},
-	"scopeName": "source.txt"
+	"scopeName": "source-sc.txt"
 }
