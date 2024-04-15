@@ -5,7 +5,7 @@ on:
       - 'ChangeLog'
 jobs:
   build:
-    runs-on: macos-14-xlarge
+    runs-on: macos-14
     steps:
       - name: Checkout
         uses: actions/checkout@v4
