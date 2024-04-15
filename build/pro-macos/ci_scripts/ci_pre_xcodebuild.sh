@@ -12,7 +12,7 @@ echo PWD=`pwd`
 LANG=en_US.UTF-8
 LANGUAGE=english
 
-# Load certificates.
+# Load the certificate of "Developer ID Application: Keiichi Tabata".
 CERTIFICATE_PATH=`pwd`/certificate.p12
 KEYCHAIN_PATH=`pwd`/app-signing.keychain-db
 echo -n "$BUILD_CERTIFICATE_BASE64"
