@@ -168,7 +168,6 @@ cp -R ../games/english-novel installer-windows/games/
 rm -rf installer-windows/tools
 mkdir -p installer-windows/tools
 cp  engine-windows/game.exe installer-windows/tools/
-cp engine-macos/game-mac.dmg installer-windows/tools/
 cp -R engine-macos/macos-src installer-windows/tools/macos-src
 cp -R engine-ios/ios-src installer-windows/tools/ios-src
 cp -R engine-android/android-src installer-windows/tools/android-src
@@ -185,10 +184,10 @@ make
 cd ..
 
 #
-# Build "Polaris Engine Pro.app".
+# Build "Polaris Engine.app".
 #
 echo ""
-echo "Building Polaris Engine Pro.app (polaris-engine.dmg)"
+echo "Building Polaris Engine.app (polaris-engine.dmg)"
 say "Mac用の開発ツールをビルドしています" &
 cd pro-macos
 rm -f polaris-engine.dmg

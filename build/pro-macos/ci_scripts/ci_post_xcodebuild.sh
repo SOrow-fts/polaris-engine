@@ -39,7 +39,6 @@ curl -T en/dl/index.html -u $FTP ftp://ftp.lolipop.jp/sites/polaris-engine.com/e
 cd ..
 
 # Post to Discord.
-cd build
 echo "\nPosting to Discord."
 NOTE_JP=`cat ChangeLog | awk '/BEGIN-LATEST-JP/,/END-LATEST-JP/' | tail -n +2 | sed '$d'`
 NOTE_JP=`echo "$NOTE_JP" | sed -e 's/<li>Polaris Engine/## Polaris Engine/g'`
