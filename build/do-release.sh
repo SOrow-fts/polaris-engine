@@ -72,8 +72,6 @@ if [ ! -e libroot ]; then
     ./build-libs.sh;
 fi
 make -j16
-cp game.exe game-signed.exe
-sign.sh game-signed.exe
 cd ..
 
 #
@@ -131,7 +129,6 @@ if [ ! -e libroot ]; then
     cp -Rav ../engine-windows/libroot .;
 fi
 make -j16 VERSION="$VERSION"
-sign.sh polaris-engine.exe
 cd ..
 
 #
@@ -171,7 +168,6 @@ cp -R ../games/english-novel installer-windows/games/
 rm -rf installer-windows/tools
 mkdir -p installer-windows/tools
 cp  engine-windows/game.exe installer-windows/tools/
-cp  engine-windows/game-signed.exe installer-windows/tools/
 cp engine-macos/game-mac.dmg installer-windows/tools/
 cp -R engine-macos/macos-src installer-windows/tools/macos-src
 cp -R engine-ios/ios-src installer-windows/tools/ios-src
@@ -186,8 +182,6 @@ cp -R ../tools/installer installer-windows/tools/installer
 # Make an installe
 cd installer-windows
 make
-sign.sh polaris-engine-installer.exe
-
 cd ..
 
 #
@@ -226,11 +220,6 @@ cd ../web && \
     git add -u dl/index.html en/dl/index.html && \
     git commit -m "web: release $VERSION"
 cd "$SAVE_DIR"
-
-#
-# Restore a non-signed dmg for a store release.
-#
-mv engine-macos/game-mac-nosign.dmg engine-macos/game-mac.dmg
 
 #
 # Post to the Discord server.
