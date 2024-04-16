@@ -60,13 +60,14 @@
 #define ID_VERSION                          220
 
 /* Export Menu */
-#define ID_EXPORT_WIN                       230
-#define ID_EXPORT_WIN_INST                  231
-#define ID_EXPORT_WIN_MAC                   232
+#define ID_EXPORT_IOS                       230
+#define ID_EXPORT_ANDROID                   231
+#define ID_EXPORT_MAC                       232
 #define ID_EXPORT_WEB                       233
-#define ID_EXPORT_ANDROID                   234
-#define ID_EXPORT_IOS                       235
-#define ID_EXPORT_PACKAGE                   236
+#define ID_EXPORT_WIN                       234
+#define ID_EXPORT_WIN_INST                  235
+#define ID_EXPORT_UNITY                     236
+#define ID_EXPORT_PACKAGE                   237
 
 /* RichEdit */
 #define ID_RICHEDIT                         240

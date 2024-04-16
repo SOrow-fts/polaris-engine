@@ -77,19 +77,6 @@ sign.sh game-signed.exe
 cd ..
 
 #
-# Build the "Game.app".
-#
-echo ""
-echo "Building Game.app (runtime-mac.dmg)."
-say "Mac用のエンジンをビルドしています" &
-cd engine-macos
-rm -f game-mac.dmg game-mac-nosign.dmg
-make game-mac.dmg
-cp game-mac.dmg game-mac-nosign.dmg
-codesign --sign 'Developer ID Application: Keiichi TABATA' game-mac.dmg
-cd ..
-
-#
 # Build the Wasm files.
 #
 echo ""
@@ -99,6 +86,16 @@ cd engine-wasm
 make clean
 make emsdk
 make
+cd ..
+
+#
+# Build the macOS source tree.
+#
+echo ""
+echo "Building macOS source tree."
+say "macOS用のソースコードを作成しています" &
+cd engine-macos
+make src > /dev/null
 cd ..
 
 #
@@ -176,8 +173,9 @@ mkdir -p installer-windows/tools
 cp  engine-windows/game.exe installer-windows/tools/
 cp  engine-windows/game-signed.exe installer-windows/tools/
 cp engine-macos/game-mac.dmg installer-windows/tools/
-cp -R engine-android/android-src installer-windows/tools/android-src
+cp -R engine-macos/macos-src installer-windows/tools/macos-src
 cp -R engine-ios/ios-src installer-windows/tools/ios-src
+cp -R engine-android/android-src installer-windows/tools/android-src
 mkdir -p installer-windows/tools/web
 cp engine-wasm/html/index.html installer-windows/tools/web/index.html
 cp engine-wasm/html/index.js installer-windows/tools/web/index.js

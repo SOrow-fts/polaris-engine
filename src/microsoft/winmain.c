@@ -345,6 +345,7 @@ static BOOL InitWindow(HINSTANCE hInstance, int nCmdShow)
 	int nWinWidth, nWinHeight;
 	int nPosX, nPosY;
 	int i;
+	BOOL bInitialFullScreen;
 
 	/* ウィンドウクラスを登録する */
 	ZeroMemory(&wcex, sizeof(wcex));
@@ -403,12 +404,13 @@ static BOOL InitWindow(HINSTANCE hInstance, int nCmdShow)
 	nWinHeight = nGameHeight + nFrameAddHeight;
 
 	/* ディスプレイのサイズが足りない場合 */
+	bInitialFullScreen = FALSE;
 	if (nVirtualScreenWidth < nWinWidth ||
 		nVirtualScreenHeight < nWinHeight)
 	{
-		log_error(get_ui_message(UIMSG_WIN32_SMALL_DISPLAY),
-				  nVirtualScreenWidth, nVirtualScreenHeight);
-		return FALSE;
+		nWinWidth = nVirtualScreenWidth - 50;
+		nWinHeight = nVirtualScreenHeight - 50;
+		bInitialFullScreen = TRUE;
 	}
 
 	/* マルチモニタでなければセンタリングする */
@@ -453,6 +455,12 @@ static BOOL InitWindow(HINSTANCE hInstance, int nCmdShow)
 	dwStartTime = GetTickCount();
 	for(i = 0; i < FPS / 10; i++)
 		WaitForNextFrame();
+
+	if (bInitialFullScreen)
+	{
+		bNeedFullScreen = TRUE;
+		SendMessage(hWndMain, WM_SIZE, 0, 0);
+	}
 
 	return TRUE;
 }

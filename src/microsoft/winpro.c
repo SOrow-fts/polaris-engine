@@ -342,7 +342,7 @@ static VOID OnExportPackage(void);
 static VOID OnExportWin(void);
 static VOID RunWindowsGame(void);
 static VOID OnExportWinInst(void);
-static VOID OnExportWinMac(void);
+static VOID OnExportMac(void);
 static VOID OnExportWeb(void);
 static VOID RunWebTest(void);
 static VOID OnExportAndroid(void);
@@ -1053,6 +1053,10 @@ static VOID InitMenu(HWND hWnd)
 	mi.dwTypeData = bEnglish ? L"Help(&H)": L"ヘルプ(&H)";
 	InsertMenuItem(hMenu, nOrder++, TRUE, &mi);
 
+	/*
+	 * 新規ゲーム
+	 */
+
 	/* 新規ゲームの入れ子を作成する */
 	mi.hSubMenu = hMenuProject;
 	mi.dwTypeData = bEnglish ? L"Create a new game" : L"新規ゲームを作成";
@@ -1097,6 +1101,10 @@ static VOID InitMenu(HWND hWnd)
 
 	/* 2階層目を作成する準備を行う */
 	mi.fMask = MIIM_TYPE | MIIM_ID;
+
+	/*
+	 * ファイル
+	 */
 
 	/* プロジェクトを開くを作成する */
 	mi.wID = ID_OPEN_PROJECT;
@@ -1151,6 +1159,10 @@ static VOID InitMenu(HWND hWnd)
 		L"終了(&Q)\tCtrl+Q";
 	InsertMenuItem(hMenuFile, nOrder++, TRUE, &mi);
 
+	/*
+	 * 実行
+	 */
+
 	/* 続ける(C)を作成する */
 	nOrder = 0;
 	mi.wID = ID_RESUME;
@@ -1178,8 +1190,44 @@ static VOID InitMenu(HWND hWnd)
 	InsertMenuItem(hMenuRun, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_ERROR, MF_GRAYED);
 
-	/* Windowsゲームをエクスポートするを作成する */
+	/*
+	 * エクスポート
+	 */
+
+	/* iOSプロジェクトをエクスポートするを作成する */
 	nOrder = 0;
+	mi.wID = ID_EXPORT_IOS;
+	mi.dwTypeData = bEnglish ?
+		L"Export iOS project" :
+		L"iOSプロジェクトをエクスポートする";
+	InsertMenuItem(hMenuExport, nOrder++, TRUE, &mi);
+	EnableMenuItem(hMenu, ID_EXPORT_IOS, MF_GRAYED);
+
+	/* Androidプロジェクトをエクスポートするを作成する */
+	mi.wID = ID_EXPORT_ANDROID;
+	mi.dwTypeData = bEnglish ?
+		L"Export Android project" :
+		L"Androidプロジェクトをエクスポートする";
+	InsertMenuItem(hMenuExport, nOrder++, TRUE, &mi);
+	EnableMenuItem(hMenu, ID_EXPORT_ANDROID, MF_GRAYED);
+
+	/* Macゲームをエクスポートするを作成する */
+	mi.wID = ID_EXPORT_MAC;
+	mi.dwTypeData = bEnglish ?
+		L"Export macOS project" :
+		L"macOSプロジェクトをエクスポートする";
+	InsertMenuItem(hMenuExport, nOrder++, TRUE, &mi);
+	EnableMenuItem(hMenu, ID_EXPORT_MAC, MF_GRAYED);
+
+	/* Webゲームをエクスポートするを作成する */
+	mi.wID = ID_EXPORT_WEB;
+	mi.dwTypeData = bEnglish ?
+		L"Export for Web" :
+		L"Webゲームをエクスポートする";
+	InsertMenuItem(hMenuExport, nOrder++, TRUE, &mi);
+	EnableMenuItem(hMenu, ID_EXPORT_WEB, MF_GRAYED);
+
+	/* Windowsゲームをエクスポートするを作成する */
 	mi.wID = ID_EXPORT_WIN;
 	mi.dwTypeData = bEnglish ?
 		L"Export a Windows game" :
@@ -1195,37 +1243,13 @@ static VOID InitMenu(HWND hWnd)
 	InsertMenuItem(hMenuExport, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_EXPORT_WIN_INST, MF_GRAYED);
 
-	/* Windows/Macゲームをエクスポートするを作成する */
-	mi.wID = ID_EXPORT_WIN_MAC;
+	/* Unityプロジェクトをエクスポートするを作成する */
+	mi.wID = ID_EXPORT_UNITY;
 	mi.dwTypeData = bEnglish ?
-		L"Export a desktop game for Windows and others" :
-		L"Windowsなどのデスクトップゲームをエクスポートする";
+		L"Export Unity project" :
+		L"Unityプロジェクトをエクスポートする";
 	InsertMenuItem(hMenuExport, nOrder++, TRUE, &mi);
-	EnableMenuItem(hMenu, ID_EXPORT_WIN_MAC, MF_GRAYED);
-
-	/* Webゲームをエクスポートするを作成する */
-	mi.wID = ID_EXPORT_WEB;
-	mi.dwTypeData = bEnglish ?
-		L"Export for Web" :
-		L"Webゲームをエクスポートする";
-	InsertMenuItem(hMenuExport, nOrder++, TRUE, &mi);
-	EnableMenuItem(hMenu, ID_EXPORT_WEB, MF_GRAYED);
-
-	/* Androidプロジェクトをエクスポートするを作成する */
-	mi.wID = ID_EXPORT_ANDROID;
-	mi.dwTypeData = bEnglish ?
-		L"Export Android project" :
-		L"Androidプロジェクトをエクスポートする";
-	InsertMenuItem(hMenuExport, nOrder++, TRUE, &mi);
-	EnableMenuItem(hMenu, ID_EXPORT_ANDROID, MF_GRAYED);
-
-	/* iOSプロジェクトをエクスポートするを作成する */
-	mi.wID = ID_EXPORT_IOS;
-	mi.dwTypeData = bEnglish ?
-		L"Export iOS project" :
-		L"iOSプロジェクトをエクスポートする";
-	InsertMenuItem(hMenuExport, nOrder++, TRUE, &mi);
-	EnableMenuItem(hMenu, ID_EXPORT_IOS, MF_GRAYED);
+	EnableMenuItem(hMenu, ID_EXPORT_UNITY, MF_GRAYED);
 
 	/* パッケージをエクスポートするを作成する */
 	mi.wID = ID_EXPORT_PACKAGE;
@@ -1234,6 +1258,10 @@ static VOID InitMenu(HWND hWnd)
 		L"パッケージのみをエクスポートする";
 	InsertMenuItem(hMenuExport, nOrder++, TRUE, &mi);
 	EnableMenuItem(hMenu, ID_EXPORT_PACKAGE, MF_GRAYED);
+
+	/*
+	 * 演出
+	 */
 
 	/* 地の文を入力を作成する */
 	nOrder = 0;
@@ -1479,7 +1507,7 @@ static VOID StartGame(void)
 		EnableMenuItem(hMenu, ID_ERROR, MF_ENABLED);
 		EnableMenuItem(hMenu, ID_EXPORT_WIN, MF_ENABLED);
 		EnableMenuItem(hMenu, ID_EXPORT_WIN_INST, MF_ENABLED);
-		EnableMenuItem(hMenu, ID_EXPORT_WIN_MAC, MF_ENABLED);
+		EnableMenuItem(hMenu, ID_EXPORT_MAC, MF_ENABLED);
 		EnableMenuItem(hMenu, ID_EXPORT_WEB, MF_ENABLED);
 		EnableMenuItem(hMenu, ID_EXPORT_ANDROID, MF_ENABLED);
 		EnableMenuItem(hMenu, ID_EXPORT_IOS, MF_ENABLED);
@@ -2218,8 +2246,8 @@ static void OnCommand(WPARAM wParam, LPARAM lParam)
 	case ID_EXPORT_WIN_INST:
 		OnExportWinInst();
 		break;
-	case ID_EXPORT_WIN_MAC:
-		OnExportWinMac();
+	case ID_EXPORT_MAC:
+		OnExportMac();
 		break;
 	case ID_EXPORT_WEB:
 		OnExportWeb();
@@ -2966,7 +2994,7 @@ void on_change_running_state(bool running, bool request_stop)
 		EnableMenuItem(hMenu, ID_ERROR, MF_GRAYED);
 		EnableMenuItem(hMenu, ID_EXPORT_WIN, MF_GRAYED);
 		EnableMenuItem(hMenu, ID_EXPORT_WIN_INST, MF_GRAYED);
-		EnableMenuItem(hMenu, ID_EXPORT_WIN_MAC, MF_GRAYED);
+		EnableMenuItem(hMenu, ID_EXPORT_MAC, MF_GRAYED);
 		EnableMenuItem(hMenu, ID_EXPORT_WEB, MF_GRAYED);
 		EnableMenuItem(hMenu, ID_EXPORT_ANDROID, MF_GRAYED);
 		EnableMenuItem(hMenu, ID_EXPORT_IOS, MF_GRAYED);
@@ -3003,7 +3031,7 @@ void on_change_running_state(bool running, bool request_stop)
 		EnableMenuItem(hMenu, ID_ERROR, MF_GRAYED);
 		EnableMenuItem(hMenu, ID_EXPORT_WIN, MF_GRAYED);
 		EnableMenuItem(hMenu, ID_EXPORT_WIN_INST, MF_GRAYED);
-		EnableMenuItem(hMenu, ID_EXPORT_WIN_MAC, MF_GRAYED);
+		EnableMenuItem(hMenu, ID_EXPORT_MAC, MF_GRAYED);
 		EnableMenuItem(hMenu, ID_EXPORT_WEB, MF_GRAYED);
 		EnableMenuItem(hMenu, ID_EXPORT_ANDROID, MF_GRAYED);
 		EnableMenuItem(hMenu, ID_EXPORT_IOS, MF_GRAYED);
@@ -3040,7 +3068,7 @@ void on_change_running_state(bool running, bool request_stop)
 		EnableMenuItem(hMenu, ID_ERROR, MF_ENABLED);
 		EnableMenuItem(hMenu, ID_EXPORT_WIN, MF_ENABLED);
 		EnableMenuItem(hMenu, ID_EXPORT_WIN_INST, MF_ENABLED);
-		EnableMenuItem(hMenu, ID_EXPORT_WIN_MAC, MF_ENABLED);
+		EnableMenuItem(hMenu, ID_EXPORT_MAC, MF_ENABLED);
 		EnableMenuItem(hMenu, ID_EXPORT_WEB, MF_ENABLED);
 		EnableMenuItem(hMenu, ID_EXPORT_ANDROID, MF_ENABLED);
 		EnableMenuItem(hMenu, ID_EXPORT_IOS, MF_ENABLED);
@@ -4663,8 +4691,8 @@ VOID OnExportWinInst(void)
 		CloseHandle(pi.hProcess);
 }
 
-/* Windows/Mac向けにエクスポートのメニューが押下されたときの処理を行う */
-VOID OnExportWinMac(void)
+/* Mac向けにエクスポートのメニューが押下されたときの処理を行う */
+VOID OnExportMac(void)
 {
 	if (MessageBox(hWndMain, bEnglish ?
 				   L"Takes a while. Are you sure?\n" :
@@ -4683,38 +4711,20 @@ VOID OnExportWinMac(void)
 	}
 
 	/* フォルダを再作成する */
-	RecreateDirectory(L".\\windows-mac-export");
+	RecreateDirectory(L".\\macos-export");
 
-	/* ファイルをコピーする */
-	if (!CopyLibraryFiles(L"tools\\game.exe", L".\\windows-mac-export\\game.exe"))
+	/* ソースをコピーする */
+	if (!CopyLibraryFiles(L"tools\\macos-src", L".\\macos-export"))
 	{
 		log_info(bEnglish ?
-				 "Failed to copy exe file." :
-				 "実行ファイルのコピーに失敗しました。");
+				 "Failed to copy source files for Android." :
+				 "ソースコードのコピーに失敗しました。"
+				 "最新のtools/macos-srcフォルダが存在するか確認してください。");
 		return;
 	}
-	if (!CopyLibraryFiles(L"tools\\game-signed.exe", L".\\windows-export\\game-signed.exe"))
-	{
-		log_info(bEnglish ?
-				 "Failed to copy exe file." :
-				 "実行ファイルのコピーに失敗しました。");
-		return;
-	}
-
-	/* ファイルをコピーする */
-	if (!CopyLibraryFiles(L"tools\\polaris-mac.dmg", L".\\windows-mac-export\\polaris-mac.dmg"))
-	{
-		log_info(bEnglish ?
-				 "Failed to copy exe file." :
-				 "Mac用の実行ファイルのコピーに失敗しました。");
-		return;
-	}
-
-	/* movをコピーする */
-	CopyMovFiles(L".\\mov", L".\\windows-mac-export\\mov");
 
 	/* パッケージを移動する */
-	if (!MovePackageFile(L".\\data01.arc", L".\\windows-mac-export\\data01.arc"))
+	if (!MovePackageFile(L".\\data01.arc", L".\\ios-export\\Resources\\data01.arc"))
 	{
 		log_info(bEnglish ?
 				 "Failed to move data01.arc" :
@@ -4723,13 +4733,15 @@ VOID OnExportWinMac(void)
 	}
 
 	MessageBox(hWndMain, bEnglish ?
-			   L"Export succeeded. Will open the folder." :
-			   L"エクスポートに成功しました。フォルダを開きます。",
+			   L"Will open the exported source code folder.\n"
+			   L"Build with Xcode." :
+			   L"エクスポートしたソースコードフォルダを開きます。\n"
+			   L"Xcodeでそのままビルドできます。\n",
 			   TITLE,
 			   MB_ICONINFORMATION | MB_OK);
 
 	/* Explorerを開く */
-	ShellExecuteW(NULL, L"explore", L".\\windows-mac-export", NULL, NULL, SW_SHOW);
+	ShellExecuteW(NULL, L"explore", L".\\macos-export", NULL, NULL, SW_SHOW);
 }
 
 /* Web向けにエクスポートのメニューが押下されたときの処理を行う */
@@ -4911,7 +4923,7 @@ VOID OnExportIOS(void)
 	}
 
 	/* パッケージを移動する */
-	if (!MovePackageFile(L".\\data01.arc", L".\\ios-export\\engine-ios\\data01.arc"))
+	if (!MovePackageFile(L".\\data01.arc", L".\\ios-export\\Resources\\data01.arc"))
 	{
 		log_info(bEnglish ?
 				 "Failed to move data01.arc" :
