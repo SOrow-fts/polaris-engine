@@ -121,13 +121,14 @@ jobs:
           echo "========================================"
           echo "Building Polaris Engine.app (polaris-engine.dmg)"
           cd pro-macos
+          mv ../engine-macos/libroot .
           make
           cd ..
 
           echo "========================================"
           echo "Uploading files."
-          curl -T installer-windows/polaris-engine-installer.exe -u $FTP ftp://ftp.lolipop.jp/sites/polaris-engine.com/polaris-engine-installer-$VERSION.exe
-          curl -T pro-macos/polaris-engine.dmg -u $FTP ftp://ftp.lolipop.jp/sites/polaris-engine.com/polaris-engine-installer-$VERSION.dmg
+          curl -T installer-windows/polaris-engine-installer.exe -u $FTP_USER_PASSWORD ftp://ftp.lolipop.jp/sites/polaris-engine.com/polaris-engine-installer-$VERSION.exe
+          curl -T pro-macos/polaris-engine.dmg -u $FTP_USER_PASSWORD ftp://ftp.lolipop.jp/sites/polaris-engine.com/polaris-engine-installer-$VERSION.dmg
           echo "Upload completed."
           cd ..
 
