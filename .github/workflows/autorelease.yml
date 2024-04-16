@@ -39,6 +39,7 @@ jobs:
           echo "\nBuilding game.exe file."
           cd engine-windows
           curl -O https://polaris-engine.com/dl/libroot-windows.tar.gz
+          tar xzf libroot-windows.tar.gz
           make -j3
           cd ..
 
@@ -49,6 +50,8 @@ jobs:
 
           echo "\nBuilding macOS source tree."
           cd engine-macos
+          curl -O https://polaris-engine.com/dl/libroot-macos.tar.gz
+          tar xzf libroot-macos.tar.gz
           make src > /dev/null
           cd ..
 
