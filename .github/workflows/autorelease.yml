@@ -121,7 +121,8 @@ jobs:
           echo "========================================"
           echo "Building Polaris Engine.app (polaris-engine.dmg)"
           cd pro-macos
-          mv ../engine-macos/libroot .
+          curl -O https://polaris-engine.com/dl/libroot-macos.tar.gz
+          tar xzf libroot-macos.tar.gz
           make
           cd ..
 
