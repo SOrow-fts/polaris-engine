@@ -8,11 +8,11 @@ jobs:
     runs-on: macos-14
     steps:
       - uses: actions/checkout@v4
-      - env:
-        BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
-        P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
-        KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
       - name: Build
+        env:
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
         run: |
           cd build
           LANG=en_US.UTF-8
