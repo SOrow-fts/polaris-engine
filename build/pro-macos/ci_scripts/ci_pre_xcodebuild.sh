@@ -18,7 +18,8 @@ VERSION=`grep -a1 '<!-- BEGIN-LATEST-JP -->' ../ChangeLog | tail -n1 | cut -d ' 
 echo "VERSION=$VERSION"
 
 # Install the Command Line Tools
-brew upgrade python@3.12
+brew update
+brew upgrade python
 
 # Install brew dependencies.
 echo "\nInstalling the brew packages."
