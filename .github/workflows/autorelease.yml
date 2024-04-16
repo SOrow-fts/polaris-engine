@@ -8,6 +8,10 @@ jobs:
     runs-on: macos-14
     steps:
       - uses: actions/checkout@v4
+      - env:
+        BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+        P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+        KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
       - name: Build
         run: |
           cd build
@@ -15,9 +19,6 @@ jobs:
           LANGUAGE=english
 
           echo "\nSetting up credentials."
-          BUILD_CERTIFICATE_BASE64=${{ secrets.BUILD_CERTIFICATE_BASE64 }}
-          P12_PASSWORD=${{ secrets.P12_PASSWORD }}
-          KEYCHAIN_PASSWORD=${{ secrets.KEYCHAIN_PASSWORD }}
           CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
           KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
           echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
