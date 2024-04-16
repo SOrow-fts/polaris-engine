@@ -19,13 +19,13 @@ FILES_MACOS = \
 main: polaris-engine.dmg
 
 polaris-engine.dmg: libroot $(SRCS_MAIN) $(HDRS_MAIN) $(FILES_MACOS)
-	@echo "Building Polaris.app"
+	@echo "Building Polaris Engine.app"
 	@rm -rf build
-	@xcodebuild -quiet -scheme pro-macos -project pro-macos.xcodeproj -configuration Release -archivePath `pwd`/build/Release/pro-macos.xcarchive ${XCODEBUILD_FLAGS} archive
-	@xcodebuild -quiet -exportArchive -archivePath `pwd`/build/Release/pro-macos.xcarchive -exportOptionsPlist export-options.plist ${XCODEBUILD_FLAGS}
+	@xcodebuild -quiet ${XCODEBUILD_FLAGS} -scheme pro-macos -project pro-macos.xcodeproj -configuration Release -archivePath `pwd`/build/Release/pro-macos.xcarchive archive
+	@xcodebuild -quiet ${XCODEBUILD_FLAGS} -exportArchive -archivePath `pwd`/build/Release/pro-macos.xcarchive -exportOptionsPlist export-options.plist
 	@rm -rf "build/Release/Polaris Engine.app"
 	@until \
-		xcodebuild -quiet -exportNotarizedApp -archivePath `pwd`/build/Release/pro-macos.xcarchive -exportPath `pwd`/build/Release ${XCODEBUILD_FLAGS} > /dev/null 2>&1; \
+		xcodebuild -quiet ${XCODEBUILD_FLAGS} -exportNotarizedApp -archivePath `pwd`/build/Release/pro-macos.xcarchive -exportPath `pwd`/build/Release > /dev/null 2>&1; \
 	do \
 		echo "Waiting 10 seconds for notarization..."; \
 		sleep 10; \
