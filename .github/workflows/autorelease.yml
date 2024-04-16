@@ -105,9 +105,9 @@ jobs:
           rm -rf installer-windows/tools
           mkdir -p installer-windows/tools
           cp engine-windows/game.exe installer-windows/tools/
-          cp engine-macos/game-mac.dmg installer-windows/tools/
-          cp -R engine-android/android-src installer-windows/tools/android-src
+          cp -R engine-macos/macos-src installer-windows/tools/macos-src
           cp -R engine-ios/ios-src installer-windows/tools/ios-src
+          cp -R engine-android/android-src installer-windows/tools/android-src
           mkdir -p installer-windows/tools/web
           cp engine-wasm/html/index.html installer-windows/tools/web/index.html
           cp engine-wasm/html/index.js installer-windows/tools/web/index.js
