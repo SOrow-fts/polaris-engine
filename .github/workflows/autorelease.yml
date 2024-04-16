@@ -3,6 +3,9 @@ on:
   push:
     paths:
       - ChangeLog
+  pull_request:
+    paths:
+      - ChangeLog
 jobs:
   build:
     runs-on: macos-14
@@ -18,7 +21,8 @@ jobs:
           LANG=en_US.UTF-8
           LANGUAGE=english
 
-          echo "\nSetting up credentials."
+          echo "========================================"
+          echo "Setting up credentials."
           CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
           KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
           echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
@@ -29,54 +33,66 @@ jobs:
           security set-key-partition-list -S apple-tool:,apple: -k "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
           security list-keychain -d user -s $KEYCHAIN_PATH
 
-          echo "\nGetting the version number."
+          echo "========================================"
+          echo "Getting the version number."
           VERSION=`grep -a1 '<!-- BEGIN-LATEST-JP -->' ../ChangeLog | tail -n1 | cut -d ' ' -f 3`
           echo "Release Version: $VERSION"
 
-          echo "\nInstalling the brew packages."
+          echo "========================================"
+          echo "Installing the brew packages."
           brew install mingw-w64 emscripten makensis
 
-          echo "\nBuilding game.exe file."
+          echo "========================================"
+          echo "Building game.exe file."
           cd engine-windows
           curl -O https://polaris-engine.com/dl/libroot-windows.tar.gz
           tar xzf libroot-windows.tar.gz
           make -j3
           cd ..
 
-          echo "\nBuilding Wasm files."
+          echo "========================================"
+          echo "Building Wasm files."
           cd engine-wasm
           make
           cd ..
 
-          echo "\nBuilding macOS source tree."
+          echo "========================================"
+          echo "Building macOS source tree."
           cd engine-macos
           curl -O https://polaris-engine.com/dl/libroot-macos.tar.gz
           tar xzf libroot-macos.tar.gz
           make src > /dev/null
           cd ..
 
-          echo "\nBuilding iOS source tree."
+          echo "========================================"
+          echo "Building iOS source tree."
           cd engine-ios
+          curl -O https://polaris-engine.com/dl/libroot-ios.tar.gz
+          tar xzf libroot-ios.tar.gz
           make src > /dev/null
           cd ..
 
-          echo "\nBuilding Android source tree."
+          echo "========================================"
+          echo "Building Android source tree."
           cd engine-android
           make src > /dev/null
           cd ..
 
-          echo "\nBuilding polaris-engine.exe"
+          echo "========================================"
+          echo "Building polaris-engine.exe"
           cd pro-windows
           mv ../engine-windows/libroot .
           make -j3 VERSION="$VERSION"
           cd ..
 
-          echo "\nBuilding web-test.exe"
+          echo "========================================"
+          echo "Building web-test.exe"
           cd ../tools/web-test
           make
           cd ../../build
 
-          echo "\nCreating an installer for Windows."
+          echo "========================================"
+          echo "Creating an installer for Windows."
           cp -v pro-windows/polaris-engine.exe installer-windows/polaris-engine.exe
           rm -rf installer-windows/games
           mkdir installer-windows/games
@@ -102,18 +118,21 @@ jobs:
           make
           cd ..
 
-          echo "\nBuilding Polaris Engine.app (polaris-engine.dmg)"
+          echo "========================================"
+          echo "Building Polaris Engine.app (polaris-engine.dmg)"
           cd pro-macos
           make
           cd ..
 
-          echo "\nUploading files."
+          echo "========================================"
+          echo "Uploading files."
           curl -T installer-windows/polaris-engine-installer.exe -u $FTP ftp://ftp.lolipop.jp/sites/polaris-engine.com/polaris-engine-installer-$VERSION.exe
           curl -T pro-macos/polaris-engine.dmg -u $FTP ftp://ftp.lolipop.jp/sites/polaris-engine.com/polaris-engine-installer-$VERSION.dmg
           echo "Upload completed."
           cd ..
 
-          echo "\nUpdating the Web site."
+          echo "========================================"
+          echo "Updating the Web site."
           cd web
           curl -o dl/index.html https://polaris-engine.com/dl/index.html
           curl -o en/dl/index.html https://polaris-engine.com/en/dl/index.html
@@ -123,7 +142,8 @@ jobs:
           curl -T en/dl/index.html -u $FTP_USER_PASSWORD ftp://ftp.lolipop.jp/sites/polaris-engine.com/en/dl/index.html
           cd ..
 
-          echo "\nPosting to Discord."
+          echo "========================================"
+          echo "Posting to Discord."
           NOTE_JP=`cat ChangeLog | awk '/BEGIN-LATEST-JP/,/END-LATEST-JP/' | tail -n +2 | sed '$d'`
           NOTE_JP=`echo "$NOTE_JP" | sed -e 's/<li>Polaris Engine/## Polaris Engine/g'`
           NOTE_JP=`echo "$NOTE_JP" | sed -e 's/    <li>/* /g'`
