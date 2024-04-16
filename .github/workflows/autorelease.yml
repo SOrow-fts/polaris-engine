@@ -123,7 +123,17 @@ jobs:
           cd pro-macos
           curl -O https://polaris-engine.com/dl/libroot-macos.tar.gz
           tar xzf libroot-macos.tar.gz
-          make XCODEBUILD_FLAGS="OTHER_CODE_SIGN_FLAGS='--keychain=$KEYCHAIN_PATH'" CODESIGN_FLAGS="--keychain $KEYCHAIN_PATH"
+          make XCODEBUILD_FLAGS=" CODESIGN_FLAGS=""
+          @xcodebuild -quiet -scheme pro-macos -project pro-macos.xcodeproj -configuration Release -archivePath `pwd`/build/Release/pro-macos.xcarchive OTHER_CODE_SIGN_FLAGS=--keychain=$KEYCHAIN_PATH archive
+          @xcodebuild -quiet -exportArchive -archivePath `pwd`/build/Release/pro-macos.xcarchive -exportOptionsPlist export-options.plist `pwd`/build/Release/pro-macos.xcarchive OTHER_CODE_SIGN_FLAGS=--keychain=$KEYCHAIN_PATH
+          @until xcodebuild -quiet -exportNotarizedApp -archivePath `pwd`/build/Release/pro-macos.xcarchive -exportPath `pwd`/build/Release ${XCODEBUILD_FLAGS} > /dev/null 2>&1; do echo "Waiting 10 seconds for notarization..."; sleep 10; done
+          @echo "Successfully notarized."
+          @mkdir tmp
+          @cp -Ra "build/Release/Polaris Engine.app" "tmp/Polaris Engine.app"
+          @echo "Creating a dmg file."
+          @hdiutil create -fs APFS -format UDBZ -srcfolder tmp -volname "Polaris Engine" "polaris-engine.dmg"
+          @echo "Signing the dmg file."
+          @codesign --sign 'Developer ID Application' --keychain $KEYCHAIN_PATH polaris-engine.dmg
           cd ..
 
           echo "========================================"
