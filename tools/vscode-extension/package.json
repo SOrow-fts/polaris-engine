@@ -18,8 +18,8 @@
                 ".txt"
             ],
             "aliases": [
-                "txt",
-                "Polaris Engine Scenario"
+                "Polaris Engine Scenario",
+                "txt"
             ],
             "configuration": "./language-scenario.json"
         },
@@ -29,8 +29,8 @@
                 ".txt"
             ],
             "aliases": [
-                "txt",
-                "Polaris Engine GUI"
+                "Polaris Engine GUI",
+                "txt"
             ],
             "configuration": "./language-gui.json"
         },
@@ -40,8 +40,8 @@
                 ".txt"
             ],
             "aliases": [
-                "txt",
-                "Polaris Engine WMS"
+                "Polaris Engine WMS",
+                "txt"
             ],
             "configuration": "./language-wms.json"
         },
@@ -51,21 +51,21 @@
                 ".txt"
             ],
             "aliases": [
-                "txt",
-                "Polaris Engine Anime"
+                "Polaris Engine Anime",
+                "txt"
             ],
             "configuration": "./language-anime.json"
         }],
         "grammars": [
             {
             "language": "polaris-engine-scenario",
-            "scopeName": "source.txt",
-            "path": "./syntaxes/suika2-scenario.tmLanguage.json"
+            "scopeName": "source-sc.txt",
+            "path": "./syntaxes/polaris-engine-scenario.tmLanguage.json"
             },
             {
                 "language": "polaris-engine-wms",
-                "scopeName": "source.txt",
-                "path": "./syntaxes/suika2-wms.tmLanguage.json"
+                "scopeName": "source-wms.txt",
+                "path": "./syntaxes/polaris-engine-wms.tmLanguage.json"
             }
         ],
         "snippets": [{
