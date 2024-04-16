@@ -123,7 +123,7 @@ jobs:
           cd pro-macos
           curl -O https://polaris-engine.com/dl/libroot-macos.tar.gz
           tar xzf libroot-macos.tar.gz
-          make
+          make XCODEBUILD_FLAGS="OTHER_CODE_SIGN_FLAGS='--keychain=$KEYCHAIN_PATH'" CODESIGN_FLAGS="--keychain $KEYCHAIN_PATH"
           cd ..
 
           echo "========================================"
