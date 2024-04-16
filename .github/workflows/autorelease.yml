@@ -1,4 +1,4 @@
-name: engine-macos
+name: autorelease
 on:
   push:
     paths:
