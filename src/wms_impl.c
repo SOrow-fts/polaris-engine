@@ -588,7 +588,7 @@ static bool s2_push_stage(struct wms_runtime *rt)
 
 	UNUSED_PARAMETER(rt);
 
-	log_warn("s2_push_stage() is deprecated. Use GUIv2 instead.");
+	log_info("s2_push_stage() is deprecated. Use GUIv2 instead.");
 
 	is_stage_pushed = true;
 
@@ -637,7 +637,7 @@ static bool s2_pop_stage(struct wms_runtime *rt)
 
 	UNUSED_PARAMETER(rt);
 
-	log_warn("s2_pop_stage() is deprecated. Use GUIv2 instead.");
+	log_info("s2_pop_stage() is deprecated. Use GUIv2 instead.");
 
 	if (!is_stage_pushed)
 		return true;

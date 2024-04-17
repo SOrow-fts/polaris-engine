@@ -1117,7 +1117,6 @@ bool log_info(const char *s, ...)
 	if(!OpenLogFile())
 		return false;
 
-	/* メッセージボックスを表示する */
 	va_start(ap, s);
 	vsnprintf(buf, sizeof(buf), s, ap);
 	va_end(ap);
@@ -1146,12 +1145,12 @@ bool log_warn(const char *s, ...)
 	if(!OpenLogFile())
 		return false;
 
-	/* メッセージボックスを表示する */
 	va_start(ap, s);
 	vsnprintf(buf, sizeof(buf), s, ap);
 	va_end(ap);
-	MessageBox(hWndMain, conv_utf8_to_utf16(buf), wszTitle,
-			   MB_OK | MB_ICONWARNING);
+
+	/* メッセージボックスを表示する */
+	MessageBox(hWndMain, conv_utf8_to_utf16(buf), wszTitle, MB_OK | MB_ICONWARNING);
 
 	/* ログファイルがオープンされている場合 */
 	if(pLogFile != NULL)
@@ -1177,12 +1176,12 @@ bool log_error(const char *s, ...)
 	if(!OpenLogFile())
 		return false;
 
-	/* メッセージボックスを表示する */
 	va_start(ap, s);
 	vsnprintf(buf, sizeof(buf), s, ap);
 	va_end(ap);
-	MessageBox(hWndMain, conv_utf8_to_utf16(buf), wszTitle,
-			   MB_OK | MB_ICONERROR);
+
+	/* メッセージボックスを表示する */
+	MessageBox(hWndMain, conv_utf8_to_utf16(buf), wszTitle, MB_OK | MB_ICONERROR);
 
 	/* ログファイルがオープンされている場合 */
 	if(pLogFile != NULL)
