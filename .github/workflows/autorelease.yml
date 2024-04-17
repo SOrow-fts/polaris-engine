@@ -124,7 +124,7 @@ jobs:
           curl -O https://polaris-engine.com/dl/libroot-macos.tar.gz
           tar xzf libroot-macos.tar.gz
           xcodebuild -quiet -scheme pro-macos -project pro-macos.xcodeproj -configuration Release -archivePath `pwd`/build/Release/pro-macos.xcarchive OTHER_CODE_SIGN_FLAGS=--keychain=$KEYCHAIN_PATH archive
-          xcodebuild -quiet -exportArchive -archivePath `pwd`/build/Release/pro-macos.xcarchive -exportOptionsPlist export-options.plist `pwd`/build/Release/pro-macos.xcarchive OTHER_CODE_SIGN_FLAGS=--keychain=$KEYCHAIN_PATH
+          xcodebuild -quiet -exportArchive -archivePath `pwd`/build/Release/pro-macos.xcarchive -exportOptionsPlist export-options.plist OTHER_CODE_SIGN_FLAGS=--keychain=$KEYCHAIN_PATH `pwd`/build/Release/pro-macos.xcarchive
           until xcodebuild -quiet -exportNotarizedApp -archivePath `pwd`/build/Release/pro-macos.xcarchive -exportPath `pwd`/build/Release ${XCODEBUILD_FLAGS} > /dev/null 2>&1; do echo "Waiting 10 seconds for notarization..."; sleep 10; done
           echo "Successfully notarized."
           mkdir tmp
