@@ -40,33 +40,23 @@ if [ ! -z "`echo $UNAME | grep Debian`" ]; then
 fi
 if [ ! -z "`echo $UNAME | grep FreeBSD`" ]; then
     sudo pkg update;
-    sudo pkg install gmake gsed unzip alsa-lib alsa-plugins qt6 xorg cmake mesa-devel freetype2;
-    rm -f master.zip master.zip.*;
-    curl -O https://github.com/ktabata/polaris-engine/archive/refs/heads/master.zip;
-    rm -rf polaris-engine-master;
-    unzip master.zip;
-    rm master.zip;
-    cd polaris-engine-master;
-    make;
-    sudo make install;
+    sudo pkg install git gmake gsed unzip alsa-lib alsa-plugins qt6 xorg cmake mesa-devel freetype2;
+    git clone https://github.com/ktabata/polaris-engine;
+    cd polaris-engine;
+    gmake;
+    sudo gmake install;
     cd ..;
-    rm -rf  polaris-engine-master;
     echo "";
     echo "Please run 'polaris-engine'";
 fi
 if [ ! -z "`echo $UNAME | grep NetBSD`" ]; then
     sudo pkg update;
-    sudo pkg install gmake gsed unzip alsa-lib alsa-plugins qt6 xorg cmake mesa-devel freetype2;
-    rm -f master.zip master.zip.*;
-    curl -O https://github.com/ktabata/polaris-engine/archive/refs/heads/master.zip;
-    rm -rf polaris-engine-master;
-    unzip master.zip;
-    rm master.zip;
-    cd polaris-engine-master;
-    make;
-    sudo make install;
+    sudo pkg install git gmake gsed unzip alsa-lib alsa-plugins qt6 xorg cmake mesa-devel freetype2;
+    git clone https://github.com/ktabata/polaris-engine;
+    cd polaris-engine;
+    gmake;
+    sudo gmake install;
     cd ..;
-    rm -rf  polaris-engine-master;
     echo "";
     echo "Please run 'polaris-engine'";
 fi
