@@ -15,6 +15,7 @@ jobs:
         env:
           BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
           P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+          BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }}
           KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
         run: |
           cd build
@@ -24,14 +25,18 @@ jobs:
           echo "========================================"
           echo "Setting up credentials."
           CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
+          PP_PATH=$RUNNER_TEMP/build_pp.mobileprovision
           KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
           echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
+          echo -n "$BUILD_PROVISION_PROFILE_BASE64" | base64 --decode -o $PP_PATH
           security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
           security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
           security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
           security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
           security set-key-partition-list -S apple-tool:,apple: -k "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
           security list-keychain -d user -s $KEYCHAIN_PATH
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
 
           echo "========================================"
           echo "Getting the version number."
@@ -124,11 +129,11 @@ jobs:
           curl -O https://polaris-engine.com/dl/libroot-macos.tar.gz
           tar xzf libroot-macos.tar.gz
           echo 'Debug: Building...'
-          xcodebuild -quiet -scheme pro-macos -project pro-macos.xcodeproj -configuration Release -archivePath `pwd`/build/Release/pro-macos.xcarchive OTHER_CODE_SIGN_FLAGS="--keychain=$KEYCHAIN_PATH" CODE_SIGN_IDENTITY='8791B1BF3393E633CC3AC91E80F381994ABCF073' -allowProvisioningUpdates archive
+          xcodebuild -quiet -scheme pro-macos -project pro-macos.xcodeproj -configuration Release -archivePath `pwd`/build/Release/pro-macos.xcarchive OTHER_CODE_SIGN_FLAGS="--keychain=$KEYCHAIN_PATH" -allowProvisioningUpdates archive
           echo 'Debug: Exporting...'
-          xcodebuild -quiet -exportArchive -archivePath `pwd`/build/Release/pro-macos.xcarchive -exportOptionsPlist export-options.plist OTHER_CODE_SIGN_FLAGS="--keychain=$KEYCHAIN_PATH" CODE_SIGN_IDENTITY='8791B1BF3393E633CC3AC91E80F381994ABCF073' -allowProvisioningUpdates `pwd`/build/Release/pro-macos.xcarchive
+          xcodebuild -quiet -exportArchive -archivePath `pwd`/build/Release/pro-macos.xcarchive -exportOptionsPlist export-options.plist OTHER_CODE_SIGN_FLAGS="--keychain=$KEYCHAIN_PATH" -allowProvisioningUpdates `pwd`/build/Release/pro-macos.xcarchive
           echo 'Debug: Nortalizing...'
-          until xcodebuild -quiet -exportNotarizedApp -archivePath `pwd`/build/Release/pro-macos.xcarchive -exportPath `pwd`/build/Release OTHER_CODE_SIGN_FLAGS="--keychain=$KEYCHAIN_PATH" CODE_SIGN_IDENTITY='8791B1BF3393E633CC3AC91E80F381994ABCF073' -allowProvisioningUpdates > /dev/null 2>&1; do echo "Waiting 10 seconds for notarization..."; sleep 10; done
+          until xcodebuild -quiet -exportNotarizedApp -archivePath `pwd`/build/Release/pro-macos.xcarchive -exportPath `pwd`/build/Release OTHER_CODE_SIGN_FLAGS="--keychain=$KEYCHAIN_PATH" -allowProvisioningUpdates > /dev/null 2>&1; do echo "Waiting 10 seconds for notarization..."; sleep 10; done
           echo "Successfully notarized."
           mkdir tmp
           cp -Ra "build/Release/Polaris Engine.app" "tmp/Polaris Engine.app"
