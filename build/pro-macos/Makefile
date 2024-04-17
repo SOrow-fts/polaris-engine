@@ -21,11 +21,11 @@ main: polaris-engine.dmg
 polaris-engine.dmg: libroot $(SRCS_MAIN) $(HDRS_MAIN) $(FILES_MACOS)
 	@echo "Building Polaris Engine.app"
 	@rm -rf build
-	@xcodebuild -quiet -scheme pro-macos -project pro-macos.xcodeproj -configuration Release -archivePath `pwd`/build/Release/pro-macos.xcarchive archive
-	@xcodebuild -quiet -exportArchive -archivePath `pwd`/build/Release/pro-macos.xcarchive -exportOptionsPlist export-options.plist
+	@xcodebuild -quiet -scheme pro-macos -project pro-macos.xcodeproj -configuration Release -archivePath `pwd`/build/Release/pro-macos.xcarchive -allowProvisioningUpdates archive
+	@xcodebuild -quiet -exportArchive -archivePath `pwd`/build/Release/pro-macos.xcarchive -exportOptionsPlist export-options.plist -allowProvisioningUpdates -exportPath `pwd`/build/Release/pro-macos.xcarchive
 	@rm -rf "build/Release/Polaris Engine.app"
 	@until \
-		xcodebuild -quiet -exportNotarizedApp -archivePath `pwd`/build/Release/pro-macos.xcarchive -exportPath `pwd`/build/Release > /dev/null 2>&1; \
+		xcodebuild -quiet -exportNotarizedApp -archivePath `pwd`/build/Release/pro-macos.xcarchive -allowProvisioningUpdates -exportPath `pwd`/build/Release; \
 	do \
 		echo "Waiting 10 seconds for notarization..."; \
 		sleep 10; \
@@ -37,7 +37,7 @@ polaris-engine.dmg: libroot $(SRCS_MAIN) $(HDRS_MAIN) $(FILES_MACOS)
 	@echo "Creating a dmg file."
 	@hdiutil create -fs APFS -format UDBZ -srcfolder tmp -volname "Polaris Engine" "polaris-engine.dmg"
 	@echo "Signing the dmg file."
-	@codesign --sign 'Developer ID Application' ${CODESIGN_FLAGS} polaris-engine.dmg
+	@codesign --sign 'Developer ID Application' polaris-engine.dmg
 	@rm -rf tmp
 
 libroot:

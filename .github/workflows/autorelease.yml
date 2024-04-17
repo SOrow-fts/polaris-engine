@@ -131,7 +131,7 @@ jobs:
           echo 'Debug: Building...'
           xcodebuild -quiet -scheme pro-macos -project pro-macos.xcodeproj -configuration Release -archivePath `pwd`/build/Release/pro-macos.xcarchive OTHER_CODE_SIGN_FLAGS="--keychain=$KEYCHAIN_PATH" -allowProvisioningUpdates archive
           echo 'Debug: Exporting...'
-          xcodebuild -quiet -exportArchive -archivePath `pwd`/build/Release/pro-macos.xcarchive -exportOptionsPlist export-options.plist OTHER_CODE_SIGN_FLAGS="--keychain=$KEYCHAIN_PATH" -allowProvisioningUpdates `pwd`/build/Release/pro-macos.xcarchive
+          xcodebuild -quiet -exportArchive -archivePath `pwd`/build/Release/pro-macos.xcarchive -exportOptionsPlist export-options.plist OTHER_CODE_SIGN_FLAGS="--keychain=$KEYCHAIN_PATH" -allowProvisioningUpdates -exportPath `pwd`/build/Release/pro-macos.xcarchive
           echo 'Debug: Nortalizing...'
           until xcodebuild -quiet -exportNotarizedApp -archivePath `pwd`/build/Release/pro-macos.xcarchive -exportPath `pwd`/build/Release OTHER_CODE_SIGN_FLAGS="--keychain=$KEYCHAIN_PATH" -allowProvisioningUpdates > /dev/null 2>&1; do echo "Waiting 10 seconds for notarization..."; sleep 10; done
           echo "Successfully notarized."
