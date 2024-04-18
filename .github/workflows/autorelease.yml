@@ -129,11 +129,11 @@ jobs:
           curl -O https://polaris-engine.com/dl/libroot-macos.tar.gz
           tar xzf libroot-macos.tar.gz
           echo 'Debug: Building...'
-          xcodebuild -quiet -scheme pro-macos -project pro-macos.xcodeproj -configuration Release -archivePath `pwd`/build/Release/pro-macos.xcarchive OTHER_CODE_SIGN_FLAGS="--keychain=$KEYCHAIN_PATH" PROVISIONING_PROFILE='641a5e08-abb1-4175-b0fa-e726be6b36d4' -allowProvisioningUpdates archive
+          xcodebuild -quiet -scheme pro-macos -project pro-macos.xcodeproj -configuration Release -archivePath `pwd`/build/Release/pro-macos.xcarchive OTHER_CODE_SIGN_FLAGS="--keychain=$KEYCHAIN_PATH" PROVISIONING_PROFILE='641a5e08-abb1-4175-b0fa-e726be6b36d4' CODE_SIGN_IDENTITY='8791B1BF3393E633CC3AC91E80F381994ABCF073' -allowProvisioningUpdates archive
           echo 'Debug: Exporting...'
-          xcodebuild -quiet -exportArchive -archivePath `pwd`/build/Release/pro-macos.xcarchive -exportOptionsPlist export-options.plist OTHER_CODE_SIGN_FLAGS="--keychain=$KEYCHAIN_PATH" -allowProvisioningUpdates PROVISIONING_PROFILE='641a5e08-abb1-4175-b0fa-e726be6b36d4' -exportPath `pwd`/build/Release/pro-macos.xcarchive
+          xcodebuild -quiet -exportArchive -archivePath `pwd`/build/Release/pro-macos.xcarchive -exportOptionsPlist export-options.plist OTHER_CODE_SIGN_FLAGS="--keychain=$KEYCHAIN_PATH" -allowProvisioningUpdates PROVISIONING_PROFILE='641a5e08-abb1-4175-b0fa-e726be6b36d4' CODE_SIGN_IDENTITY='8791B1BF3393E633CC3AC91E80F381994ABCF073' -exportPath `pwd`/build/Release/pro-macos.xcarchive
           echo 'Debug: Nortalizing...'
-          until xcodebuild -quiet -exportNotarizedApp -archivePath `pwd`/build/Release/pro-macos.xcarchive -exportPath `pwd`/build/Release OTHER_CODE_SIGN_FLAGS="--keychain=$KEYCHAIN_PATH" PROVISIONING_PROFILE='641a5e08-abb1-4175-b0fa-e726be6b36d4' -allowProvisioningUpdates > /dev/null 2>&1; do echo "Waiting 10 seconds for notarization..."; sleep 10; done
+          until xcodebuild -quiet -exportNotarizedApp -archivePath `pwd`/build/Release/pro-macos.xcarchive -exportPath `pwd`/build/Release OTHER_CODE_SIGN_FLAGS="--keychain=$KEYCHAIN_PATH" PROVISIONING_PROFILE='641a5e08-abb1-4175-b0fa-e726be6b36d4' CODE_SIGN_IDENTITY='8791B1BF3393E633CC3AC91E80F381994ABCF073' -allowProvisioningUpdates > /dev/null 2>&1; do echo "Waiting 10 seconds for notarization..."; sleep 10; done
           echo "Successfully notarized."
           mkdir tmp
           cp -Ra "build/Release/Polaris Engine.app" "tmp/Polaris Engine.app"
