@@ -7,7 +7,7 @@ This file is referred by some automatic release scripts.
 <!-- BEGIN-LATEST-JP -->
 <li>Polaris Engine 1.0.17 2024/4/16
   <ul>
-    <li>自動リリーステスト</li>
+    <li>英語コンフィグファイルの修正(TODO:英語化)</li>
   </ul>
 </li>
 <!-- END-LATEST-JP -->
@@ -84,7 +84,7 @@ This file is referred by some automatic release scripts.
 <!-- BEGIN-LATEST-EN -->
 <li>Polaris Engine 1.0.17 2024/4/16
   <ul>
-    <li>Auto release test</li>
+    <li>Modernized the English config files (TODO: translate)</li>
   </ul>
 </li>
 <!-- END-LATEST-EN -->
@@ -159,6 +159,7 @@ This file is referred by some automatic release scripts.
   </ul>
 </li>
 ..
+.
 .
 .
 .
