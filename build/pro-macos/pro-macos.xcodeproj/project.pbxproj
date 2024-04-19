@@ -766,8 +766,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = "pro-macos/pro_macos.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Keiichi Tabata";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application: Keiichi Tabata";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -809,7 +809,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.polaris-engine.app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "641a5e08-abb1-4175-b0fa-e726be6b36d4";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "com.polaris-engine.macos-autorelease";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
@@ -822,8 +822,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = "pro-macos/pro_macos.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Keiichi Tabata";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application: Keiichi Tabata";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -865,7 +865,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.polaris-engine.app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "641a5e08-abb1-4175-b0fa-e726be6b36d4";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "com.polaris-engine.macos-autorelease";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
