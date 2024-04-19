@@ -822,8 +822,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = "pro-macos/pro_macos.entitlements";
-				CODE_SIGN_IDENTITY = "Developer ID Application: Keiichi Tabata";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application: Keiichi Tabata";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "8791B1BF3393E633CC3AC91E80F381994ABCF073";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
