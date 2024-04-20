@@ -215,15 +215,13 @@ echo "Upload completed."
 echo ""
 echo "Updating the Web site."
 say "Webページを更新中です"
-SAVE_DIR=`pwd`
 cd ../web && \
-    ./update-templates.sh && \
     ./update-version.sh && \
     ftp-upload.sh dl/index.html && \
     ftp-upload.sh en/dl/index.html && \
     git add -u dl/index.html en/dl/index.html && \
     git commit -m "web: release $VERSION"
-cd "$SAVE_DIR"
+cd ..
 
 #
 # Post to the Discord server.
