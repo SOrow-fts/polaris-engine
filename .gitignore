@@ -1,18 +1,10 @@
 #
 # Credentials
+# (For safety: we don't use the following actually.)
 #
 
 .env
 .passwd
-
-#
-# Third-party IP
-#
-
-iemote.h
-emotedriver.dll
-emotedriver.lib
-emote_test.psb
 
 #
 # Garbages
@@ -20,23 +12,36 @@ emote_test.psb
 
 *.DS_Store
 *~
-.vscode/settings.json
 log.txt
 sav
 
 #
-# Main Engine
+# Engine
 #
 
-# Windows
-*.o
-libroot*
-*.exe
-*.aps
-llvm
-llvm-mingw-*-aarch64.tar.xz
+# mingw-w64 (i686)
+build/engine-windows/*.o
+build/engine-windows/libroot
+build/engine-windows/libroot-windows.tar.gz
+build/engine-windows/tmp
+build/engine-windows/*.exe
+build/engine-windows/*.aps
 
-# Visual Studio 2022
+# mingw-w64 (x86_64)
+build/engine-windows-64/*.o
+build/engine-windows-64/libroot
+build/engine-windows-64/*.exe
+build/engine-windows-64/*.aps
+
+# mingw-w64 (arm64)
+build/engine-windows-arm64/*.o
+build/engine-windows-arm64/libroot
+build/engine-windows-arm64/*.exe
+build/engine-windows-arm64/*.aps
+build/engine-windows-arm64/llvm
+build/engine-windows-arm-64/llvm-mingw-*-aarch64.tar.xz
+
+# Visual Studio 2022 (for debug only)
 build/engine-windows-vs2022/.vs
 build/engine-windows-vs2022/zlib
 build/engine-windows-vs2022/libpng
@@ -55,24 +60,17 @@ build/engine-windows-vs2022/testgame
 
 # macOS
 build/engine-macos/engine-macos.xcodeproj/project.xcworkspace
-build/engine-macos/engine-macos.xcodeproj/xcshareddata
-build/engine-macos/engine-macos.xcodeproj/cuserdata
 build/engine-macos/engine-macos.xcodeproj/xcuserdata
 build/engine-macos/libroot
-build/engine-macos/libroot-mac.tar.gz
+build/engine-macos/libroot-macos.tar.gz
 build/engine-macos/game-mac.dmg
-build/engine-macos/game-mac-nosign.dmg
 build/engine-macos/build
 build/engine-macos/macos-src
 
-# Wasm
-build/engine-wasm/html
-build/engine-wasm/emsdk
-build/engine-wasm/data01.arc
-build/engine-wasm/libwebp-1.3.2
-
 # iOS
 build/engine-ios/libroot
+build/engine-ios/libroot-device
+build/engine-ios/libroot-sim
 build/engine-ios/engine-ios.xcodeproj/project.xcworkspace
 build/engine-ios/engine-ios.xcodeproj/xcuserdata
 build/engine-ios/engine-ios/data01.arc
@@ -90,35 +88,28 @@ build/engine-android/cmdline-tools
 build/engine-android/commandlinetools-linux-*.zip
 build/engine-android/android-src
 
-# Linux
-build/engine-linux/polaris-engine-runtime
+# Wasm
+build/engine-wasm/html
+build/engine-wasm/emsdk
+build/engine-wasm/data01.arc
+build/engine-wasm/libwebp-1.3.2
 
-# Unity
-build/engine-unity/Assembly-CSharp.csproj
-build/engine-unity/.vs
-build/engine-unity/.vscode
-build/engine-unity/.vsconfig
-build/engine-windows/tmp
-build/engine-unity/obj
-build/engine-unity/Library
-build/engine-unity/Logs
-build/engine-unity/Packages
-build/engine-unity/Temp
-build/engine-unity/UserSettings
-build/engine-unity/ProjectSettings
-build/engine-unity/Packages
-build/engine-unity/engine-unity.sln
-build/engine-unity/Assets/StreamingAssets*
-build/engine-unity/Assets/libpolaris.dylib*
-build/engine-unity/Assets/libpolaris.dll*
-build/engine-unity/Assets/libpolaris.so*
-build/engine-unity/Assets/Resources*
+# X11
+build/engine-x11/polaris-engine-runtime
+polaris-engine-runtime
+polaris-engine
 
 #
-# Pro
+# Editor
 #
 
-# Windows
+# mingw-w64 (i686)
+build/pro-windows/*.o
+build/pro-windows/libroot
+build/pro-windows/*.exe
+build/pro-windows/*.aps
+
+# Visual Studio 2022 (for debug only)
 build/pro-windows-vs2022/.vs/
 build/pro-windows-vs2022/Debug/
 build/pro-windows-vs2022/Release/
@@ -136,9 +127,10 @@ build/pro-windows-vs2022/zlib/
 # macOS
 build/pro-macos/pro-macos.xcodeproj/project.xcworkspace
 build/pro-macos/pro-macos.xcodeproj/xcuserdata
-build/pro-macos/libroot-mac.tar.gz
+build/pro-macos/libroot
+build/pro-macos/libroot-macos.tar.gz
 build/pro-macos/build/
-build/pro-macos/tmp/
+build/pro-macos/tmp
 build/pro-macos/polaris-engine.dmg
 
 # iOS
@@ -155,45 +147,32 @@ build/pro-android/app/src/main/cpp
 build/pro-android/app/release
 build/pro-android/app/debug
 
-# Linux
-build/pro-linux/deps
-build/pro-linux/build
-build/pro-linux/CMakeLists.txt.user
+# Qt6
+build/pro-qt/deps
+build/pro-qt/build
+build/pro-qt/CMakeLists.txt.user
 
 # Wasm
 build/pro-wasm/html
 build/pro-wasm/emsdk
 build/pro-wasm/data01.arc
 
+# Web-test
+tools/web-test/web-test.exe
+
 #
 # Installer
 #
 build/installer-windows/games
-build/installer-windows/tools/
-build/installer-windows/readme-en.html
-build/installer-windows/readme-jp.html
-build/installer-windows/polaris-engine.zip
+build/installer-windows/tools
+build/installer-windows/polaris-engine-installer.exe
+build/installer-windows/polaris-engine.exe
 
 #
+# Visual Studio Code Extension
+#
+tools/vscode-extension/*.vsix
+
 # Misc.
-#
-
-# Ubuntu PPA
-build/ppa/work
-
-# Console Example with SDL2
-build/experimental-engine-console/libroot
-build/experimental-engine-console/exefs
-build/experimental-engine-console/romfs
-build/experimental-engine-console/tmp
-build/experimental-engine-console/*.o
-build/experimental-engine-console/*.elf
-build/experimental-engine-console/*.nro
-build/experimental-engine-console/*.nacp
-build/experimental-engine-console/*.nsp
-
-#
-# Website
-#
-
-doc/web/tmp
+build/engine-unity
+build/engine-windows-private-*

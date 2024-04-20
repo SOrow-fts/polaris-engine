@@ -72,6 +72,8 @@ if [ ! -e libroot ]; then
     ./build-libs.sh;
 fi
 make -j16
+cp game.exe game-nosign.exe
+sign.sh game.exe
 cd ..
 
 #
@@ -129,6 +131,7 @@ if [ ! -e libroot ]; then
     cp -Rav ../engine-windows/libroot .;
 fi
 make -j16 VERSION="$VERSION"
+sign.sh polaris-engine.exe
 cd ..
 
 #
@@ -140,6 +143,7 @@ if [ ! -e ../tools/web-test/web-test.exe ]; then
     say "Windows用のWebテストツールをビルドしています";
     cd ../tools/web-test;
     make;
+    sign.sh web-test.exe;
     cd ../../build;
 fi
 
@@ -167,7 +171,8 @@ cp -R ../games/english-novel installer-windows/games/
 # /tools
 rm -rf installer-windows/tools
 mkdir -p installer-windows/tools
-cp  engine-windows/game.exe installer-windows/tools/
+cp engine-windows/game.exe installer-windows/tools/
+cp engine-windows/game-nosign.exe installer-windows/tools/
 cp -R engine-macos/macos-src installer-windows/tools/macos-src
 cp -R engine-ios/ios-src installer-windows/tools/ios-src
 cp -R engine-android/android-src installer-windows/tools/android-src
@@ -178,7 +183,7 @@ cp engine-wasm/html/index.wasm installer-windows/tools/web/index.wasm
 cp  ../tools/web-test/web-test.exe installer-windows/tools/web-test.exe
 cp -R ../tools/installer installer-windows/tools/installer
 
-# Make an installe
+# Make an installer
 cd installer-windows
 make
 cd ..
