@@ -10,7 +10,16 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "cd &quot;$WORKSPACE_PATH&quot;/../..&#10;&#10;if [ ! -d libroot ]; then curl -O https://polaris-engine.com/dl/libroot-mac.tar.gz; tar xzf libroot-mac.tar.gz; fi&#10;&#10;cd ../engine-macos&#10;if [ ! -d libroot ]; then curl -O https://polaris-engine.com/dl/libroot-windows.tar.gz; tar xzf libroot-windows.tar.gz; fi&#10;if [ ! -f game-mac.dmg ]; then make; fi&#10;&#10;cd ../engine-windows&#10;if [ ! -d libroot ]; then curl -O https://polaris-engine.com/dl/libroot-windows.tar.gz; tar xzf libroot-windows.tar.gz; fi&#10;if [ ! -f game.exe ]; then make game.exe; fi&#10;&#10;cd ../engine-ios&#10;if [ ! -d ios-src ]; then make src; fi&#10;&#10;cd ../engine-android&#10;if [ ! -d ios-src ]; then make src; fi&#10;&#10;cd ../engine-wasm&#10;if [ ! -f html/index.html ]; then make; fi&#10;">
+               scriptText = "cd &quot;$WORKSPACE_PATH&quot;/../..&#10;if [ ! -d libroot ]; then&#10;    curl -O https://polaris-engine.com/dl/libroot-macos.tar.gz;&#10;    tar xzf libroot-macos.tar.gz;&#10;fi&#10;cd ../engine-windows&#10;if [ ! -e game.exe ]; then&#10;    make;&#10;fi&#10;cd ../engine-wasm&#10;if [ ! -e html/index.html ]; then&#10;    rm -rf html;&#10;    make;&#10;fi&#10;cd ../engine-macos&#10;if [ ! -d macos-src ]; then&#10;    make src;&#10;fi&#10;cd ../engine-ios&#10;if [ ! -d ios-src ]; then&#10;    make src;&#10;fi&#10;cd ../engine-android&#10;if [ ! -d android-src ]; then&#10;    make src;&#10;fi&#10;">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "2669F7072B283866001AEF17"
+                     BuildableName = "Polaris Engine.app"
+                     BlueprintName = "Polaris Engine"
+                     ReferencedContainer = "container:pro-macos.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
             </ActionContent>
          </ExecutionAction>
       </PreActions>
