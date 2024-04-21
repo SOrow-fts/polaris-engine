@@ -191,6 +191,7 @@ static bool init_cl_enter(bool *cont)
 	int index;
 
 	name = get_string_param(CIEL_PARAM_NAME);
+	name = expand_variable(name);
 	if (IS_EMPTY(name)) {
 		log_error("name= is required");
 		log_script_exec_footer();
@@ -869,6 +870,7 @@ static int get_index_for_name(bool allow_bg, bool allow_all, bool allow_notfound
 	int i;
 
 	name = get_string_param(CIEL_PARAM_NAME);
+	name = expand_variable(name);
 	if (IS_EMPTY(name)) {
 		log_error("name= is required");
 		log_script_exec_footer();
