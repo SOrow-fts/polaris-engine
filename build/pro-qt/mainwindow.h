@@ -20,6 +20,7 @@
 #include <QAudioFormat>
 #include <QAudioSink>
 #include <QIODevice>
+#include "polaris.h"
 #endif
 
 QT_BEGIN_NAMESPACE
@@ -126,6 +127,9 @@ public:
 #ifdef USE_QT_AUDIO
     // The sound sinks.
     QAudioSink *m_soundSink[MIXER_STREAMS];
+
+    // The sound devices.
+    QIODevice *m_soundDevice[MIXER_STREAMS];
 
     // Wave streams.
     struct wave *m_wave[MIXER_STREAMS];

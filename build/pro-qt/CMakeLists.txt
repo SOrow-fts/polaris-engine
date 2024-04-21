@@ -24,8 +24,8 @@ add_compile_definitions(
   USE_EDITOR
   USE_QT
 
-  # This is for non-Linux including FreeBSD, NetBSD, OpenBSD.
-# USE_QT_AUDIO
+  # Qt's audio classes are totally uselss on Linux adn *BSD.
+  #USE_QT_AUDIO
 )
 
 # The following source files.
