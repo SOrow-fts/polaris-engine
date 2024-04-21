@@ -111,14 +111,14 @@ struct temporary_stage {
 
 	/* Anime */
 	bool use_anime;
-	int anime_seq_count[CL_LAYERS];
-	float anime_time[CL_LAYERS][CL_SEQ_SIZE];
-	int anime_x_orig[CL_LAYERS];
-	int anime_y_orig[CL_LAYERS];
-	int anime_a_orig[CL_LAYERS];
-	int anime_x[CL_LAYERS][CL_SEQ_SIZE];
-	int anime_y[CL_LAYERS][CL_SEQ_SIZE];
-	int anime_a[CL_LAYERS][CL_SEQ_SIZE];
+	int anime_seq_count[CL_CHARACTERS];
+	float anime_time[CL_CHARACTERS][CL_SEQ_SIZE];
+	int anime_x_orig[CL_CHARACTERS];
+	int anime_y_orig[CL_CHARACTERS];
+	int anime_a_orig[CL_CHARACTERS];
+	int anime_x[CL_CHARACTERS][CL_SEQ_SIZE];
+	int anime_y[CL_CHARACTERS][CL_SEQ_SIZE];
+	int anime_a[CL_CHARACTERS][CL_SEQ_SIZE];
 };
 
 static struct temporary_stage ts;
@@ -234,6 +234,8 @@ static bool init_cl_leave(bool *cont)
 		return false;
 
 	for (i = 0; i < CL_CHARACTERS; i++) {
+		if (ts.ch_count == 0) 
+			break;
 		if (index != CL_ALL && index != i)
 			continue;
 
@@ -462,7 +464,7 @@ static bool init_cl_move(bool *cont)
 		return false;
 	time = get_string_param(CIEL_PARAM_TIME);
 	if (IS_EMPTY(time)) {
-		log_error("time= not specified.");
+		log_error("t= not specified.");
 		log_script_exec_footer();
 		return false;
 	}
@@ -600,7 +602,7 @@ static bool init_cl_run_anime(void)
 	int i, j, prev_x, prev_y, prev_a;
 	int stage_layer;
 
-	for (i = 0; i < CL_LAYERS; i++) {
+	for (i = 0; i < CL_CHARACTERS; i++) {
 		if (ts.anime_seq_count[i] == 0)
 			continue;
 
@@ -640,7 +642,7 @@ static bool init_cl_run_anime(void)
 	start_command_repetition();
 
 	ts.is_modified = false;
-	for (i = 0; i < CL_LAYERS; i++) {
+	for (i = 0; i < CL_CHARACTERS; i++) {
 		if (ts.file[i] != NULL) {
 			free(ts.file[i]);
 			ts.file[i] = NULL;
@@ -959,7 +961,7 @@ void ciel_clear_hook(void)
 
 	/* anime */
 	ts.use_anime = false;
-	for (i = 0; i < CL_LAYERS; i++)
+	for (i = 0; i < CL_CHARACTERS; i++)
 		ts.anime_seq_count[i] = 0;
 }
 
