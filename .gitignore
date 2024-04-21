@@ -96,6 +96,7 @@ build/engine-wasm/libwebp-1.3.2
 
 # X11
 build/engine-x11/polaris-engine-runtime
+build/engine-x11/*.o
 polaris-engine-runtime
 polaris-engine
 

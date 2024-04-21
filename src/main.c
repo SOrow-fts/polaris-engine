@@ -217,7 +217,7 @@ bool game_loop_iter(void)
 	if (!pre_dispatch()) {
 		/* 停止中で実行されない場合、ステージを描画してフレームを終了する */
 		render_stage();
-		if (conf_sysmenu_hidden != 2)
+		if (conf_sysmenu_hidden != 2 && is_non_interruptible())
 			render_collapsed_sysmenu(false);
 		return true;
 	}
@@ -298,7 +298,7 @@ bool game_loop_iter(void)
 	if (need_dummy_render) {
 		/* 実行中でないので画面を再描画する */
 		render_stage();
-		if (conf_sysmenu_hidden != 2)
+		if (conf_sysmenu_hidden != 2 && is_non_interruptible())
 			render_collapsed_sysmenu(false);
 	}
 
