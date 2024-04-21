@@ -4321,8 +4321,10 @@ static VOID OnSave(void)
 	HANDLE hFile;
 
 	if (MessageBox(hWndMain, bEnglish ?
-				   L"Are you sure you want to save the script?" :
-				   L"スクリプトを保存してもよろしいですか？",
+				   L"Are you sure you want to save the script?"
+				   L"This feature is unstable." :
+				   L"スクリプトを保存してもよろしいですか？"
+				   L"この機能はまだ不安定です。",
 				   TITLE,
 				   MB_YESNO | MB_ICONQUESTION) == IDNO)
 		return;
