@@ -5,12 +5,17 @@ This file is referred by some automatic release scripts.
 [Release History (Japanese)]
 
 <!-- BEGIN-LATEST-JP -->
+<li>Polaris Engine 1.0.22 2024/4/21
+  <ul>
+    <li>内部的な修正</li>
+  </ul>
+</li>
+<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.0.21 2024/4/21
   <ul>
     <li>Ubuntu版の修正</li>
   </ul>
 </li>
-<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.0.20 2024/4/21
   <ul>
     <li>署名を追加</li>
@@ -103,12 +108,17 @@ This file is referred by some automatic release scripts.
 [Release History (English)]
 
 <!-- BEGIN-LATEST-EN -->
+<li>Polaris Engine 1.0.22 2024/4/21
+  <ul>
+    <li>Internal fixes</li>
+  </ul>
+</li>
+<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.0.21 2024/4/21
   <ul>
     <li>Fixed Ubuntu PPA</li>
   </ul>
 </li>
-<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.0.20 2024/4/21
   <ul>
     <li>Added a code sign</li>
