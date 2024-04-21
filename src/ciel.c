@@ -473,8 +473,6 @@ static bool init_cl_move(bool *cont)
 	yplus = get_string_param(CIEL_PARAM_YPLUS);
 	yminus = get_string_param(CIEL_PARAM_YMINUS);
 	alpha = get_string_param(CIEL_PARAM_ALPHA);
-	if (IS_EMPTY(alpha))
-		alpha = "255";
 
 	seq = ts.anime_seq_count[index];
 	if (seq >= CL_SEQ_SIZE) {
@@ -516,6 +514,8 @@ static bool init_cl_move(bool *cont)
 			ts.anime_a[index][seq] = 0;
 		if (ts.anime_a[index][seq] > 255)
 			ts.anime_a[index][seq] = 255;
+	} else {
+		ts.anime_a[index][seq] = ts.a[index];
 	}
 
 	ts.anime_seq_count[index]++;

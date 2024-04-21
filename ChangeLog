@@ -5,12 +5,18 @@ This file is referred by some automatic release scripts.
 [Release History (Japanese)]
 
 <!-- BEGIN-LATEST-JP -->
+<li>Polaris Engine 1.0.19 2024/4/21
+  <ul>
+    <li>Cielシステムのバグ修正</li>
+    <li>エディタ(エクスポート前の状態)で右上ボタンを常に表示するように変更 (チラつきによる違和感を抑制)</li>
+  </ul>
+</li>
+<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.0.18 2024/4/20
   <ul>
     <li>自動リリースをあきらめて署名を復活</li>
   </ul>
 </li>
-<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.0.17 2024/4/16
   <ul>
     <li>英語コンフィグファイルの修正(TODO:英語化)</li>
@@ -87,12 +93,18 @@ This file is referred by some automatic release scripts.
 [Release History (English)]
 
 <!-- BEGIN-LATEST-EN -->
+<li>Polaris Engine 1.0.19 2024/4/21
+  <ul>
+    <li>Fixed a bug of Ciel system</li>
+    <li>Always show the right top button on the Editor</li>
+  </ul>
+</li>
+<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.0.18 2024/4/20
   <ul>
     <li>The auto-release system was retired and the code signings revived</li>
   </ul>
 </li>
-<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.0.17 2024/4/16
   <ul>
     <li>Modernized the English config files (TODO: translate)</li>
