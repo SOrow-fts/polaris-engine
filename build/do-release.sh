@@ -186,6 +186,7 @@ cp -R ../tools/installer installer-windows/tools/installer
 # Make an installer
 cd installer-windows
 make
+sign.sh polaris-engine-installer.exe
 cd ..
 
 #
