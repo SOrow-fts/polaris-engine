@@ -630,7 +630,6 @@ static bool init_cl_run_anime(void)
 			prev_a = ts.anime_a[i][j];
 		}
 
-		ts.anime_seq_count[i] = 0;
 		ts.x[i] = prev_x;
 		ts.y[i] = prev_y;
 		ts.a[i] = prev_a;
@@ -790,11 +789,16 @@ static void process_anime_finish(void)
 
 	/* アニメが終了した場合 */
 	has_running_anime = false;
-	for (i = 0; i < CL_LAYERS; i++) {
+	for (i = 0; i < CL_CHARACTERS; i++) {
+		int stage_layer = cl_layer_to_stage_layer(i);
 		if (ts.anime_seq_count[i] == 0)
 			continue;
-		if (!is_anime_finished_for_layer(cl_layer_to_stage_layer(i)))
+		if (is_anime_finished_for_layer(stage_layer)) {
+			clear_layer_anime_sequence(stage_layer);
+			ts.anime_seq_count[i] = 0;
+		} else {
 			has_running_anime = true;
+		}
 	}
 	if (!has_running_anime) {
 		/* 繰り返し動作を終了する */
@@ -825,9 +829,11 @@ static void process_anime_finish(void)
 			return;
 		} else {
 			/* アニメを終了する */
-			for (i = 0; i < CL_LAYERS; i++) {
-				if (ts.anime_seq_count[i] > 0)
-					finish_layer_anime(i);
+			for (i = 0; i < CL_CHARACTERS; i++) {
+				if (ts.anime_seq_count[i] != 0) {
+					clear_layer_anime_sequence(cl_layer_to_stage_layer(i));
+					ts.anime_seq_count[i] = 0;
+				}
 			}
 
 			/* 繰り返し動作を終了する */
@@ -841,9 +847,11 @@ static void process_anime_finish(void)
 	     (is_control_pressed || is_return_pressed ||
 	      is_left_clicked || is_down_pressed)) {
 		/* アニメを終了する */
-		for (i = 0; i < CL_LAYERS; i++) {
-			if (ts.anime_seq_count[i] > 0)
-				finish_layer_anime(i);
+		for (i = 0; i < CL_CHARACTERS; i++) {
+			if (ts.anime_seq_count[i] != 0) {
+				clear_layer_anime_sequence(cl_layer_to_stage_layer(i));
+				ts.anime_seq_count[i] = 0;
+			}
 		}
 
 		/* 繰り返し動作を終了する */
