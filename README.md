@@ -86,8 +86,7 @@ Polaris Engine does not depend on SDKs or frameworks such as Unity, Godot, Pytho
 
 ## CI/CD Pipiline
 
-* We do CI for build sanity checks on every push to the repository using GitHub Actions.
-* We currently don't have a way to do CD on the cloud due to a lack of code signing capability.
+* We currently don't have a way to do CI/CD on the cloud due to lacks of code signing capabilities.
 * However, the author has a release script and thus releases are fully automated on his MacBook Pro.
   * The release script builds all binaries and uploads them to the Web site and GitHub.
   * It also posts a message to the Discord server.
@@ -95,7 +94,7 @@ Polaris Engine does not depend on SDKs or frameworks such as Unity, Godot, Pytho
 
 ## Trivia
 
-Polaris Engine is the successor of "Suika2" and "Suika Studio (Suika1)".
+Polaris Engine is the successor of `Suika2` and `Suika Studio (Suika1)`.
 * [See the Suika2 here](https://github.com/ktabata/suika2)
 * [See the Suika Studio 2002 version here](https://github.com/ktabata/suika-studio-2002-gpl)
 * [See the Suika Studio 2003 version here](https://github.com/ktabata/suika-studio-2003-gpl)
