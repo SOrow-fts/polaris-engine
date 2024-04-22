@@ -133,10 +133,10 @@
 #  - キャラの画像を指定したピクセル数だけ移動します
 #
 # [使い方]
-#  - &move-x midori 100 
-#  - &move-x midori -100
+#  - &move-x midori 100 0.5
+#  - &move-x midori -100 0.5
 
 :move-x
-@cl.move name=midori x+=100 t=0.5
+@cl.move name=&1 x+=&2 t=&3
 @cl.run
 @return

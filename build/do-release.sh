@@ -154,6 +154,11 @@ echo ""
 echo "Creating an installer for Windows."
 say "Windows用のインストーラをビルドしています" &
 
+# prepare
+cp ../tools/library/orbis.txt ../games/japanese-light/txt/
+cp ../tools/library/orbis.txt ../games/japanese-dark/txt/
+cp ../tools/library/orbis.txt ../games/japanese-tategaki/txt/
+
 # /
 cp -v pro-windows/polaris-engine.exe installer-windows/polaris-engine.exe
 
