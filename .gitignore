@@ -26,6 +26,7 @@ build/engine-windows/libroot-windows.tar.gz
 build/engine-windows/tmp
 build/engine-windows/*.exe
 build/engine-windows/*.aps
+build/engine-windows-custom-*
 
 # mingw-w64 (x86_64)
 build/engine-windows-64/*.o
