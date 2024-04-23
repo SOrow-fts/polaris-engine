@@ -121,8 +121,8 @@ This file is referred by some automatic release scripts.
 <!-- BEGIN-LATEST-EN -->
 <li>Polaris Engine 1.1.2 2024/4/23
   <ul>
-    <li>switchコマンドのバグ修正</li>
-    <li>switchコマンドの非推奨化</li>
+    <li>Fixed a bug of the switch command</li>
+    <li>Deprecated usages of the switch command</li>
   </ul>
 </li>
 <!-- END-LATEST-EN -->
