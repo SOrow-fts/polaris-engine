@@ -1332,9 +1332,12 @@ static bool process_move(void)
 	 *    - gosubオプションがついている場合はpushも行う
 	 */
 	if (result_index != -1 &&
-	    button[result_index].type == TYPE_GOTO) {
+	    (button[result_index].type == TYPE_GOTO ||
+	     button[result_index].type == TYPE_GALLERY)) {
 		if (is_sys_gui) {
 			is_sys_gui = false;
+			if (is_message_active())
+				clear_message_active();
 			if (button[result_index].gosub)
 				push_return_point_minus_one();
 			if (!move_to_label(button[result_index].label))

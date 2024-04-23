@@ -747,7 +747,7 @@ static void init_flags_and_vars(void)
 		 * GUIコマンドの直後の場合
 		 *  - 画面全体の更新を行うためにフラグをセットする
 		 */
-		gui_sys_flag = true;
+		gui_sys_flag = false;
 		gui_cmd_flag = false;
 		gui_gosub_flag = true;
 	} else {
