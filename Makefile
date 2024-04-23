@@ -125,15 +125,19 @@ setup:
 		sudo apt-get install build-essential cmake libasound2-dev libx11-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libxpm-dev mesa-common-dev zlib1g-dev libpng-dev libjpeg-dev libwebp-dev libbz2-dev libogg-dev libvorbis-dev libfreetype-dev cmake qt6-base-dev qt6-multimedia-dev libqt6core6 libqt6gui6 libqt6widgets6 libqt6opengl6-dev libqt6openglwidgets6 libqt6multimedia6 libqt6multimediawidgets6 mingw-w64; \
 	fi
 	@if [ ! -z "`uname -a | grep WSL2`" ]; then \
-		echo 'Installing dependencies...'; \
+		echo 'Installing dependencies for WSL2...'; \
+		sudo apt-get update; \
+		sudo apt-get install build-essential cmake libasound2-dev libx11-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libxpm-dev mesa-common-dev zlib1g-dev libpng-dev libjpeg-dev libwebp-dev libbz2-dev libogg-dev libvorbis-dev libfreetype-dev cmake qt6-base-dev qt6-multimedia-dev libqt6core6 libqt6gui6 libqt6widgets6 libqt6opengl6-dev libqt6openglwidgets6 libqt6multimedia6 libqt6multimediawidgets6 mingw-w64; \
+		cd build/engine-windows && wget https://polaris-engine.com/dl/libroot-windows.tar.gz && tar xzf libroot-windows.tar.gz && cd ../..; \
+		cp -Ra build/engine-windows/libroot build/pro-windows/; \
+	fi
+	@if [ ! -z "`uname -a | grep Microsoft`" ]; then \
+		echo 'Installing dependencies for WSL1...'; \
 		sudo apt-get update; \
 		sudo apt-get install build-essential cmake libasound2-dev libx11-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libxpm-dev mesa-common-dev zlib1g-dev libpng-dev libjpeg-dev libwebp-dev libbz2-dev libogg-dev libvorbis-dev libfreetype-dev cmake qt6-base-dev qt6-multimedia-dev libqt6core6 libqt6gui6 libqt6widgets6 libqt6opengl6-dev libqt6openglwidgets6 libqt6multimedia6 libqt6multimediawidgets6 mingw-w64; \
 		echo "Disabling EXE file execution."; \
-		echo 0 | sudo tee /proc/sys/fs/binfmt_misc/WSLInterop; \
-		cd build/engine-windows && ./build-libs.sh && cd ../..; \
+		cd build/engine-windows && wget https://polaris-engine.com/dl/libroot-windows.tar.gz && tar xzf libroot-windows.tar.gz && cd ../..; \
 		cp -Ra build/engine-windows/libroot build/pro-windows/; \
-		echo "Re-enabling EXE file execution."; \
-		echo 1 | sudo tee /proc/sys/fs/binfmt_misc/WSLInterop; \
 	fi
 	@if [ ! -z "`uname -a | grep FreeBSD`" ]; then \
 		echo 'Installing dependencies...'; \

@@ -3459,8 +3459,8 @@ static VOID RichEdit_SetTextColorForLine(const wchar_t *pText, int nLineStartCR,
 						continue;
 
 					/* 引数名部分を選択してテキスト色を変更する */
-					nNameStart = nLineStartCR + (pParamStart - (pText + nLineStartCRLF));
-					nNameLen = pParamStop - pParamStart + 1;
+					nNameStart = nLineStartCR + (int)(pParamStart - (pText + nLineStartCRLF));
+					nNameLen = (int)(pParamStop - pParamStart) + 1;
 					RichEdit_SetSelectedRange(nNameStart, nNameLen);
 					RichEdit_SetTextColorForSelectedRange(dwColorParamName);
 				}
@@ -3703,7 +3703,7 @@ static VOID RichEdit_UpdateScriptModelFromText(void)
 {
 	char szLine[2048];
 	wchar_t *pWcs, *pCRLF;
-	int i, nTotal, nLine, nLineStartCharCR, nLineStartCharCRLF;
+	int i, nTotal, nLine, nLineStartCharCRLF;
 
 	/* パースエラーをリセットして、最初のパースエラーで通知を行う */
 	dbg_reset_parse_error_count();
@@ -3712,7 +3712,6 @@ static VOID RichEdit_UpdateScriptModelFromText(void)
 	pWcs = RichEdit_GetText();
 	nTotal = (int)wcslen(pWcs);
 	nLine = 0;
-	nLineStartCharCR = 0;
 	nLineStartCharCRLF = 0;
 	while (nLineStartCharCRLF < nTotal)
 	{
@@ -3738,7 +3737,6 @@ static VOID RichEdit_UpdateScriptModelFromText(void)
 
 		nLine++;
 		nLineStartCharCRLF += nLen + 2; /* +2 for CRLF */
-		nLineStartCharCR += nLen + 1; /* +1 for CR */
 	}
 	free(pWcs);
 

@@ -5,9 +5,9 @@ include ../common.mk
 #
 
 # For cross compilation
-CC = i686-w64-mingw32-gcc
-CXX = i686-w64-mingw32-g++
-WINDRES = i686-w64-mingw32-windres
+CC = ./llvm/bin/aarch64-w64-mingw32-gcc
+CXX = ./llvm/bin/aarch64-w64-mingw32-g++
+WINDRES = ./llvm/bin/aarch64-w64-mingw32-windres
 
 #
 # CPPFLAGS
@@ -17,6 +17,7 @@ CPPFLAGS = \
 	-DUSE_EDITOR \
 	-DVERSION=$(VERSION) \
 	-D_WIN32_WINNT=0x0500 \
+	-I./llvm/aarch64-w64-mingw32/include \
 	-I. \
 	-I./libroot/include \
 	-I./libroot/include/freetype2
@@ -31,7 +32,6 @@ CFLAGS = \
 	-ffast-math \
 	-finput-charset=utf-8 \
 	-fexec-charset=utf-8 \
-	-no-pthread \
 	-Wall \
 	-Werror \
 	-Wextra \
@@ -112,7 +112,7 @@ OBJS = \
 all: polaris-engine.exe
 
 polaris-engine.exe: libroot $(OBJS) $(HDRS_MAIN) $(HDRS)
-	$(CC) -s -o polaris-engine.exe $(OBJS) $(LDFLAGS) -no-pthread
+	$(CC) -s -o polaris-engine.exe $(OBJS) $(LDFLAGS)
 
 libroot:
 	./build-libs.sh
