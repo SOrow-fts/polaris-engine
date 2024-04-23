@@ -134,6 +134,7 @@ static float calc_pos_y_to(int anime_layer, int index, const char *value);
 static bool load_anime_file(const char *file);
 static bool update_layer_params(int layer);
 static bool load_anime_image(int layer);
+static void synthesis_eye_anime(int chpos);
 
 /*
  * アニメーションサブシステムに関する初期化処理を行う
@@ -897,8 +898,7 @@ bool load_eye_image_if_exists(int chpos, const char *fname)
 {
 	char eye_fname[1024], ext[128], *dot;
 	struct image *eye_img;
-	float base_time;
-	int base_layer, eye_layer, x, y, frame_count, i;
+	int eye_layer;
 
 	/* まず目のレイヤを無効にする */
 	eye_layer = chpos_to_eye_layer(chpos);
@@ -946,17 +946,52 @@ bool load_eye_image_if_exists(int chpos, const char *fname)
 		return false;
 	}
 
-	/* キャラの座標を取得する */
-	base_layer = chpos_to_layer(chpos);
-	x = get_layer_x(base_layer);
-	y = get_layer_y(base_layer);
-
 	/* レイヤを設定する */
 	set_layer_file_name(eye_layer, eye_fname);
 	set_layer_image(eye_layer, eye_img);
-	set_layer_position(eye_layer, x, y);
 	set_layer_alpha(eye_layer, 0);
 	set_layer_scale(eye_layer, 1.0f, 1.0f);
+
+	/* 目パチのアニメを合成する */
+	synthesis_eye_anime(chpos);
+
+	return true;
+}
+
+/*
+ * 目パチアニメを再ロード
+ */
+bool reload_eye_anime(int chpos)
+{
+	int eye_layer;
+
+	/* キャラがない場合 */
+	eye_layer = chpos_to_eye_layer(chpos);
+	if (get_layer_image(eye_layer) == NULL)
+		return true;
+
+	/* 目パチのアニメを合成する */
+	synthesis_eye_anime(chpos);
+
+	return true;
+}
+
+/* 目パチのアニメを合成する */
+static void synthesis_eye_anime(int chpos)
+{
+	float base_time;
+	int x, y, i, frame_count;
+	int base_layer, eye_layer;
+	
+	base_layer = chpos_to_layer(chpos);
+	eye_layer = chpos_to_eye_layer(chpos);
+
+	/* キャラの座標を取得する */
+	x = get_layer_x(base_layer);
+	y = get_layer_y(base_layer);
+
+	/* 目パチレイヤーの位置を設定する */
+	set_layer_position(eye_layer, x, y);
 
 	/* 目パチのアニメを開始する */
 	frame_count = get_layer_image(eye_layer)->width / get_layer_image(base_layer)->width;
@@ -985,8 +1020,6 @@ bool load_eye_image_if_exists(int chpos, const char *fname)
 
 	/* アニメを開始する */
 	start_layer_anime(eye_layer);
-
-	return true;
 }
 
 /*

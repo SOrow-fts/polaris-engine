@@ -5,12 +5,17 @@ This file is referred by some automatic release scripts.
 [Release History (Japanese)]
 
 <!-- BEGIN-LATEST-JP -->
+<li>Polaris Engine 1.1.4 2024/4/24
+  <ul>
+    <li>cha/all/cl.runでキャラを移動したときに目パチを再設定するように修正</li>
+  </ul>
+</li>
+<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.1.3 2024/4/23
   <ul>
     <li>カスタム1/2ボタンのgosub動作のバグを修正</li>
   </ul>
 </li>
-<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.1.2 2024/4/23
   <ul>
     <li>switchコマンドのバグ修正</li>
@@ -124,12 +129,17 @@ This file is referred by some automatic release scripts.
 [Release History (English)]
 
 <!-- BEGIN-LATEST-EN -->
+<li>Polaris Engine 1.1.4 2024/4/24
+  <ul>
+    <li>Fixed a bug where an eye-blink layer is not moved on cha/all/cl.run</li>
+  </ul>
+</li>
+<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.1.3 2024/4/23
   <ul>
     <li>Fixed a bug of gosub behaviours of CUSTOM1/2 SysMenu buttons</li>
   </ul>
 </li>
-<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.1.2 2024/4/23
   <ul>
     <li>Fixed a bug of the switch command</li>

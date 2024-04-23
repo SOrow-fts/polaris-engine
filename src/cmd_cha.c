@@ -15,7 +15,9 @@
 
 #include "polaris.h"
 
+static int chpos;
 static int layer;
+static int eye_layer;
 
 static bool init(void);
 static bool get_position(int *chpos, const char *pos);
@@ -50,7 +52,7 @@ static bool init(void)
 {
 	const char *pos_s, *alpha_s, *accel_s;
 	float span;
-	int chpos, ofs_x, ofs_y, alpha, from_x, from_y, to_x, to_y, accel;
+	int ofs_x, ofs_y, alpha, from_x, from_y, to_x, to_y, accel;
 
 	/* パラメータを取得する */
 	pos_s = get_string_param(CHA_PARAM_POS);
@@ -100,6 +102,11 @@ static bool init(void)
 	add_anime_sequence_property_i("to-y", to_y);
 	add_anime_sequence_property_i("to-a", alpha);
 	add_anime_sequence_property_i("accel", accel);
+
+	/* 目パチレイヤーの停止を行う */
+	eye_layer = chpos_to_eye_layer(chpos);
+	clear_layer_anime_sequence(eye_layer);
+	set_layer_alpha(eye_layer, 0);
 
 	/* アニメを開始する */
 	start_layer_anime(layer);
@@ -275,6 +282,10 @@ static bool cleanup(void)
 	/* アニメが終了した場合は削除する */
 	if (is_anime_finished_for_layer(layer))
 		clear_layer_anime_sequence(layer);
+
+	/* 目パチレイヤーの再設定を行う */
+	if (!reload_eye_anime(chpos))
+		return false;
 
 	/* 次のコマンドに移動する */
 	if (!move_to_next_command())

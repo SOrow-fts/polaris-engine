@@ -680,10 +680,18 @@ static int cl_layer_to_stage_layer(int cl_layer)
 
 static void render(void)
 {
+	int i;
+
 	if (!ts.use_anime)
 		render_fade_frame();
 	else
 		render_anime_frame();
+
+	if (!is_in_command_repetition()) {
+		/* 目パチレイヤーの再設定を行う */
+		for (i = 0; i < CH_BASIC_LAYERS; i++)
+			reload_eye_anime(i);
+	}
 }
 
 static void render_fade_frame(void)

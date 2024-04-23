@@ -86,4 +86,7 @@ const char *get_reg_anime_file_name(int reg_index);
 /* 目パチ画像をロードする */
 bool load_eye_image_if_exists(int chpos, const char *fname);
 
+/* 目パチアニメを再ロード */
+bool reload_eye_anime(int chpos);
+
 #endif

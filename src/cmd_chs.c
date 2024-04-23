@@ -580,6 +580,12 @@ static void draw(void)
 /* 終了処理を行う */
 static bool cleanup(void)
 {
+	int i;
+
+	/* 目パチレイヤーの再設定を行う */
+	for (i = 0; i < CH_BASIC_LAYERS; i++)
+		reload_eye_anime(i);
+
 	/* 次のコマンドに移動する */
 	if (!move_to_next_command())
 		return false;
