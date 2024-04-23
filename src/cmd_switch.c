@@ -63,7 +63,8 @@
  * 親ボタンの最大数
  *  - @choose, @select は親ボタンのみ使用する
  */
-#define PARENT_COUNT		(10)
+#define SWITCH_PARENT_COUNT	(8)
+#define CHOOSE_COUNT		(10)
 
 /*
  * 親ボタン1つあたりの子ボタンの最大数
@@ -127,7 +128,7 @@ static struct parent_button {
 	int h;
 	struct image *img_idle;
 	struct image *img_hover;
-} parent_button[PARENT_COUNT];
+} parent_button[CHOOSE_COUNT];
 
 /* 子選択肢のボタン */
 static struct child_button {
@@ -139,7 +140,7 @@ static struct child_button {
 	int h;
 	struct image *img_idle;
 	struct image *img_hover;
-} child_button[PARENT_COUNT][CHILD_COUNT];
+} child_button[CHOOSE_COUNT][CHILD_COUNT];
 
 /*
  * 選択肢の状態
@@ -335,7 +336,7 @@ static bool blit_process(void)
 	     need_config_mode)) {
 		draw_stage_to_thumb();
 		if (selected_parent_index == -1) {
-			for (i = 0; i < PARENT_COUNT; i++) {
+			for (i = 0; i < CHOOSE_COUNT; i++) {
 				if (parent_button[i].img_idle == NULL)
 					continue;
 				draw_switch_to_thumb(parent_button[i].img_idle,
@@ -597,7 +598,7 @@ static bool init_choose(void)
 	memset(child_button, 0, sizeof(child_button));
 
 	/* 選択肢の情報を取得する */
-	for (i = 0; i < PARENT_COUNT; i++) {
+	for (i = 0; i < CHOOSE_COUNT; i++) {
 		/* ラベルを取得する */
 		label = get_string_param(CHOOSE_LABEL(i));
 		if (strcmp(label, "") == 0)
@@ -672,7 +673,7 @@ static bool init_ichoose(void)
 	}
 
 	/* 選択肢の情報を取得する */
-	for (i = 0; i < PARENT_COUNT; i++) {
+	for (i = 0; i < CHOOSE_COUNT; i++) {
 		/* ラベルを取得する */
 		label = get_string_param(CHOOSE_LABEL(i));
 		if (strcmp(label, "") == 0)
@@ -736,7 +737,7 @@ static int init_mchoose(void)
 
 	/* 選択肢の情報を取得する */
 	pos = 0;
-	for (i = 0; i < PARENT_COUNT; i++) {
+	for (i = 0; i < CHOOSE_COUNT; i++) {
 		/* 変数を取得する */
 		var = get_string_param(MCHOOSE_VAR(i));
 		if (strcmp(var, "") == 0)
@@ -819,7 +820,7 @@ static int init_michoose(void)
 
 	/* 選択肢の情報を取得する */
 	pos = 0;
-	for (i = 0; i < PARENT_COUNT; i++) {
+	for (i = 0; i < CHOOSE_COUNT; i++) {
 		/* 変数を取得する */
 		var = get_string_param(MCHOOSE_VAR(i));
 		if (strcmp(var, "") == 0)
@@ -898,9 +899,11 @@ static bool init_switch(void)
 	memset(parent_button, 0, sizeof(parent_button));
 	memset(child_button, 0, sizeof(child_button));
 
+	log_info("@switch is deprecated.");
+
 	/* 親選択肢の情報を取得する */
 	is_first = true;
-	for (i = 0; i < PARENT_COUNT; i++) {
+	for (i = 0; i < SWITCH_PARENT_COUNT; i++) {
 		/* 親選択肢のメッセージを取得する */
 		p = get_string_param(SWITCH_PARENT_MESSAGE(i));
 		assert(strcmp(p, "") != 0);
@@ -996,7 +999,7 @@ static bool init_switch(void)
 	}
 
 	/* 子選択肢の情報を取得する */
-	for (i = 0; i < PARENT_COUNT; i++) {
+	for (i = 0; i < SWITCH_PARENT_COUNT; i++) {
 		/* 親選択肢が無効の場合、スキップする */
 		if (IS_PARENT_DISABLED(i))
 			continue;
@@ -1342,7 +1345,7 @@ static int get_pointed_parent_index(void)
 		save_mouse_pos_y = mouse_pos_y;
 		if (pointed_index == -1)
 			return 0;
-		if (pointed_index == PARENT_COUNT - 1)
+		if (pointed_index == SWITCH_PARENT_COUNT - 1)
 			return 0;
 		if (parent_button[pointed_index + 1].msg != NULL)
 			return pointed_index + 1;
@@ -1357,7 +1360,7 @@ static int get_pointed_parent_index(void)
 		save_mouse_pos_y = mouse_pos_y;
 		if (pointed_index == -1 ||
 		    pointed_index == 0) {
-			for (i = PARENT_COUNT - 1; i >= 0; i--)
+			for (i = SWITCH_PARENT_COUNT - 1; i >= 0; i--)
 				if (parent_button[i].msg != NULL)
 					return i;
 		}
@@ -1365,7 +1368,7 @@ static int get_pointed_parent_index(void)
 	}
 
 	/* マウスポイントを処理する */
-	for (i = 0; i < PARENT_COUNT; i++) {
+	for (i = 0; i < CHOOSE_COUNT; i++) {
 		if (IS_PARENT_DISABLED(i))
 			continue;
 
@@ -1579,7 +1582,7 @@ static void render_frame(void)
 
 	/* 選択肢を描画する */
 	if (selected_parent_index == -1) {
-		for (i = 0; i < PARENT_COUNT; i++) {
+		for (i = 0; i < CHOOSE_COUNT; i++) {
 			struct image *img = i != pointed_index && i != -1?
 				parent_button[i].img_idle : parent_button[i].img_hover;
 			if (img == NULL)
@@ -1750,7 +1753,7 @@ static bool cleanup(void)
 	int i, j;
 
 	/* 画像を破棄する */
-	for (i = 0; i < PARENT_COUNT; i++) {
+	for (i = 0; i < CHOOSE_COUNT; i++) {
 		if (parent_button[i].img_idle != NULL)
 			destroy_image(parent_button[i].img_idle);
 		if (parent_button[i].img_hover != NULL)

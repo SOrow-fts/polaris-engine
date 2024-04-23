@@ -5,12 +5,18 @@ This file is referred by some automatic release scripts.
 [Release History (Japanese)]
 
 <!-- BEGIN-LATEST-JP -->
+<li>Polaris Engine 1.1.2 2024/4/23
+  <ul>
+    <li>switchコマンドのバグ修正</li>
+    <li>switchコマンドの非推奨化</li>
+  </ul>
+</li>
+<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.1.1 2024/4/22
   <ul>
     <li>ORBISライブラリの修正</li>
   </ul>
 </li>
-<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.0.22 2024/4/21
   <ul>
     <li>内部的な修正</li>
@@ -113,12 +119,18 @@ This file is referred by some automatic release scripts.
 [Release History (English)]
 
 <!-- BEGIN-LATEST-EN -->
+<li>Polaris Engine 1.1.2 2024/4/23
+  <ul>
+    <li>switchコマンドのバグ修正</li>
+    <li>switchコマンドの非推奨化</li>
+  </ul>
+</li>
+<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.1.1 2024/4/22
   <ul>
     <li>ORBISライブラリの修正</li>
   </ul>
 </li>
-<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.1.0 2024/4/22
   <ul>
     <li>Introduced ORBIS Library</li>
