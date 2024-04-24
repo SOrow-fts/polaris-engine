@@ -583,6 +583,7 @@ static bool set_global_key_value(const char *key, const char *val)
 			return false;
 		return true;
 	} else if (strcmp(key, "overlay") == 0) {
+		log_info("overlay is deprecated.");
 		if (!load_base_image("none"))
 			return false;
 		return true;
@@ -620,6 +621,10 @@ static bool set_global_key_value(const char *key, const char *val)
 	} else if (strcmp(key, "timed") == 0) {
 		bomb_time = (float)atof(val);
 		reset_lap_timer(&bomb_sw);
+		return true;
+	} else if (strcmp(key, "pushstage") == 0) {
+		bool s2_push_stage(struct wms_runtime *rt);
+		s2_push_stage(NULL);
 		return true;
 	} else if (strcmp(key, "alt") == 0) {
 		if (conf_tts_enable == 1)

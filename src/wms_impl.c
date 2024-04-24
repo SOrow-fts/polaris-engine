@@ -49,7 +49,7 @@ static bool s2_clear_namebox(struct wms_runtime *rt);
 static bool s2_hide_msgbox(struct wms_runtime *rt);
 static bool s2_hide_namebox(struct wms_runtime *rt);
 static bool s2_save_global(struct wms_runtime *rt);
-static bool s2_push_stage(struct wms_runtime *rt);
+bool s2_push_stage(struct wms_runtime *rt);
 static bool s2_pop_stage(struct wms_runtime *rt);
 static bool s2_remove_local_save(struct wms_runtime *rt);
 static bool s2_remove_global_save(struct wms_runtime *rt);
@@ -581,14 +581,12 @@ static bool s2_save_global(struct wms_runtime *rt)
 }
 
 /* Push the stage. */
-static bool s2_push_stage(struct wms_runtime *rt)
+bool s2_push_stage(struct wms_runtime *rt)
 {
 	const char *s;
 	int i;
 
 	UNUSED_PARAMETER(rt);
-
-	log_info("s2_push_stage() is deprecated. Use GUIv2 instead.");
 
 	is_stage_pushed = true;
 
@@ -630,14 +628,12 @@ static bool s2_push_stage(struct wms_runtime *rt)
 }
 
 /* Pop the stage. */
-static bool s2_pop_stage(struct wms_runtime *rt)
+bool s2_pop_stage(struct wms_runtime *rt)
 {
 	struct image *img;
 	int i;
 
 	UNUSED_PARAMETER(rt);
-
-	log_info("s2_pop_stage() is deprecated. Use GUIv2 instead.");
 
 	if (!is_stage_pushed)
 		return true;
