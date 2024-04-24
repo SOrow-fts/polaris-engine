@@ -17,9 +17,11 @@
 /* ランダムな値を意味する変数名 */
 #define RANDOM_VARIABLE	"$RAND"
 
+/* UTC時刻(秒)を意味する変数名 */
+#define TIME_VARIABLE	"$TIME"
+
 /* 前方参照 */
-static bool process_normal_var(const char *lhs, const char *op,
-			       const char *rhs);
+static bool process_normal_var(const char *lhs, const char *op, const char *rhs);
 static bool process_name_var(const char *lhs, const char *op, const char *rhs);
 
 /*
@@ -103,6 +105,8 @@ static bool process_normal_var(const char *lhs,
 	/* 右辺の値を求める */
 	if (strcmp(rhs, RANDOM_VARIABLE) == 0) {
 		rval = rand();
+	} else if (strcmp(rhs, TIME_VARIABLE) == 0) {
+		rval = time(NULL);
 	} else if (strcmp(rhs, "yes") == 0) {
 		rval = 1;
 	} else if (strcmp(rhs, "no") == 0) {

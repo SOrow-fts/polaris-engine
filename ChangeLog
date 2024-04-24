@@ -4,12 +4,17 @@ This file is referred by some automatic release scripts.
 
 [Release History (Japanese)]
 <!-- BEGIN-LATEST-JP -->
+<li>Polaris Engine 1.1.7 2024/4/24
+  <ul>
+    <li>@set $1 = $TIME で時刻(秒)を取得できるように機能追加</li>
+  </ul>
+</li>
+<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.1.6 2024/4/24
   <ul>
     <li>カッコではじまる文章の場合、２行目をカッコの分だけ字下げするように改善</li>
   </ul>
 </li>
-<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.1.5 2024/4/24
   <ul>
     <li>10回に2回程度、2回まばたきするように変更</li>
@@ -137,12 +142,17 @@ This file is referred by some automatic release scripts.
 
 [Release History (English)]
 <!-- BEGIN-LATEST-EN -->
+<li>Polaris Engine 1.1.8 2024/4/24
+  <ul>
+    <li>Added $TIME variable to the @set command</li>
+  </ul>
+</li>
+<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.1.6 2024/4/24
   <ul>
     <li>Added Japanese indent</li>
   </ul>
 </li>
-<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.1.5 2024/4/24
   <ul>
     <li>Added a twice-eye-blinking (20% probalility)</li>
