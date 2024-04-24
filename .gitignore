@@ -40,7 +40,7 @@ build/engine-windows-arm64/libroot
 build/engine-windows-arm64/*.exe
 build/engine-windows-arm64/*.aps
 build/engine-windows-arm64/llvm
-build/engine-windows-arm-64/llvm-mingw-*-aarch64.tar.xz
+build/engine-windows-arm-64/llvm-mingw-*-aarch64.tar.xz*
 
 # Visual Studio 2022 (for debug only)
 build/engine-windows-vs2022/.vs
@@ -111,6 +111,20 @@ build/pro-windows/libroot
 build/pro-windows/*.exe
 build/pro-windows/*.aps
 
+# mingw-w64 (x86_64)
+build/pro-windows-64/*.o
+build/pro-windows-64/libroot
+build/pro-windows-64/*.exe
+build/pro--windows-64/*.aps
+
+# mingw-w64 (arm64)
+build/pro-windows-arm64/*.o
+build/pro-windows-arm64/libroot
+build/pro-windows-arm64/*.exe
+build/pro-windows-arm64/*.aps
+build/pro-windows-arm64/llvm
+build/pro-windows-arm-64/llvm-mingw-*-aarch64.tar.xz*
+
 # Visual Studio 2022 (for debug only)
 build/pro-windows-vs2022/.vs/
 build/pro-windows-vs2022/Debug/
@@ -179,9 +193,7 @@ tools/vscode-extension/*.vsix
 # Games
 #
 
-games/japanese-light/txt/orbis.txt
-games/japanese-dark/txt/orbis.txt
-games/japanese-tategaki/txt/orbis.txt
+games/**/txt/orbis.txt
 
 #
 # Misc.

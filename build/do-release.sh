@@ -155,9 +155,9 @@ echo "Creating an installer for Windows."
 say "Windows用のインストーラをビルドしています" &
 
 # prepare
-cp ../tools/library/orbis.txt ../games/japanese-light/txt/
-cp ../tools/library/orbis.txt ../games/japanese-dark/txt/
-cp ../tools/library/orbis.txt ../games/japanese-tategaki/txt/
+cp ../tools/library/orbis.txt ../games/japanese-light/txt/library/
+cp ../tools/library/orbis.txt ../games/japanese-dark/txt/library/
+cp ../tools/library/orbis.txt ../games/japanese-tategaki/txt/library/
 
 # /
 cp -v pro-windows/polaris-engine.exe installer-windows/polaris-engine.exe
@@ -204,6 +204,10 @@ cd pro-macos
 rm -f polaris-engine.dmg
 make
 cd ..
+
+rm ../games/japanese-light/txt/library/orbis.txt
+rm ../games/japanese-dark/txt/library/orbis.txt
+rm ../games/japanese-tategaki/txt/library/orbis.txt
 
 #
 # Upload.
