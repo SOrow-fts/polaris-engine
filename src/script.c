@@ -3578,7 +3578,6 @@ bool save_script(void)
 	in_using = false;
 	for (i = 0; i < get_line_count(); i++) {
 		const char *line;
-		int out, lf;
 
 		/* 行の文字列を取得する */
 		line = get_line_string_at_line_num(i);
@@ -3587,23 +3586,24 @@ bool save_script(void)
 		if (!in_using) {
 			if (strncmp(line, USING_BEGIN_PREFIX, strlen(USING_BEGIN_PREFIX)) == 0) {
 				in_using = true;
-				out = fputs(strstr(line, "using"), fp);
+				if (fputs(strstr(line, "using"), fp) < 0) {
+					fclose(fp);
+					return false;
+				}
 			} else {
-				out = fputs(line, fp);
+				if (fputs(line, fp) < 0) {
+					fclose(fp);
+					return false;
+				}
+			}
+			if (fputs("\n", fp) < 0) {
+				fclose(fp);
+				return false;
 			}
 		} else {
-            if (strcmp(line, USING_END) == 0) {
-                in_using = false;
-                out = 1;
-            } else {
-                out = fputs(line, fp);
-            }
+			if (strcmp(line, USING_END) == 0)
+				in_using = false;
 		}
-		lf = fputs("\n", fp);
-		if(out < 0 || lf < 0) {
-			fclose(fp);
-			return false;
-		}			
 	}
 	fclose(fp);
 
