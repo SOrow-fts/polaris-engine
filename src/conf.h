@@ -475,6 +475,7 @@ extern int conf_msgbox_show_on_bg;
 extern int conf_msgbox_show_on_choose;
 extern float conf_beep_adjustment;
 extern int conf_serif_quote;
+extern int conf_serif_quote_indent;
 extern int conf_sysmenu_transition;
 extern int conf_msgbox_history_disable;
 extern int conf_serif_color_name_only;

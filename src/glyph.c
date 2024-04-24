@@ -1060,11 +1060,9 @@ void construct_draw_msg_context(
 	context->runtime_ruby_x = 0;
 	context->runtime_ruby_y = 0;
 
-	/* Is bracket started? */
-	if (strncmp(msg, U8("「"), strlen(U8("「"))) == 0 && !use_tategaki)
-		context->left_margin += get_glyph_width(font, font_size, U32_C('「'));
-	if (strncmp(msg, U8("（"), strlen(U8("（"))) == 0 && !use_tategaki)
-		context->left_margin += get_glyph_width(font, font_size, U32_C('（'));
+	/* Is quoted? */
+	if (conf_serif_quote_indent && is_quoted_serif(msg) && !use_tategaki)
+		context->left_margin += get_glyph_width(font, font_size, U32_C('　'));
 }
 
 /*

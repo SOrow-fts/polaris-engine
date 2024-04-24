@@ -474,6 +474,9 @@ float conf_beep_adjustment;
 /* セリフをカギカッコで囲う */
 int conf_serif_quote;
 
+/* セリフがカギカッコで始まるとき、２行目以降を自動字下げする */
+int conf_serif_quote_indent;
+
 /* ch,cha,chs,bgの最中に折りたたみメッセージボックスを表示する */
 int conf_sysmenu_transition;
 
@@ -1837,6 +1840,7 @@ static struct rule {
 	{"msgbox.show.on.choose", 'i', &conf_msgbox_show_on_choose, OPTIONAL, SAVE},
 	{"beep.adjustment", 'f', &conf_beep_adjustment, OPTIONAL, NOSAVE},
 	{"serif.quote", 'i', &conf_serif_quote, OPTIONAL, SAVE},
+	{"serif.quote.indent", 'i', &conf_serif_quote_indent, OPTIONAL, SAVE},
 	{"sysmenu.transition", 'i', &conf_sysmenu_transition, OPTIONAL, SAVE},
 	{"msgbox.history.disable", 'i', &conf_msgbox_history_disable, OPTIONAL, SAVE},
 	{"serif.color.name.only", 'i', &conf_serif_color_name_only, OPTIONAL, SAVE},
