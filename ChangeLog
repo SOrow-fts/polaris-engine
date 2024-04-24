@@ -4,12 +4,17 @@ This file is referred by some automatic release scripts.
 
 [Release History (Japanese)]
 <!-- BEGIN-LATEST-JP -->
+<li>Polaris Engine 1.1.9 2024/4/24
+  <ul>
+    <li>簡単な補完を実装</li>
+  </ul>
+</li>
+<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.1.8 2024/4/24
   <ul>
     <li>シナリオを保存した際にusingブロックが展開されてしまうバグを修正</li>
   </ul>
 </li>
-<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.1.7 2024/4/24
   <ul>
     <li>@set $1 = $TIME で時刻(秒)を取得できるように機能追加</li>
@@ -147,12 +152,17 @@ This file is referred by some automatic release scripts.
 
 [Release History (English)]
 <!-- BEGIN-LATEST-EN -->
+<li>Polaris Engine 1.1.9 2024/4/24
+  <ul>
+    <li>Implemented a simple completion</li>
+  </ul>
+</li>
+<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.1.8 2024/4/24
   <ul>
     <li>Fixed a bug where using blocks are expanded</li>
   </ul>
 </li>
-<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.1.7 2024/4/24
   <ul>
     <li>Added $TIME variable to the @set command</li>

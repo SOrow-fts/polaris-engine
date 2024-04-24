@@ -247,6 +247,27 @@ static int nFontSize = 10;
 static FILETIME ftTimeStamp;
 
 /*
+ * 補完
+ */
+struct completion_item {
+	wchar_t *prefix;
+	wchar_t *insert;
+} completion_item[] = {
+	{L"@anime", L" file= (async)"},
+	{L"@bg", L" file= duration= effect="},
+	{L"@bgm", L" file= (once)"},
+	{L"@ch", L" position=l/lc/c/rc/r file= effect= right= down= alpha="},
+	{L"@cha", L" position=l/lc/c/rc/r duration= acceleration=move/accel/brake x= y= alpha="},
+	{L"@chapter", L" title="},
+	{L"@choose", L" destination1= option1=\"\" destination2= option2=\"\""},
+	{L"@ichoose", L" destination1= option1=\"\" destination2= option2=\"\""},
+	{L"@mchoose", L" destination1= flag1= option1=\"\" destination2= flag2= option2=\"\""},
+	{L"@se", L" file= (loop)"},
+	{L"@vol", L" track=bgm/voice/se volume="},
+	{L"@wait", L" duration="},
+};
+
+/*
  * Forward Declaration
  */
 
@@ -308,6 +329,7 @@ static BOOL RichEdit_SearchNextError(int nStart, int nEnd);
 static VOID RichEdit_SetTextByScriptModel(void);
 static VOID RichEdit_UpdateScriptModelFromText(void);
 static VOID RichEdit_InsertText(const wchar_t *pLine, ...);
+static VOID RichEdit_InsertTextAtEnd(const wchar_t *pszText);
 static VOID RichEdit_UpdateTheme(void);
 static VOID RichEdit_DelayedHighligth(void);
 static VOID __stdcall OnTimerFormat(HWND hWnd, UINT nID, UINT_PTR uTime, DWORD dwParam);
@@ -334,6 +356,7 @@ static VOID OnNext(void);
 static VOID OnStop(void);
 static VOID OnMove(void);
 static VOID OnReturn(void);
+static VOID OnTab(void);
 static VOID OnSave(void);
 static VOID OnNextError(void);
 static VOID OnPopup(void);
@@ -1724,6 +1747,15 @@ static BOOL PretranslateMessage(MSG* pMsg)
 				OnReturn();
 
 				/* このメッセージはリッチエディットに送らない(改行しない) */
+				return TRUE;
+			}
+			break;
+		case VK_TAB:
+			if (!bShiftDown && !bControlDown)
+			{
+				OnTab();
+
+				/* このメッセージはリッチエディットに送らない */
 				return TRUE;
 			}
 			break;
@@ -3792,6 +3824,22 @@ static VOID RichEdit_InsertText(const wchar_t *pFormat, ...)
 	bExecLineChanged = TRUE;
 }
 
+/* テキストを行末に挿入する */
+static VOID RichEdit_InsertTextAtEnd(const wchar_t *pszText)
+{
+	int nLine, nLineStart, nLineLen;
+
+	/* カーソル行を取得する */
+	nLine = RichEdit_GetCursorLine();
+
+	/* 行の末尾にカーソルを移す */
+	RichEdit_GetLineStartAndLength(nLine, &nLineStart, &nLineLen);
+	RichEdit_SetCursorPosition(nLineStart + nLineLen);
+
+	/* リッチエディットにテキストを追加する */
+	SendMessage(hWndRichEdit, EM_REPLACESEL, (WPARAM)TRUE, (LPARAM)pszText);
+}
+
 static VOID RichEdit_UpdateTheme(void)
 {
 	int nCursor;
@@ -4419,6 +4467,61 @@ static VOID OnReturn(void)
 
 	/* 全体のテキスト色を変更する(遅延) */
 	RichEdit_DelayedHighligth();
+}
+
+/* リッチエディットでのTabを処理する */
+static VOID OnTab(void)
+{
+	wchar_t szCmd[1024];
+	wchar_t *pWcs, *pCRLF;
+	int i, nLine, nTotal, nLineStartCharCR, nLineStartCharCRLF;
+
+	memset(szCmd, 0, sizeof(szCmd));
+
+	nLine = RichEdit_GetCursorLine();
+	pWcs = RichEdit_GetText();
+	nTotal = (int)wcslen(pWcs);
+	nLineStartCharCR = 0;
+	nLineStartCharCRLF = 0;
+	for (i = 0; i <= nLine; i++)
+	{
+		if (nLineStartCharCRLF >= nTotal)
+			break;
+
+		pCRLF = wcswcs(pWcs + nLineStartCharCRLF, L"\r\n");
+		if (pCRLF != NULL)
+		{
+			int nLen = (int)(pCRLF - (pWcs + nLineStartCharCRLF));
+			if (i == nLine)
+			{
+				wcsncpy(szCmd, pWcs + nLineStartCharCRLF, (size_t)nLen);
+				break;
+			}
+			nLineStartCharCRLF += nLen + 2; /* +2 for CRLF */
+			nLineStartCharCR += nLen + 1; /* +1 for CR */
+		}
+		else
+		{
+			int nLen = (int)wcslen(pWcs + nLineStartCharCRLF);
+			if (i == nLine)
+			{
+				wcscpy(szCmd, pWcs + nLineStartCharCRLF);
+				break;
+			}
+			nLineStartCharCRLF += nLen + 2; /* +2 for CRLF */
+			nLineStartCharCR += nLen + 1; /* +1 for CR */
+		}
+	}
+	free(pWcs);
+
+    for (i = 0; i < (int)(sizeof(completion_item) / sizeof(struct completion_item)); i++)
+	{
+		if (wcscmp(completion_item[i].prefix, szCmd) == 0)
+		{
+			RichEdit_InsertTextAtEnd(completion_item[i].insert);
+			break;
+		}
+	}
 }
 
 /* ポップアップを表示する */
