@@ -128,6 +128,7 @@ struct draw_msg_context {
 	bool runtime_is_line_top;
 	bool runtime_is_gyoto_kinsoku;
 	bool runtime_is_gyoto_kinsoku_second;
+	bool is_bracket_started;
 };
 
 /*
