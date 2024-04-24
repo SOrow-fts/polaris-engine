@@ -324,7 +324,7 @@ Suika2で制作されたゲームが続々とストア公開されています�
 ###  - 終了のラベルより手前で、直接実行されない箇所に書く
 ###
 
-using effect.txt
+using library/effect.txt
 
 ###
 ### 終了
