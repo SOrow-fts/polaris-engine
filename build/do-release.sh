@@ -3,6 +3,9 @@
 # Stop when failed.
 set -eu
 
+export LANG=en_US.UTF-8
+export LANGUAGE=english
+
 #
 # Show a welcome message.
 #
@@ -93,7 +96,6 @@ cd ..
 #
 echo ""
 echo "Building macOS source tree."
-say "macOS用のソースコードを作成しています" &
 cd engine-macos
 make src > /dev/null
 cd ..
@@ -103,7 +105,6 @@ cd ..
 #
 echo ""
 echo "Building iOS source tree."
-say "iOS用のソースコードを作成しています" &
 cd engine-ios
 make src > /dev/null
 cd ..
@@ -113,7 +114,6 @@ cd ..
 #
 echo ""
 echo "Building Android source tree."
-say "Android用のソースコードを作成しています" &
 cd engine-android
 make debug > /dev/null
 make src > /dev/null
