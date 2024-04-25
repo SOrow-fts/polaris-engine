@@ -1161,9 +1161,9 @@ void push_return_gui(const char *gui_file)
 /*
  * gosubによるリターンポイントを記録する(SysMenuからのGUIによるgosub-back用)
  */
-void set_deep_return_point(int deep_return_point)
+void set_deep_return_point(int deep_rp)
 {
-	deep_return_point = deep_return_point;
+	deep_return_point = deep_rp;
 	is_gosub_from_sysmenu = true;
 }
 
