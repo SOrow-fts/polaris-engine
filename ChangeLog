@@ -4,12 +4,17 @@ This file is referred by some automatic release scripts.
 
 [Release History (Japanese)]
 <!-- BEGIN-LATEST-JP -->
+<li>Polaris Engine 1.1.13 2024/4/25
+  <ul>
+    <li>タイトル画面を改変しやすいものに変更</li>
+  </ul>
+</li>
+<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.1.12 2024/4/25
   <ul>
     <li>カスタムシステムメニューの機能向上 (gosub-guiとgosub-backの追加、pushstageをpushstateに変更)</li>
   </ul>
 </li>
-<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.1.11 2024/4/24
   <ul>
     <li>カスタムシステムメニューのGUIのglobalセクションにpushstageフラグを追加、gosub後にs2_pop_stage()で復元可能に</li>
@@ -167,12 +172,17 @@ This file is referred by some automatic release scripts.
 
 [Release History (English)]
 <!-- BEGIN-LATEST-EN -->
+<li>Polaris Engine 1.1.13 2024/4/25
+  <ul>
+    <li>Replaced the title screens to simple ones</li>
+  </ul>
+</li>
+<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.1.12 2024/4/25
   <ul>
     <li>Improved custom sysmenu (added gosub-gui and gosub-back)</li>
   </ul>
 </li>
-<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.1.11 2024/4/24
   <ul>
     <li>Added pushstage flag to the global section of GUI, made it possible to call s2_pop_stage()</li>
