@@ -161,6 +161,9 @@ static int save_mouse_pos_x, save_mouse_pos_y;
 /* このコマンドを無視するか */
 static bool ignore_as_no_options;
 
+/* 最初のフレームでマウスオーバーのSEを回避するフラグ */
+static bool is_first_frame;
+
 /*
  * 描画の状態
  */
@@ -463,6 +466,8 @@ static bool post_process(void)
 	    (need_save_mode || need_load_mode || need_history_mode || need_config_mode || need_custom1_mode || need_custom2_mode))
 		stop_command_repetition();
 
+	is_first_frame = false;
+
 	return true;
 }
 
@@ -496,6 +501,8 @@ bool init(void)
 	need_custom1_mode = false;
 	need_custom2_mode = false;
 	is_quick_load_failed = false;
+
+	is_first_frame = true;
 
 	is_timed = false;
 	is_bombed = false;
@@ -1239,9 +1246,11 @@ static void process_main_input(void)
 	    new_pointed_index != old_pointed_index &&
 	    !is_sysmenu_finished) {
 		if (!is_left_clicked) {
-			play_se(get_command_type() == COMMAND_NEWS ? conf_news_change_se : conf_switch_change_se);
+			if (!is_first_frame)
+				play_se(get_command_type() == COMMAND_NEWS ? conf_news_change_se : conf_switch_change_se);
 		} else {
-			play_se(conf_switch_parent_click_se_file);
+			if (!is_first_frame)
+				play_se(conf_switch_parent_click_se_file);
 		}
 	}
 	pointed_index = new_pointed_index;
