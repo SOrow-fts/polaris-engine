@@ -150,6 +150,8 @@ static struct gui_button {
 
 	/* TYPE_GOTO */
 	bool gosub;
+	bool gosub_gui;
+	bool gosub_back;
 
 	/*
 	 * 実行時の情報
@@ -221,6 +223,12 @@ static bool flag_gui_mode;
 
 /* システムGUIであるか */
 static bool is_sys_gui;
+
+/* カスタムシステムメニューGUIであるか */
+static bool is_custom_sysmenu;
+
+/* pushstateのときのreturn point */
+static int deep_return_point;
 
 /* 右クリックでキャンセルするか */
 static bool cancelable;
@@ -477,6 +485,11 @@ bool prepare_gui_mode(const char *file, bool sys)
 	/* プロパティを保存する */
 	gui_file = file;
 	is_sys_gui = sys;
+	is_custom_sysmenu =
+		strcmp(file, CUSTOM1_GUI_FILE) == 0 ||
+		strcmp(file, COMPAT_CUSTOM1_GUI_FILE) == 0 ||
+		strcmp(file, CUSTOM2_GUI_FILE) == 0 ||
+		strcmp(file, COMPAT_CUSTOM2_GUI_FILE) == 0;
 
 	/* ボタンをゼロクリアする */
 	memset(button, 0, sizeof(button));
@@ -622,9 +635,12 @@ static bool set_global_key_value(const char *key, const char *val)
 		bomb_time = (float)atof(val);
 		reset_lap_timer(&bomb_sw);
 		return true;
-	} else if (strcmp(key, "pushstage") == 0) {
-		bool s2_push_stage(struct wms_runtime *rt);
-		s2_push_stage(NULL);
+	} else if (strcmp(key, "pushstate") == 0) {
+		if (is_custom_sysmenu) {
+			bool s2_push_stage(struct wms_runtime *rt);
+			s2_push_stage(NULL);
+			deep_return_point = get_command_index();
+		}
 		return true;
 	} else if (strcmp(key, "alt") == 0) {
 		if (conf_tts_enable == 1)
@@ -851,8 +867,10 @@ static bool set_button_key_value(const int index, const char *key,
 		b->rt.is_new_enabled = true;
 	} else if (strcmp("gosub", key) == 0) {
 		b->gosub = true;
-	} else if (strcmp("usearrow", key) == 0) {
-		/* removed */
+	} else if (strcmp("gosub-gui", key) == 0) {
+		b->gosub_gui = true;
+	} else if (strcmp("gosub-back", key) == 0) {
+		b->gosub_back = true;
 	} else {
 		log_gui_unknown_button_property(key);
 		return false;
@@ -1219,7 +1237,7 @@ static void process_blit(void)
 	make_bg = false;
 	if (is_finished) {
 		if (!is_v2) {
-			if (!is_sys_gui) {
+			if (!is_sys_gui || is_custom_sysmenu) {
 				if (fade_out_time == 0) {
 					if (result_index != -1) {
 						switch (button[result_index].type) {
@@ -1333,18 +1351,22 @@ static bool process_move(void)
 	/*
 	 * ラベルへジャンプする場合:
 	 *  - @guiコマンドの場合はcmd_gui.cで処理する
-	 *  - ただしシステムGUIの場合はここで処理する
+	 *  - ただしシステムGUIかカスタムシステムメニューの場合はここで処理する
 	 *    - gosubオプションがついている場合はpushも行う
 	 */
 	if (result_index != -1 &&
 	    (button[result_index].type == TYPE_GOTO ||
 	     button[result_index].type == TYPE_GALLERY)) {
-		if (is_sys_gui) {
+		if (is_sys_gui || is_custom_sysmenu) {
 			is_sys_gui = false;
 			if (is_message_active())
 				clear_message_active();
 			if (button[result_index].gosub)
 				push_return_point_minus_one();
+			if (button[result_index].gosub_gui)
+				push_return_gui(gui_file);
+			if (button[result_index].gosub_back)
+				set_deep_return_point(deep_return_point);
 			if (!move_to_label(button[result_index].label))
 				return false;
 		}

@@ -18,7 +18,18 @@
  */
 bool return_command(void)
 {
+	const char *gui;
 	int rp;
+
+	/* カスタムシステムメニューGUIのgosubで、戻り先がGUIの場合 */
+	gui = get_return_gui();
+	if (gui != NULL) {
+		if (!prepare_gui_mode(gui, false))
+			return false;
+		set_gui_options(true, false, false);
+		start_gui_mode();
+		return true;
+	}
 
 	/* リターンポイントを取得する */
 	rp = pop_return_point();

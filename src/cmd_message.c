@@ -569,7 +569,7 @@ static bool blit_process(void)
 	} else if (need_custom1_mode) {
 		if (conf_sysmenu_custom1_gosub == NULL)  {
 			if (check_file_exist(GUI_DIR, CUSTOM1_GUI_FILE)) {
-				if (!prepare_gui_mode(CUSTOM1_GUI_FILE, true))
+				if (!prepare_gui_mode(CUSTOM1_GUI_FILE, false))
 					return false;
 			} else {
 				if (!prepare_gui_mode(COMPAT_CUSTOM1_GUI_FILE, true))
@@ -584,7 +584,7 @@ static bool blit_process(void)
 	} else if (need_custom2_mode) {
 		if (conf_sysmenu_custom2_gosub == NULL)  {
 			if (check_file_exist(GUI_DIR, CUSTOM2_GUI_FILE)) {
-				if (!prepare_gui_mode(CUSTOM2_GUI_FILE, true))
+				if (!prepare_gui_mode(CUSTOM2_GUI_FILE, false))
 					return false;
 			} else {
 				if (!prepare_gui_mode(CUSTOM2_GUI_FILE, true))

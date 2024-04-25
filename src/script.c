@@ -121,8 +121,14 @@ static int cur_index;
 /* 最後にgosubが実行されたコマンド番号 */
 static int return_point;
 
+/* カスタムシステムメニューGUIのdeep return point */
+static int deep_return_point;
+
 /* gosubがSysMenu由来か */
 static bool is_gosub_from_sysmenu;
+
+/* gosubの戻り先GUI */
+static const char *return_gui;
 
 /* 無効なreturn_pointの値 */
 #define INVALID_RETURN_POINT	(-2)
@@ -932,6 +938,7 @@ bool load_script(const char *fname)
 	cur_script = search_file_name_pointer(fname);
 	assert(cur_script != NULL);
 	set_return_point(INVALID_RETURN_POINT);
+	set_deep_return_point(INVALID_RETURN_POINT);
 
 #ifdef USE_EDITOR
 	/* スクリプトロードのタイミングでは停止要求を処理する */
@@ -1144,13 +1151,35 @@ void push_return_point_minus_one(void)
 }
 
 /*
+ * gosubによるリターンポイントがGUIであることを記録する(カスタムGUIのgosub-gui用)
+ */
+void push_return_gui(const char *gui_file)
+{
+	return_gui = gui_file;
+}
+
+/*
+ * gosubによるリターンポイントを記録する(SysMenuからのGUIによるgosub-back用)
+ */
+void set_deep_return_point(int deep_return_point)
+{
+	deep_return_point = deep_return_point;
+	is_gosub_from_sysmenu = true;
+}
+
+/*
  * gosubによるリターンポイントを取得する(return用)
  */
 int pop_return_point(void)
 {
 	int rp;
-	rp = return_point;
-	return_point = INVALID_RETURN_POINT;
+	if (deep_return_point != INVALID_RETURN_POINT) {
+		rp = deep_return_point;
+		deep_return_point = INVALID_RETURN_POINT;
+	} else {
+		rp = return_point;
+		return_point = INVALID_RETURN_POINT;
+	}
 	return rp;
 }
 
@@ -1163,6 +1192,17 @@ bool is_return_from_sysmenu_gosub(void)
 	flag = is_gosub_from_sysmenu;
 	is_gosub_from_sysmenu = false;
 	return flag;
+}
+
+/*
+ * SysMenu経由のGUIからgosubされてreturnしたか
+ */
+const char *get_return_gui(void)
+{
+	const char *ret;
+	ret = return_gui;
+	return_gui = NULL;
+	return ret;
 }
 
 /*

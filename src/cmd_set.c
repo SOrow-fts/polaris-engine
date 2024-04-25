@@ -106,7 +106,7 @@ static bool process_normal_var(const char *lhs,
 	if (strcmp(rhs, RANDOM_VARIABLE) == 0) {
 		rval = rand();
 	} else if (strcmp(rhs, TIME_VARIABLE) == 0) {
-		rval = time(NULL);
+		rval = (int)time(NULL);
 	} else if (strcmp(rhs, "yes") == 0) {
 		rval = 1;
 	} else if (strcmp(rhs, "no") == 0) {

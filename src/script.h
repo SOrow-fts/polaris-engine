@@ -646,6 +646,15 @@ void push_return_point(void);
 /* gosubによるリターンポイントを記録する(カスタムSYSMENUのgosub用) */
 void push_return_point_minus_one(void);
 
+/* gosubによるリターンポイントがGUIであることを記録する(カスタムGUIのgosub用) */
+void push_return_gui(const char *gui_file);
+
+/* gosubによるリターンポイントを記録する(SysMenuからのGUIによるgosub-back用) */
+void set_deep_return_point(int deep_return_point);
+
+/* SysMenu経由のGUIからgosubされてreturnしたか */
+const char *get_return_gui(void);
+
 /* gosubによるリターンポイントを取得する(return用) */
 int pop_return_point(void);
 
