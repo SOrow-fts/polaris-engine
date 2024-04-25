@@ -198,12 +198,14 @@ static ViewController *theViewController;
 
 - (void)windowWillClose:(NSNotification *)notification {
     // Save.
-    save_global_data();
-    save_seen();
-    
+    if (_isInitialized) {
+        save_global_data();
+        save_seen();
+    }
+
     // Exit the event loop.
     [NSApp stop:nil];
-    
+
     // Magic: Post an empty event and make sure to exit the main loop.
     [NSApp postEvent:[NSEvent otherEventWithType:NSEventTypeApplicationDefined
                                         location:NSMakePoint(0, 0)
