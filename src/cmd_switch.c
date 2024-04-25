@@ -957,7 +957,7 @@ static bool init_switch(void)
 		}
 
 		/* 座標を計算する */
-		if (get_command_type() == COMMAND_SWITCH) {
+		if (get_command_type() == COMMAND_SWITCH || i >= NEWS_SWITCH_BASE) {
 			get_switch_rect(i,
 					&parent_button[i].x,
 					&parent_button[i].y,
@@ -975,7 +975,7 @@ static bool init_switch(void)
 		parent_button[i].img_idle = create_image(parent_button[i].w, parent_button[i].h);
 		if (parent_button[i].img_idle == NULL)
 			return false;
-		if (get_command_type() == COMMAND_SWITCH)
+		if (get_command_type() == COMMAND_SWITCH || i >= NEWS_SWITCH_BASE)
 			draw_switch_bg_image(parent_button[i].img_idle, i);
 		else
 			draw_news_bg_image(parent_button[i].img_idle);
@@ -984,7 +984,7 @@ static bool init_switch(void)
 		parent_button[i].img_hover = create_image(parent_button[i].w, parent_button[i].h);
 		if (parent_button[i].img_hover == NULL)
 			return false;
-		if (get_command_type() == COMMAND_SWITCH)
+		if (get_command_type() == COMMAND_SWITCH || i >= NEWS_SWITCH_BASE)
 			draw_switch_fg_image(parent_button[i].img_idle, i);
 		else
 			draw_news_fg_image(parent_button[i].img_idle);
