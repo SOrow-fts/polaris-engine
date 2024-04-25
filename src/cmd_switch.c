@@ -968,13 +968,19 @@ static bool init_switch(void)
 		parent_button[i].img_idle = create_image(parent_button[i].w, parent_button[i].h);
 		if (parent_button[i].img_idle == NULL)
 			return false;
-		draw_switch_bg_image(parent_button[i].img_idle, i);
+		if (get_command_type() == COMMAND_NEWS)
+			draw_news_bg_image(parent_button[i].img_idle);
+		else
+			draw_switch_bg_image(parent_button[i].img_idle, i);
 
 		/* hover画像を作成する */
 		parent_button[i].img_hover = create_image(parent_button[i].w, parent_button[i].h);
 		if (parent_button[i].img_hover == NULL)
 			return false;
-		draw_switch_fg_image(parent_button[i].img_hover, i);
+		if (get_command_type() == COMMAND_NEWS)
+			draw_news_fg_image(parent_button[i].img_idle);
+		else
+			draw_switch_fg_image(parent_button[i].img_idle, i);
 
 		/* テキストを描画する */
 		draw_text(parent_button[i].img_idle,
