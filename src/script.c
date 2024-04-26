@@ -937,8 +937,9 @@ bool load_script(const char *fname)
 	cur_index = 0;
 	cur_script = search_file_name_pointer(fname);
 	assert(cur_script != NULL);
-	set_return_point(INVALID_RETURN_POINT);
-	set_deep_return_point(INVALID_RETURN_POINT);
+	return_point = INVALID_RETURN_POINT;
+	deep_return_point = INVALID_RETURN_POINT;
+	is_gosub_from_sysmenu = false;
 
 #ifdef USE_EDITOR
 	/* スクリプトロードのタイミングでは停止要求を処理する */

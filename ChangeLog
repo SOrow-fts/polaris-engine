@@ -4,12 +4,17 @@ This file is referred by some automatic release scripts.
 
 [Release History (Japanese)]
 <!-- BEGIN-LATEST-JP -->
+<li>Polaris Engine 1.1.17 2024/4/26
+  <ul>
+    <li>ヒストリーが表示されないバグを修正 (GUIからのgosub機能を追加した際のデグレード)</li>
+  </ul>
+</li>
+<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.1.16 2024/4/25
   <ul>
     <li>newsコマンドを修正</li>
   </ul>
 </li>
-<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.1.15 2024/4/25
   <ul>
     <li>newsコマンドを修正</li>
@@ -187,12 +192,17 @@ This file is referred by some automatic release scripts.
 
 [Release History (English)]
 <!-- BEGIN-LATEST-EN -->
+<li>Polaris Engine 1.1.17 2024/4/26
+  <ul>
+    <li>Fixed a degrade bug where history cannot be shown</li>
+  </ul>
+</li>
+<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.1.16 2024/4/25
   <ul>
     <li>Fixed the news command</li>
   </ul>
 </li>
-<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.1.15 2024/4/25
   <ul>
     <li>Fixed the news command</li>
