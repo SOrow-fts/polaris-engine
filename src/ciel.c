@@ -1070,7 +1070,6 @@ bool ciel_deserialize_hook(struct rfile *rf)
 				if (ts.name[i] == NULL)
 					return false;
 				ts.ch_count++;
-				log_info("%s: %d", name, ts.ch_count);
 			}
 		}
 
