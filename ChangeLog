@@ -4,12 +4,17 @@ This file is referred by some automatic release scripts.
 
 [Release History (Japanese)]
 <!-- BEGIN-LATEST-JP -->
-<li>Polaris Engine 1.1.19 2024/4/27
+<li>Polaris Engine 1.1.20 2024/4/27
   <ul>
     <li>Cielシステムでロードしたときにキャラの数が復元されないバグの修正</li>
   </ul>
 </li>
 <!-- END-LATEST-JP -->
+<li>Polaris Engine 1.1.19 2024/4/27
+  <ul>
+    <li>Cielシステムでロードしたときにキャラの数が復元されないバグの修正</li>
+  </ul>
+</li>
 <li>Polaris Engine 1.1.18 2024/4/27
   <ul>
     <li>日本語ライト・ダークの微修正</li>
@@ -203,12 +208,17 @@ This file is referred by some automatic release scripts.
 
 [Release History (English)]
 <!-- BEGIN-LATEST-EN -->
-<li>Polaris Engine 1.1.19 2024/4/27
+<li>Polaris Engine 1.1.20 2024/4/27
   <ul>
     <li>Fixed a bug where the Ciel system cannot restore the character count</li>
   </ul>
 </li>
 <!-- END-LATEST-EN -->
+<li>Polaris Engine 1.1.19 2024/4/27
+  <ul>
+    <li>Fixed a bug where the Ciel system cannot restore the character count</li>
+  </ul>
+</li>
 <li>Polaris Engine 1.1.18 2024/4/27
   <ul>
     <li>Slightly fixed the Japanese light and dark templates</li>
