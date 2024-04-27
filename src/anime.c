@@ -765,7 +765,14 @@ static bool on_key_value(const char *key, const char *val)
 	} else if (strcmp(key, "blend") == 0) {
 		s->blend = atoi(val);
 	} else if (strcmp(key, "accel") == 0) {
-		s->accel = atoi(val);
+		if (strcmp(val, "normal") == 0)
+			s->accel = 0;
+		else if (strcmp(val, "accel") == 0)
+			s->accel = 1;
+		else if (strcmp(val, "brake") == 0)
+			s->accel = 2;
+		else
+			s->accel = atoi(val);
 	} else if (strcmp(key, "loop") == 0) {
 		s->loop = true;
 		context[cur_seq_layer].loop_ofs = (uint64_t)(atof(val) * 1000.0f);
