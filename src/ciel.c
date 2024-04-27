@@ -1053,6 +1053,8 @@ bool ciel_deserialize_hook(struct rfile *rf)
 
 	ciel_clear_hook();
 
+	ts.ch_count= 0;
+
 	/* For each character. */
 	for (i = 0; i < CL_CHARACTERS; i++) {
 		ts.is_file_changed[i] = false;
@@ -1066,7 +1068,7 @@ bool ciel_deserialize_hook(struct rfile *rf)
 			ts.name[i] = strdup(name);
 			if (ts.name[i] == NULL)
 				return false;
-
+			ts.ch_count++;
 		}
 
 		/* x */
