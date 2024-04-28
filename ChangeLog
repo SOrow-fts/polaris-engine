@@ -4,12 +4,17 @@ This file is referred by some automatic release scripts.
 
 [Release History (Japanese)]
 <!-- BEGIN-LATEST-JP -->
+<li>Polaris Engine 1.1.22 2024/4/28
+  <ul>
+    <li>システムメニューのカスタムメニューGUIを開いたときのバグを修正</li>
+  </ul>
+</li>
+<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.1.21 2024/4/27
   <ul>
     <li>Cielシステムでロードしたときにキャラの数が復元されないバグの修正</li>
   </ul>
 </li>
-<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.1.20 2024/4/27
   <ul>
     <li>Cielシステムでロードしたときにキャラの数が復元されないバグの修正</li>
@@ -213,12 +218,17 @@ This file is referred by some automatic release scripts.
 
 [Release History (English)]
 <!-- BEGIN-LATEST-EN -->
+<li>Polaris Engine 1.1.22 2024/4/28
+  <ul>
+    <li>Fixed a bug where calling a custom GUI from SysMenu causes a flicker</li>
+  </ul>
+</li>
+<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.1.21 2024/4/27
   <ul>
     <li>Fixed a bug where the Ciel system cannot restore the character count</li>
   </ul>
 </li>
-<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.1.20 2024/4/27
   <ul>
     <li>Fixed a bug where the Ciel system cannot restore the character count</li>
