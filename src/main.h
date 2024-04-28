@@ -107,7 +107,7 @@ bool select_command(void);
 bool se_command(void);
 bool switch_command(void);
 bool gosub_command(void);
-bool return_command(void);
+bool return_command(bool *cont);
 bool cha_command(void);
 bool shake_command(void);
 bool setsave_command(void);

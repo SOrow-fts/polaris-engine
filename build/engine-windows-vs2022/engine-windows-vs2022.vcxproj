@@ -45,7 +45,6 @@
     <ClCompile Include="..\..\src\history.c" />
     <ClCompile Include="..\..\src\image.c" />
     <ClCompile Include="..\..\src\log.c" />
-    <ClCompile Include="..\..\src\m2\emotedx9.cc" />
     <ClCompile Include="..\..\src\main.c" />
     <ClCompile Include="..\..\src\microsoft\dx9render.cc" />
     <ClCompile Include="..\..\src\microsoft\dsound.c" />

@@ -572,9 +572,8 @@ static bool dispatch_command(bool *cont)
 		*cont = true;
 		break;
 	case COMMAND_RETURN:
-		if (!return_command())
+		if (!return_command(cont))
 			return false;
-		*cont = true;
 		break;
 	case COMMAND_CHA:
 		if (!cha_command())

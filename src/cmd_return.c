@@ -16,7 +16,7 @@
 /*
  * returnコマンド
  */
-bool return_command(void)
+bool return_command(bool *cont)
 {
 	const char *gui;
 	int rp;
@@ -28,6 +28,9 @@ bool return_command(void)
 			return false;
 		set_gui_options(true, false, false);
 		start_gui_mode();
+		if (!run_gui_mode())
+			return false;
+		*cont = false;
 		return true;
 	}
 
@@ -53,5 +56,6 @@ bool return_command(void)
 		return false;
 	}
 
+	*cont = true;
 	return true;
 }

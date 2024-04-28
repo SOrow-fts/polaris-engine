@@ -639,7 +639,7 @@ static bool set_global_key_value(const char *key, const char *val)
 		if (is_sys_gui && is_custom_sysmenu) {
 			bool s2_push_stage(struct wms_runtime *rt);
 			s2_push_stage(NULL);
-			deep_return_point = get_command_index();
+			deep_return_point = get_command_index() - 1;
 		}
 		return true;
 	} else if (strcmp(key, "alt") == 0) {
@@ -1356,7 +1356,10 @@ static bool process_move(void)
 	 */
 	if (result_index != -1 &&
 	    (button[result_index].type == TYPE_GOTO ||
-	     button[result_index].type == TYPE_GALLERY)) {
+	     button[result_index].type == TYPE_GALLERY) &&
+		(button[result_index].gosub ||
+		 button[result_index].gosub_gui ||
+		 button[result_index].gosub_back)) {
 		if (is_sys_gui || is_custom_sysmenu) {
 			is_sys_gui = false;
 			if (is_message_active())
@@ -3695,6 +3698,9 @@ static bool load_gui_file(const char *file)
 	bool is_global, is_comment;
 
 	assert(file != NULL);
+
+	memset(word, 0, sizeof(word));
+	memset(key, 0, sizeof(key));
 
 	/* ファイルをオープンする */
 	rf = open_rfile(GUI_DIR, file, false);
