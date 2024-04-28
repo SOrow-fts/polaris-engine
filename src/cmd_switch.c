@@ -432,11 +432,18 @@ static bool blit_process(void)
 
 static void render_process(void)
 {
-	/* レンダリングを行わない場合 */
-	if (did_quick_load
-	    ||
-	    (need_save_mode || need_load_mode || need_history_mode || need_config_mode || need_custom1_mode || need_custom2_mode))
+	/* クイックロードされた場合 */
+	if (did_quick_load)
 		return;
+
+	/* GUIへ遷移する場合、メッセージコマンドのレンダリングではなくGUIのレンダリングを行う */
+	if (is_sysmenu_finished &&
+	    (need_save_mode || need_load_mode || need_history_mode ||
+	     need_config_mode || need_custom1_mode || need_custom2_mode)) {
+		run_gui_mode();
+		is_sysmenu_finished = false;
+		return;
+	}
 
 	/* レンダリングを行う */
 	render_frame();
