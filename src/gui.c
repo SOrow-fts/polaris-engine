@@ -636,7 +636,7 @@ static bool set_global_key_value(const char *key, const char *val)
 		reset_lap_timer(&bomb_sw);
 		return true;
 	} else if (strcmp(key, "pushstate") == 0) {
-		if (is_custom_sysmenu) {
+		if (is_sys_gui && is_custom_sysmenu) {
 			bool s2_push_stage(struct wms_runtime *rt);
 			s2_push_stage(NULL);
 			deep_return_point = get_command_index();

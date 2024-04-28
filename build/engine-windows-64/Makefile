@@ -9,12 +9,15 @@ CC = x86_64-w64-mingw32-gcc
 CXX = x86_64-w64-mingw32-g++
 WINDRES = x86_64-w64-mingw32-windres
 
+# For MSYS2:
+#WINDRES = windres
+
 #
 # CPPFLAGS
 #
 
 CPPFLAGS = \
-	-I./ \
+	-I. \
 	-I./libroot/include \
 	-I./libroot/include/freetype2
 
@@ -23,7 +26,7 @@ CPPFLAGS = \
 #
 
 CFLAGS = \
-	-O3 \
+	-O0 -g3 \
 	-municode \
 	-ffast-math \
 	-finput-charset=utf-8 \
@@ -102,7 +105,7 @@ OBJS = \
 all: game-64.exe
 
 game-64.exe: libroot $(OBJS) $(HDRS_MAIN) $(HDRS)
-	$(CC) -s -o game-64.exe $(OBJS) $(LDFLAGS)
+	$(CC) -o game-64.exe $(OBJS) $(LDFLAGS)
 
 libroot:
 	./build-libs.sh
