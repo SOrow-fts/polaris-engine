@@ -26,7 +26,7 @@ CPPFLAGS = \
 #
 
 CFLAGS = \
-	-O0 -g3 \
+	-O3 \
 	-municode \
 	-ffast-math \
 	-finput-charset=utf-8 \
