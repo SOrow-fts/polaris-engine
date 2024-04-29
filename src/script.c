@@ -785,7 +785,7 @@ static bool add_comment_line(const char *s, ...);
  */
 bool init_script(void)
 {
-#ifdef POLARIS_TARGET_ANDROID
+#ifdef POLARIS_DLL
 	/* NDKではプロセスが再利用されるため、解放を行う */
 	cleanup_script();
 #endif

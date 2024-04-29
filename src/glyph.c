@@ -104,7 +104,7 @@ bool init_glyph(void)
 	FT_Error err;
 	int i;
 
-#ifdef POLARIS_TARGET_ANDROID
+#ifdef POLARIS_DLL
 	cleanup_glyph();
 #endif
 

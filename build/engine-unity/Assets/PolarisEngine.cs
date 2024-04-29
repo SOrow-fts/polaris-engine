@@ -16,16 +16,45 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PolarisEngine : MonoBehaviour
 {
+	private static PolarisEngine _instance;
+
+	private Mesh _mesh;
+	private Material _material;
+	private Vector3[] _positions = new Vector3[] {
+		new Vector3(-1, 1, 0),
+		new Vector3(1, 1, 0),
+		new Vector3(1, -1, 0),
+		new Vector3(-1, -1, 0)
+	};
+	private Vector2[] _uv = new Vector2[] {
+		new Vector2(0, 0),
+		new Vector2(1, 0),
+		new Vector2(1, 1),
+		new Vector2(0, 1)
+	};
+	private int[] _triangles = new int[] {0, 1, 2, 1, 3, 2};
+	private Vector3[] _normals = new Vector3[] {
+		new Vector3(0, 0, -1),
+		new Vector3(0, 0, -1),
+		new Vector3(0, 0, -1),
+		new Vector3(0, 0, -1)
+	};	
+
+	//
+	// Unsafe Code
+	//
+
 	// HAL delegate types.
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_log_info(byte *s);
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_log_warn(byte *s);
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_log_error(byte *s);
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_make_sav_dir();
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_make_valid_path(byte *dir, byte* fname, byte *dst, int len);
-	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_notify_image_update(IntPtr img);
+	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_notify_image_update(IntPtr img, uint *pixels);
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_notify_image_free(IntPtr img);
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_render_image_normal(int dst_left, int dst_top, int dst_width, int dst_height, IntPtr src_img, int src_left, int src_top, int src_width, int src_height, int alpha);
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_render_image_add(int dst_left, int dst_top, int dst_width, int dst_height, IntPtr src_img, int src_left, int src_top, int src_width, int src_height, int alpha);
@@ -191,29 +220,29 @@ public class PolarisEngine : MonoBehaviour
 	static IntPtr p_on_event_cleanup;
 	static IntPtr p_on_event_frame;
 
-	// Image structure.
-	public struct Image {
+	// C Image structure.
+	public struct UnmanagedImage {
 		public int width;
 		public int height;
-		public unsafe byte *pixels;
+		public IntPtr pixels;
 		public IntPtr texture;
 		public bool need_upload;
 	};
 
-	// Image lists.
-	//private static ArrayList imageList = new ArrayList();
-	//private static bool isInitialUpdateFinished = false;
+	// C# Image structure.
+	public struct ManagedImage {
+		public int width;
+		public int height;
+		public UInt32[] pixels;
+		public Texture2D texture;
+		public bool need_upload;
+	};
 
-	// Rendering pipeline.
-	private static Shader shader;
-	private static ComputeBuffer vertexBuffer;
-	private static Material material;
-	private static float[] vertices;
-	private static Bounds bounds;
+	// Image lists.
+	private static Dictionary<IntPtr, ManagedImage> imageDict = new Dictionary<IntPtr, ManagedImage>();
 
 	unsafe void Start()
 	{
-/*
 		GC.KeepAlive(this);
 
 		// Set delegate objects.
@@ -438,85 +467,7 @@ public class PolarisEngine : MonoBehaviour
 		// Initialize the event subsystem.
 		d_on_event_init();
 		GC.KeepAlive(this);
-
-		// Setup the rendering pipeline.
-		//normalShader = Resources.Load<Shader>("NormalShader");
-		//graphicsBuffer = new GraphicsBuffer(GraphicsBuffer.Target.Vertex, GraphicsBuffer.UsageFlags.None, 32, 4);
-		//material = new Material(normalShader);
-*/
-		// Set active.
-		this.gameObject.SetActive(true);
-
-		vertices = new float[6 * 4]; // (XYZ0,UV) * 4-vertices
-
-		vertexBuffer = new ComputeBuffer(4, sizeof(float) * 6);
-		vertexBuffer.SetData(vertices);
-
-		shader = Shader.Find("PolarisEngine/NormalShader");
-		if (shader == null)
-			Debug.Log("Shader not found");
-		material = new Material(shader);
-		bounds = new Bounds(Vector3.one * -10000, Vector3.one * 10000);
 	}
-
-	unsafe void Update()
-	{
-		// Set the left-top point.
-		vertices[0] = 0;				// X
-		vertices[1] = 0;				// Y
-		vertices[2] = 1;				// Z
-		vertices[3] = 0;				// 0
-		vertices[4] = 0;				// U
-		vertices[5] = 0;				// V
-
-		// Set the right-top point.
-		vertices[6] = 100;   			// X
-		vertices[7] = 0;				// Y
-		vertices[8] = 1;				// Z
-		vertices[9] = 0;				// 0
-		vertices[10] = 1;				// U
-		vertices[11] = 0;				// V 
-
-		// Set the left-bottom point.
-		vertices[12] = 0;   			// X
-		vertices[13] = 100;				// Y
-		vertices[14] = 1;				// Z
-		vertices[15] = 0;				// 0
-		vertices[16] = 0;				// U
-		vertices[17] = 1;				// V
-
-		// Set the right-bottom point.
-		vertices[18] = 100;   			// X
-		vertices[19] = 100;				// Y
-		vertices[20] = 1;				// Z
-		vertices[21] = 0;				// 0
-		vertices[22] = 1;				// U
-		vertices[23] = 1;				// V
-
-		if (vertexBuffer == null)
-			Debug.Log("vertexBuffer == null");
-		vertexBuffer.SetData(vertices);
-		if (material == null)
-			Debug.Log("material == null");
-		material.SetBuffer("_Input", vertexBuffer);
-		Graphics.DrawProcedural(material, bounds, MeshTopology.Triangles, 2, 1);
-
-		// Create textures for images that are loaded before the first rendering.
-		//if (!isInitialUpdateFinished)
-		//{
-		//	foreach (Image image in initialImageList)
-		//		Marshal.PtrToStructure<Texture>(image.texture).SetPixelData(image.pixels, 0);
-		//	isInitialUpdateFinished = true;
-		//}
-		//if (on_event_frame() == 0)
-		//{
-		//	exit(0);
-		//}
-	}
-
-	//
-	// Native
-	//
 
     [DllImport("libpolaris.dylib")]
     static extern unsafe void init_hal_func_table(
@@ -646,127 +597,120 @@ public class PolarisEngine : MonoBehaviour
 	}
 
 	[AOT.MonoPInvokeCallback(typeof(delegate_notify_image_update))]
-	static unsafe void notify_image_update(IntPtr img)
+	static unsafe void notify_image_update(IntPtr img, uint *pixels)
 	{
-		Image image = Marshal.PtrToStructure<PolarisEngine.Image>(img);
-		image.need_upload = true;
+		if (!imageDict.ContainsKey(img))
+		{
+			ManagedImage storeImage = new ManagedImage();
+			UnmanagedImage marshalImage = Marshal.PtrToStructure<PolarisEngine.UnmanagedImage>(img);
+
+			storeImage.width = marshalImage.width;
+			storeImage.height = marshalImage.height;
+			storeImage.pixels = new UInt32[storeImage.width * storeImage.height];
+			storeImage.texture = new Texture2D(2, 2);
+			storeImage.need_upload = true;
+
+			imageDict.Add(img, storeImage);
+		}
+
+		UnmanagedImage srcImage = Marshal.PtrToStructure<PolarisEngine.UnmanagedImage>(img);
+		ManagedImage dstImage = imageDict[img];
+		for (int y = 0; y < dstImage.height; y++)
+		{
+			for (int x = 0; x < dstImage.width; x++)
+			{
+				uint p = pixels[y * dstImage.width + x];
+				dstImage.pixels[y * dstImage.width + x] = p;
+			}
+		}
+
+		dstImage.need_upload = true;
 	}
 
 	[AOT.MonoPInvokeCallback(typeof(delegate_notify_image_free))]
 	static unsafe void notify_image_free(IntPtr img)
 	{
-		Image image = Marshal.PtrToStructure<PolarisEngine.Image>(img);
-		if (image.texture == null)
-			return;
-
-		Texture texture = Marshal.PtrToStructure<Texture>(image.texture);
-		MonoBehaviour.Destroy(texture);
+		if (imageDict.ContainsKey(img))
+		{
+			ManagedImage image = imageDict[img];
+			MonoBehaviour.Destroy(image.texture);
+			imageDict.Remove(img);
+		}
 	}
 
 	[AOT.MonoPInvokeCallback(typeof(delegate_render_image_normal))]
 	static unsafe void render_image_normal(int dst_left, int dst_top, int dst_width, int dst_height, IntPtr src_img, int src_left, int src_top, int src_width, int src_height, int alpha)
 	{
-	/*
-		Image srcImage = Marshal.PtrToStructure<PolarisEngine.Image>(src_img);
-		if (srcImage.texture == null)
-			return;
-
-		Texture2D texture = Marshal.PtrToStructure<Texture2D>(srcImage.texture);
-		material.SetTexture("MainTexture", texture);
+		ManagedImage srcImage = imageDict[src_img];
+		_instance._material.mainTexture = srcImage.texture;
 
 		// Set the left-top point.
-		vertices[0] = x;				// X-1
-		vertices[1] = y;				// Y-1
-		vertices[2] = z;				// Z-1
-		vertices[3] = alpha / 255.0f;	// X-2
-		vertices[4] = u;				// U1-1
-		vertices[5] = v;				// V1-1
-		vertices[6] = 0;				// U2-1
-		vertices[7] = 0;				// V2-1
+		_instance._positions[0].x = dst_left;
+		_instance._positions[0].y = 720 - dst_top;
+		_instance._positions[0].z = 0;
+		_instance._uv[0].x = 0;
+		_instance._uv[0].y = 0;
 
 		// Set the right-top point.
-		vertices[8] = x;				// X-1
-		vertices[9] = y;				// Y-1
-		vertices[10] = z;				// Z-1
-		vertices[11] = alpha / 255.0f;	// X-2
-		vertices[12] = u;				// U1-1
-		vertices[13] = v;				// V1-1
-		vertices[14] = 0;				// U2-1
-		vertices[15] = 0;				// V2-1
+		_instance._positions[1].x = dst_left + dst_width;
+		_instance._positions[1].y = 720 - dst_top;
+		_instance._positions[1].z = 0;
+		_instance._uv[1].x = 1.0f;
+		_instance._uv[1].y = 0;
 
 		// Set the left-bottom point.
-		vertices[16] = x;				// X-1
-		vertices[17] = y;				// Y-1
-		vertices[18] = z;				// Z-1
-		vertices[19] = alpha / 255.0f;	// X-2
-		vertices[20] = u;				// U1-1
-		vertices[21] = v;				// V1-1
-		vertices[22] = 0;				// U2-1
-		vertices[23] = 0;				// V2-1
+		_instance._positions[2].x = dst_left;
+		_instance._positions[2].y = 720 - (dst_top + dst_height);
+		_instance._positions[2].z = 0;
+		_instance._uv[2].x = 0;
+		_instance._uv[2].y = 1.0f;
 
 		// Set the right-bottom point.
-		vertices[24] = x;				// X-1
-		vertices[25] = y;				// Y-1
-		vertices[26] = z;				// Z-1
-		vertices[27] = alpha / 255.0f;	// X-2
-		vertices[28] = u;				// U1-1
-		vertices[29] = v;				// V1-1
-		vertices[30] = 0;				// U2-1
-		vertices[31] = 0;				// V2-1
+		_instance._positions[3].x = dst_left + dst_width;
+		_instance._positions[3].y = 720 - (dst_top + dst_height);
+		_instance._positions[3].z = 0;
+		_instance._uv[3].x = 1.0f;
+		_instance._uv[3].y = 1.0f;
 
-		computeBuffer.SetData(vertices);
-		material.SetBuffer("ComputeBuffer", computeBuffer);
-		Graphics.DrawProceduralNow(MeshTopology.Triangles, 4, 1);
-	*/
+		_instance._mesh.vertices = _instance._positions;
+		_instance._mesh.triangles = _instance._triangles;
+		_instance._mesh.uv = _instance._uv;
+		Graphics.DrawMesh(_instance._mesh, Vector3.zero, Quaternion.identity, _instance._material, 0);
 	}
 
 	[AOT.MonoPInvokeCallback(typeof(delegate_render_image_add))]
 	static unsafe void render_image_add(int dst_left, int dst_top, int dst_width, int dst_height, IntPtr src_img, int src_left, int src_top, int src_width, int src_height, int alpha)
 	{
-		Image SrcImage = Marshal.PtrToStructure<PolarisEngine.Image>(src_img);
-
 		// TODO
 	}
 
 	[AOT.MonoPInvokeCallback(typeof(delegate_render_image_dim))]
 	static unsafe void render_image_dim(int dst_left, int dst_top, int dst_width, int dst_height, IntPtr src_img, int src_left, int src_top, int src_width, int src_height, int alpha)
 	{
-		Image SrcImage = Marshal.PtrToStructure<PolarisEngine.Image>(src_img);
-
 		// TODO
 	}
 
 	[AOT.MonoPInvokeCallback(typeof(delegate_render_image_rule))]
 	static unsafe void render_image_rule(IntPtr src_img, IntPtr rule_img, int threshold)
 	{
-		Image SrcImage = Marshal.PtrToStructure<PolarisEngine.Image>(src_img);
-		Image RuleImage = Marshal.PtrToStructure<PolarisEngine.Image>(rule_img);
-
 		// TODO
 	}
 
 	[AOT.MonoPInvokeCallback(typeof(delegate_render_image_melt))]
 	static unsafe void render_image_melt(IntPtr src_img, IntPtr rule_img, int progress)
 	{
-		Image SrcImage = Marshal.PtrToStructure<PolarisEngine.Image>(src_img);
-		Image RuleImage = Marshal.PtrToStructure<PolarisEngine.Image>(rule_img);
-
 		// TODO
 	}
 
 	[AOT.MonoPInvokeCallback(typeof(delegate_render_image_3d_normal))]
 	static unsafe void render_image_3d_normal(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, IntPtr src_img, int src_left, int src_top, int src_width, int src_height, int alpha)
 	{
-		Image SrcImage = Marshal.PtrToStructure<PolarisEngine.Image>(src_img);
-
 		// TODO
 	}
 
 	[AOT.MonoPInvokeCallback(typeof(delegate_render_image_3d_add))]
 	static unsafe void render_image_3d_add(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, IntPtr src_img, int src_left, int src_top, int src_width, int src_height, int alpha)
 	{
-		Image SrcImage = Marshal.PtrToStructure<PolarisEngine.Image>(src_img);
-
 		// TODO
 	}
 
@@ -916,12 +860,18 @@ public class PolarisEngine : MonoBehaviour
 		}
 		else
 		{
-			byte[] fileBody = System.IO.File.ReadAllBytes(Application.streamingAssetsPath + "/" + FileName);
-			if (fileBody == null)
-				return IntPtr.Zero;
-			ret = Marshal.AllocCoTaskMem(fileBody.Length);
-			Marshal.Copy(fileBody, 0, ret, fileBody.Length);
-			*len = fileBody.Length;
+			try
+			{
+				byte[] fileBody = System.IO.File.ReadAllBytes(Application.streamingAssetsPath + "/" + FileName);
+				if (fileBody == null)
+					return IntPtr.Zero;
+				ret = Marshal.AllocCoTaskMem(fileBody.Length);
+				Marshal.Copy(fileBody, 0, ret, fileBody.Length);
+				*len = fileBody.Length;
+			}
+			catch(Exception)
+			{
+			}
 		}
 
 		GC.KeepAlive(ret);
@@ -965,16 +915,57 @@ public class PolarisEngine : MonoBehaviour
     static unsafe void close_save_file() {
 		string s = PlayerPrefs.GetString(SaveFile, SaveData);
     }
-}
 
+	//
+	// Initialization
+	//
+
+	private void Awake()
+	{
+		_instance = this;
+
+		_mesh = new Mesh();
+		_mesh.vertices = _positions;
+		_mesh.triangles = _triangles;
+		_mesh.uv = _uv;
+		_mesh.normals = _normals;
+		_mesh.RecalculateBounds();
+
+//		Shader shader = Resources.Load<Shader>("PolarisEngine/NormalShader");
+		_material = new Material(Shader.Find("Legacy Shaders/Diffuse"));
+	}
+
+	//
+	// Frame Update
+	//
+
+	unsafe void Update()
+	{
 /*
-		string filename = "Assets/Resources/ch/001-happy.png";
-		var rawData = System.IO.File.ReadAllBytes(filename);
+		_instance._mesh.vertices = _instance._positions;
+		_instance._mesh.triangles = _instance._triangles;
+		_instance._mesh.uv = _instance._uv;
+		Graphics.DrawMesh(_instance._mesh, Vector3.zero, Quaternion.identity, _instance._material, 0);
+*/
+		ArrayList uploadArray = new ArrayList();
+		foreach (ManagedImage image in imageDict.Values)
+		{
+			if (image.need_upload)
+			{
+				image.texture.SetPixelData(image.pixels, 0);
+				uploadArray.Add(image);
+			}
+		}
+		for (int i = 0; i < uploadArray.Count; i++)
+		{
+			ManagedImage image = (ManagedImage)uploadArray[i];
+			image.need_upload = false;
+		}
 
-		Texture2D tex = new Texture2D(2, 2);
-		tex.LoadImage(rawData);
-		if (tex == null)
-			Debug.Log("NG");
-		else
-			Debug.Log("OK");
- */
+		if (on_event_frame() == 0)
+		{
+			// TODO
+			// exit(0);
+		}
+	}
+}

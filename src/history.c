@@ -51,8 +51,10 @@ static char tmp_text[TEXT_SIZE];
  */
 bool init_history(void)
 {
+#ifdef POLARIS_DLL
 	/* Android NDK用に初期化を行う */
 	clear_history();
+#endif
 
 	last_history_index = -1;
 

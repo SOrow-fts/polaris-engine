@@ -198,5 +198,4 @@ games/**/txt/orbis.txt
 #
 # Misc.
 #
-build/engine-unity
 build/engine-windows-private-*

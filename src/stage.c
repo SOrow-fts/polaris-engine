@@ -288,7 +288,7 @@ bool init_stage(void)
 {
 	int i;
 
-#ifdef POLARIS_TARGET_ANDROID
+#ifdef POLARIS_DLL
 	/* 再初期化のための処理 */
 	cleanup_stage();
 #endif
@@ -910,6 +910,8 @@ bool update_switchbox(bool is_fg, int index)
 void cleanup_stage(void)
 {
 	int i;
+
+	stage_mode = STAGE_MODE_IDLE;
 
 	for (i = 0; i < STAGE_LAYERS; i++) {
 		if (i == LAYER_CLICK)

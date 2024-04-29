@@ -44,9 +44,13 @@
 #define POLARIS_TARGET_POSIX
 #endif
 
- /*
-  * For GCC and LLVM/Clang
-  */
+#if defined(POLARIS_TARGET_ANDROID) || defined(POLARIS_TARGET_UNITY)
+#define POLARIS_DLL
+#endif
+
+/*
+ * For GCC and LLVM/Clang
+ */
 #if defined(__GNUC__) || defined(__llvm__)
 
  /*

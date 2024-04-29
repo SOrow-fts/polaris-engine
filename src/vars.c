@@ -45,6 +45,7 @@ void init_vars(void)
 {
 	int i;
 
+#ifdef POLARIS_DLL
 	/* Androidでは再利用されるので初期化する */
 	for (i = 0; i < LOCAL_VAR_SIZE; i++)
 		local_var_tbl[i] = 0;
@@ -55,6 +56,7 @@ void init_vars(void)
 			free(name_var_tbl[i]);
 		name_var_tbl[i] = NULL;
 	}
+#endif
 
 #ifdef USE_EDITOR
 	clear_variable_changed();

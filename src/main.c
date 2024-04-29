@@ -113,7 +113,7 @@ static bool pre_dispatch(void);
  */
 void init_game_loop(void)
 {
-#ifdef POLARIS_TARGET_ANDROID
+#ifdef POLARIS_DLL
 	/* Android NDK用に変数を初期化する */
 	is_left_button_pressed = false;
 	is_right_button_pressed = false;

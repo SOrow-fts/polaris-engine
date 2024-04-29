@@ -25,7 +25,7 @@ Shader "PolarisEngine/NormalShader"
                 float2 uv : TEXCOORD0;
             };
 
-	    StructuredBuffer<appdata> _Input;
+            StructuredBuffer<appdata> _Input;
 
             struct v2f
             {
@@ -33,7 +33,7 @@ Shader "PolarisEngine/NormalShader"
                 float4 vertex : SV_POSITION;
             };
 
-            v2f vert (uint id : SV_VertexID, uint inst : SV_InstanceID)
+            v2f vert(uint id : SV_VertexID, uint inst : SV_InstanceID)
             {
                 v2f o;
                 o.vertex = _Input[id].vertex;
@@ -43,7 +43,7 @@ Shader "PolarisEngine/NormalShader"
 
             sampler2D _MainTex;
 
-            fixed4 frag (v2f i) : SV_Target
+            fixed4 frag(v2f i) : SV_Target
             {
                 fixed4 col = fixed4(1.0, 1.0, 1.0, 1.0);
                 return col;

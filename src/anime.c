@@ -141,7 +141,7 @@ static void synthesis_eye_anime(int chpos);
  */
 bool init_anime(void)
 {
-#ifdef POLARIS_TARGET_ANDROID
+#ifdef POLARIS_DLL
 	/* Android NDK用に再初期化する */
 	cleanup_anime();
 #endif

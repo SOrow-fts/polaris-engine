@@ -94,7 +94,12 @@ char *make_valid_path(const char *dir, const char *fname);
  *  - This function tells a HAL that an image needs to be uploaded to GPU
  *  - A HAL can upload images to GPU at an appropriate time
  */
+#ifndef HAL_PTR
 void notify_image_update(struct image *img);
+#else
+void notify_image_update(struct image *img, uint32_t *pixels);
+#define notify_image_update(img)	notify_image_update(img, img->pixels)
+#endif
 
 /*
  * Notifies an image free.
@@ -399,7 +404,7 @@ extern void init_hal_func_table(
 	void POLARISAPI (*p_log_error)(intptr_t s),
 	void POLARISAPI (*p_make_sav_dir)(void),
 	void POLARISAPI (*p_make_valid_path)(intptr_t dir, intptr_t fname, intptr_t dst, int len),
-	void POLARISAPI (*p_notify_image_update)(intptr_t img),
+	void POLARISAPI (*p_notify_image_update)(intptr_t img, intptr_t pixels),
 	void POLARISAPI (*p_notify_image_free)(intptr_t img),
 	void POLARISAPI (*p_render_image_normal)(int dst_left, int dst_top, int dst_width, int dst_height, intptr_t src_img, int src_left, int src_top, int src_width, int src_height, int alpha),
 	void POLARISAPI (*p_render_image_add)(int dst_left, int dst_top, int dst_width, int dst_height, intptr_t src_img, int src_left, int src_top, int src_width, int src_height, int alpha),
@@ -435,7 +440,7 @@ extern void POLARISAPI (*wrap_log_warn)(intptr_t s);
 extern void POLARISAPI (*wrap_log_error)(intptr_t s);
 extern void POLARISAPI (*wrap_make_sav_dir)(void);
 extern void POLARISAPI (*wrap_make_valid_path)(intptr_t dir, intptr_t fname, intptr_t dst, int len);
-extern void POLARISAPI (*wrap_notify_image_update)(intptr_t img);
+extern void POLARISAPI (*wrap_notify_image_update)(intptr_t img, intptr_t pixels);
 extern void POLARISAPI (*wrap_notify_image_free)(intptr_t img);
 extern void POLARISAPI (*wrap_render_image_normal)(int dst_left, int dst_top, int dst_width, int dst_height, intptr_t src_img, int src_left, int src_top, int src_width, int src_height, int alpha);
 extern void POLARISAPI (*wrap_render_image_add)(int dst_left, int dst_top, int dst_width, int dst_height, intptr_t src_img, int src_left, int src_top, int src_width, int src_height, int alpha);
