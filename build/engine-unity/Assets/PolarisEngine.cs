@@ -54,15 +54,15 @@ public class PolarisEngine : MonoBehaviour
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_log_error(byte *s);
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_make_sav_dir();
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_make_valid_path(byte *dir, byte* fname, byte *dst, int len);
-	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_notify_image_update(IntPtr img, uint *pixels);
-	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_notify_image_free(IntPtr img);
-	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_render_image_normal(int dst_left, int dst_top, int dst_width, int dst_height, IntPtr src_img, int src_left, int src_top, int src_width, int src_height, int alpha);
-	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_render_image_add(int dst_left, int dst_top, int dst_width, int dst_height, IntPtr src_img, int src_left, int src_top, int src_width, int src_height, int alpha);
-	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_render_image_dim(int dst_left, int dst_top, int dst_width, int dst_height, IntPtr src_img, int src_left, int src_top, int src_width, int src_height, int alpha);
-	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_render_image_rule(IntPtr src_img, IntPtr rule_img, int threshold);
-	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_render_image_melt(IntPtr src_img, IntPtr rule_img, int progress);
-	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_render_image_3d_normal(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, IntPtr src_img, int src_left, int src_top, int src_width, int src_height, int alpha);
-	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_render_image_3d_add(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, IntPtr src_img, int src_left, int src_top, int src_width, int src_height, int alpha);
+	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_notify_image_update(int id, int width, int height, uint *pixels);
+	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_notify_image_free(int id);
+	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_render_image_normal(int dst_left, int dst_top, int dst_width, int dst_height, int src_img, int src_left, int src_top, int src_width, int src_height, int alpha);
+	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_render_image_add(int dst_left, int dst_top, int dst_width, int dst_height, int src_img, int src_left, int src_top, int src_width, int src_height, int alpha);
+	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_render_image_dim(int dst_left, int dst_top, int dst_width, int dst_height, int src_img, int src_left, int src_top, int src_width, int src_height, int alpha);
+	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_render_image_rule(int src_img, int rule_img, int threshold);
+	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_render_image_melt(int src_img, int rule_img, int progress);
+	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_render_image_3d_normal(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, int src_img, int src_left, int src_top, int src_width, int src_height, int alpha);
+	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_render_image_3d_add(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, int src_img, int src_left, int src_top, int src_width, int src_height, int alpha);
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_reset_lap_timer(IntPtr origin);
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate Int64 delegate_get_lap_timer_millisec(IntPtr origin);
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_play_sound(int stream, IntPtr wave);
@@ -220,26 +220,17 @@ public class PolarisEngine : MonoBehaviour
 	static IntPtr p_on_event_cleanup;
 	static IntPtr p_on_event_frame;
 
-	// C Image structure.
-	public struct UnmanagedImage {
-		public int width;
-		public int height;
-		public IntPtr pixels;
-		public IntPtr texture;
-		public bool need_upload;
-	};
-
 	// C# Image structure.
 	public struct ManagedImage {
 		public int width;
 		public int height;
-		public UInt32[] pixels;
+		public Color[] pixels;
 		public Texture2D texture;
 		public bool need_upload;
 	};
 
 	// Image lists.
-	private static Dictionary<IntPtr, ManagedImage> imageDict = new Dictionary<IntPtr, ManagedImage>();
+	private static Dictionary<int, ManagedImage> imageDict = new Dictionary<int, ManagedImage>();
 
 	unsafe void Start()
 	{
@@ -597,77 +588,83 @@ public class PolarisEngine : MonoBehaviour
 	}
 
 	[AOT.MonoPInvokeCallback(typeof(delegate_notify_image_update))]
-	static unsafe void notify_image_update(IntPtr img, uint *pixels)
+	static unsafe void notify_image_update(int id, int width, int height, uint *pixels)
 	{
-		if (!imageDict.ContainsKey(img))
+		if (!imageDict.ContainsKey(id))
 		{
 			ManagedImage storeImage = new ManagedImage();
-			UnmanagedImage marshalImage = Marshal.PtrToStructure<PolarisEngine.UnmanagedImage>(img);
-
-			storeImage.width = marshalImage.width;
-			storeImage.height = marshalImage.height;
-			storeImage.pixels = new UInt32[storeImage.width * storeImage.height];
-			storeImage.texture = new Texture2D(2, 2);
+			storeImage.width = width;
+			storeImage.height = height;
+			storeImage.pixels = new Color[storeImage.width * storeImage.height];
+			storeImage.texture = new Texture2D(storeImage.width, storeImage.height, TextureFormat.ARGB32, false);
 			storeImage.need_upload = true;
-
-			imageDict.Add(img, storeImage);
+			imageDict.Add(id, storeImage);
 		}
 
-		UnmanagedImage srcImage = Marshal.PtrToStructure<PolarisEngine.UnmanagedImage>(img);
-		ManagedImage dstImage = imageDict[img];
+		ManagedImage dstImage = imageDict[id];
 		for (int y = 0; y < dstImage.height; y++)
 		{
 			for (int x = 0; x < dstImage.width; x++)
 			{
 				uint p = pixels[y * dstImage.width + x];
-				dstImage.pixels[y * dstImage.width + x] = p;
+				Color cl = new Color(((p >> 16) & 0xff) / 255.0f,
+				 	  	   	   		 ((p >> 8) & 0xff) / 255.0f,
+				 					 (p & 0xff) / 255.0f,
+				 					 ((p >> 24) & 0xff) / 255.0f);
+				dstImage.pixels[y * dstImage.width + x] = cl;
 			}
 		}
-
 		dstImage.need_upload = true;
 	}
 
 	[AOT.MonoPInvokeCallback(typeof(delegate_notify_image_free))]
-	static unsafe void notify_image_free(IntPtr img)
+	static unsafe void notify_image_free(int id)
 	{
-		if (imageDict.ContainsKey(img))
+		if (imageDict.ContainsKey(id))
 		{
-			ManagedImage image = imageDict[img];
+			ManagedImage image = imageDict[id];
 			MonoBehaviour.Destroy(image.texture);
-			imageDict.Remove(img);
+			imageDict.Remove(id);
 		}
 	}
 
 	[AOT.MonoPInvokeCallback(typeof(delegate_render_image_normal))]
-	static unsafe void render_image_normal(int dst_left, int dst_top, int dst_width, int dst_height, IntPtr src_img, int src_left, int src_top, int src_width, int src_height, int alpha)
+	static unsafe void render_image_normal(int dst_left, int dst_top, int dst_width, int dst_height, int src_img, int src_left, int src_top, int src_width, int src_height, int alpha)
 	{
 		ManagedImage srcImage = imageDict[src_img];
+		if (srcImage.need_upload)
+		{
+			srcImage.texture.SetPixels(srcImage.pixels, 0);
+			srcImage.texture.Apply();
+			srcImage.need_upload = false;
+		}
 		_instance._material.mainTexture = srcImage.texture;
+		_instance._material.SetColor("_Color", new Color(1.0f, 1.0f, 1.0f, alpha / 255.0f));
 
 		// Set the left-top point.
-		_instance._positions[0].x = dst_left;
-		_instance._positions[0].y = 720 - dst_top;
+		_instance._positions[0].x = dst_left / 1280.0f;
+		_instance._positions[0].y = 1.0f - dst_top / 720.0f;
 		_instance._positions[0].z = 0;
 		_instance._uv[0].x = 0;
 		_instance._uv[0].y = 0;
 
 		// Set the right-top point.
-		_instance._positions[1].x = dst_left + dst_width;
-		_instance._positions[1].y = 720 - dst_top;
+		_instance._positions[1].x = (dst_left + dst_width) / 1280.0f;
+		_instance._positions[1].y = 1.0f - dst_top / 720.0f;
 		_instance._positions[1].z = 0;
 		_instance._uv[1].x = 1.0f;
 		_instance._uv[1].y = 0;
 
 		// Set the left-bottom point.
-		_instance._positions[2].x = dst_left;
-		_instance._positions[2].y = 720 - (dst_top + dst_height);
+		_instance._positions[2].x = dst_left / 1280.0f;
+		_instance._positions[2].y = 1.0f - (dst_top + dst_height) / 720.0f;
 		_instance._positions[2].z = 0;
 		_instance._uv[2].x = 0;
 		_instance._uv[2].y = 1.0f;
 
 		// Set the right-bottom point.
-		_instance._positions[3].x = dst_left + dst_width;
-		_instance._positions[3].y = 720 - (dst_top + dst_height);
+		_instance._positions[3].x = (dst_left + dst_width) / 1280.0f;
+		_instance._positions[3].y = 1.0f - (dst_top + dst_height) / 720.0f;
 		_instance._positions[3].z = 0;
 		_instance._uv[3].x = 1.0f;
 		_instance._uv[3].y = 1.0f;
@@ -679,37 +676,41 @@ public class PolarisEngine : MonoBehaviour
 	}
 
 	[AOT.MonoPInvokeCallback(typeof(delegate_render_image_add))]
-	static unsafe void render_image_add(int dst_left, int dst_top, int dst_width, int dst_height, IntPtr src_img, int src_left, int src_top, int src_width, int src_height, int alpha)
+	static unsafe void render_image_add(int dst_left, int dst_top, int dst_width, int dst_height, int src_img, int src_left, int src_top, int src_width, int src_height, int alpha)
 	{
 		// TODO
+		render_image_normal(dst_left, dst_top, dst_width, dst_height, src_img, src_left, src_top, src_width, src_height, alpha);
 	}
 
 	[AOT.MonoPInvokeCallback(typeof(delegate_render_image_dim))]
-	static unsafe void render_image_dim(int dst_left, int dst_top, int dst_width, int dst_height, IntPtr src_img, int src_left, int src_top, int src_width, int src_height, int alpha)
+	static unsafe void render_image_dim(int dst_left, int dst_top, int dst_width, int dst_height, int src_img, int src_left, int src_top, int src_width, int src_height, int alpha)
 	{
 		// TODO
+		render_image_normal(dst_left, dst_top, dst_width, dst_height, src_img, src_left, src_top, src_width, src_height, alpha);
 	}
 
 	[AOT.MonoPInvokeCallback(typeof(delegate_render_image_rule))]
-	static unsafe void render_image_rule(IntPtr src_img, IntPtr rule_img, int threshold)
+	static unsafe void render_image_rule(int src_img, int rule_img, int threshold)
 	{
 		// TODO
+		render_image_normal(0, 0, 1280, 720, src_img, 0, 0, 1280, 720, threshold);
 	}
 
 	[AOT.MonoPInvokeCallback(typeof(delegate_render_image_melt))]
-	static unsafe void render_image_melt(IntPtr src_img, IntPtr rule_img, int progress)
+	static unsafe void render_image_melt(int src_img, int rule_img, int progress)
 	{
 		// TODO
+		render_image_normal(0, 0, 1280, 720, src_img, 0, 0, 1280, 720, progress);
 	}
 
 	[AOT.MonoPInvokeCallback(typeof(delegate_render_image_3d_normal))]
-	static unsafe void render_image_3d_normal(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, IntPtr src_img, int src_left, int src_top, int src_width, int src_height, int alpha)
+	static unsafe void render_image_3d_normal(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, int src_img, int src_left, int src_top, int src_width, int src_height, int alpha)
 	{
 		// TODO
 	}
 
 	[AOT.MonoPInvokeCallback(typeof(delegate_render_image_3d_add))]
-	static unsafe void render_image_3d_add(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, IntPtr src_img, int src_left, int src_top, int src_width, int src_height, int alpha)
+	static unsafe void render_image_3d_add(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, int src_img, int src_left, int src_top, int src_width, int src_height, int alpha)
 	{
 		// TODO
 	}
@@ -941,27 +942,6 @@ public class PolarisEngine : MonoBehaviour
 
 	unsafe void Update()
 	{
-/*
-		_instance._mesh.vertices = _instance._positions;
-		_instance._mesh.triangles = _instance._triangles;
-		_instance._mesh.uv = _instance._uv;
-		Graphics.DrawMesh(_instance._mesh, Vector3.zero, Quaternion.identity, _instance._material, 0);
-*/
-		ArrayList uploadArray = new ArrayList();
-		foreach (ManagedImage image in imageDict.Values)
-		{
-			if (image.need_upload)
-			{
-				image.texture.SetPixelData(image.pixels, 0);
-				uploadArray.Add(image);
-			}
-		}
-		for (int i = 0; i < uploadArray.Count; i++)
-		{
-			ManagedImage image = (ManagedImage)uploadArray[i];
-			image.need_upload = false;
-		}
-
 		if (on_event_frame() == 0)
 		{
 			// TODO

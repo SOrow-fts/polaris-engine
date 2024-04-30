@@ -94,12 +94,7 @@ char *make_valid_path(const char *dir, const char *fname);
  *  - This function tells a HAL that an image needs to be uploaded to GPU
  *  - A HAL can upload images to GPU at an appropriate time
  */
-#ifndef HAL_PTR
 void notify_image_update(struct image *img);
-#else
-void notify_image_update(struct image *img, uint32_t *pixels);
-#define notify_image_update(img)	notify_image_update(img, img->pixels)
-#endif
 
 /*
  * Notifies an image free.
@@ -179,9 +174,9 @@ render_image_dim(
  */
 void
 render_image_rule(
-	struct image *src_img,	/* [IN] The source image */
-	struct image *rule_img,	/* [IN] The rule image */
-	int threshold);		/* The threshold (0 to 255) */
+	struct image *src_img,		/* [IN] The source image */
+	struct image *rule_img,		/* [IN] The rule image */
+	int threshold);			/* The threshold (0 to 255) */
 
 /*
  * Renders an image to the screen with the "melt" shader pipeline.
@@ -189,9 +184,9 @@ render_image_rule(
  *  - A rule image must have the same size as the screen
  */
 void render_image_melt(
-	struct image *src_img,	/* [IN] The source image */
-	struct image *rule_img,	/* [IN] The rule image */
-	int progress);		/* The progress (0 to 255) */
+	struct image *src_img,		/* [IN] The source image */
+	struct image *rule_img,		/* [IN] The rule image */
+	int progress);			/* The progress (0 to 255) */
 
 /*
  * Renders an image to the screen as a triangle strip with the "normal" shader pipeline.
@@ -404,15 +399,15 @@ extern void init_hal_func_table(
 	void POLARISAPI (*p_log_error)(intptr_t s),
 	void POLARISAPI (*p_make_sav_dir)(void),
 	void POLARISAPI (*p_make_valid_path)(intptr_t dir, intptr_t fname, intptr_t dst, int len),
-	void POLARISAPI (*p_notify_image_update)(intptr_t img, intptr_t pixels),
-	void POLARISAPI (*p_notify_image_free)(intptr_t img),
-	void POLARISAPI (*p_render_image_normal)(int dst_left, int dst_top, int dst_width, int dst_height, intptr_t src_img, int src_left, int src_top, int src_width, int src_height, int alpha),
-	void POLARISAPI (*p_render_image_add)(int dst_left, int dst_top, int dst_width, int dst_height, intptr_t src_img, int src_left, int src_top, int src_width, int src_height, int alpha),
-	void POLARISAPI (*p_render_image_dim)(int dst_left, int dst_top, int dst_width, int dst_height, intptr_t src_img, int src_left, int src_top, int src_width, int src_height, int alpha),
-	void POLARISAPI (*p_render_image_rule)(intptr_t src_img, intptr_t rule_img, int threshold),
-	void POLARISAPI (*p_render_image_melt)(intptr_t src_img, intptr_t rule_img, int progress),
-	void POLARISAPI (*p_render_image_3d_normal)(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, intptr_t src_img, int src_left, int src_top, int src_width, int src_height, int alpha),
-	void POLARISAPI (*p_render_image_3d_add)(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, intptr_t src_img, int src_left, int src_top, int src_width, int src_height, int alpha),
+	void POLARISAPI (*p_notify_image_update)(int id, int width, int height, intptr_t pixels),
+	void POLARISAPI (*p_notify_image_free)(int id),
+	void POLARISAPI (*p_render_image_normal)(int dst_left, int dst_top, int dst_width, int dst_height, int src_img, int src_left, int src_top, int src_width, int src_height, int alpha),
+	void POLARISAPI (*p_render_image_add)(int dst_left, int dst_top, int dst_width, int dst_height, int src_img, int src_left, int src_top, int src_width, int src_height, int alpha),
+	void POLARISAPI (*p_render_image_dim)(int dst_left, int dst_top, int dst_width, int dst_height, int src_img, int src_left, int src_top, int src_width, int src_height, int alpha),
+	void POLARISAPI (*p_render_image_rule)(int src_img, int rule_img, int threshold),
+	void POLARISAPI (*p_render_image_melt)(int src_img, int rule_img, int progress),
+	void POLARISAPI (*p_render_image_3d_normal)(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, int src_img, int src_left, int src_top, int src_width, int src_height, int alpha),
+	void POLARISAPI (*p_render_image_3d_add)(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, int src_img, int src_left, int src_top, int src_width, int src_height, int alpha),
 	void POLARISAPI (*p_reset_lap_timer)(intptr_t origin),
 	int64_t POLARISAPI (*p_get_lap_timer_millisec)(intptr_t origin),
 	void POLARISAPI (*p_play_sound)(int stream, intptr_t wave),
@@ -440,15 +435,15 @@ extern void POLARISAPI (*wrap_log_warn)(intptr_t s);
 extern void POLARISAPI (*wrap_log_error)(intptr_t s);
 extern void POLARISAPI (*wrap_make_sav_dir)(void);
 extern void POLARISAPI (*wrap_make_valid_path)(intptr_t dir, intptr_t fname, intptr_t dst, int len);
-extern void POLARISAPI (*wrap_notify_image_update)(intptr_t img, intptr_t pixels);
-extern void POLARISAPI (*wrap_notify_image_free)(intptr_t img);
-extern void POLARISAPI (*wrap_render_image_normal)(int dst_left, int dst_top, int dst_width, int dst_height, intptr_t src_img, int src_left, int src_top, int src_width, int src_height, int alpha);
-extern void POLARISAPI (*wrap_render_image_add)(int dst_left, int dst_top, int dst_width, int dst_height, intptr_t src_img, int src_left, int src_top, int src_width, int src_height, int alpha);
-extern void POLARISAPI (*wrap_render_image_dim)(int dst_left, int dst_top, int dst_width, int dst_height, intptr_t src_img, int src_left, int src_top, int src_width, int src_height, int alpha);
-extern void POLARISAPI (*wrap_render_image_rule)(intptr_t src_img, intptr_t rule_img, int threshold);
-extern void POLARISAPI (*wrap_render_image_melt)(intptr_t src_img, intptr_t rule_img, int progress);
-extern void POLARISAPI (*wrap_render_image_3d_normal)(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, intptr_t src_img, int src_left, int src_top, int src_width, int src_height, int alpha);
-extern void POLARISAPI (*wrap_render_image_3d_add)(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, intptr_t src_img, int src_left, int src_top, int src_width, int src_height, int alpha);
+extern void POLARISAPI (*wrap_notify_image_update)(int id, int width, int height, intptr_t pixels);
+extern void POLARISAPI (*wrap_notify_image_free)(int id);
+extern void POLARISAPI (*wrap_render_image_normal)(int dst_left, int dst_top, int dst_width, int dst_height, int src_img, int src_left, int src_top, int src_width, int src_height, int alpha);
+extern void POLARISAPI (*wrap_render_image_add)(int dst_left, int dst_top, int dst_width, int dst_height, int src_img, int src_left, int src_top, int src_width, int src_height, int alpha);
+extern void POLARISAPI (*wrap_render_image_dim)(int dst_left, int dst_top, int dst_width, int dst_height, int src_img, int src_left, int src_top, int src_width, int src_height, int alpha);
+extern void POLARISAPI (*wrap_render_image_rule)(int src_img, int rule_img, int threshold);
+extern void POLARISAPI (*wrap_render_image_melt)(int src_img, int rule_img, int progress);
+extern void POLARISAPI (*wrap_render_image_3d_normal)(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, int src_img, int src_left, int src_top, int src_width, int src_height, int alpha);
+extern void POLARISAPI (*wrap_render_image_3d_add)(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, int src_img, int src_left, int src_top, int src_width, int src_height, int alpha);
 extern void POLARISAPI (*wrap_reset_lap_timer)(intptr_t origin);
 extern int64_t POLARISAPI (*wrap_get_lap_timer_millisec)(intptr_t origin);
 extern void POLARISAPI (*wrap_play_sound)(int stream, intptr_t wave);

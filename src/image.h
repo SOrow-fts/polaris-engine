@@ -49,6 +49,9 @@ struct image {
 
 	/* (HAL internal) テクスチャのアップロードが必要か */
 	bool need_upload;
+
+	/* (HAL internal) */
+	int id;
 };
 
 /*

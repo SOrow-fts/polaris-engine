@@ -34,6 +34,11 @@
 #define ALIGN_BYTES	(64)
 
 /*
+ * テクスチャのID
+ */
+static int id_top;
+
+/*
  * 前方参照
  */
 
@@ -84,6 +89,7 @@ struct image *create_image(int w, int h)
 	img->pixels = pixels;
 	img->texture = NULL;
 	img->need_upload = false;
+	img->id = id_top++;
 
 	return img;
 }
@@ -139,6 +145,7 @@ struct image *create_image_with_pixels(int w, int h, pixel_t *pixels)
 	img->pixels = pixels;
 	img->texture = NULL;
 	img->need_upload = false;
+	img->id = id_top++;
 
 	return img;
 }

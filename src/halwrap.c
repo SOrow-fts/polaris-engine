@@ -22,15 +22,15 @@ void POLARISAPI (*wrap_log_warn)(intptr_t s);
 void POLARISAPI (*wrap_log_error)(intptr_t s);
 void POLARISAPI (*wrap_make_sav_dir)(void);
 void POLARISAPI (*wrap_make_valid_path)(intptr_t dir, intptr_t fname, intptr_t dst, int len);
-void POLARISAPI (*wrap_notify_image_update)(intptr_t img, intptr_t pixels);
-void POLARISAPI (*wrap_notify_image_free)(intptr_t img);
-void POLARISAPI (*wrap_render_image_normal)(int dst_left, int dst_top, int dst_width, int dst_height, intptr_t src_img, int src_left, int src_top, int src_width, int src_height, int alpha);
-void POLARISAPI (*wrap_render_image_add)(int dst_left, int dst_top, int dst_width, int dst_height, intptr_t src_img, int src_left, int src_top, int src_width, int src_height, int alpha);
-void POLARISAPI (*wrap_render_image_dim)(int dst_left, int dst_top, int dst_width, int dst_height, intptr_t src_img, int src_left, int src_top, int src_width, int src_height, int alpha);
-void POLARISAPI (*wrap_render_image_rule)(intptr_t src_img, intptr_t rule_img, int threshold);
-void POLARISAPI (*wrap_render_image_melt)(intptr_t src_img, intptr_t rule_img, int progress);
-void POLARISAPI (*wrap_render_image_3d_normal)(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, intptr_t src_img, int src_left, int src_top, int src_width, int src_height, int alpha);
-void POLARISAPI (*wrap_render_image_3d_add)(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, intptr_t src_img, int src_left, int src_top, int src_width, int src_height, int alpha);
+void POLARISAPI (*wrap_notify_image_update)(int id, int width, int height, intptr_t pixels);
+void POLARISAPI (*wrap_notify_image_free)(int id);
+void POLARISAPI (*wrap_render_image_normal)(int dst_left, int dst_top, int dst_width, int dst_height, int src_img, int src_left, int src_top, int src_width, int src_height, int alpha);
+void POLARISAPI (*wrap_render_image_add)(int dst_left, int dst_top, int dst_width, int dst_height, int src_img, int src_left, int src_top, int src_width, int src_height, int alpha);
+void POLARISAPI (*wrap_render_image_dim)(int dst_left, int dst_top, int dst_width, int dst_height, int src_img, int src_left, int src_top, int src_width, int src_height, int alpha);
+void POLARISAPI (*wrap_render_image_rule)(int src_img, int rule_img, int threshold);
+void POLARISAPI (*wrap_render_image_melt)(int src_img, int rule_img, int progress);
+void POLARISAPI (*wrap_render_image_3d_normal)(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, int src_img, int src_left, int src_top, int src_width, int src_height, int alpha);
+void POLARISAPI (*wrap_render_image_3d_add)(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, int src_img, int src_left, int src_top, int src_width, int src_height, int alpha);
 void POLARISAPI (*wrap_reset_lap_timer)(intptr_t origin);
 int64_t POLARISAPI (*wrap_get_lap_timer_millisec)(intptr_t origin);
 void POLARISAPI (*wrap_play_sound)(int stream, intptr_t wave);
@@ -65,15 +65,15 @@ void init_hal_func_table
 	void POLARISAPI (*p_log_error)(intptr_t s),
 	void POLARISAPI (*p_make_sav_dir)(void),
 	void POLARISAPI (*p_make_valid_path)(intptr_t dir, intptr_t fname, intptr_t dst, int len),
-	void POLARISAPI (*p_notify_image_update)(intptr_t img, intptr_t pixels),
-	void POLARISAPI (*p_notify_image_free)(intptr_t img),
-	void POLARISAPI (*p_render_image_normal)(int dst_left, int dst_top, int dst_width, int dst_height, intptr_t src_img, int src_left, int src_top, int src_width, int src_height, int alpha),
-	void POLARISAPI (*p_render_image_add)(int dst_left, int dst_top, int dst_width, int dst_height, intptr_t src_img, int src_left, int src_top, int src_width, int src_height, int alpha),
-	void POLARISAPI (*p_render_image_dim)(int dst_left, int dst_top, int dst_width, int dst_height, intptr_t src_img, int src_left, int src_top, int src_width, int src_height, int alpha),
-	void POLARISAPI (*p_render_image_rule)(intptr_t src_img, intptr_t rule_img, int threshold),
-	void POLARISAPI (*p_render_image_melt)(intptr_t src_img, intptr_t rule_img, int progress),
-	void POLARISAPI (*p_render_image_3d_normal)(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, intptr_t src_img, int src_left, int src_top, int src_width, int src_height, int alpha),
-	void POLARISAPI (*p_render_image_3d_add)(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, intptr_t src_img, int src_left, int src_top, int src_width, int src_height, int alpha),
+	void POLARISAPI (*p_notify_image_update)(int id, int width, int height, intptr_t pixels),
+	void POLARISAPI (*p_notify_image_free)(int id),
+	void POLARISAPI (*p_render_image_normal)(int dst_left, int dst_top, int dst_width, int dst_height, int src_img, int src_left, int src_top, int src_width, int src_height, int alpha),
+	void POLARISAPI (*p_render_image_add)(int dst_left, int dst_top, int dst_width, int dst_height, int src_img, int src_left, int src_top, int src_width, int src_height, int alpha),
+	void POLARISAPI (*p_render_image_dim)(int dst_left, int dst_top, int dst_width, int dst_height, int src_img, int src_left, int src_top, int src_width, int src_height, int alpha),
+	void POLARISAPI (*p_render_image_rule)(int src_img, int rule_img, int threshold),
+	void POLARISAPI (*p_render_image_melt)(int src_img, int rule_img, int progress),
+	void POLARISAPI (*p_render_image_3d_normal)(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, int src_img, int src_left, int src_top, int src_width, int src_height, int alpha),
+	void POLARISAPI (*p_render_image_3d_add)(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, int src_img, int src_left, int src_top, int src_width, int src_height, int alpha),
 	void POLARISAPI (*p_reset_lap_timer)(intptr_t origin),
 	int64_t POLARISAPI (*p_get_lap_timer_millisec)(intptr_t origin),
 	void POLARISAPI (*p_play_sound)(int stream, intptr_t wave),
@@ -204,40 +204,66 @@ char *make_valid_path(const char *dir, const char *fname)
 	return ret;
 }
 
-#undef notify_image_update
-void notify_image_update(struct image *img, uint32_t *pixels)
+void notify_image_update(struct image *img)
 {
-	wrap_notify_image_update((intptr_t)img, (intptr_t)pixels);
+	wrap_notify_image_update(img->id, img->width, img->height, (intptr_t)img->pixels);
 }
 
 void notify_image_free(struct image *img)
 {
-	wrap_notify_image_free((intptr_t)img);
+	wrap_notify_image_free(img->id);
 }
 
 void render_image_normal(int dst_left, int dst_top, int dst_width, int dst_height, struct image *src_img, int src_left, int src_top, int src_width, int src_height, int alpha)
 {
-	wrap_render_image_normal(dst_left, dst_top, dst_width, dst_height, (intptr_t)src_img, src_left, src_top, src_width, src_height, alpha);
+	if (dst_width == -1)
+		dst_width = src_img->width;
+	if (dst_height == -1)
+		dst_height = src_img->height;
+	if (src_width == -1)
+		src_width = src_img->width;
+	if (src_height == -1)
+		src_height = src_img->height;
+
+	wrap_render_image_normal(dst_left, dst_top, dst_width, dst_height, src_img->id, src_left, src_top, src_width, src_height, alpha);
 }
 
 void render_image_add(int dst_left, int dst_top, int dst_width, int dst_height, struct image *src_img, int src_left, int src_top, int src_width, int src_height, int alpha)
 {
-	wrap_render_image_add(dst_left, dst_top, dst_width, dst_height, (intptr_t)src_img, src_left, src_top, src_width, src_height, alpha);
+	if (dst_width == -1)
+		dst_width = src_img->width;
+	if (dst_height == -1)
+		dst_height = src_img->height;
+	if (src_width == -1)
+		src_width = src_img->width;
+	if (src_height == -1)
+		src_height = src_img->height;
+
+	wrap_render_image_add(dst_left, dst_top, dst_width, dst_height, src_img->id, src_left, src_top, src_width, src_height, alpha);
 }
 
 void render_image_dim(int dst_left, int dst_top, int dst_width, int dst_height, struct image *src_img, int src_left, int src_top, int src_width, int src_height, int alpha)
 {
-    wrap_render_image_dim(dst_left, dst_top, dst_width, dst_height, (intptr_t)src_img, src_left, src_top, src_width, src_height, alpha);
+	if (dst_width == -1)
+		dst_width = src_img->width;
+	if (dst_height == -1)
+		dst_height = src_img->height;
+	if (src_width == -1)
+		src_width = src_img->width;
+	if (src_height == -1)
+		src_height = src_img->height;
+
+	wrap_render_image_dim(dst_left, dst_top, dst_width, dst_height, src_img->id, src_left, src_top, src_width, src_height, alpha);
 }
 
 void render_image_rule(struct image *src_img, struct image *rule_img, int threshold)
 {
-	wrap_render_image_rule((intptr_t)src_img, (intptr_t)rule_img, threshold);
+	wrap_render_image_rule(src_img->id, rule_img->id, threshold);
 }
 
 void render_image_melt(struct image *src_img, struct image *rule_img, int progress)
 {
-	wrap_render_image_melt((intptr_t)src_img, (intptr_t)rule_img, progress);
+	wrap_render_image_melt(src_img->id, rule_img->id, progress);
 }
 
 void render_image_3d_normal(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, struct image *src_img, int src_left, int src_top, int src_width, int src_height, int alpha)

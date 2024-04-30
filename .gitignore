@@ -101,6 +101,12 @@ build/engine-x11/*.o
 polaris-engine-runtime
 polaris-engine
 
+# Unity
+build/engine-unity/Assets/*.meta
+build/engine-unity/StreamingAssets
+build/engine-unity/Assets/*.dll
+build/engine-unity/Assets/*.dylib
+
 #
 # Editor
 #
