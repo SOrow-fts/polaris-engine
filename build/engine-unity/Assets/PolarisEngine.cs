@@ -23,6 +23,8 @@ public class PolarisEngine : MonoBehaviour
 	//
 	// For Rendering
 	//
+	private static int viewportWidth = 1280;
+	private static int viewportHeight = 720;
 	private Mesh _mesh;
 	private Material _material;
 	private Vector3[] _positions = new Vector3[] {new Vector3(-1, 1, 0), new Vector3(1, 1, 0), new Vector3(1, -1, 0), new Vector3(-1, -1, 0)};
@@ -30,6 +32,7 @@ public class PolarisEngine : MonoBehaviour
 	private Color[] _colors = new Color[] {new Color(0, 0, 0, 0), new Color(0, 0, 0, 0), new Color(0, 0, 0, 0), new Color(0, 0, 0, 0)};
 	private int[] _triangles = new int[] {0, 1, 2, 1, 3, 2};
 	private Vector3[] _normals = new Vector3[] {new Vector3(0, 0, -1), new Vector3(0, 0, -1), new Vector3(0, 0, -1), new Vector3(0, 0, -1)};
+	private CommandBuffer _commandBuffer;
 
 	//
 	// Game Initialization
@@ -48,6 +51,18 @@ public class PolarisEngine : MonoBehaviour
 
 		Shader shader = Resources.Load<Shader>("NormalShader");
 		_material = new Material(shader);
+
+		_commandBuffer = new CommandBuffer();
+		_commandBuffer.name = "FrameCommand";
+		_commandBuffer.SetRenderTarget(BuiltinRenderTextureType.CameraTarget);
+		_commandBuffer.SetViewport(new Rect(0, 0, viewportWidth, viewportHeight));
+		_commandBuffer.SetViewMatrix(Matrix4x4.TRS(new Vector3(-1f, -1f, 0), Quaternion.identity, new Vector3(2f / viewportWidth, 2f / viewportHeight, 1f)));
+		_commandBuffer.ClearRenderTarget(true, true, Color.black);
+
+		Camera camera = Camera.main;
+		camera.clearFlags = CameraClearFlags.SolidColor;
+		camera.backgroundColor = new Color(0, 0, 0, 0);
+		camera.AddCommandBuffer(CameraEvent.BeforeForwardAlpha, _commandBuffer);
 	}
 
 	//
@@ -55,6 +70,8 @@ public class PolarisEngine : MonoBehaviour
 	//
 	unsafe void Update()
 	{
+		_commandBuffer.Clear();
+
 		if (on_event_frame() == 0)
 		{
 			// TODO
@@ -63,8 +80,9 @@ public class PolarisEngine : MonoBehaviour
 	}
 
 	//
-	// これよりの下のコードは黒魔術です。
-	// さまざまな言語処理系に精通していない限り、理解できなくて構いません。
+	// ここから下のコードはC#とCを橋渡しするためのおまじないで、
+	// さまざまな言語処理系に精通していないと理解できないので、
+	// 真剣に読む必要はありません。
 	//
 
 	//
@@ -712,7 +730,8 @@ public class PolarisEngine : MonoBehaviour
 		_instance._mesh.uv = _instance._uv;
 		_instance._mesh.colors = _instance._colors;
 
-		Graphics.DrawMesh(_instance._mesh, Vector3.zero, Quaternion.identity, _instance._material, 0);
+		_instance._commandBuffer.DrawMesh(_instance._mesh, Matrix4x4.identity, _instance._material);
+		//Graphics.DrawMesh(_instance._mesh, Vector3.zero, Quaternion.identity, _instance._material, 0);
 	}
 
 	[AOT.MonoPInvokeCallback(typeof(delegate_render_image_add))]
