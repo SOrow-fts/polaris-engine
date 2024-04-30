@@ -25,25 +25,11 @@ public class PolarisEngine : MonoBehaviour
 	//
 	private Mesh _mesh;
 	private Material _material;
-	private Vector3[] _positions = new Vector3[] {
-		new Vector3(-1, 1, 0),
-		new Vector3(1, 1, 0),
-		new Vector3(1, -1, 0),
-		new Vector3(-1, -1, 0)
-	};
-	private Vector2[] _uv = new Vector2[] {
-		new Vector2(0, 0),
-		new Vector2(1, 0),
-		new Vector2(1, 1),
-		new Vector2(0, 1)
-	};
+	private Vector3[] _positions = new Vector3[] {new Vector3(-1, 1, 0), new Vector3(1, 1, 0), new Vector3(1, -1, 0), new Vector3(-1, -1, 0)};
+	private Vector2[] _uv = new Vector2[] {new Vector2(0, 0), new Vector2(1, 0), new Vector2(1, 1), new Vector2(0, 1)};
+	private Color[] _colors = new Color[] {new Color(0, 0, 0, 0), new Color(0, 0, 0, 0), new Color(0, 0, 0, 0), new Color(0, 0, 0, 0)};
 	private int[] _triangles = new int[] {0, 1, 2, 1, 3, 2};
-	private Vector3[] _normals = new Vector3[] {
-		new Vector3(0, 0, -1),
-		new Vector3(0, 0, -1),
-		new Vector3(0, 0, -1),
-		new Vector3(0, 0, -1)
-	};
+	private Vector3[] _normals = new Vector3[] {new Vector3(0, 0, -1), new Vector3(0, 0, -1), new Vector3(0, 0, -1), new Vector3(0, 0, -1)};
 
 	//
 	// Game Initialization
@@ -56,6 +42,7 @@ public class PolarisEngine : MonoBehaviour
 		_mesh.vertices = _positions;
 		_mesh.triangles = _triangles;
 		_mesh.uv = _uv;
+		_mesh.colors = _colors;
 		_mesh.normals = _normals;
 		_mesh.RecalculateBounds();
 
@@ -687,39 +674,44 @@ public class PolarisEngine : MonoBehaviour
 			srcImage.need_upload = false;
 		}
 		_instance._material.mainTexture = srcImage.texture;
-		_instance._material.SetColor("_Color", new Color(1.0f, 1.0f, 1.0f, alpha / 255.0f));
 
 		// Set the left-top point.
-		_instance._positions[0].x = dst_left / 1280.0f;
-		_instance._positions[0].y = 1.0f - dst_top / 720.0f;
+		_instance._positions[0].x = dst_left / 1280.0f - 0.5f;
+		_instance._positions[0].y = 0.5f - dst_top / 720.0f;
 		_instance._positions[0].z = 0;
-		_instance._uv[0].x = 0;
-		_instance._uv[0].y = 0;
+		_instance._uv[0].x = (float)src_left / (float)srcImage.width;
+		_instance._uv[0].y = (float)src_top / (float)srcImage.height;
+		_instance._colors[0].a = alpha / 255.0f;
 
 		// Set the right-top point.
-		_instance._positions[1].x = (dst_left + dst_width) / 1280.0f;
-		_instance._positions[1].y = 1.0f - dst_top / 720.0f;
+		_instance._positions[1].x = (dst_left + dst_width) / 1280.0f - 0.5f;
+		_instance._positions[1].y = 0.5f - dst_top / 720.0f;
 		_instance._positions[1].z = 0;
-		_instance._uv[1].x = 1.0f;
-		_instance._uv[1].y = 0;
+		_instance._uv[1].x = (float)(src_left + src_width) / (float)srcImage.width;
+		_instance._uv[1].y = (float)src_top / (float)srcImage.height;
+		_instance._colors[1].a = alpha / 255.0f;
 
 		// Set the left-bottom point.
-		_instance._positions[2].x = dst_left / 1280.0f;
-		_instance._positions[2].y = 1.0f - (dst_top + dst_height) / 720.0f;
+		_instance._positions[2].x = dst_left / 1280.0f - 0.5f;
+		_instance._positions[2].y = 0.5f - (dst_top + dst_height) / 720.0f;
 		_instance._positions[2].z = 0;
-		_instance._uv[2].x = 0;
-		_instance._uv[2].y = 1.0f;
+		_instance._uv[2].x = (float)src_left / (float)srcImage.width;
+		_instance._uv[2].y = (float)(src_top + src_height) / (float)srcImage.height;
+		_instance._colors[2].a = alpha / 255.0f;
 
 		// Set the right-bottom point.
-		_instance._positions[3].x = (dst_left + dst_width) / 1280.0f;
-		_instance._positions[3].y = 1.0f - (dst_top + dst_height) / 720.0f;
+		_instance._positions[3].x = (dst_left + dst_width) / 1280.0f - 0.5f;
+		_instance._positions[3].y = 0.5f - (dst_top + dst_height) / 720.0f;
 		_instance._positions[3].z = 0;
-		_instance._uv[3].x = 1.0f;
-		_instance._uv[3].y = 1.0f;
+		_instance._uv[3].x = (float)(src_left + src_width) / (float)srcImage.width;
+		_instance._uv[3].y = (float)(src_top + src_height) / (float)srcImage.height;
+		_instance._colors[3].a = alpha / 255.0f;
 
 		_instance._mesh.vertices = _instance._positions;
 		_instance._mesh.triangles = _instance._triangles;
 		_instance._mesh.uv = _instance._uv;
+		_instance._mesh.colors = _instance._colors;
+
 		Graphics.DrawMesh(_instance._mesh, Vector3.zero, Quaternion.identity, _instance._material, 0);
 	}
 
