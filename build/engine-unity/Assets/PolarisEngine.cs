@@ -20,8 +20,9 @@ using UnityEngine.Rendering;
 
 public class PolarisEngine : MonoBehaviour
 {
-	private static PolarisEngine _instance;
-
+	//
+	// For Rendering
+	//
 	private Mesh _mesh;
 	private Material _material;
 	private Vector3[] _positions = new Vector3[] {
@@ -42,13 +43,51 @@ public class PolarisEngine : MonoBehaviour
 		new Vector3(0, 0, -1),
 		new Vector3(0, 0, -1),
 		new Vector3(0, 0, -1)
-	};	
+	};
 
 	//
-	// Unsafe Code
+	// Game Initialization
+	//
+	private void Awake()
+	{
+		_instance = this;
+
+		_mesh = new Mesh();
+		_mesh.vertices = _positions;
+		_mesh.triangles = _triangles;
+		_mesh.uv = _uv;
+		_mesh.normals = _normals;
+		_mesh.RecalculateBounds();
+
+		Shader shader = Resources.Load<Shader>("NormalShader");
+		_material = new Material(shader);
+	}
+
+	//
+	// Frame Update
+	//
+	unsafe void Update()
+	{
+		if (on_event_frame() == 0)
+		{
+			// TODO
+			// exit(0);
+		}
+	}
+
+	//
+	// これよりの下のコードは黒魔術です。
+	// さまざまな言語処理系に精通していない限り、理解できなくて構いません。
 	//
 
+	//
+	// The Sole Instance
+	//
+	private static PolarisEngine _instance;
+
+	//
 	// HAL delegate types.
+	//
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_log_info(byte *s);
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_log_warn(byte *s);
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_log_error(byte *s);
@@ -86,7 +125,9 @@ public class PolarisEngine : MonoBehaviour
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_write_save_file(int b);
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_close_save_file();
 
-	// Init delegate types.
+	//
+	// Init delegate types for C code calls.
+	//
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 	unsafe delegate void delegate_init_hal_func_table(IntPtr log_info,
 													  IntPtr log_warn,
@@ -126,13 +167,13 @@ public class PolarisEngine : MonoBehaviour
 													  IntPtr close_save_file);
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate int delegate_init_conf();
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_init_locale_code();
-
-	// Event delegate types.
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate int delegate_on_event_init();
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_on_event_cleanup();
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate int delegate_on_event_frame();
 
-	// Delegate objects.
+	//
+	// Delegate objects for C code calls.
+	//
 	static delegate_log_info d_log_info;
 	static delegate_log_warn d_log_warn;
 	static delegate_log_error d_log_error;
@@ -176,7 +217,9 @@ public class PolarisEngine : MonoBehaviour
 	static delegate_on_event_cleanup d_on_event_cleanup;
 	static delegate_on_event_frame d_on_event_frame;
 
+	//
 	// Delegate pointers.
+	//
 	static IntPtr p_log_info;
 	static IntPtr p_log_warn;
 	static IntPtr p_log_error;
@@ -220,7 +263,9 @@ public class PolarisEngine : MonoBehaviour
 	static IntPtr p_on_event_cleanup;
 	static IntPtr p_on_event_frame;
 
+	//
 	// C# Image structure.
+	//
 	public struct ManagedImage {
 		public int width;
 		public int height;
@@ -229,9 +274,14 @@ public class PolarisEngine : MonoBehaviour
 		public bool need_upload;
 	};
 
+	//
 	// Image lists.
+	//
 	private static Dictionary<int, ManagedImage> imageDict = new Dictionary<int, ManagedImage>();
 
+	//
+	// Initialize the calling bridges on loading.
+	//
 	unsafe void Start()
 	{
 		GC.KeepAlive(this);
@@ -460,7 +510,7 @@ public class PolarisEngine : MonoBehaviour
 		GC.KeepAlive(this);
 	}
 
-    [DllImport("libpolaris.dylib")]
+    [DllImport("libpolaris")]
     static extern unsafe void init_hal_func_table(
 		IntPtr log_info,
 		IntPtr log_warn,
@@ -539,10 +589,8 @@ public class PolarisEngine : MonoBehaviour
     static extern unsafe void on_event_swipe_up();
 
 	//
-	// HAL
+	// HAL functions
 	//
-
-	static unsafe IntPtr locale = IntPtr.Zero;
 
 	[AOT.MonoPInvokeCallback(typeof(delegate_log_info))]
 	static unsafe void log_info(byte *s)
@@ -804,6 +852,8 @@ public class PolarisEngine : MonoBehaviour
 		// TODO
 	}
 
+	static unsafe IntPtr locale = IntPtr.Zero;
+
 	[AOT.MonoPInvokeCallback(typeof(delegate_get_system_locale))]
 	static unsafe IntPtr get_system_locale()
 	{
@@ -916,36 +966,4 @@ public class PolarisEngine : MonoBehaviour
     static unsafe void close_save_file() {
 		string s = PlayerPrefs.GetString(SaveFile, SaveData);
     }
-
-	//
-	// Initialization
-	//
-
-	private void Awake()
-	{
-		_instance = this;
-
-		_mesh = new Mesh();
-		_mesh.vertices = _positions;
-		_mesh.triangles = _triangles;
-		_mesh.uv = _uv;
-		_mesh.normals = _normals;
-		_mesh.RecalculateBounds();
-
-		Shader shader = Resources.Load<Shader>("NormalShader");
-		_material = new Material(shader);
-	}
-
-	//
-	// Frame Update
-	//
-
-	unsafe void Update()
-	{
-		if (on_event_frame() == 0)
-		{
-			// TODO
-			// exit(0);
-		}
-	}
 }
