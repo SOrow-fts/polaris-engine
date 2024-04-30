@@ -934,17 +934,6 @@ public class PolarisEngine : MonoBehaviour
 
 		Shader shader = Resources.Load<Shader>("NormalShader");
 		_material = new Material(shader);
-/*
-		_material.SetFloat("_SrcBlend", (float)UnityEngine.Rendering.BlendMode.SrcAlpha);
-		_material.SetFloat("_DstBlend", (float)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-		_material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-		_material.SetOverrideTag("RenderType", "Transparent");
-		_material.SetFloat("_ZWrite", 0.0f);
-		_material.renderQueue = (int)RenderQueue.Transparent;
-		_material.renderQueue += _material.HasProperty("_QueueOffset") ? (int)_material.GetFloat("_QueueOffset") : 0;
-		_material.SetShaderPassEnabled("ShadowCaster", false);
-//		BaseShaderGUI.SetupMaterialBlendMode(_material);
-*/
 	}
 
 	//

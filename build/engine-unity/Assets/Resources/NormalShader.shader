@@ -3,11 +3,13 @@ Shader "Polaris Engine/Normal Shader"
     Properties
     {
         _MainTexture ("Texture", 2D) = "white" {}
+        _Color ("Main Color", Color) = (1,1,1,1)
     }
     SubShader
     {
         Tags { "RenderType"="Transparent" }
-        Pass {
+        Pass
+        {
             Blend SrcAlpha OneMinusSrcAlpha
             SetTexture [_MainTex] { combine texture }
         }
