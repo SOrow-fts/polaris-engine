@@ -75,22 +75,43 @@ add_library(
   src/main/cpp/cmd_wait.c
   src/main/cpp/cmd_wms.c
 )
-target_link_libraries(
-  polaris
-  GLESv3
-  png
-  jpeg
-  webp
-  freetype
-  bz2
-  z
-  brotlidec
-  brotlicommon
-  ogg
-  vorbis
-  OpenSLES
-  ${log-lib}
-)
+if(AWK)
+  # On the Mac and Linux versions of Android Studio
+  target_link_libraries(
+    polaris
+    GLESv3
+    png
+    jpeg
+    webp
+    freetype
+    bz2
+    z
+    brotlidec
+    brotlicommon
+    ogg
+    vorbis
+    OpenSLES
+    ${log-lib}
+  )
+else()
+  # On the Windows version of Android Studio
+  target_link_libraries(
+    polaris
+    GLESv3
+    png_shared
+    jpeg
+    webp
+    freetype
+    bz2
+    z
+    brotlidec
+    brotlicommon
+    ogg
+    vorbis
+    OpenSLES
+    ${log-lib}
+  )
+endif()
 
 # Add bzip2
 add_subdirectory(src/main/cpp/bzip2)
