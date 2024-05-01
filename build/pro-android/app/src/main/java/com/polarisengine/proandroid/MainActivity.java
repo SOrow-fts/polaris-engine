@@ -227,7 +227,7 @@ public class MainActivity extends ComponentActivity {
 	//
 
 	private void openProject() {
-		// This will call onActivityResult() if a user give us a permission to a folder.
+		// This will call onActivityResult() if a user gives us a permission to a folder.
 		dirRequest.launch(null);
 	}
 
@@ -236,6 +236,7 @@ public class MainActivity extends ComponentActivity {
 			new ActivityResultCallback<Uri>() {
 				@Override
 				public void onActivityResult(Uri uri) {
+					Log.d("polaris", uri.toString());
 					if (uri != null) {
 						// Get the real path.
 						basePath = FileUtil.getFullPathFromTreeUri(uri, MainActivity.instance);
