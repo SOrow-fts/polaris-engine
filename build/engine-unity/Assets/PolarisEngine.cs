@@ -69,8 +69,8 @@ public class PolarisEngine : MonoBehaviour
 	}
 
 	//
-	// ここから下のコードはC#とCを橋渡しするためのおまじないで、
-	// さまざまな言語処理系に精通していないと理解できないので、
+	// ここから下のコードはC#とCを橋渡しするためのおまじないが大半で、
+	// さまざまな言語処理系に精通していないと理解できないと思われるため、
 	// 真剣に読む必要はありません。
 	//
 
@@ -581,6 +581,21 @@ public class PolarisEngine : MonoBehaviour
 
     [DllImport("libpolaris")]
     static extern unsafe void on_event_swipe_up();
+
+    [DllImport("libpolaris")]
+    static extern unsafe byte *create_wave_from_file(IntPtr dir, IntPtr file, bool loop);
+
+    [DllImport("libpolaris")]
+	static extern unsafe void destroy_wave(byte *w);
+
+    [DllImport("libpolaris")]
+	static extern void set_wave_repeat_times(byte *w, int n);
+
+    [DllImport("libpolaris")]
+	static extern bool is_wave_eos(byte *w);
+
+    [DllImport("libpolaris")]
+	static extern int get_wave_samples(byte *w, uint *buf, int samples);
 
 	//
 	// HAL functions
