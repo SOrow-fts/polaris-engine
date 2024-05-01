@@ -517,7 +517,7 @@ bool init(void)
 
 	/* Android NDKの場合、画像を破棄する */
 #ifdef POLARIS_TARGET_ANDROID
-	for (int i = 0; i < PARENT_COUNT; i++) {
+	for (int i = 0; i < CHOOSE_COUNT; i++) {
 		if (parent_button[i].img_idle != NULL)
 			destroy_image(parent_button[i].img_idle);
 		if (parent_button[i].img_hover != NULL)
