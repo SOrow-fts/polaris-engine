@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace "com.polaris-engine.pro-android"
+    namespace "com.polarisengine.proandroid"
     compileSdk 34
     ndkVersion "26.1.10909125"
     defaultConfig {
-        applicationId "com.polaris-engine.pro-android"
+        applicationId "com.polarisengine.proandroid"
         minSdk 30
         targetSdk 34
         versionCode 1

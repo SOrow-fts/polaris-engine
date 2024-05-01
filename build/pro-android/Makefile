@@ -7,7 +7,7 @@ setup:
 	@
 	@echo 'Extracting libpng.'
 	@mkdir -p app/src/main/cpp/libpng
-	@tar xzf ../libsrc/libpng-1.6.35.tar.gz -C app/src/main/cpp/libpng --strip-components 1
+	@tar xzf ../libsrc/libpng-1.6.42.tar.gz -C app/src/main/cpp/libpng --strip-components 1
 	@cp app/src/main/cpp/libpng/scripts/pnglibconf.h.prebuilt app/src/main/cpp/libpng/pnglibconf.h
 	@
 	@echo 'Extracting bzip2.'
