@@ -43,9 +43,8 @@ static bool is_var_changed[LOCAL_VAR_SIZE + GLOBAL_VAR_SIZE];
  */
 void init_vars(void)
 {
-	int i;
-
 #ifdef POLARIS_DLL
+	int i;
 	/* Androidでは再利用されるので初期化する */
 	for (i = 0; i < LOCAL_VAR_SIZE; i++)
 		local_var_tbl[i] = 0;

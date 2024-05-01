@@ -61,7 +61,7 @@ static int touch_last_y;
 static bool is_continuous_swipe_enabled;
 
 JNIEXPORT void JNICALL
-Java_jp_luxion_polaris_MainActivity_nativeInitGame(
+Java_com_polarisengine_engineandroid_MainActivity_nativeInitGame(
 	JNIEnv *env,
 	jobject instance)
 {
@@ -93,7 +93,7 @@ Java_jp_luxion_polaris_MainActivity_nativeInitGame(
 }
 
 JNIEXPORT void JNICALL
-Java_jp_luxion_polaris_MainActivity_nativeReinitOpenGL(
+Java_com_polarisengine_engineandroid_MainActivity_nativeReinitOpenGL(
         JNIEnv *env,
         jobject instance)
 {
@@ -114,7 +114,7 @@ Java_jp_luxion_polaris_MainActivity_nativeReinitOpenGL(
 }
 
 JNIEXPORT void JNICALL
-Java_jp_luxion_polaris_MainActivity_nativeCleanup(
+Java_com_polarisengine_engineandroid_MainActivity_nativeCleanup(
 	JNIEnv *env,
 	jobject instance)
 {
@@ -133,7 +133,7 @@ Java_jp_luxion_polaris_MainActivity_nativeCleanup(
 }
 
 JNIEXPORT jboolean JNICALL
-Java_jp_luxion_polaris_MainActivity_nativeRunFrame(
+Java_com_polarisengine_engineandroid_MainActivity_nativeRunFrame(
 	JNIEnv *env,
 	jobject instance)
 {
@@ -142,7 +142,7 @@ Java_jp_luxion_polaris_MainActivity_nativeRunFrame(
 	/* Process a video playback. */
 	bool do_render = true;
 	if (state_video) {
-		jclass cls = (*jni_env)->FindClass(jni_env, "jp/luxion/polaris/MainActivity");
+		jclass cls = (*jni_env)->FindClass(jni_env, "com/polarisengine/engineandroid/MainActivity");
 		jmethodID mid = (*jni_env)->GetMethodID(jni_env, cls, "bridgeIsVideoPlaying", "()Z");
 		if ((*jni_env)->CallBooleanMethod(jni_env, main_activity, mid))
 			do_render = false;
@@ -169,7 +169,7 @@ Java_jp_luxion_polaris_MainActivity_nativeRunFrame(
 }
 
 JNIEXPORT void JNICALL
-Java_jp_luxion_polaris_MainActivity_nativeOnPause(
+Java_com_polarisengine_engineandroid_MainActivity_nativeOnPause(
         JNIEnv *env,
         jobject instance)
 {
@@ -179,7 +179,7 @@ Java_jp_luxion_polaris_MainActivity_nativeOnPause(
 }
 
 JNIEXPORT void JNICALL
-Java_jp_luxion_polaris_MainActivity_nativeOnResume(
+Java_com_polarisengine_engineandroid_MainActivity_nativeOnResume(
         JNIEnv *env,
         jobject instance)
 {
@@ -189,7 +189,7 @@ Java_jp_luxion_polaris_MainActivity_nativeOnResume(
 }
 
 JNIEXPORT void JNICALL
-Java_jp_luxion_polaris_MainActivity_nativeOnTouchStart(
+Java_com_polarisengine_engineandroid_MainActivity_nativeOnTouchStart(
         JNIEnv *env,
         jobject instance,
         jint x,
@@ -207,7 +207,7 @@ Java_jp_luxion_polaris_MainActivity_nativeOnTouchStart(
 }
 
 JNIEXPORT void JNICALL
-Java_jp_luxion_polaris_MainActivity_nativeOnTouchMove(
+Java_com_polarisengine_engineandroid_MainActivity_nativeOnTouchMove(
 	JNIEnv *env,
 	jobject instance,
 	jint x,
@@ -234,7 +234,7 @@ Java_jp_luxion_polaris_MainActivity_nativeOnTouchMove(
 }
 
 JNIEXPORT void JNICALL
-Java_jp_luxion_polaris_MainActivity_nativeOnTouchEnd(
+Java_com_polarisengine_engineandroid_MainActivity_nativeOnTouchEnd(
 	JNIEnv *env,
 	jobject instance,
 	jint x,
@@ -550,7 +550,7 @@ bool play_video(const char *fname, bool is_skippable)
 
 	jstring file = (*jni_env)->NewStringUTF(jni_env, fname);
 
-	jclass cls = (*jni_env)->FindClass(jni_env, "jp/luxion/polaris/MainActivity");
+	jclass cls = (*jni_env)->FindClass(jni_env, "com/polarisengine/engineandroid/MainActivity");
 	jmethodID mid = (*jni_env)->GetMethodID(jni_env, cls, "bridgePlayVideo", "(Ljava/lang/String;Z)V");
 	(*jni_env)->CallVoidMethod(jni_env,
 				   main_activity,
@@ -565,7 +565,7 @@ void stop_video(void)
 {
 	state_video = false;
 
-	jclass cls = (*jni_env)->FindClass(jni_env, "jp/luxion/polaris/MainActivity");
+	jclass cls = (*jni_env)->FindClass(jni_env, "com/polarisengine/engineandroid/MainActivity");
 	jmethodID mid = (*jni_env)->GetMethodID(jni_env, cls, "bridgeStopVideo", "()V");
 	(*jni_env)->CallVoidMethod(jni_env, main_activity, mid);
 }
@@ -573,7 +573,7 @@ void stop_video(void)
 bool is_video_playing(void)
 {
 	if (state_video) {
-		jclass cls = (*jni_env)->FindClass(jni_env, "jp/luxion/polaris/MainActivity");
+		jclass cls = (*jni_env)->FindClass(jni_env, "com/polarisengine/engineandroid/MainActivity");
 		jmethodID mid = (*jni_env)->GetMethodID(jni_env, cls, "bridgeIsVideoPlaying", "()V");
 		if (!(*jni_env)->CallBooleanMethod(jni_env, main_activity, mid)) {
 			state_video = false;
