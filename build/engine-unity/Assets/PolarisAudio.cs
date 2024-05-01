@@ -1,62 +1,49 @@
 /* -*- coding: utf-8; tab-width: 4; c-basic-offset: 4; indent-tabs-mode: t; -*- */
 
-[RequireComponent(typeof(AudioSource))]
-public class AudioTest : MonoBehaviour
-{
-	public double bpm = 140.0F;
-	public float gain = 0.5F;
-	public int signatureHi = 4;
-	public int signatureLo = 4;
+/*
+ * Polaris Engine
+ * Copyright (C) 2001-2024, Keiichi Tabata. All rights reserved.
+ */
 
-	private double nextTick = 0.0F;
-	private float amp = 0.0F;
-	private float phase = 0.0F;
-	private double sampleRate = 0.0F;
-	private int accent;
-	private bool running = false;
+/*
+ * The Polaris Engine Audio HAL for Unity.
+ */
+
+using UnityEngine;
+
+[RequireComponent(typeof(AudioSource))]
+public class PolarisAudioStream : MonoBehaviour
+{
+	unsafe byte *wave;
+
+	unsafe public void SetSource(byte *w)
+	{
+		wave = w;
+	}
 
 	void Start()
 	{
-		accent = signatureHi;
-		double startTick = AudioSettings.dspTime;
-		sampleRate = AudioSettings.outputSampleRate;
-		nextTick = startTick * sampleRate;
-		running = true;
 	}
 
-	void OnAudioFilterRead(float[] data, int channels)
+	unsafe void OnAudioFilterRead(float[] data, int channels)
 	{
-		if (!running)
+		if (wave == null)
 			return;
 
-		double samplesPerTick = sampleRate * 60.0F / bpm * 4.0F / signatureLo;
-		double sample = AudioSettings.dspTime * sampleRate;
-		int dataLen = data.Length / channels;
+		// Assume (channels==2)
+		int samples = data.Length / channels;
 
-		int n = 0;
-		while (n < dataLen)
+		// Get PCM samples.
+		short[] intData = new short[samples * 2];
+		fixed(short *unsafePointer = intData)
 		{
-			float x = gain * amp * Mathf.Sin(phase);
-			int i = 0;
-			while (i < channels)
-			{
-				data[n * channels + i] += x;
-				i++;
-			}
-			while (sample + n >= nextTick)
-			{
-				nextTick += samplesPerTick;
-				amp = 1.0F;
-				if (++accent > signatureHi)
-				{
-					accent = 1;
-					amp *= 2.0F;
-				}
-				Debug.Log("Tick: " + accent + "/" + signatureHi);
-			}
-			phase += amp * 0.3F;
-			amp *= 0.993F;
-			n++;
+			PolarisEngine.get_wave_samples(wave, (uint *)unsafePointer, samples);
+			for (int i = 0; i < samples * 2; i++)
+				data[i] = intData[i] / 32767.0f;
 		}
+
+		// Stop if we reached to an end-of-stream.
+		if (PolarisEngine.is_wave_eos(wave))
+			wave = null;
 	}
 }

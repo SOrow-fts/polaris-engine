@@ -1,12 +1,12 @@
 /* -*- coding: utf-8; tab-width: 4; c-basic-offset: 4; indent-tabs-mode: t; -*- */
 
 /*
- * Suika2 / Polaris Engine
+ * Polaris Engine
  * Copyright (C) 2001-2024, Keiichi Tabata. All rights reserved.
  */
 
 /*
- * The Suika2 HAL for Unity.
+ * The Polaris Engine HAL for Unity.
  */
 
 using System;
@@ -59,41 +59,50 @@ public class PolarisEngine : MonoBehaviour
 	//
 	unsafe void Update()
 	{
+		int KEY_CONTROL = 0;
+		int KEY_SPACE = 1;
+		int KEY_RETURN = 2;
+		int KEY_UP = 3;
+		int KEY_DOWN = 4;
+		int KEY_LEFT = 5;
+		int KEY_RIGHT = 6;
+		int KEY_ESCAPE = 7;
+
 		// Process key down.
 		if (Input.GetKeyDown(KeyCode.LeftControl))
-			on_event_key_down(KEY_CONTROL);
+			on_event_key_press(KEY_CONTROL);
 		if (Input.GetKeyDown(KeyCode.Space))
-			on_event_key_down(KEY_SPACE);
+			on_event_key_press(KEY_SPACE);
 		if (Input.GetKeyDown(KeyCode.Return))
-			on_event_key_down(KEY_RETURN);
+			on_event_key_press(KEY_RETURN);
 		if (Input.GetKeyDown(KeyCode.UpArrow))
-			on_event_key_down(KEY_UP);
+			on_event_key_press(KEY_UP);
 		if (Input.GetKeyDown(KeyCode.DownArrow))
-			on_event_key_down(KEY_DOWN);
+			on_event_key_press(KEY_DOWN);
 		if (Input.GetKeyDown(KeyCode.LeftArrow))
-			on_event_key_down(KEY_LEFT);
+			on_event_key_press(KEY_LEFT);
 		if (Input.GetKeyDown(KeyCode.RightArrow))
-			on_event_key_down(KEY_RIGHT);
+			on_event_key_press(KEY_RIGHT);
 		if (Input.GetKeyDown(KeyCode.Escape))
-			on_event_key_down(KEY_ESCAPE);
+			on_event_key_press(KEY_ESCAPE);
 
 		// Process key up.
 		if (Input.GetKeyUp(KeyCode.LeftControl))
-			on_event_key_up(KEY_CONTROL);
+			on_event_key_release(KEY_CONTROL);
 		if (Input.GetKeyUp(KeyCode.Space))
-			on_event_key_up(KEY_SPACE);
+			on_event_key_release(KEY_SPACE);
 		if (Input.GetKeyUp(KeyCode.Return))
-			on_event_key_up(KEY_RETURN);
+			on_event_key_release(KEY_RETURN);
 		if (Input.GetKeyUp(KeyCode.UpArrow))
-			on_event_key_up(KEY_UP);
+			on_event_key_release(KEY_UP);
 		if (Input.GetKeyUp(KeyCode.UpArrow))
-			on_event_key_up(KEY_UP);
+			on_event_key_release(KEY_UP);
 		if (Input.GetKeyUp(KeyCode.LeftArrow))
-			on_event_key_up(KEY_LEFT);
+			on_event_key_release(KEY_LEFT);
 		if (Input.GetKeyUp(KeyCode.RightArrow))
-			on_event_key_up(KEY_RIGHT);
+			on_event_key_release(KEY_RIGHT);
 		if (Input.GetKeyUp(KeyCode.Escape))
-			on_event_key_up(KEY_ESCAPE);
+			on_event_key_release(KEY_ESCAPE);
 
 		// Do a frame rendering.
 		_commandBuffer.Clear();
@@ -134,7 +143,7 @@ public class PolarisEngine : MonoBehaviour
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_render_image_3d_add(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, int src_img, int src_left, int src_top, int src_width, int src_height, int alpha);
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_reset_lap_timer(IntPtr origin);
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate Int64 delegate_get_lap_timer_millisec(IntPtr origin);
-	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_play_sound(int stream, IntPtr wave);
+	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_play_sound(int stream, byte *wave);
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_stop_sound(int stream);
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate void delegate_set_sound_volume(int stream, float vol);
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)] unsafe delegate int delegate_is_sound_finished(int stream);
@@ -540,8 +549,12 @@ public class PolarisEngine : MonoBehaviour
 		GC.KeepAlive(this);
 	}
 
-    [DllImport("libpolaris")]
-    static extern unsafe void init_hal_func_table(
+	//
+	// Native Code
+	//
+
+	[DllImport("libpolaris")]
+	static extern unsafe void init_hal_func_table(
 		IntPtr log_info,
 		IntPtr log_warn,
 		IntPtr log_error,
@@ -579,59 +592,50 @@ public class PolarisEngine : MonoBehaviour
 		IntPtr write_save_file,
 		IntPtr close_save_file);
 
-    [DllImport("libpolaris")]
-    static extern unsafe void init_locale_code();
+	[DllImport("libpolaris")]
+	static extern unsafe void init_locale_code();
 
-    [DllImport("libpolaris")]
+	[DllImport("libpolaris")]
 	static extern unsafe int init_conf();
 
-    [DllImport("libpolaris")]
+	[DllImport("libpolaris")]
 	static extern unsafe int on_event_init();
 
-    [DllImport("libpolaris")]
-    static extern unsafe void on_event_cleanup();
+	[DllImport("libpolaris")]
+	static extern unsafe void on_event_cleanup();
 
-    [DllImport("libpolaris")]
+	[DllImport("libpolaris")]
 	static extern unsafe int on_event_frame();
 
-    [DllImport("libpolaris")]
-    static extern unsafe void on_event_key_press(int key);
+	[DllImport("libpolaris")]
+	static extern unsafe void on_event_key_press(int key);
 
-    [DllImport("libpolaris")]
-    static extern unsafe void on_event_key_release(int key);
+	[DllImport("libpolaris")]
+	static extern unsafe void on_event_key_release(int key);
 
-    [DllImport("libpolaris")]
-    static extern unsafe void on_event_mouse_press(int button, int x, int y);
+	[DllImport("libpolaris")]
+	static extern unsafe void on_event_mouse_press(int button, int x, int y);
 
-    [DllImport("libpolaris")]
-    static extern unsafe void on_event_mouse_release(int button, int x, int y);
+	[DllImport("libpolaris")]
+	static extern unsafe void on_event_mouse_release(int button, int x, int y);
 
-    [DllImport("libpolaris")]
-    static extern unsafe void on_event_mouse_move(int x, int y);
+	[DllImport("libpolaris")]
+	static extern unsafe void on_event_mouse_move(int x, int y);
 
-    [DllImport("libpolaris")]
-    static extern unsafe void on_event_touch_cancel();
+	[DllImport("libpolaris")]
+	static extern unsafe void on_event_touch_cancel();
 
-    [DllImport("libpolaris")]
-    static extern unsafe void on_event_swipe_down();
+	[DllImport("libpolaris")]
+	static extern unsafe void on_event_swipe_down();
 
-    [DllImport("libpolaris")]
-    static extern unsafe void on_event_swipe_up();
+	[DllImport("libpolaris")]
+	static extern unsafe void on_event_swipe_up();
 
-    [DllImport("libpolaris")]
-    static extern unsafe byte *create_wave_from_file(IntPtr dir, IntPtr file, bool loop);
+	[DllImport("libpolaris")]
+	public static extern unsafe int get_wave_samples(byte *w, uint *buf, int samples);
 
-    [DllImport("libpolaris")]
-	static extern unsafe void destroy_wave(byte *w);
-
-    [DllImport("libpolaris")]
-	static extern void set_wave_repeat_times(byte *w, int n);
-
-    [DllImport("libpolaris")]
-	static extern bool is_wave_eos(byte *w);
-
-    [DllImport("libpolaris")]
-	static extern int get_wave_samples(byte *w, uint *buf, int samples);
+	[DllImport("libpolaris")]
+	public static extern unsafe bool is_wave_eos(byte *w);
 
 	//
 	// HAL functions
@@ -830,17 +834,35 @@ public class PolarisEngine : MonoBehaviour
 	}
 
 	[AOT.MonoPInvokeCallback(typeof(delegate_play_sound))]
-	static unsafe void play_sound(int stream, IntPtr wave)
+	static unsafe void play_sound(int stream, byte *wave)
 	{
-		// TODO
+		PolarisAudioStream s;
+		if (stream == 0)
+			s = GameObject.Find("BGM").GetComponent<PolarisAudioStream>();
+		else if (stream == 1)
+			s = GameObject.Find("SE").GetComponent<PolarisAudioStream>();
+		else if (stream == 2)
+			s = GameObject.Find("Voice").GetComponent<PolarisAudioStream>();
+		else
+			s = GameObject.Find("SysSE").GetComponent<PolarisAudioStream>();
+		s.SetSource(wave);
 	}
 
 	[AOT.MonoPInvokeCallback(typeof(delegate_stop_sound))]
 	static unsafe void stop_sound(int stream)
 	{
-		// TODO
+		PolarisAudioStream s;
+		if (stream == 0)
+			s = GameObject.Find("BGM").GetComponent<PolarisAudioStream>();
+		else if (stream == 1)
+			s = GameObject.Find("SE").GetComponent<PolarisAudioStream>();
+		else if (stream == 2)
+			s = GameObject.Find("Voice").GetComponent<PolarisAudioStream>();
+		else
+			s = GameObject.Find("SysSE").GetComponent<PolarisAudioStream>();
+		s.SetSource(null);
 	}
-	
+
 	[AOT.MonoPInvokeCallback(typeof(delegate_set_sound_volume))]
 	static unsafe void set_sound_volume(int stream, float vol)
 	{
