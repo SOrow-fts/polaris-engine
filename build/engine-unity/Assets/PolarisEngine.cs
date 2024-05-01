@@ -59,8 +59,44 @@ public class PolarisEngine : MonoBehaviour
 	//
 	unsafe void Update()
 	{
-		_commandBuffer.Clear();
+		// Process key down.
+		if (Input.GetKeyDown(KeyCode.LeftControl))
+			on_event_key_down(KEY_CONTROL);
+		if (Input.GetKeyDown(KeyCode.Space))
+			on_event_key_down(KEY_SPACE);
+		if (Input.GetKeyDown(KeyCode.Return))
+			on_event_key_down(KEY_RETURN);
+		if (Input.GetKeyDown(KeyCode.UpArrow))
+			on_event_key_down(KEY_UP);
+		if (Input.GetKeyDown(KeyCode.DownArrow))
+			on_event_key_down(KEY_DOWN);
+		if (Input.GetKeyDown(KeyCode.LeftArrow))
+			on_event_key_down(KEY_LEFT);
+		if (Input.GetKeyDown(KeyCode.RightArrow))
+			on_event_key_down(KEY_RIGHT);
+		if (Input.GetKeyDown(KeyCode.Escape))
+			on_event_key_down(KEY_ESCAPE);
 
+		// Process key up.
+		if (Input.GetKeyUp(KeyCode.LeftControl))
+			on_event_key_up(KEY_CONTROL);
+		if (Input.GetKeyUp(KeyCode.Space))
+			on_event_key_up(KEY_SPACE);
+		if (Input.GetKeyUp(KeyCode.Return))
+			on_event_key_up(KEY_RETURN);
+		if (Input.GetKeyUp(KeyCode.UpArrow))
+			on_event_key_up(KEY_UP);
+		if (Input.GetKeyUp(KeyCode.UpArrow))
+			on_event_key_up(KEY_UP);
+		if (Input.GetKeyUp(KeyCode.LeftArrow))
+			on_event_key_up(KEY_LEFT);
+		if (Input.GetKeyUp(KeyCode.RightArrow))
+			on_event_key_up(KEY_RIGHT);
+		if (Input.GetKeyUp(KeyCode.Escape))
+			on_event_key_up(KEY_ESCAPE);
+
+		// Do a frame rendering.
+		_commandBuffer.Clear();
 		if (on_event_frame() == 0)
 		{
 			// TODO
