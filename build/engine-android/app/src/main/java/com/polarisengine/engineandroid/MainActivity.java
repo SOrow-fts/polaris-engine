@@ -13,7 +13,7 @@
  *  - 2024-04-11 Polaris Engine
  */
 
-package software.hokuto.polaris;
+package com.polarisengine.engineandroid;
 
 import static android.opengl.GLSurfaceView.RENDERMODE_CONTINUOUSLY;
 import static android.opengl.GLSurfaceView.RENDERMODE_WHEN_DIRTY;

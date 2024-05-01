@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace 'com.polaris-engine.engine-android'
+    namespace 'com.polarisengine.engineandroid'
     compileSdk 34
     ndkVersion "25.2.9519653"
     defaultConfig {
-        applicationId "com.polaris-engine.engine-android"
+        applicationId "com.polarisengine.engineandroid"
         minSdkVersion 14
         targetSdkVersion 34
         versionCode 1
