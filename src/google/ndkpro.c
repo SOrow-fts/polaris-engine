@@ -94,7 +94,7 @@ static jstring make_script_jstring(void);
  */
 
 JNIEXPORT void JNICALL
-Java_jp_luxion_polarispro_MainActivity_nativeInitGame(
+Java_com_polarisengine_proandroid_MainActivity_nativeInitGame(
 	JNIEnv *env,
 	jobject instance,
 	jstring basePath)
@@ -227,7 +227,7 @@ Java_com_polarisengine_proandroid_MainActivity_nativeOnResume(
 }
 
 JNIEXPORT void JNICALL
-Java_jp_luxion_polaris_MainActivity_nativeOnTouchStart(
+Java_com_polarisengine_proandroid_MainActivity_nativeOnTouchStart(
         JNIEnv *env,
         jobject instance,
         jint x,
@@ -245,7 +245,7 @@ Java_jp_luxion_polaris_MainActivity_nativeOnTouchStart(
 }
 
 JNIEXPORT void JNICALL
-Java_jp_luxion_polaris_MainActivity_nativeOnTouchMove(
+Java_com_polarisengine_proandroid_MainActivity_nativeOnTouchMove(
 	JNIEnv *env,
 	jobject instance,
 	jint x,
@@ -272,7 +272,7 @@ Java_jp_luxion_polaris_MainActivity_nativeOnTouchMove(
 }
 
 JNIEXPORT void JNICALL
-Java_jp_luxion_polaris_MainActivity_nativeOnTouchEnd(
+Java_com_polarisengine_proandroid_MainActivity_nativeOnTouchEnd(
 	JNIEnv *env,
 	jobject instance,
 	jint x,

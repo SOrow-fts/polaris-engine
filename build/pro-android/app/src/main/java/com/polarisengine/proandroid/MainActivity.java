@@ -236,7 +236,6 @@ public class MainActivity extends ComponentActivity {
 			new ActivityResultCallback<Uri>() {
 				@Override
 				public void onActivityResult(Uri uri) {
-					Log.d("polaris", uri.toString());
 					if (uri != null) {
 						// Get the real path.
 						basePath = FileUtil.getFullPathFromTreeUri(uri, MainActivity.instance);
