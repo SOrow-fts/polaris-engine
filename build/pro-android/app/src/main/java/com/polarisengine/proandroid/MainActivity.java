@@ -5,7 +5,7 @@
  * Copyright (C) 2001-2024, Keiichi Tabata. All rights reserved.
  */
 
-package com.polaris-engine.pro-android;
+package com.polarisengine.proandroid;
 
 import android.annotation.SuppressLint;
 import android.content.res.AssetFileDescriptor;
@@ -240,9 +240,9 @@ public class MainActivity extends ComponentActivity {
 						// Get the real path.
 						basePath = FileUtil.getFullPathFromTreeUri(uri, MainActivity.instance);
 
-						// Append the "Polaris Engine" directory path/
-						if (!basePath.endsWith("/Polaris Engine"))
-							basePath = basePath + "/Polaris Engine/";
+						// Append the "PolarisEngine" directory path/
+						if (!basePath.endsWith("/PolarisEngine"))
+							basePath = basePath + "/PolarisEngine/";
 						else
 							basePath = basePath + "/";
 

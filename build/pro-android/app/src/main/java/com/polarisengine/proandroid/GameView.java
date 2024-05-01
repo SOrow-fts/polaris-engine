@@ -5,7 +5,7 @@
  * Copyright (C) 2001-2024, Keiichi Tabata. All rights reserved.
  */
 
-package com.polaris-engine.pro-android;
+package com.polarisengine.proandroid;
 
 import android.content.Context;
 import android.util.AttributeSet;
