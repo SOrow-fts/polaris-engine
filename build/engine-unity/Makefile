@@ -111,18 +111,18 @@ LIBS_MACOS = \
 all: src
 
 src: win64
-	rm -rf unity-src
-	mkdir unity-src
-	cp -R ProjectSettings unity-src/
-	cp -R Packages unity-src/
-	cp -R Library unity-src/
-	mkdir unity-src/Assets
-	cp Assets/libpolaris.dll unity-src/Assets/
-	cp Assets/PolarisScene.unity unity-src/Assets/
-	cp Assets/PolarisEngine.cs unity-src/Assets/
-	cp Assets/PolarisAudio.cs unity-src/Assets/
-	mkdir unity-src/Assets/Resources
-	cp Assets/Resources/NormalShader.shader unity-src/Assets/Resources/
+	@rm -rf unity-src
+	@mkdir unity-src
+	@cp -v -R ProjectSettings unity-src/
+	@cp -v -R Packages unity-src/
+	@cp -v -R Library unity-src/
+	@mkdir unity-src/Assets
+	@cp -v Assets/libpolaris.dll unity-src/Assets/
+	@cp -v Assets/PolarisScene.unity unity-src/Assets/
+	@cp -v Assets/PolarisEngine.cs unity-src/Assets/
+	@cp -v Assets/PolarisAudio.cs unity-src/Assets/
+	@mkdir unity-src/Assets/Resources
+	@cp -v Assets/Resources/NormalShader.shader unity-src/Assets/Resources/
 
 win64: ../engine-windows-64/libroot $(SRCS) $(LIBS_WIN64)
 	x86_64-w64-mingw32-gcc -O2 -shared -o Assets/libpolaris.dll $(CPPFLAGS) -I../engine-windows-64/libroot/include -I../engine-windows-64/libroot/include/freetype2 $(SRCS) $(LIBS_WIN64)

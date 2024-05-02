@@ -120,6 +120,15 @@ make src > /dev/null
 cd ..
 
 #
+# Build the Unity source tree.
+#
+echo ""
+echo "Building Unity source tree."
+cd engine-unity
+make src
+cd ..
+
+#
 # Build "polaris-engine.exe".
 #
 echo ""
@@ -181,6 +190,7 @@ cp engine-windows/game-nosign.exe installer-windows/tools/
 cp -R engine-macos/macos-src installer-windows/tools/macos-src
 cp -R engine-ios/ios-src installer-windows/tools/ios-src
 cp -R engine-android/android-src installer-windows/tools/android-src
+cp -R engine-unity/unity-src installer-windows/tools/unity-src
 mkdir -p installer-windows/tools/web
 cp engine-wasm/html/index.html installer-windows/tools/web/index.html
 cp engine-wasm/html/index.js installer-windows/tools/web/index.js
