@@ -370,6 +370,7 @@ static VOID OnExportWeb(void);
 static VOID RunWebTest(void);
 static VOID OnExportAndroid(void);
 static VOID OnExportIOS(void);
+static VOID OnExportUnity(void);
 static VOID OnFont(void);
 static VOID OnHighlightMode(void);
 static VOID OnDarkMode(void);
@@ -1534,6 +1535,7 @@ static VOID StartGame(void)
 		EnableMenuItem(hMenu, ID_EXPORT_WEB, MF_ENABLED);
 		EnableMenuItem(hMenu, ID_EXPORT_ANDROID, MF_ENABLED);
 		EnableMenuItem(hMenu, ID_EXPORT_IOS, MF_ENABLED);
+		EnableMenuItem(hMenu, ID_EXPORT_UNITY, MF_ENABLED);
 		EnableMenuItem(hMenu, ID_EXPORT_PACKAGE, MF_ENABLED);
 		EnableMenuItem(hMenu, ID_CMD_MESSAGE, MF_ENABLED);
 		EnableMenuItem(hMenu, ID_CMD_SERIF, MF_ENABLED);
@@ -2289,6 +2291,9 @@ static void OnCommand(WPARAM wParam, LPARAM lParam)
 		break;
 	case ID_EXPORT_IOS:
 		OnExportIOS();
+		break;
+	case ID_EXPORT_UNITY:
+		OnExportUnity();
 		break;
 	case ID_EXPORT_PACKAGE:
 		OnExportPackage();
@@ -5035,6 +5040,60 @@ VOID OnExportIOS(void)
 
 	/* Explorerを開く */
 	ShellExecuteW(NULL, L"explore", L".\\ios-export", NULL, NULL, SW_SHOW);
+}
+
+/* Unityプロジェクトをエクスポートのメニューが押下されたときの処理を行う */
+VOID OnExportUnity(void)
+{
+	if (MessageBox(hWndMain, bEnglish ?
+				   L"Attention: This feature is still in alpha version.\n"
+				   L"Takes a while. Are you sure?\n" :
+				   L"注意: Unityエクスポートはまだアルファ版であり、これから改善されます。\n"
+				   L"エクスポートには時間がかかります。よろしいですか？",
+				   TITLE,
+				   MB_ICONWARNING | MB_OKCANCEL) != IDOK)
+		return;
+
+	/* フォルダを再作成する */
+	RecreateDirectory(L".\\unity-export");
+
+	/* ソースをコピーする */
+	if (!CopyLibraryFiles(L"tools\\unity-src", L".\\unity-export"))
+	{
+		log_info(bEnglish ?
+				 "Failed to copy source files for Unity." :
+				 "ソースコードのコピーに失敗しました。"
+				 "最新のtools/unity-srcフォルダが存在するか確認してください。");
+		return;
+	}
+
+	/* アセットをコピーする */
+	CopyGameFiles(L".\\anime", L".\\unity-export\\Assets\\StreamingAssets\\anime");
+	CopyGameFiles(L".\\bg", L".\\unity-export\\Assets\\StreamingAssets\\bg");
+	CopyGameFiles(L".\\bgm", L".\\unity-export\\Assets\\StreamingAssets\\bgm");
+	CopyGameFiles(L".\\cg", L".\\unity-export\\Assets\\StreamingAssets\\cg");
+	CopyGameFiles(L".\\ch", L".\\unity-export\\Assets\\StreamingAssets\\ch");
+	CopyGameFiles(L".\\conf", L".\\unity-export\\Assets\\StreamingAssets\\conf");
+	CopyGameFiles(L".\\cv", L".\\unity-export\\Assets\\StreamingAssets\\cv");
+	CopyGameFiles(L".\\font", L".\\unity-export\\Assets\\StreamingAssets\\font");
+	CopyGameFiles(L".\\gui", L".\\unity-export\\Assets\\StreamingAssets\\gui");
+	CopyGameFiles(L".\\mov", L".\\unity-export\\Assets\\StreamingAssets\\mov");
+	CopyGameFiles(L".\\rule", L".\\unity-export\\Assets\\StreamingAssets\\rule");
+	CopyGameFiles(L".\\se", L".\\unity-export\\Assets\\StreamingAssets\\se");
+	CopyGameFiles(L".\\txt", L".\\unity-export\\Assets\\StreamingAssets\\txt");
+	CopyGameFiles(L".\\wms", L".\\unity-export\\Assets\\StreamingAssets\\wms");
+
+	MessageBox(hWndMain, bEnglish ?
+			   L"Will open the exported source code folder.\n"
+			   L"Build with Android Studio." :
+			   L"エクスポートしたソースコードフォルダを開きます。\n"
+			   L"Windows版Unityでそのままテストビルドできます。\n"
+			   L"家庭用ゲーム機版Unityでのビルドは別途お問い合わせください。",
+			   TITLE,
+			   MB_ICONINFORMATION | MB_OK);
+
+	/* Explorerを開く */
+	ShellExecuteW(NULL, L"explore", L".\\unity-export", NULL, NULL, SW_SHOW);
 }
 
 /* フォルダを再作成する */
