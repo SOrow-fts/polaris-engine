@@ -115,6 +115,7 @@ src: win64
 	mkdir unity-src
 	cp -R ProjectSettings unity-src/
 	cp -R Packages unity-src/
+	cp -R Library unity-src/
 	mkdir unity-src/Assets
 	cp Assets/libpolaris.dll unity-src/Assets/
 	cp Assets/PolarisScene.unity unity-src/Assets/
