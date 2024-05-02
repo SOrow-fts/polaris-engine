@@ -38,8 +38,16 @@ public class PolarisAudioStream : MonoBehaviour
 		fixed(short *unsafePointer = intData)
 		{
 			PolarisEngine.get_wave_samples(wave, (uint *)unsafePointer, samples);
-			for (int i = 0; i < samples * 2; i++)
-				data[i] = intData[i] / 32767.0f;
+			if (channels == 2)
+			{
+				for (int i = 0; i < samples * 2; i++)
+					data[i] = intData[i] / 32767.0f;
+			}
+			else
+			{
+				for (int i = 0; i < samples; i++)
+					data[i] = intData[i] / 32767.0f;
+			}
 		}
 
 		// Stop if we reached to an end-of-stream.

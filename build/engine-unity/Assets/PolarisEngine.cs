@@ -26,21 +26,28 @@ public class PolarisEngine : MonoBehaviour
 	private static int viewportWidth = 1280;
 	private static int viewportHeight = 720;
 	private Shader _normalShader;
-	private Vector2[] _uv = new Vector2[] {new Vector2(0, 0), new Vector2(1, 0), new Vector2(1, 1), new Vector2(0, 1)};
-	private Color[] _colors = new Color[] {new Color(0, 0, 0, 0), new Color(0, 0, 0, 0), new Color(0, 0, 0, 0), new Color(0, 0, 0, 0)};
-	private int[] _triangles = new int[] {0, 1, 2, 1, 3, 2};
-	private Vector3[] _normals = new Vector3[] {new Vector3(0, 0, -1), new Vector3(0, 0, -1), new Vector3(0, 0, -1), new Vector3(0, 0, -1)};
 	private CommandBuffer _commandBuffer;
+
+	//
+	// For Audio
+	//
+	private static AudioSource _audioSourceBGM;
+	private static AudioSource _audioSourceSE;
+	private static AudioSource _audioSourceVoice;
+	private static AudioSource _audioSourceSys;
 
 	//
 	// Game Initialization
 	//
 	private void Awake()
 	{
+		// Save the instance.
 		_instance = this;
 
+		// Get the shaders. (TODO: other shaders)
 		_normalShader = Resources.Load<Shader>("NormalShader");
 
+		// Make a command buffer.
 		_commandBuffer = new CommandBuffer();
 		_commandBuffer.name = "FrameCommand";
 		_commandBuffer.SetRenderTarget(BuiltinRenderTextureType.CameraTarget);
@@ -48,6 +55,7 @@ public class PolarisEngine : MonoBehaviour
 		_commandBuffer.SetViewMatrix(Matrix4x4.TRS(new Vector3(-1f, -1f, 0), Quaternion.identity, new Vector3(2f / viewportWidth, 2f / viewportHeight, 1f)));
 		_commandBuffer.ClearRenderTarget(true, true, Color.black);
 
+		// Make a camera.
 		Camera camera = Camera.main;
 		camera.clearFlags = CameraClearFlags.SolidColor;
 		camera.backgroundColor = new Color(0, 0, 0, 0);
@@ -836,31 +844,27 @@ public class PolarisEngine : MonoBehaviour
 	[AOT.MonoPInvokeCallback(typeof(delegate_play_sound))]
 	static unsafe void play_sound(int stream, byte *wave)
 	{
-		PolarisAudioStream s;
 		if (stream == 0)
-			s = GameObject.Find("BGM").GetComponent<PolarisAudioStream>();
+			GameObject.Find("BGM").GetComponent<PolarisAudioStream>().SetSource(wave);
 		else if (stream == 1)
-			s = GameObject.Find("SE").GetComponent<PolarisAudioStream>();
+			GameObject.Find("SE").GetComponent<PolarisAudioStream>().SetSource(wave);
 		else if (stream == 2)
-			s = GameObject.Find("Voice").GetComponent<PolarisAudioStream>();
+			GameObject.Find("CV").GetComponent<PolarisAudioStream>().SetSource(wave);
 		else
-			s = GameObject.Find("SysSE").GetComponent<PolarisAudioStream>();
-		s.SetSource(wave);
+			GameObject.Find("SYSSE").GetComponent<PolarisAudioStream>().SetSource(wave);
 	}
 
 	[AOT.MonoPInvokeCallback(typeof(delegate_stop_sound))]
 	static unsafe void stop_sound(int stream)
 	{
-		PolarisAudioStream s;
 		if (stream == 0)
-			s = GameObject.Find("BGM").GetComponent<PolarisAudioStream>();
+			GameObject.Find("BGM").GetComponent<PolarisAudioStream>().SetSource(null);
 		else if (stream == 1)
-			s = GameObject.Find("SE").GetComponent<PolarisAudioStream>();
+			GameObject.Find("SE").GetComponent<PolarisAudioStream>().SetSource(null);
 		else if (stream == 2)
-			s = GameObject.Find("Voice").GetComponent<PolarisAudioStream>();
+			GameObject.Find("CV").GetComponent<PolarisAudioStream>().SetSource(null);
 		else
-			s = GameObject.Find("SysSE").GetComponent<PolarisAudioStream>();
-		s.SetSource(null);
+			GameObject.Find("SYSSE").GetComponent<PolarisAudioStream>().SetSource(null);
 	}
 
 	[AOT.MonoPInvokeCallback(typeof(delegate_set_sound_volume))]
