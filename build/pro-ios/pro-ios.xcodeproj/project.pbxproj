@@ -644,8 +644,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "pro-ios/pro-ios.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_TEAM = DT727R68TR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "pro-ios/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Polaris Engine";
@@ -661,7 +661,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0;
 				OTHER_CFLAGS = (
 					"-I../../src/",
 					"-I../../src/apple",
@@ -683,7 +683,7 @@
 					"-lbrotlidec",
 					"-lbrotlicommon",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.polaris-engine.pro-ios";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.polaris-engine.app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -702,8 +702,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "pro-ios/pro-ios.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_TEAM = DT727R68TR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "pro-ios/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Polaris Engine";
@@ -719,7 +719,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0;
 				OTHER_CFLAGS = (
 					"-I../../src/",
 					"-I../../src/apple",
@@ -741,7 +741,7 @@
 					"-lbrotlidec",
 					"-lbrotlicommon",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.polaris-engine.pro-ios";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.polaris-engine.app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

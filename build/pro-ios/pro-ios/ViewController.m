@@ -25,6 +25,10 @@ static void setStoppedState(void);
 
 // iCloud Drive Path
 @property NSString *iCloudDrivePath;
+
+// iCloud Error Status
+@property BOOL loadError;
+
 // Status
 @property BOOL isEnglish;
 @property BOOL isRunning;
@@ -80,9 +84,11 @@ static void setStoppedState(void);
     theViewController = self;
 
     // Initialize the project.
-    if (![self initProject])
-        exit(1);
-    
+    if (![self initProject]) {
+        self.loadError = YES;
+        return;
+    }
+
     // Initialize the Polaris Engine.
     init_locale_code();
     if(!init_file())
@@ -123,6 +129,16 @@ static void setStoppedState(void);
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    if (self.loadError) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"エラー"
+                                                                       message:@"起動できませんでした。iCloud Driveが有効であることを確認してください。"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) { exit(0); }];
+        [alert addAction:defaultAction];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    
     [super viewDidAppear:animated];
     [self updateViewport:_view.frame.size];
 }
@@ -169,14 +185,8 @@ static void setStoppedState(void);
 
 - (BOOL)initProject {
     self.iCloudDrivePath = [[[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil] path];
-    if (self.iCloudDrivePath == nil) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"エラー"
-                                       message:@"iCloud Driveが有効ではありません。"
-                                       preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) { exit(0); }];
-        [alert addAction:defaultAction];
-        [self presentViewController:alert animated:YES completion:nil];
-    }
+    if (self.iCloudDrivePath == nil)
+        return NO;
     self.iCloudDrivePath = [self.iCloudDrivePath stringByAppendingString:@"/Documents"];
 
     NSError *error;
@@ -186,7 +196,7 @@ static void setStoppedState(void);
                                                        attributes:nil
                                                             error:&error]) {
             NSLog(@"createDirectoryAtPath error: %@", error);
-            return false;
+            return NO;
         }
 
         NSArray *subfolderArray = @[@"anime",

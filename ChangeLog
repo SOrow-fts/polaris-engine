@@ -4,12 +4,17 @@ This file is referred by some automatic release scripts.
 
 [Release History (Japanese)]
 <!-- BEGIN-LATEST-JP -->
+<li>Polaris Engine 1.2.1 2024/5/3
+  <ul>
+    <li>安定版</li>
+  </ul>
+</li>
+<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.2.0 2024/5/2
   <ul>
     <li>Unity対応の最初のアルファ版</li>
   </ul>
 </li>
-<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.1.24 2024/5/1
   <ul>
     <li>libpngのバージョンアップ(Windows番のAndroid Studioでのビルドに対応)</li>
@@ -233,12 +238,17 @@ This file is referred by some automatic release scripts.
 
 [Release History (English)]
 <!-- BEGIN-LATEST-EN -->
+<li>Polaris Engine 1.2.1 2024/5/３
+  <ul>
+    <li>A stable version</li>
+  </ul>
+</li>
+<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.2.0 2024/5/2
   <ul>
     <li>The first public alpha version of Unity support</li>
   </ul>
 </li>
-<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.1.24 2024/5/1
   <ul>
     <li>Updated libpng from 1.6.35 to 1.6.43 (for cmake on Android NDK)</li>

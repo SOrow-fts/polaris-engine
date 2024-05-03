@@ -4640,6 +4640,13 @@ VOID OnExportWin(void)
 				 "実行ファイルのコピーに失敗しました。");
 		return;
 	}
+	if (!CopyLibraryFiles(L"tools\\game-nosign.exe", L".\\windows-export\\game-nosign.exe"))
+	{
+		log_info(bEnglish ?
+				 "Failed to copy exe file." :
+				 "実行ファイルのコピーに失敗しました。");
+		return;
+	}
 
 	/* movをコピーする */
 	CopyMovFiles(L".\\mov", L".\\windows-export\\mov");
