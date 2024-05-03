@@ -40,7 +40,7 @@
 #define POLARIS_TARGET_ANDROID
 #elif defined(__EMSCRIPTEN__)
 #define POLARIS_TARGET_WASM
-#elif !defined(POLARIS_TARGET_SDL2)
+#elif !defined(POLARIS_TARGET_UNITY) && !defined(POLARIS_TARGET_SDL2)
 #define POLARIS_TARGET_POSIX
 #endif
 

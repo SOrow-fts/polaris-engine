@@ -6,7 +6,7 @@ This file is referred by some automatic release scripts.
 <!-- BEGIN-LATEST-JP -->
 <li>Polaris Engine 1.2.1 2024/5/3
   <ul>
-    <li>安定版</li>
+    <li>game-nosign.exeを追加</li>
   </ul>
 </li>
 <!-- END-LATEST-JP -->
@@ -240,7 +240,7 @@ This file is referred by some automatic release scripts.
 <!-- BEGIN-LATEST-EN -->
 <li>Polaris Engine 1.2.1 2024/5/３
   <ul>
-    <li>A stable version</li>
+    <li>Added game-nosign.exe</li>
   </ul>
 </li>
 <!-- END-LATEST-EN -->

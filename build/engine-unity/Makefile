@@ -1,6 +1,6 @@
 include ../common.mk
 
-CPPFLAGS = -DHAL_PTR
+CPPFLAGS = -DPOLARIS_TARGET_UNITY
 
 SRCS = \
 	../../src/anime.c \
@@ -108,6 +108,19 @@ LIBS_MACOS = \
 	../engine-macos/libroot/lib/libbz2.a \
 	../engine-macos/libroot/lib/libz.a
 
+LIBS_AARCH64 = \
+	libroot-aarch64/lib/libfreetype.a \
+	libroot-aarch64/lib/libbrotlidec.a \
+	libroot-aarch64/lib/libbrotlicommon.a \
+	libroot-aarch64/lib/libpng16.a \
+	libroot-aarch64/lib/libjpeg.a \
+	libroot-aarch64/lib/libvorbisfile.a \
+	libroot-aarch64/lib/libvorbisenc.a \
+	libroot-aarch64/lib/libvorbis.a \
+	libroot-aarch64/lib/libogg.a \
+	libroot-aarch64/lib/libbz2.a \
+	libroot-aarch64/lib/libz.a
+
 all: src
 
 src: win64
@@ -135,5 +148,11 @@ macos: ../engine-macos/libroot $(SRCS) $(LIBS_MACOS)
 	clang -O0 -g3 -arch arm64 -arch x86_64 -dynamiclib -undefined dynamic_lookup -o Assets/libpolaris.dylib $(CPPFLAGS) -I../engine-macos/libroot/include -I../engine-macos/libroot/include/freetype2 $(SRCS) $(LIBS_MACOS)
 	rm -rf Assets/libpolaris.dylib.dSYM
 
+aarch64: libroot-aarch64
+	aarch64-none-elf-gcc -O2 -shared -fPIC -o Assets/libpolaris.so $(CPPFLAGS) -DNO_CDECL -DNO_WEBP -Ilibroot-aarch64/include -Ilibroot-aarch64/include/freetype2 $(SRCS) $(LIBS_AARCH64)
+
+libroot-aarch64:
+	./build-libs-aarch64.sh
+
 clean:
-	@rm -rf Assets/libpolaris.dylib* Assets/libpolaris.so* Assets/libpolaris.dll*
+	@rm -rf Assets/libpolaris.dylib* Assets/libpolaris.so* Assets/libpolaris.dll* libroot*

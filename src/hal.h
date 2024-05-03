@@ -389,9 +389,13 @@ static inline void set_continuous_swipe_enabled(bool is_enabled) { UNUSED_PARAME
 /*
  * For Foreign Languages (Swift and C#)
  */
-#ifdef HAL_PTR
+#ifdef POLARIS_DLL
 
+#ifndef NO_CDECL
 #define POLARISAPI __cdecl
+#else
+#define POLARISAPI
+#endif
 
 extern void init_hal_func_table(
 	void POLARISAPI (*p_log_info)(intptr_t s),
@@ -462,6 +466,6 @@ extern void POLARISAPI (*wrap_get_system_locale)(intptr_t dst, int len);
 extern void POLARISAPI (*wrap_speak_text)(intptr_t text);
 extern void POLARISAPI (*wrap_set_continuous_swipe_enabled)(bool is_enabled);
 
-#endif /* HAL_PTR */
+#endif /* POLARIS_DLL */
 
 #endif /* POLARIS_HAL_H */

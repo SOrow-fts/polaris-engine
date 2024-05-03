@@ -107,6 +107,7 @@ build/engine-unity/StreamingAssets
 build/engine-unity/Assets/*.dll
 build/engine-unity/Assets/*.dylib
 build/engine-unity/unity-src
+build/engine-unity/libroot-*
 
 #
 # Editor
@@ -152,16 +153,16 @@ build/pro-macos/pro-macos.xcodeproj/project.xcworkspace
 build/pro-macos/pro-macos.xcodeproj/xcuserdata
 build/pro-macos/libroot
 build/pro-macos/libroot-macos.tar.gz
-build/pro-macos/build/
+build/pro-macos/build
 build/pro-macos/tmp
 build/pro-macos/polaris-engine.dmg
 
 # iOS
 build/pro-ios/pro-ios.xcodeproj/project.xcworkspace
 build/pro-ios/pro-ios.xcodeproj/xcuserdata
-build/pro-ios/libroot-ios.tar.gz
-build/pro-ios/build/
-build/pro-ios/tmp/
+build/pro-ios/libroot*
+build/pro-ios/build
+build/pro-ios/tmp
 
 # Android
 build/pro-android/.idea
