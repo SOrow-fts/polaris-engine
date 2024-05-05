@@ -4,12 +4,17 @@ This file is referred by some automatic release scripts.
 
 [Release History (Japanese)]
 <!-- BEGIN-LATEST-JP -->
+<li>Polaris Engine 1.2.2 2024/5/5
+  <ul>
+    <li>GUI機能のバグ修正</li>
+  </ul>
+</li>
+<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.2.1 2024/5/3
   <ul>
     <li>game-nosign.exeを追加</li>
   </ul>
 </li>
-<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.2.0 2024/5/2
   <ul>
     <li>Unity対応の最初のアルファ版</li>
@@ -238,12 +243,17 @@ This file is referred by some automatic release scripts.
 
 [Release History (English)]
 <!-- BEGIN-LATEST-EN -->
+<li>Polaris Engine 1.2.2 2024/5/5
+  <ul>
+    <li>Fixed a bug of GUI gosub-back</li>
+  </ul>
+</li>
+<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.2.1 2024/5/３
   <ul>
     <li>Added game-nosign.exe</li>
   </ul>
 </li>
-<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.2.0 2024/5/2
   <ul>
     <li>The first public alpha version of Unity support</li>

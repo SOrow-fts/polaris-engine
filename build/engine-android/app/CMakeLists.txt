@@ -15,7 +15,7 @@ add_library(
   src/main/cpp/glrender.c
   src/main/cpp/slsound.c
 
-  # platform-independent
+  # CORE (platform-independent)
   src/main/cpp/anime.c
   src/main/cpp/conf.c
   src/main/cpp/ciel.c
@@ -71,6 +71,43 @@ add_library(
   src/main/cpp/cmd_wait.c
   src/main/cpp/cmd_wms.c
 )
+
+# Include bzip2
+add_subdirectory(src/main/cpp/bzip2)
+include_directories(src/main/cpp/bzip2)
+
+# Include brotli
+add_subdirectory(src/main/cpp/brotli)
+include_directories(src/main/cpp/brotli/c/include)
+
+# Include libpng
+option(HAVE_LD_VERSION_SCRIPT OFF)
+set(HAVE_LD_VERSION_SCRIPT OFF)
+add_compile_definitions(SKIP_INSTALL_ALL=YES)
+add_subdirectory(src/main/cpp/libpng)
+include_directories(src/main/cpp/libpng)
+
+# Include jpeg
+add_subdirectory(src/main/cpp/jpeg)
+include_directories(src/main/cpp/jpeg)
+
+# Include libwebp
+add_subdirectory(src/main/cpp/libwebp)
+include_directories(src/main/cpp/libwebp)
+
+# Include freetype2
+add_subdirectory(src/main/cpp/freetype)
+include_directories(src/main/cpp/freetype/include)
+
+# Include libogg
+add_subdirectory(src/main/cpp/libogg)
+include_directories(src/main/cpp/libogg/include)
+
+# Include libvorbis
+add_subdirectory(src/main/cpp/libvorbis)
+include_directories(src/main/cpp/libvorbis/include)
+
+# Link all into a DLL
 if(AWK)
   # On the Mac and Linux versions of Android Studio
   target_link_libraries(
@@ -104,38 +141,3 @@ else()
     ${log-lib}
   )
 endif()
-
-# Add bzip2
-add_subdirectory(src/main/cpp/bzip2)
-include_directories(src/main/cpp/bzip2)
-
-# Add brotli
-add_subdirectory(src/main/cpp/brotli)
-include_directories(src/main/cpp/brotli/c/include)
-
-# Add libpng
-option(HAVE_LD_VERSION_SCRIPT OFF)
-set(HAVE_LD_VERSION_SCRIPT OFF)
-add_compile_definitions(SKIP_INSTALL_ALL=YES)
-add_subdirectory(src/main/cpp/libpng)
-include_directories(src/main/cpp/libpng)
-
-# Add jpeg
-add_subdirectory(src/main/cpp/jpeg)
-include_directories(src/main/cpp/jpeg)
-
-# Add libwebp
-add_subdirectory(src/main/cpp/libwebp)
-include_directories(src/main/cpp/libwebp)
-
-# Add freetype2
-add_subdirectory(src/main/cpp/freetype)
-include_directories(src/main/cpp/freetype/include)
-
-# Add libogg
-add_subdirectory(src/main/cpp/libogg)
-include_directories(src/main/cpp/libogg/include)
-
-# Add libvorbis
-add_subdirectory(src/main/cpp/libvorbis)
-include_directories(src/main/cpp/libvorbis/include)

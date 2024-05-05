@@ -412,7 +412,12 @@ static void process_button_draw_generic(struct image *target, int index);
 static void process_button_draw_gallery(struct image *target, int index);
 static void process_button_draw_namevar(struct image *target, int index);
 
+/*
+ * WMS
+ */
 bool register_s2_functions(struct wms_runtime *rt);
+bool s2_push_stage(struct wms_runtime *rt);
+bool s2_pop_stage(struct wms_runtime *rt);
 
 /*
  * GUIに関する初期化処理を行う
@@ -430,6 +435,8 @@ bool init_gui(void)
 void cleanup_gui(void)
 {
 	int i;
+
+	deep_return_point = -1;
 
 	/* フラグを再初期化する */
 	flag_gui_mode = false;
@@ -637,7 +644,6 @@ static bool set_global_key_value(const char *key, const char *val)
 		return true;
 	} else if (strcmp(key, "pushstate") == 0) {
 		if (is_sys_gui && is_custom_sysmenu) {
-			bool s2_push_stage(struct wms_runtime *rt);
 			s2_push_stage(NULL);
 			deep_return_point = get_command_index() - 1;
 		}
@@ -1332,6 +1338,8 @@ static void process_render(void)
 /* 他のコマンドやGUIへの遷移を処理する */
 static bool process_move(void)
 {
+	int i;
+
 	if (!is_finished)
 		return true;
 	if (is_fading_in || is_fading_out)
@@ -1368,10 +1376,21 @@ static bool process_move(void)
 				push_return_point_minus_one();
 			if (button[result_index].gosub_gui)
 				push_return_gui(gui_file);
-			if (button[result_index].gosub_back)
+			if (button[result_index].gosub_back) {
 				set_deep_return_point(deep_return_point);
+				deep_return_point = -1;
+			}
 			if (!move_to_label(button[result_index].label))
 				return false;
+		}
+	}
+	if (result_index == -1 && deep_return_point != -1) {
+		for (i = 0; i < BUTTON_COUNT; i++) {
+			if (button[i].type == TYPE_GOTO && button[i].gosub_back) {
+				set_deep_return_point(deep_return_point);
+				deep_return_point = -1;
+				break;
+			}
 		}
 	}
 

@@ -50,7 +50,7 @@ static bool s2_hide_msgbox(struct wms_runtime *rt);
 static bool s2_hide_namebox(struct wms_runtime *rt);
 static bool s2_save_global(struct wms_runtime *rt);
 bool s2_push_stage(struct wms_runtime *rt);
-static bool s2_pop_stage(struct wms_runtime *rt);
+bool s2_pop_stage(struct wms_runtime *rt);
 static bool s2_remove_local_save(struct wms_runtime *rt);
 static bool s2_remove_global_save(struct wms_runtime *rt);
 static bool s2_reset_local_variables(struct wms_runtime *rt);
