@@ -1389,6 +1389,8 @@ static bool process_move(void)
 			if (button[i].type == TYPE_GOTO && button[i].gosub_back) {
 				set_deep_return_point(deep_return_point);
 				deep_return_point = -1;
+				if (!move_to_label(button[i].label))
+					return false;
 				break;
 			}
 		}
