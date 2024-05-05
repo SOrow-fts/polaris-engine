@@ -4,13 +4,18 @@ This file is referred by some automatic release scripts.
 
 [Release History (Japanese)]
 <!-- BEGIN-LATEST-JP -->
+<li>Polaris Engine 1.2.4 2024/5/5
+  <ul>
+    <li>Windows版Android Studioでのビルドの改善</li>
+  </ul>
+</li>
+<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.2.3 2024/5/5
   <ul>
     <li>GUI機能で右クリックキャンセルした際にgosub-backボタンがあればその動作をするように変更</li>
     <li>MacでのAndroidビルドの問題を修正</li>
   </ul>
 </li>
-<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.2.2 2024/5/5
   <ul>
     <li>GUI機能のバグ修正</li>
@@ -249,13 +254,18 @@ This file is referred by some automatic release scripts.
 
 [Release History (English)]
 <!-- BEGIN-LATEST-EN -->
+<li>Polaris Engine 1.2.4 2024/5/5
+  <ul>
+    <li>Fixed a problem on builds on the Windows version of Android Studio</li>
+  </ul>
+</li>
+<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.2.3 2024/5/5
   <ul>
     <li>Changed to use a gosub-back button if it exists when right-clicked on a GUI</li>
     <li>Fixed a problem on builds on the Mac version of Android Studio</li>
   </ul>
 </li>
-<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.2.2 2024/5/5
   <ul>
     <li>Fixed a bug of GUI gosub-back</li>

@@ -237,7 +237,7 @@ src:
 	@cp ../../src/cmd_wms.c android-src/app/src/main/cpp/
 	@
 	@mkdir -p android-src/app/src/main/cpp/libpng
-	@tar xzf ../libsrc/libpng-1.6.35.tar.gz -C android-src/app/src/main/cpp/libpng --strip-components 1
+	@tar xzf ../libsrc/libpng-1.6.43.tar.gz -C android-src/app/src/main/cpp/libpng --strip-components 1
 	@cp android-src/app/src/main/cpp/libpng/scripts/pnglibconf.h.prebuilt android-src/app/src/main/cpp/libpng/pnglibconf.h
 	@
 	@mkdir -p android-src/app/src/main/cpp/jpeg
