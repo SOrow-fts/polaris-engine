@@ -8,7 +8,9 @@
 #include "polaris.h"
 
 struct image *create_image_from_file_png(const char *dir, const char *file);
+#if !defined(NO_JPEG)
 struct image *create_image_from_file_jpeg(const char *dir, const char *file);
+#endif
 #if !defined(NO_WEBP)
 struct image *create_image_from_file_webp(const char *dir, const char *file);
 #endif
@@ -17,7 +19,9 @@ struct image *create_image_from_file_webp(const char *dir, const char *file);
  * 前方参照
  */
 static bool is_png_ext(const char *str);
+#if !defined(NO_JPEG)
 static bool is_jpg_ext(const char *str);
+#endif
 #if !defined(NO_WEBP)
 static bool is_webp_ext(const char *str);
 #endif
@@ -31,13 +35,17 @@ struct image *create_image_from_file(const char *dir, const char *file)
 	struct image *img;
 	int y, x;
 
+	if (0) {
+	}
+#if !defined(NO_JPEG)
 	/* JPEGファイルの場合 */
-	if (is_jpg_ext(file)) {
+	else if (is_jpg_ext(file)) {
 		img = create_image_from_file_jpeg(dir, file);
 		if (img == NULL)
 			return NULL;
 		return img;
 	}
+#endif
 #if !defined(NO_WEBP)
 	/* WebPファイルの場合 */
 	else if (is_webp_ext(file)) {
@@ -71,6 +79,7 @@ struct image *create_image_from_file(const char *dir, const char *file)
 				break;
 			}
 
+#ifndef NO_JPEG
 			/* 自動拡張子付与(.jpg)でチェックする */
 			snprintf(fname, sizeof(fname), "%s.jpg", file);
 			if (check_file_exist(dir, fname)) {
@@ -88,6 +97,7 @@ struct image *create_image_from_file(const char *dir, const char *file)
 					return NULL;
 				break;
 			}
+#endif
 
 #if !defined(NO_WEBP)
 			/* 自動拡張子付与(.webp)でチェックする */

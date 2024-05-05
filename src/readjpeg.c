@@ -5,6 +5,8 @@
  * Copyright (C) 2001-2024, Keiichi Tabata. All rights reserved.
  */
 
+#if !defined(NO_JPEG)
+
 #include "polaris.h"
 
 #include <jpeglib.h>
@@ -141,3 +143,5 @@ struct image *create_image_from_file_jpeg(const char *dir, const char *file)
 
 	return img;
 }
+
+#endif /* NO_JPEG */
