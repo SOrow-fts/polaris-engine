@@ -5019,7 +5019,7 @@ static VOID RunAndroidBuild(void)
 	wchar_t cmdline[1024];
 
 	/* コマンドライン文字列はCreateProcessW()に書き換えられるので、バッファにコピーしておく */
-	wcscpy(cmdline, L"cmd.exe /k .\\android-export\\build.bat");
+	wcscpy(cmdline, L"cmd.exe /k build.bat");
 
 	/* プロセスを実行する */
 	ZeroMemory(&si, sizeof(STARTUPINFOW));
