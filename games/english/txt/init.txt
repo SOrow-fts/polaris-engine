@@ -283,7 +283,7 @@ If there's anything you want to customize, but can't, please contact the Team.
 
 @ch c 001-fun.png 1.0
 
-*Midori*e029.ogg*If you have any questions, send me an e-mail at \#{ff0000}midori@suika2.com\#{ffffff} anytime!
+*Midori*e029.ogg*If you have any questions, send me an e-mail at \#{ff0000}midori@suika2.com\#{50280a} anytime!
 
 @vol bgm 0.5 1.0
 

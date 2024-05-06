@@ -272,7 +272,7 @@ ktabataはその後、真の移植性を求めて、たくさんのプラット�
 
 @ch position=center file=001-fun.png duration=1.0
 
-*みどり*023.ogg*何かわからないことがあったら、いつでも\#{ff0000}midori@luxion.jp\#{ffffff} までメールしてよ。
+*みどり*023.ogg*何かわからないことがあったら、いつでも\#{ff0000}midori@luxion.jp\#{50280a} までメールしてよ。
 
 @ch position=center file=none duration=1.0
 
