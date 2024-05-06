@@ -3327,12 +3327,7 @@ static bool cleanup(void)
 		set_mixer_input(VOICE_STREAM, NULL);
 
 	/* クリックアニメーションを非表示にする */
-#ifdef USE_EDITOR
-	if (dbg_is_stop_requested())
-		show_click(true);
-#else
 	show_click(false);
-#endif
 
 	/*
 	 * 次のコマンドに移動するときは、表示中のメッセージをなしとする

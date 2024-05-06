@@ -219,6 +219,17 @@ void clear_layer_anime_sequence(int layer)
 
 	assert(layer >= 0 && layer < STAGE_LAYERS);
 
+	if (context[layer].seq_count > 0) {
+		struct sequence *s;
+		s = &sequence[layer][context[layer].seq_count - 1];
+		set_layer_position(layer, (int)s->to_x, (int)s->to_y);
+		set_layer_scale(layer, (int)s->to_scale_x, (int)s->to_scale_y);
+		set_layer_alpha(layer, (int)s->to_a);
+		set_layer_center(layer, (int)s->center_x, (int)s->center_y);
+		set_layer_rotate(layer, s->to_rotate * (3.14159265f / 180.0f));
+		set_layer_blend(layer, s->blend);
+	}
+
 	context[layer].seq_count = 0;
 	context[layer].is_running = false;
 	context[layer].is_finished = false;
@@ -247,31 +258,10 @@ void clear_layer_anime_sequence(int layer)
  */
 void clear_all_anime_sequence(void)
 {
-	int i, j;
+	int i;
 
-	for (i = 0; i < STAGE_LAYERS; i++) {
-		context[i].seq_count = 0;
-		context[i].is_running = false;
-		context[i].is_finished = false;
-		context[i].loop_len = 0;
-		context[i].loop_ofs = 0;
-		if (context[i].file != NULL) {
-			free(context[i].file);
-			context[i].file = NULL;
-		}
-
-		for (j = 0 ; j < SEQUENCE_COUNT; j++) {
-			if (sequence[i][j].file != NULL) {
-				free(sequence[i][j].file);
-				sequence[i][j].file = NULL;
-			}
-			memset(&sequence[i][j], 0, sizeof(struct sequence));
-			sequence[i][j].from_scale_x = 1.0f;
-			sequence[i][j].from_scale_y = 1.0f;
-			sequence[i][j].to_scale_x = 1.0f;
-			sequence[i][j].to_scale_y = 1.0f;
-		}
-	}
+	for (i = 0; i < STAGE_LAYERS; i++)
+		clear_layer_anime_sequence(i);
 }
 
 /*

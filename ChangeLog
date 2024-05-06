@@ -4,13 +4,19 @@ This file is referred by some automatic release scripts.
 
 [Release History (Japanese)]
 <!-- BEGIN-LATEST-JP -->
+<li>Polaris Engine 1.2.6 2024/5/7
+  <ul>
+    <li>テンプレートゲームのフォント色を修正</li>
+    <li>クリックアニメが表示されたままになるバグを修正</li>
+  </ul>
+</li>
+<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.2.5 2024/5/7
   <ul>
     <li>口パクに対応</li>
     <li>AndroidのAPKファイルの自動ビルドに対応</li>
   </ul>
 </li>
-<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.2.4 2024/5/5
   <ul>
     <li>Windows版Android Studioでのビルドの改善</li>
@@ -260,13 +266,19 @@ This file is referred by some automatic release scripts.
 
 [Release History (English)]
 <!-- BEGIN-LATEST-EN -->
+<li>Polaris Engine 1.2.6 2024/5/7
+  <ul>
+    <li>Fixed the font color on the template games</li>
+    <li>Fixed a bug where the click anime remains after messages</li>
+  </ul>
+</li>
+<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.2.5 2024/5/7
   <ul>
     <li>Added lip-sync</li>
     <li>Supported automatic build of Android APK on Windows</li>
   </ul>
 </li>
-<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.2.4 2024/5/5
   <ul>
     <li>Fixed a problem on builds on the Windows version of Android Studio</li>
