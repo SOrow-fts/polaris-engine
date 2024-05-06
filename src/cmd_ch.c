@@ -144,6 +144,10 @@ static bool init(void)
 	if (!load_eye_image_if_exists(chpos, fname))
 		return false;
 
+	/* 口パク画像があれば読み込む */
+	if (!load_lip_image_if_exists(chpos, fname))
+		return false;
+
 	/* 繰り返し動作を開始する */
 	start_command_repetition();
 

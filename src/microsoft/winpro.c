@@ -369,6 +369,7 @@ static VOID OnExportMac(void);
 static VOID OnExportWeb(void);
 static VOID RunWebTest(void);
 static VOID OnExportAndroid(void);
+static VOID RunAndroidBuild(void);
 static VOID OnExportIOS(void);
 static VOID OnExportUnity(void);
 static VOID OnFont(void);
@@ -4590,7 +4591,7 @@ static VOID OnWriteVars(void)
 }
 
 /* パッケージを作成メニューが押下されたときの処理を行う */
-VOID OnExportPackage(void)
+static VOID OnExportPackage(void)
 {
 	if (MessageBox(hWndMain, bEnglish ?
 				   L"Are you sure you want to export the package file?\n"
@@ -4611,7 +4612,7 @@ VOID OnExportPackage(void)
 }
 
 /* Windows向けにエクスポートのメニューが押下されたときの処理を行う */
-VOID OnExportWin(void)
+static VOID OnExportWin(void)
 {
 	if (MessageBox(hWndMain, bEnglish ?
 				   L"Takes a while. Are you sure?\n" :
@@ -4678,7 +4679,7 @@ VOID OnExportWin(void)
 }
 
 /* エクスポートされたWindowsゲームを実行する */
-VOID RunWindowsGame(void)
+static VOID RunWindowsGame(void)
 {
 	STARTUPINFOW si;
 	PROCESS_INFORMATION pi;
@@ -4703,7 +4704,7 @@ VOID RunWindowsGame(void)
 }
 
 /* Windows向けインストーラをエクスポートするのメニューが押下されたときの処理を行う */
-VOID OnExportWinInst(void)
+static VOID OnExportWinInst(void)
 {
 	wchar_t cmdline[1024];
 	STARTUPINFOW si;
@@ -4798,7 +4799,7 @@ VOID OnExportWinInst(void)
 }
 
 /* Mac向けにエクスポートのメニューが押下されたときの処理を行う */
-VOID OnExportMac(void)
+static VOID OnExportMac(void)
 {
 	if (MessageBox(hWndMain, bEnglish ?
 				   L"Takes a while. Are you sure?\n" :
@@ -4851,7 +4852,7 @@ VOID OnExportMac(void)
 }
 
 /* Web向けにエクスポートのメニューが押下されたときの処理を行う */
-VOID OnExportWeb(void)
+static VOID OnExportWeb(void)
 {
 	if (MessageBox(hWndMain, bEnglish ?
 				   L"Takes a while. Are you sure?\n" :
@@ -4912,7 +4913,7 @@ VOID OnExportWeb(void)
 }
 
 /* web-test.exeを実行する */
-VOID RunWebTest(void)
+static VOID RunWebTest(void)
 {
 	STARTUPINFOW si;
 	PROCESS_INFORMATION pi;
@@ -4946,7 +4947,7 @@ VOID RunWebTest(void)
 }
 
 /* Androidプロジェクトをエクスポートのメニューが押下されたときの処理を行う */
-VOID OnExportAndroid(void)
+static VOID OnExportAndroid(void)
 {
 	if (MessageBox(hWndMain, bEnglish ?
 				   L"Takes a while. Are you sure?\n" :
@@ -4984,6 +4985,20 @@ VOID OnExportAndroid(void)
 	CopyGameFiles(L".\\txt", L".\\android-export\\app\\src\\main\\assets\\txt");
 	CopyGameFiles(L".\\wms", L".\\android-export\\app\\src\\main\\assets\\wms");
 
+	if (MessageBox(hWndMain, bEnglish ?
+				   L"Would you like to build APK file?" :
+				   L"APKファイルをビルドしますか？",
+				   TITLE,
+				   MB_ICONINFORMATION | MB_YESNO) == IDYES)
+	{
+		/* バッチファイルを呼び出す */
+		RunAndroidBuild();
+
+		/* Explorerを開く */
+		ShellExecuteW(NULL, L"explore", L".\\android-export\\app\\build\\outputs\\apk\\release", NULL, NULL, SW_SHOW);
+		return;
+	}
+
 	MessageBox(hWndMain, bEnglish ?
 			   L"Will open the exported source code folder.\n"
 			   L"Build with Android Studio." :
@@ -4996,8 +5011,37 @@ VOID OnExportAndroid(void)
 	ShellExecuteW(NULL, L"explore", L".\\android-export", NULL, NULL, SW_SHOW);
 }
 
+/* build.batを実行する */
+static VOID RunAndroidBuild(void)
+{
+	STARTUPINFOW si;
+	PROCESS_INFORMATION pi;
+	wchar_t cmdline[1024];
+
+	/* コマンドライン文字列はCreateProcessW()に書き換えられるので、バッファにコピーしておく */
+	wcscpy(cmdline, L"cmd.exe /k .\\android-export\\build.bat");
+
+	/* プロセスを実行する */
+	ZeroMemory(&si, sizeof(STARTUPINFOW));
+	si.cb = sizeof(STARTUPINFOW);
+	CreateProcessW(NULL,	/* lpApplication */
+				   cmdline,	/* lpCommandLine */
+				   NULL,	/* lpProcessAttribute */
+				   NULL,	/* lpThreadAttributes */
+				   FALSE,	/* bInheritHandles */
+				   NORMAL_PRIORITY_CLASS | CREATE_NEW_CONSOLE | CREATE_NEW_PROCESS_GROUP,
+				   NULL,	/* lpEnvironment */
+				   L".\\android-export",
+				   &si,
+				   &pi);
+	if (pi.hProcess != NULL)
+		CloseHandle(pi.hThread);
+	if (pi.hProcess != NULL)
+		CloseHandle(pi.hProcess);
+}
+
 /* iOSプロジェクトをエクスポートのメニューが押下されたときの処理を行う */
-VOID OnExportIOS(void)
+static VOID OnExportIOS(void)
 {
 	if (MessageBox(hWndMain, bEnglish ?
 				   L"Takes a while. Are you sure?\n" :
@@ -5050,7 +5094,7 @@ VOID OnExportIOS(void)
 }
 
 /* Unityプロジェクトをエクスポートのメニューが押下されたときの処理を行う */
-VOID OnExportUnity(void)
+static VOID OnExportUnity(void)
 {
 	if (MessageBox(hWndMain, bEnglish ?
 				   L"Attention: This feature is still in alpha version.\n"

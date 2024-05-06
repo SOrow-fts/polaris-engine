@@ -40,10 +40,7 @@ void cleanup_glyph(void);
 bool update_global_font(void);
 
 /* utf-8文字列の先頭文字をutf-32文字に変換する */
-#ifndef AVOID_UTF8_TO_UTF32
-/* We have a duplicated symbol on some platforms, just avoid redefinition here. */
 int utf8_to_utf32(const char *mbs, uint32_t *wc);
-#endif
 
 /* utf-8文字列の文字数を返す */
 int count_utf8_chars(const char *mbs);

@@ -18,7 +18,7 @@
 #define INVALID_ACCEL_TYPE	(0)
 
 /* レイヤごとのアニメーションシーケンスの最大数 */
-#define SEQUENCE_COUNT		(64)
+#define SEQUENCE_COUNT		(1024)
 
 /* アニメーションシーケンスの構造 */
 struct sequence {
@@ -283,6 +283,9 @@ bool new_anime_sequence(int layer)
 
 	assert(layer >= 0 && layer < STAGE_LAYERS);
 
+	if (context[layer].seq_count >= SEQUENCE_COUNT)
+		return false;
+
 	cur_seq_layer = layer;
 
 	s = &sequence[layer][context[layer].seq_count];
@@ -396,31 +399,6 @@ bool is_anime_running(void)
 	int i;
 
 	for (i = 0; i < STAGE_LAYERS; i++) {
-		if (context[i].is_running)
-			return true;
-	}
-	return false;
-}
-
-/*
- * 実行中のアニメーションがあるか調べる
- */
-bool is_anime_running_except_eye_blinking(void)
-{
-	int i;
-
-	for (i = 0; i < STAGE_LAYERS; i++) {
-		switch (i) {
-		case LAYER_CHB_EYE:
-		case LAYER_CHL_EYE:
-		case LAYER_CHLC_EYE:
-		case LAYER_CHR_EYE:
-		case LAYER_CHC_EYE:
-		case LAYER_CHF_EYE:
-			continue;
-		default:
-			break;
-		}
 		if (context[i].is_running)
 			return true;
 	}
@@ -966,7 +944,7 @@ bool load_eye_image_if_exists(int chpos, const char *fname)
 }
 
 /*
- * 目パチアニメを再ロード
+ * 目パチアニメを再ロードする
  */
 bool reload_eye_anime(int chpos)
 {
@@ -992,6 +970,9 @@ static void synthesis_eye_anime(int chpos)
 	
 	base_layer = chpos_to_layer(chpos);
 	eye_layer = chpos_to_eye_layer(chpos);
+
+	if (get_layer_image(eye_layer) == NULL)
+		return;
 
 	/* キャラの座標を取得する */
 	x = get_layer_x(base_layer);
@@ -1042,12 +1023,197 @@ static void synthesis_eye_anime(int chpos)
 			add_anime_sequence_property_i("from-y",	y);
 			add_anime_sequence_property_i("to-x",	x);
 			add_anime_sequence_property_i("to-y",	y);
+			add_anime_sequence_property_i("frame",	0);
 		}
 	}
 	add_anime_sequence_property_i("loop", 0);
 
 	/* アニメを開始する */
 	start_layer_anime(eye_layer);
+}
+
+/*
+ * 口パク
+ */
+
+/*
+ * 口パク画像をロードする
+ */
+bool load_lip_image_if_exists(int chpos, const char *fname)
+{
+	char lip_fname[1024], ext[128], *dot;
+	struct image *lip_img;
+	int lip_layer;
+
+	/* まず口のレイヤを無効にする */
+	lip_layer = chpos_to_lip_layer(chpos);
+	set_layer_file_name(lip_layer, NULL);
+	set_layer_image(lip_layer, NULL);
+
+	/* キャラがない場合 */
+	if (fname == NULL || strcmp(fname, "none") == 0 || strcmp(fname, U8("消去")) == 0) {
+		/* 既存の口パクアニメを終了する */
+		clear_layer_anime_sequence(lip_layer);
+		return true;
+	}
+
+	/* 口パクファイル名の文字列"filename_eye.ext"を作る */
+	strcpy(lip_fname, fname);
+	dot = strstr(lip_fname, ".");
+	if (dot != NULL) {
+		/* 拡張子ありの場合 */
+		strcpy(ext, dot);
+		strcpy(dot, "_lip");
+		strcat(dot, ext);
+
+		/* ファイルがない場合 */
+		if (!check_file_exist(CH_DIR, lip_fname))
+			return true;
+	} else {
+		/* 拡張子なしの場合 */
+		do {
+			strcat(lip_fname, "_lip.png");
+			if (check_file_exist(CH_DIR, lip_fname))
+				break;
+			strcat(lip_fname, "_lip.webp");
+			if (check_file_exist(CH_DIR, lip_fname))
+				break;
+
+			/* 口パクファイルがない */
+			return true;
+		} while (0);
+	}
+
+	/* イメージを読み込む */
+	lip_img = create_image_from_file(CH_DIR, lip_fname);
+	if (lip_img == NULL) {
+		log_script_exec_footer();
+		return false;
+	}
+
+	/* レイヤを設定する */
+	set_layer_file_name(lip_layer, lip_fname);
+	set_layer_image(lip_layer, lip_img);
+	set_layer_alpha(lip_layer, 0);
+	set_layer_scale(lip_layer, 1.0f, 1.0f);
+
+	return true;
+}
+
+/*
+ * 口パクのアニメを実行する
+ */
+void run_lip_anime(int chpos, const char *msg)
+{
+	float ofs_time, base_time;
+	int i, x, y, base_layer, lip_layer, frame_count, word_count;
+	int WORD_COUNT = 3;
+
+	base_layer = chpos_to_layer(chpos);
+	lip_layer = chpos_to_lip_layer(chpos);
+
+	if (get_layer_image(lip_layer) == NULL)
+		return;
+
+	/* キャラの座標を取得する */
+	x = get_layer_x(base_layer);
+	y = get_layer_y(base_layer);
+
+	/* 口パクレイヤーの位置を設定する */
+	set_layer_position(lip_layer, x, y);
+
+	/* 口パクのアニメを開始する */
+	frame_count = get_layer_image(lip_layer)->width / get_layer_image(base_layer)->width;
+	base_time = conf_character_lipsync_frame == 0 ? 0.02f : conf_character_lipsync_frame;
+	ofs_time = 0;
+	word_count = WORD_COUNT;
+	clear_layer_anime_sequence(lip_layer);
+	while (msg) {
+		uint32_t wc;
+		int n;
+
+		n = utf8_to_utf32(msg, &wc);
+		if (n <= 0)
+			break;
+		msg += n;
+
+		if (wc == U32_C('、') || wc == U32_C('。') ||
+		    wc == U32_C('！') || wc == U32_C('？') ||
+		    wc == U32_C('・') || wc == U32_C('…') ||
+		    wc == U32_C('―')) {
+			ofs_time += base_time * 20;
+			word_count = WORD_COUNT;
+			continue;
+		}
+
+		/* (WORD_COUNT)文字ごとに口パクする */
+		if (word_count == 0)
+			word_count = WORD_COUNT;
+		if (word_count-- != WORD_COUNT)
+			continue;
+
+		/* 正順で口パクを表示する */
+		for (i = 0; i < frame_count; i++) {
+			new_anime_sequence(lip_layer);
+			add_anime_sequence_property_f("start",	ofs_time);
+			ofs_time += base_time;
+			add_anime_sequence_property_f("end",	ofs_time);
+			add_anime_sequence_property_i("from-x",	x);
+			add_anime_sequence_property_i("from-y",	y);
+			add_anime_sequence_property_i("from-a",	255);
+			add_anime_sequence_property_i("to-x",	x);
+			add_anime_sequence_property_i("to-y",	y);
+			add_anime_sequence_property_i("to-a",	255);
+			add_anime_sequence_property_i("frame",	i);
+			ofs_time += base_time;
+		}
+
+		/* 3フレーム以上ある場合、逆順で口パクを表示する */
+		if (frame_count > 2) {
+			for (i = frame_count - 1; i >= 0; i--) {
+				new_anime_sequence(lip_layer);
+				add_anime_sequence_property_f("start",	ofs_time);
+				ofs_time += base_time;
+				add_anime_sequence_property_f("end",	ofs_time);
+				add_anime_sequence_property_i("from-x",	x);
+				add_anime_sequence_property_i("from-y",	y);
+				add_anime_sequence_property_i("from-a",	255);
+				add_anime_sequence_property_i("to-x",	x);
+				add_anime_sequence_property_i("to-y",	y);
+				add_anime_sequence_property_i("to-a",	255);
+				add_anime_sequence_property_i("frame",	i);
+				ofs_time += base_time;
+			}
+		}
+	}
+
+	/* 口パクを非表示にする */
+	new_anime_sequence(lip_layer);
+	add_anime_sequence_property_f("start",	ofs_time);
+	ofs_time += base_time;
+	add_anime_sequence_property_f("end",	ofs_time);
+	add_anime_sequence_property_i("from-x",	x);
+	add_anime_sequence_property_i("from-y",	y);
+	add_anime_sequence_property_i("from-a",	0);
+	add_anime_sequence_property_i("to-x",	x);
+	add_anime_sequence_property_i("to-y",	y);
+	add_anime_sequence_property_i("to-a",	0);
+	add_anime_sequence_property_i("frame",	0);
+
+	/* アニメを開始する */
+	start_layer_anime(lip_layer);
+}
+
+/*
+ * 口パクのアニメを停止する
+ */
+void stop_lip_anime(int chpos)
+{
+	int lip_layer;
+
+	lip_layer = chpos_to_lip_layer(chpos);
+
+	clear_layer_anime_sequence(lip_layer);
 }
 
 /*

@@ -11,6 +11,7 @@
  * [Changes]
  *  - 2023-10-XX Created.
  *  - 2024-03-03 Added eye anime support.
+ *  - 2024-05-06 Added lip anime support.
  *  - 2024-04-11 Polaris Engine
  */
 
@@ -65,9 +66,6 @@ bool finish_layer_anime(int layer);
 /* 実行中のアニメーションがあるか調べる */
 bool is_anime_running(void);
 
-/* 実行中のアニメーションがあるか調べる */
-bool is_anime_running_except_eye_blinking(void);
-
 /* 指定したレイヤーの中にアニメが実行中のものがあるか調べる */
 bool is_anime_running_with_layer_mask(bool *used_layers);
 
@@ -86,7 +84,16 @@ const char *get_reg_anime_file_name(int reg_index);
 /* 目パチ画像をロードする */
 bool load_eye_image_if_exists(int chpos, const char *fname);
 
-/* 目パチアニメを再ロード */
+/* 目パチアニメを再ロードする */
 bool reload_eye_anime(int chpos);
+
+/* 口パク画像をロードする */
+bool load_lip_image_if_exists(int chpos, const char *fname);
+
+/* 口パクのアニメを合成する */
+void run_lip_anime(int chpos, const char *msg);
+
+/* 口パクのアニメを停止する */
+void stop_lip_anime(int chpos);
 
 #endif

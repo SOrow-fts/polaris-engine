@@ -26,6 +26,7 @@
  *  - 2023-08-19 Added pen move.
  *  - 2023-09-12 Commonize text layout engine to glyph.c
  *  - 2023-11-22 Added "seen" color.
+ *  - 2023-11-22 Added lip sync.
  *  - 2024-04-11 Polaris Engine
  */
 
@@ -358,6 +359,7 @@ static void adjust_pointed_index(void);
 static void get_button_rect(int btn, int *x, int *y, int *w, int *h);
 static void init_repetition(void);
 static void speak(void);
+static void init_lip_sync(void);
 
 /* フレーム処理 */
 static bool frame_auto_mode(void);
@@ -720,6 +722,9 @@ static bool init(void)
 
 	/* テキスト読み上げを行う */
 	speak();
+
+	/* 口パクを実行する */
+	init_lip_sync();
 
 	/* 連続スワイプによるスキップ動作を有効にする */
 	set_continuous_swipe_enabled(true);
@@ -3273,6 +3278,18 @@ static void speak(void)
 	speak_text(msg_top);
 }
 
+/* 口パクを実行する */
+static void init_lip_sync(void)
+{
+	int chpos;
+
+	chpos = get_talking_chpos();
+	if (chpos == -1)
+		return;
+
+	run_lip_anime(chpos, msg_top);
+}
+
 /*
  * 終了処理
  */
@@ -3300,6 +3317,8 @@ static void stop(void)
 /* 終了処理を行う */
 static bool cleanup(void)
 {
+	int chpos;
+
 	/* @ichooseのためにペンの位置を保存する */
 	set_pen_position(pen_x, pen_y);
 
@@ -3359,6 +3378,11 @@ static bool cleanup(void)
 		if (!move_to_next_command())
 			return false;
 	}
+
+	/* 口パクのアニメを停止する */
+	chpos = get_talking_chpos();
+	if (chpos != -1)
+		stop_lip_anime(chpos);
 
 	return true;
 }

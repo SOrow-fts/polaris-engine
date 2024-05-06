@@ -407,6 +407,12 @@ extern float conf_character_eyeblink_interval;
 extern float conf_character_eyeblink_frame;
 
 /*
+ * 口パクの設定
+ */
+
+extern float conf_character_lipsync_frame;
+
+/*
  * ステージのマージン(キャラクタレイヤの位置補正)
  */
 

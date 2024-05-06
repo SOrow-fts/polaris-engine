@@ -649,6 +649,13 @@ static bool serialize_stage(struct wfile *wf)
 		case LAYER_CHRC_EYE: continue;
 		case LAYER_CHC_EYE: continue;
 		case LAYER_CHF_EYE: continue;
+		case LAYER_CHB_LIP: continue;
+		case LAYER_CHL_LIP: continue;
+		case LAYER_CHLC_LIP: continue;
+		case LAYER_CHR_LIP: continue;
+		case LAYER_CHRC_LIP: continue;
+		case LAYER_CHC_LIP: continue;
+		case LAYER_CHF_LIP: continue;
 		default: break;
 		}
 
@@ -1136,6 +1143,13 @@ static bool deserialize_stage(struct rfile *rf)
 		case LAYER_CHRC_EYE: continue;
 		case LAYER_CHC_EYE: continue;
 		case LAYER_CHF_EYE: continue;
+		case LAYER_CHB_LIP: continue;
+		case LAYER_CHL_LIP: continue;
+		case LAYER_CHLC_LIP: continue;
+		case LAYER_CHR_LIP: continue;
+		case LAYER_CHRC_LIP: continue;
+		case LAYER_CHC_LIP: continue;
+		case LAYER_CHF_LIP: continue;
 		default: break;
 		}
 
@@ -1228,6 +1242,8 @@ static bool deserialize_stage(struct rfile *rf)
 		layer = chpos_to_layer(i);
 		fname = get_layer_file_name(layer);
 		if (!load_eye_image_if_exists(i, fname))
+			return false;
+		if (!load_lip_image_if_exists(i, fname))
 			return false;
 	}
 

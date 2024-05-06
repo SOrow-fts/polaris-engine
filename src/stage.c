@@ -1293,18 +1293,25 @@ void clear_stage(void)
 		case LAYER_BG2:		/* fall-thru */
 		case LAYER_CHB:		/* fall-thru */
 		case LAYER_CHB_EYE:	/* fall-thru */
+		case LAYER_CHB_LIP:	/* fall-thru */
 		case LAYER_CHL:		/* fall-thru */
 		case LAYER_CHL_EYE:	/* fall-thru */
+		case LAYER_CHL_LIP:	/* fall-thru */
 		case LAYER_CHLC:	/* fall-thru */
 		case LAYER_CHLC_EYE:	/* fall-thru */
+		case LAYER_CHLC_LIP:	/* fall-thru */
 		case LAYER_CHR:		/* fall-thru */
 		case LAYER_CHR_EYE:	/* fall-thru */
+		case LAYER_CHR_LIP:	/* fall-thru */
 		case LAYER_CHRC:	/* fall-thru */
 		case LAYER_CHRC_EYE:	/* fall-thru */
+		case LAYER_CHRC_LIP:	/* fall-thru */
 		case LAYER_CHC:		/* fall-thru */
 		case LAYER_CHC_EYE:	/* fall-thru */
+		case LAYER_CHC_LIP:	/* fall-thru */
 		case LAYER_CHF:		/* fall-thru */
 		case LAYER_CHF_EYE:	/* fall-thru */
+		case LAYER_CHF_LIP:	/* fall-thru */
 		case LAYER_EFFECT1:	/* fall-thru */
 		case LAYER_EFFECT2:	/* fall-thru */
 		case LAYER_EFFECT3:	/* fall-thru */
@@ -1413,39 +1420,73 @@ int chpos_to_eye_layer(int chpos)
 }
 
 /*
+ * Converts a character position to a stage layer index (character lip).
+ */
+int chpos_to_lip_layer(int chpos)
+{
+	switch (chpos) {
+	case CH_BACK:
+		return LAYER_CHB_LIP;
+	case CH_LEFT:
+		return LAYER_CHL_LIP;
+	case CH_LEFT_CENTER:
+		return LAYER_CHLC_LIP;
+	case CH_RIGHT:
+		return LAYER_CHR_LIP;
+	case CH_RIGHT_CENTER:
+		return LAYER_CHRC_LIP;
+	case CH_CENTER:
+		return LAYER_CHC_LIP;
+	case CH_FACE:
+		return LAYER_CHF_LIP;
+	default:
+		assert(0);
+		break;
+	}
+	return -1;
+}
+
+/*
  * Converts a stage layer index to a character position.
  */
 int layer_to_chpos(int layer)
 {
-	assert(layer == LAYER_CHB || layer == LAYER_CHB_EYE ||
-	       layer == LAYER_CHL || layer == LAYER_CHL_EYE ||
-	       layer == LAYER_CHR || layer == LAYER_CHR_EYE ||
-	       layer == LAYER_CHC || layer == LAYER_CHC_EYE ||
-	       layer == LAYER_CHRC || layer == LAYER_CHRC_EYE ||
-	       layer == LAYER_CHLC || layer == LAYER_CHLC_EYE ||
-	       layer == LAYER_CHF || layer == LAYER_CHF_EYE);
+	assert(layer == LAYER_CHB || layer == LAYER_CHB_EYE || layer == LAYER_CHB_LIP ||
+	       layer == LAYER_CHL || layer == LAYER_CHL_EYE || layer == LAYER_CHL_LIP ||
+	       layer == LAYER_CHR || layer == LAYER_CHR_EYE || layer == LAYER_CHR_LIP ||
+	       layer == LAYER_CHC || layer == LAYER_CHC_EYE || layer == LAYER_CHC_LIP ||
+	       layer == LAYER_CHRC || layer == LAYER_CHRC_EYE || layer == LAYER_CHRC_LIP ||
+	       layer == LAYER_CHLC || layer == LAYER_CHLC_EYE || layer == LAYER_CHLC_LIP ||
+	       layer == LAYER_CHF || layer == LAYER_CHF_EYE || layer == LAYER_CHF_LIP);
 
 	switch (layer) {
 	case LAYER_CHB:
 	case LAYER_CHB_EYE:
+	case LAYER_CHB_LIP:
 		return CH_BACK;
 	case LAYER_CHL:
 	case LAYER_CHL_EYE:
+	case LAYER_CHL_LIP:
 		return CH_LEFT;
 	case LAYER_CHLC:
 	case LAYER_CHLC_EYE:
+	case LAYER_CHLC_LIP:
 		return CH_LEFT_CENTER;
 	case LAYER_CHR:
 	case LAYER_CHR_EYE:
+	case LAYER_CHR_LIP:
 		return CH_RIGHT;
 	case LAYER_CHRC:
 	case LAYER_CHRC_EYE:
+	case LAYER_CHRC_LIP:
 		return CH_RIGHT_CENTER;
 	case LAYER_CHC:
 	case LAYER_CHC_EYE:
+	case LAYER_CHC_LIP:
 		return CH_CENTER;
 	case LAYER_CHF:
 	case LAYER_CHF_EYE:
+	case LAYER_CHF_LIP:
 		return CH_FACE;
 	default:
 		assert(0);
@@ -1482,16 +1523,22 @@ void render_stage(void)
 	render_layer_image(LAYER_EFFECT8);
 	render_layer_image(LAYER_CHB);
 	render_layer_image(LAYER_CHB_EYE);
+	render_layer_image(LAYER_CHB_LIP);
 	render_layer_image(LAYER_CHL);
 	render_layer_image(LAYER_CHL_EYE);
+	render_layer_image(LAYER_CHL_LIP);
 	render_layer_image(LAYER_CHLC);
 	render_layer_image(LAYER_CHLC_EYE);
+	render_layer_image(LAYER_CHLC_LIP);
 	render_layer_image(LAYER_CHR);
 	render_layer_image(LAYER_CHR_EYE);
+	render_layer_image(LAYER_CHR_LIP);
 	render_layer_image(LAYER_CHRC);
 	render_layer_image(LAYER_CHRC_EYE);
+	render_layer_image(LAYER_CHRC_LIP);
 	render_layer_image(LAYER_CHC);
 	render_layer_image(LAYER_CHC_EYE);
+	render_layer_image(LAYER_CHC_LIP);
 	render_layer_image(LAYER_EFFECT1);
 	render_layer_image(LAYER_EFFECT2);
 	render_layer_image(LAYER_EFFECT3);
@@ -1500,8 +1547,11 @@ void render_stage(void)
 		render_layer_image(LAYER_MSG);
 	if (is_namebox_visible && !conf_namebox_hidden)
 		render_layer_image(LAYER_NAME);
-	if (is_msgbox_visible)
+	if (is_msgbox_visible) {
 		render_layer_image(LAYER_CHF);
+		render_layer_image(LAYER_CHF_EYE);
+		render_layer_image(LAYER_CHF_LIP);
+	}
 	if (is_click_visible)
 		render_layer_image(LAYER_CLICK);
 	if (is_auto_visible)
@@ -3875,7 +3925,7 @@ static void render_fade_shake(void)
  */
 void set_ch_name_mapping(int pos, int ch_name_index)
 {
-	assert(pos >= 0 && pos < CH_BASIC_LAYERS);
+	assert(pos >= 0 && pos < CH_ALL_LAYERS);
 
 	ch_name_mapping[pos] = ch_name_index;
 }
@@ -3887,6 +3937,21 @@ void set_ch_name_mapping(int pos, int ch_name_index)
 void set_ch_talking(int ch_name_index)
 {
 	ch_talking = ch_name_index;
+}
+
+/* 発話キャラを取得する */
+int get_talking_chpos(void)
+{
+	int i;
+
+	if (ch_talking == -1)
+		return -1;
+
+	for (i = 0; i < CH_BASIC_LAYERS; i++) {
+		if (ch_name_mapping[i] == ch_talking)
+			return i;
+	}
+	return -1;
 }
 
 /*
@@ -4239,10 +4304,13 @@ static void render_layer_image(int layer)
 	if (layer == LAYER_CLICK && conf_click_disable)
 		return;
 
-	/* 目パチのフレームを計算する */
+	/* 目パチ/口パクのフレームを計算する */
 	if (layer == LAYER_CHB_EYE || layer == LAYER_CHL_EYE ||
 	    layer == LAYER_CHLC_EYE || layer == LAYER_CHC_EYE ||
-	    layer == LAYER_CHRC_EYE || layer == LAYER_CHR_EYE) {
+	    layer == LAYER_CHRC_EYE || layer == LAYER_CHR_EYE ||
+	    layer == LAYER_CHB_LIP || layer == LAYER_CHL_LIP ||
+	    layer == LAYER_CHLC_LIP || layer == LAYER_CHC_LIP ||
+	    layer == LAYER_CHRC_LIP || layer == LAYER_CHR_LIP) {
 		base_img = layer_image[chpos_to_layer(layer_to_chpos(layer))];
 		if (base_img == NULL)
 			return;

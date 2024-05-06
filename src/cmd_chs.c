@@ -285,6 +285,8 @@ static bool init(void)
 			continue;
 		if (!load_eye_image_if_exists(i, fname[i]))
 			return false;
+		if (!load_lip_image_if_exists(i, fname[i]))
+			return false;
 	}
 
 	/* 時間計測を開始する */

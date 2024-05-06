@@ -84,25 +84,25 @@
 
 @ch c 001-fun.png 1.0
 
-*???*e001.ogg*Isn't the breeze great from up here? It's so cool...
+*Midori*e001.ogg*Isn't the breeze great from up here? It's so cool...
 
 @ch c none 1.0
 
-*???*e002.ogg*(I'm on my school's rooftop, having skipped my remedial class.)
+*Midori*e002.ogg*(I'm on my school's rooftop, having skipped my remedial class.)
 
 @ch c 001-happy.png 1.0
 
-*???*e003.ogg*Hm? Oh, you're here. Hey, it's fine, they don't call the roll for remedial classes anymore.
+*Midori*e003.ogg*Hm? Oh, you're here. Hey, it's fine, they don't call the roll for remedial classes anymore.
 
 @ch c none 1.0
 
-*???*e004.ogg*(Since this is a country town in Hokkaido, and on the coast, I can see the sea peaking up over the horizon. During the cultural festival, the sun turns the whole ocean amber.)
+*Midori*e004.ogg*(Since this is a country town in Hokkaido, and on the coast, I can see the sea peaking up over the horizon. During the cultural festival, the sun turns the whole ocean amber.)
 
 @ch c 001-fun.png 1.0
 
-*???*e005.ogg*Now, you're probably wondering why I skipped the remedial class, right?
-*???*e006.ogg*Oh actually, I should probably introduce myself first, shouldn't I?
-*???*e007.ogg*My name's \#{00ff00}Midori\#{ffffff}, nice to meet you!
+*Midori*e005.ogg*Now, you're probably wondering why I skipped the remedial class, right?
+*Midori*e006.ogg*Oh actually, I should probably introduce myself first, shouldn't I?
+*Midori*e007.ogg*My name's \#{00ff00}Midori\#{ffffff}, nice to meet you!
 
 *Midori*e008.ogg*I'm a senior student here. If you couldn't already tell, I love watermelon, my parents even own a watermelon farm!
 
@@ -287,7 +287,7 @@ If there's anything you want to customize, but can't, please contact the Team.
 
 @vol bgm 0.5 1.0
 
-*Midori*e031.ogg*I hope you'll send me an e-mail with your questions, feedback, issues, or even just to say hi! – See you next time!
+*Midori*e031.ogg*I hope you'll send me an e-mail with your questions, feedback, issues, or even just to say hi! - See you next time!
 
 # Shake the message box.
 @anime msgbox-shake.txt sync,showmsgbox
@@ -306,7 +306,6 @@ If there's anything you want to customize, but can't, please contact the Team.
 @chapter Bonus
 
 You got through all the questions, thank you!
-It's still a secret, but Suika2 will be renamed Polaris Engine.
 
 @goto END
 

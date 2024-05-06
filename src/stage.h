@@ -58,32 +58,32 @@ enum layer {
 	/* back */
 	LAYER_CHB,
 	LAYER_CHB_EYE,
-//	LAYER_CHB_MOUTH,
+	LAYER_CHB_LIP,
 
 	/* left */
 	LAYER_CHL,
 	LAYER_CHL_EYE,
-//	LAYER_CHL_MOUTH,
+	LAYER_CHL_LIP,
 
 	/* left-center */
 	LAYER_CHLC,
 	LAYER_CHLC_EYE,
-//	LAYER_CHLC_MOUTH,
+	LAYER_CHLC_LIP,
 
 	/* left-center */
 	LAYER_CHR,
 	LAYER_CHR_EYE,
-//	LAYER_CHR_MOUTH,
+	LAYER_CHR_LIP,
 
 	/* right-center */
 	LAYER_CHRC,
 	LAYER_CHRC_EYE,
-//	LAYER_CHRC_MOUTH,
+	LAYER_CHRC_LIP,
 
 	/* right-center */
 	LAYER_CHC,
 	LAYER_CHC_EYE,
-//	LAYER_CHC_MOUTH,
+	LAYER_CHC_LIP,
 
 	/*
 	 * エフェクトレイヤ(キャラクタの上、メッセージボックスの下)
@@ -106,7 +106,7 @@ enum layer {
 	/* face */
 	LAYER_CHF,
 	LAYER_CHF_EYE,
-//	LAYER_CHF_MOUTH,
+	LAYER_CHF_LIP,
 
 	/* クリックアニメーション */
 	LAYER_CLICK,	/* 特殊: click_image[i]への参照 */
@@ -302,7 +302,7 @@ struct image *get_layer_image(int layer);
 /* Sets a layer image for a load.*/
 void set_layer_image(int layer, struct image *img);
 
-/* Sets a layer frame for eye blinking and lip synchronizing. */
+/* Sets a layer frame for eye blinking and lip synchronization. */
 void set_layer_frame(int layer, int frame);
 
 /* Clear basic layers. */
@@ -320,6 +320,9 @@ int chpos_to_layer(int chpos);
 
 /* Convert a character position to a stage layer index (character eye). */
 int chpos_to_eye_layer(int chpos);
+
+/* Convert a character position to a stage layer index (character lip). */
+int chpos_to_lip_layer(int chpos);
 
 /* Convert a stage layer index to a character position. */
 int layer_to_chpos(int chpos);
@@ -430,6 +433,9 @@ void set_ch_name_mapping(int chpos, int ch_name_index);
 
 /* 発話キャラを設定する */
 void set_ch_talking(int ch_name_index);
+
+/* 発話キャラを取得する */
+int get_talking_chpos(void);
 
 /* キャラの自動明暗を発話キャラを元に更新する */
 void update_ch_dim_by_talking_ch(void);

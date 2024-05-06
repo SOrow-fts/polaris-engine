@@ -796,6 +796,13 @@ character.eyeblink.interval=3.0
 # 目パチの1コマの時間(秒)
 character.eyeblink.frame=0.1
 
+##
+## 口パクの設定
+##
+
+# 口パクの1コマの時間(秒)
+character.lipsync.frame=0.02
+
 ###
 ### ステージの設定
 ###
