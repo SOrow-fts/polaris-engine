@@ -14,9 +14,9 @@ Firstly, you have to get the `Polaris Engine` repository using `Git`.
 git clone https://github.com/ktabta/polaris-engine.git
 ```
 
-# The Main Engines
+# Game Runtime (the main engine)
 
-## The Main Engine for Windows
+## Windows Game
 
 This method will build a Windows app on Ubuntu or macOS.
 
@@ -45,16 +45,17 @@ This method will build a Windows app on Ubuntu or macOS.
   make engine-windows-arm64
   ```
 
-## The Main Engine for macOS
+## Mac Game
 
 This method will utilize `Xcode` and terminal to build macOS main engine binary.
 
 * Use macOS 14
 * Install Xcode 15
-* From Xcode, open `build/engine-macos/polaris.xcodeproj`
-* Build the `polaris` target
+* Run `Polaris Engine` and export a macOS source code tree
+* From Xcode, open the exported project
+* Build the app
 
-## The Main Engine for Wasm
+## Web Game
 
 This method will build the Wasm version of `Polaris Engine`.
 
@@ -64,14 +65,14 @@ This method will build the Wasm version of `Polaris Engine`.
   ```
   make engine-wasm
   ```
-  * Note that `emsdk` will be installed when the first call of `make`
+  * Note that you need Emscripten compiler
 
 * Test instructions
   * Copy your `data01.arc` to `build/engine-wasm/html/`
   * Do `make run` in the `build/engine-wasm/` directory
   * Open `http://localhost:8000/html/` by a browser
 
-## The Main Engine for Linux
+## Linux Game
 
 This method will build a Linux app.
 
@@ -88,39 +89,34 @@ This method will build a Linux app.
   make engine-linux
   ```
 
-## The Main Engine for iOS (iPhone and iPad)
+## iOS Game
 
 This method will utilize `Xcode` and terminal to build an iOS app.
 
 * Use macOS 14
 * Install Xcode 15
-* Run `Polaris Engine Pro` and export iOS source code
+* Run `Polaris Engine` and export an iOS source code tree
 * From Xcode, open the exported project
-* Complete the following steps:
-  * Connect your iOS device via USB cable
-    * First time only: Enable debug mode on iOS and reboot the device
-    * Reconnect the device
-  * Register your device to Xcode
-  * Set the build target to your device
-  * Build the project for the device
-    * First time only: Wait for a finish of transfer of iOS debug information
-  * Run the app from your iOS device
+* Set the build target to your device (or a simulator)
+* Build the app
 
 ## The Main Engine for Android
 
-This method requires `Android Studio` to build the Android app.
+* Method 1
+  * Run `Polaris Engine` and export an Android source code tree
+  * Press YES to the "Would you like to build APK?" dialog
+* Method 2
+  * This method requires `Android Studio` to build the Android app.
+  * Install `Android Studio`
+  * Run `Polaris Engine` and export an Android source code tree
+  * Open the exported project from `Android Studio`
+  * Build the project
 
-* Install `Android Studio`
-* Run `Polaris Engine Pro` and export Android source code
-* Open the exported project from `Android Studio`
-* Build the project
-* Run the app from your device or an emulator.
+# Development Tool
 
-# Polaris Engine Pro
+## Windows Dev Tool
 
-## Polaris Engine Pro for Windows
-
-This method will build a `Polaris Engine Pro` for Windows app on Ubuntu or macOS.
+This method will build an app of `Polaris Engine` for Windows on Ubuntu or macOS.
 
 * Prerequisite
   * Use Ubuntu or macOS
@@ -135,31 +131,31 @@ This method will build a `Polaris Engine Pro` for Windows app on Ubuntu or macOS
   make pro-windows
   ```
 
-## Polaris Engine Pro for macOS
+## Mac Dev Tool
 
-This method will utilize `Xcode` and terminal to build a macOS Pro app.
+This method will utilize `Xcode` to build a macOS app.
 
 * Use macOS 14
 * Install Xcode 15
 * From Xcode, open `build/pro-macos/pro-macos.xcodeproj`
-* Build.
+* Build
 
-## Polaris Engine Pro Mobile for iOS
+## iOS Dev Tool
 
-This method will utilize `Xcode` and terminal to build an iOS Pro app.
+This method will utilize `Xcode` to build an iOS Pro app.
 
 * Steps
   * Use macOS 14
   * Install Xcode 15
   * From Xcode, open `build/pro-ios/pro-ios.xcodeproj`
-  * Build.
+  * Build
 
-## Polaris Engine Pro for Linux
+## Linux Dev Tool
 
-This method will build a Linux version of Polaris Engine Pro using Qt6.
+This method will build a Linux version of Polaris Engine using Qt6.
 
 * Prerequisite
-  * Use Ubuntu including WSL2
+  * Use Ubuntu
   * From the terminal, navigate to the source code directory and run the following command:
   ```
   make setup
@@ -171,9 +167,9 @@ This method will build a Linux version of Polaris Engine Pro using Qt6.
   make pro-linux
   ```
 
-## Polaris Engine Pro on Wasm
+## Web Dev Tool
 
-This method will build `Polaris Engine Pro on Wasm`, a Web variation of `Polaris Engine Pro`.
+This method will build a Web version of `Polaris Engine`.
 
 * Use Ubuntu or macOS
 * From the terminal, navigate to the source code directory and run the following command:
@@ -181,7 +177,7 @@ This method will build `Polaris Engine Pro on Wasm`, a Web variation of `Polaris
 make pro-wasm
 ```
 * Upload the `build/pro-wasm/html/*` files to your Web server
-* Access the uploaded `index.html` via `https` (Note that `http` is not allowed)
+* Access the uploaded `index.html` via `https` (Note: `http` is not allowed due to file access APIs)
 
 # Misc
 
@@ -189,7 +185,7 @@ make pro-wasm
 
 To use static analysis of `gcc`, type the following commands:
 ```
-cd build/engine-linux-x86_64
+cd build/engine-x11
 make analyze
 ```
 
@@ -197,9 +193,7 @@ make analyze
 
 To use static analysis of LLVM/Clang, you can run the following commands:
 ```
-sudo apt-get install -y clang
-cd build/engine-linux-x86_64-clang
-make
+cd build/engine-x11
 make analyze
 ```
 
@@ -209,49 +203,13 @@ We use `valgrind` to detect memory leaks and keep memory-related bugs at zero.
 
 To use memory leak checks on Linux, type the following commands:
 ```
-cd build/engine-linux-x86_64
+cd build/engine-x11
 make valgrind
 ```
 
-## The Main Engine for Raspberry Pi
+## NetBSD sound settings
 
-This method will build a Raspberry Pi app.
-
-* Use Raspberry Pi OS
-* From the terminal, run the following commands:
-```
-sudo apt-get update
-sudo apt-get install libasound2-dev libx11-dev libxpm-dev mesa-common-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
-```
-* From the terminal, navigate to the source code directory and run the following command:
-```
-make engine-linux
-```
-
-## The Main Engine for FreeBSD
-
-This method will build a FreeBSD binary.
-
-* On FreeBSD 12 (amd64), install the following packages:
-  * `gmake`
-  * `alsa-lib`
-  * `alsa-plugins`
-* From the terminal, navigate to the `build/engine-linux` directory and run the following commands:
-```
-gmake -f Makefile.freebsd
-gmake -f Makefile.freebsd install
-```
-
-## The Main Engine for NetBSD
-
-This method will build a NetBSD binary.
-
-* On NetBSD, install the following packages:
-  * `gmake`
-  * `alsa-lib`
-  * `alsa-plugins-oss`
-* Prerequisite
-  * To setup `ALSA/OSS`, create `/etc/asound.conf` and copy the following snippet to the file:
+* To setup `ALSA/OSS`, create `/etc/asound.conf` and copy the following snippet to the file:
   ```
   pcm.!default {
     type oss
@@ -262,21 +220,3 @@ This method will build a NetBSD binary.
     device /dev/mixer
   }
   ```
-* From the terminal, navigate to the `build/engine-netbsd` directory and run the following commands:
-```
-export LD_LIBRARY_PATH=/usr/pkg/lib:/usr/X11R7/lib
-gmake -f Makefile.netbsd
-gmake -f Makefile.netbsd install
-```
-
-## The Main Engine for OpenBSD
-
-This method will build an OpenBSD binary without a sound output.
-
-* On OpenBSD, install the following package:
-  * `gmake`
-* From the terminal, navigate to the `build/engine-linux` directory and run the following commands:
-```
-gmake -f Makefile.openbsd
-gmake -f Makefile.openbsd install
-```
