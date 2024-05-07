@@ -90,7 +90,7 @@ This strategy was very influenced by the NetBSD Kernel and the Windows NT Kernel
 
 ## CI/CD Pipiline
 
-* Currently, we don't have a complete CI/CD via the cloud due to a loack of code signing capabilities.
+* Currently, we don't have a complete CI/CD via the cloud due to a lack of code signing capabilities.
 * However, the author has a release script and thus, releases are fully automated on his MacBook Pro.
   * The release script builds all binaries and uploads them to the website and GitHub.
   * It also posts a message to the Discord server.
