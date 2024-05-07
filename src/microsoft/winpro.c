@@ -4994,11 +4994,11 @@ static VOID OnExportAndroid(void)
 				   TITLE,
 				   MB_ICONINFORMATION | MB_YESNO) == IDYES)
 	{
+		/* Explorerを開く */
+		ShellExecuteW(NULL, L"explore", L".\\android-export", NULL, NULL, SW_SHOW);
+
 		/* バッチファイルを呼び出す */
 		RunAndroidBuild();
-
-		/* Explorerを開く */
-		ShellExecuteW(NULL, L"explore", L".\\android-export\\app\\build\\outputs\\apk\\release", NULL, NULL, SW_SHOW);
 		return;
 	}
 
