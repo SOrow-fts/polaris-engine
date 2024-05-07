@@ -13,7 +13,7 @@ The contents of the `polaris-engine.com` Web site excluding the downloads and th
 ## Applying the release version number
 
 * Edit `../ChangeLog`
-* Run `./we/update-version.sh`
+* Run `./web/update-version.sh`
 
 ## Upload
 
