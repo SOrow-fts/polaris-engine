@@ -100,7 +100,7 @@ This method will utilize `Xcode` and terminal to build an iOS app.
 * Set the build target to your device (or a simulator)
 * Build the app
 
-## The Main Engine for Android
+## Android Game
 
 * Method 1
   * Run `Polaris Engine` and export an Android source code tree
