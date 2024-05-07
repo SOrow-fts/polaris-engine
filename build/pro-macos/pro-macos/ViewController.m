@@ -1223,7 +1223,7 @@ static ViewController *theViewController;
         return;
     }
 
-    NSArray *appArray = @[@"libroot-device", @"libroot-sim", @"engine-ios", @"engine-ios.xcodeproj", @"Resources"];
+    NSArray *appArray = @[@"libroot-device", @"libroot-sim", @"engine-ios", @"engine-ios.xcodeproj", @"Resources", @"build.sh", @"ExportOptions.plist"];
     for (NSString *sub in appArray) {
         if (![fileManager copyItemAtPath:[NSString stringWithFormat:@"%@/Contents/Resources/ios-src/%@", [[NSBundle  mainBundle] bundlePath], sub]
                                   toPath:[NSString stringWithFormat:@"%@/export-ios/%@", [fileManager currentDirectoryPath], sub]
@@ -1242,7 +1242,22 @@ static ViewController *theViewController;
 
     log_info(_isEnglish ? "Successflully exported" : "エクスポートに成功しました。");
 
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL fileURLWithPath:[[fileManager currentDirectoryPath] stringByAppendingString:@"/export-ios"]]];
+    // IPA作成の確認のダイアログを開く
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert setMessageText:self.isEnglish ?
+           @"Would you like to build an IPA file? (You are required to be an Apple Developer Program member.)" :
+           @"IPAファイルをビルドしますか？ (Apple Developer Programに加入しておく必要があります)"];
+    [alert addButtonWithTitle:!self.isEnglish ? @"はい" : @"Yes"];
+    [alert addButtonWithTitle:!self.isEnglish ? @"いいえ" : @"No"];
+    [alert setAlertStyle:NSAlertStyleWarning];
+    if([alert runModal] != NSAlertFirstButtonReturn) {
+        [[NSWorkspace sharedWorkspace] openURL:[NSURL fileURLWithPath:[[fileManager currentDirectoryPath] stringByAppendingString:@"/export-ios"]]];
+        return;
+    }
+
+    system("cd export-ios && sh ./build.sh && cd ..");
+
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL fileURLWithPath:[[fileManager currentDirectoryPath] stringByAppendingString:@"/export-ios/app"]]];
 }
 
 - (IBAction)onMenuExportForAndroid:(id)sender {

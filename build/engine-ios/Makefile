@@ -21,7 +21,7 @@ FILES_IOS= \
 src: libroot-device libroot-sim
 	@rm -rf ios-src
 	@mkdir ios-src
-	@cp -R engine-ios engine-ios.xcodeproj ios-src/
+	@cp -R engine-ios engine-ios.xcodeproj build.sh ExportOptions.plist ios-src/
 	@sed -e 's|../../src/apple/|engine-ios/apple/|g' < ios-src/engine-ios.xcodeproj/project.pbxproj > tmpfile && mv tmpfile ios-src/engine-ios.xcodeproj/project.pbxproj
 	@sed -e 's|../../src/|engine-ios/|g' < ios-src/engine-ios.xcodeproj/project.pbxproj > tmpfile && mv tmpfile ios-src/engine-ios.xcodeproj/project.pbxproj
 	@mkdir -p ios-src/engine-ios/apple
