@@ -13,7 +13,7 @@ curl -L -O https://dl.google.com/android/repository/commandlinetools-win-1107670
 call powershell -command "Expand-Archive commandlinetools-win-11076708_latest.zip"
 
 set ANDROID_SDK_ROOT=%CURRENT_DIR%commandlinetools-win-11076708_latest\commandline-tools
-./cmdline-tools/bin/sdkmanager "platforms;android-34 --sdk_root=%ANDROID_SDK_ROOT%
+commandlinetools-win-11076708_latest\cmdline-tools\bin\sdkmanager "platforms;android-34 --sdk_root=%ANDROID_SDK_ROOT%
 
 gradlew.bat build
 gradlew.bat --stop

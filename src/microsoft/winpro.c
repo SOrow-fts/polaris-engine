@@ -4959,8 +4959,11 @@ static VOID OnExportAndroid(void)
 	/* フォルダを再作成する */
 	RecreateDirectory(L".\\android-export");
 
-	/* ソースをコピーする */
-	if (!CopyLibraryFiles(L"tools\\android-src", L".\\android-export"))
+	/*
+	 * ソースをコピーする
+	 *  - JVMのプロセスが生きているとandroid-exportが削除されないので、末尾の\\*が必要
+	 */
+	if (!CopyLibraryFiles(L"tools\\android-src\\*", L".\\android-export"))
 	{
 		log_info(bEnglish ?
 				 "Failed to copy source files for Android." :
