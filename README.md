@@ -46,16 +46,11 @@ Please visit [the official Web site](https://polaris-engine.com/en/dl/) to obtai
 
 ## Build
 
-See also [Build Instructions](https://github.com/ktabata/polaris-engine/raw/master/build/README.md) for more details.
+See also [Build Instructions](https://github.com/ktabata/polaris-engine/blob/master/build/README.md) for more details.
 
-On Ubuntu:
+On Linux/BSD:
 ```
-sudo apt-get install -y git build-essential libasound2-dev libx11-dev mesa-common-dev qt6-base-dev qt6-multimedia-dev libwebp-dev
-git clone https://github.com/ktabata/polaris-engine.git
-./configure
-make
-sudo make install
-polaris-engine
+./install-polaris-engine.sh
 ```
 
 ### Discord User Community Server
