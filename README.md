@@ -88,7 +88,7 @@ If you would like to port Polaris Engine to a new target platform, you only need
 `Polaris Engine` does not depend on SDKs or frameworks such as Unity, Godot, Python, or SDL2, this is thanks to the extensive design of first-party HALs, our compatibility layer's API.
 This strategy was very influenced by the NetBSD Kernel and the Windows NT Kernel/Exective/HAL.
 
-## CI/CD Pipiline
+## CI/CD Pipeline
 
 * Currently, we don't have a complete CI/CD via the cloud due to a lack of code signing capabilities.
 * However, the author has a release script and thus, releases are fully automated on his MacBook Pro.
