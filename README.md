@@ -3,26 +3,29 @@ Polaris Engine
 
 ## What is Polaris Engine?
 
-Polaris Engine is the first-class development software for visual novel creation.
+`Polaris Engine` is a first-class development software for visual novel creation.
 
-Polaris Engine has an open-source philosophy and is designed with a true cross-platform portablity including iOS, Android, even gaming consoles.
-It is equipped with features and tools of production-grade quality.
-Polaris Engine is perfect for both beginners and seasoned creators alike.
+With an open-source philosophy and designed with true cross-platform portability in mind,
+`Polaris Engine` is equipped with features and tools of production-grade quality,
+making it perfect for both beginners and seasoned creators alike.
 
-Effortlessness and efficiently are key concepts of Polaris Engine.
-It provides that without sacrificing features or usability to enrich both the creator and user experience.
+With a strong focus on effortless and efficient creation,
+`Polaris Engine` is able to enrich both the creator and user experience,
+all without sacrificing the features and usability creators and users have become acustomed to in the modern world.
 
-Polaris Engine don't aim for no-code but it achieve low-code using multiple Domain Specific Languages).
-Specifically, there are separate languages for scenarios, user interfaces, and logics.
-We are in the process of adding a little graphical support for each DSL.
-This is quite different from other engines and we call it "Visual Live Scripting" technology.
-The author thinks as a researcher of software engineering that VLS is one shape of RAD, Rapid Application Development.
+Polaris Engine doesn't aim to be a no-code platform; however, taking advantage of Domain Specific Languages (DSL),
+creators can compartmentalize their development cycles, making use of in-built languages for scenarios, user interfaces, and logic.
+
+To add to this, we're currently in the process of adding basic graphical support for each DSL.
+This is somewhat different to other engines, and we call it 'Visual Live Scripting' (VLS).
+
+The author thinks as a researcher of software engineering that VLS is one of the many shapes of Rapid Application Development (RAD).
 
 ## What is the Polaris Engine's Development Goal?
 
-**"The New Standard for Visual Novel Creation"**, in the era of 2020s and beyond, is the current goal of the Polaris Engine development.
+`Polaris Engine`'s goal is to **define a new standard of visual novel creation** throughout the 2020s and beyond.
 
-## What are the Polaris Engine's Mission, Vision and Values (MVV)?
+## What are the Polaris Engine's Mission, Vision, and Value (MVV) statements?
 
 * Mission
   * **Simple:** Polaris Engine enables the creation of Visual Novels in an easy and efficient manner.
@@ -82,13 +85,14 @@ The CORE is written in ANSI C, the most portable programming language in the wor
 
 If you would like to port Polaris Engine to a new target platform, you only need to write a thin HAL, this is generally possible within a week.
 
-Polaris Engine does not depend on SDKs or frameworks such as Unity, Godot, Python, or SDL2, this is thanks to the extensive design of HAL, our compatibility layer's API.
+`Polaris Engine` does not depend on SDKs or frameworks such as Unity, Godot, Python, or SDL2, this is thanks to the extensive design of first-party HALs, our compatibility layer's API.
+This strategy was very influenced by the NetBSD Kernel and the Windows NT Kernel/Exective/HAL.
 
 ## CI/CD Pipiline
 
-* We currently don't have a way to do CI/CD on the cloud due to lacks of code signing capabilities.
-* However, the author has a release script and thus releases are fully automated on his MacBook Pro.
-  * The release script builds all binaries and uploads them to the Web site and GitHub.
+* Currently, we don't have a complete CI/CD via the cloud due to a loack of code signing capabilities.
+* However, the author has a release script and thus, releases are fully automated on his MacBook Pro.
+  * The release script builds all binaries and uploads them to the website and GitHub.
   * It also posts a message to the Discord server.
   * This is generally done in 10 minutes via FTTH, or 20 minutes via LTE/5G.
 
