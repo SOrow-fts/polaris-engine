@@ -4349,8 +4349,8 @@ static const wchar_t *SelectFile(const char *pszDir)
 			 strcmp(pszDir, GUI_DIR) == 0)
 	{
 		ofn.lpstrFilter = bEnglish ?
-			L"Scenario Files\0*.s2sc;Text Files\0*.txt;\0All Files(*.*)\0*.*\0\0" : 
-			L"シナリオファイル\0*.s2sc;テキストファイル\0*.txt;\0すべてのファイル(*.*)\0*.*\0\0";
+			L"Scenario Files\0*.txt;\0All Files(*.*)\0*.*\0\0" : 
+			L"シナリオファイル\0*.txt;\0すべてのファイル(*.*)\0*.*\0\0";
 		ofn.lpstrDefExt = L"txt";
 	}
 
