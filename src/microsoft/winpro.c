@@ -4379,6 +4379,7 @@ static VOID OnSave(void)
 				   MB_YESNO | MB_ICONQUESTION) == IDNO)
 		return;
 
+	RichEdit_UpdateScriptModelFromText();
 	if (!save_script())
 	{
 		MessageBox(hWndMain, bEnglish ?

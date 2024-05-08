@@ -4,12 +4,17 @@ This file is referred by some automatic release scripts.
 
 [Release History (Japanese)]
 <!-- BEGIN-LATEST-JP -->
+<li>Polaris Engine 1.2.17 2024/5/8
+  <ul>
+    <li>シナリオ保存のバグを修正</li>
+  </ul>
+</li>
+<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.2.16 2024/5/8
   <ul>
     <li>マスターボリュームのバグを修正</li>
   </ul>
 </li>
-<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.2.15 2024/5/8
   <ul>
     <li>既読フラグの管理を改善</li>
@@ -317,12 +322,17 @@ This file is referred by some automatic release scripts.
 
 [Release History (English)]
 <!-- BEGIN-LATEST-EN -->
+<li>Polaris Engine 1.2.17 2024/5/8
+  <ul>
+    <li>Fixed a bug of scenario save</li>
+  </ul>
+</li>
+<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.2.16 2024/5/8
   <ul>
     <li>Fixed a bug of the master volume</li>
   </ul>
 </li>
-<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.2.15 2024/5/8
   <ul>
     <li>Improved the seen flag management</li>
