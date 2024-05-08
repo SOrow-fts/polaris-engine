@@ -17,7 +17,7 @@
 
     ViewController *viewController = (ViewController *)self.superview.window.contentViewController;
 
-    if (!viewController.isShiftPressed && event.keyCode == RETURN) {
+    if (viewController.isShiftPressed && event.keyCode == RETURN) {
         [viewController onScriptEnter];
         return;
     }
@@ -29,7 +29,5 @@
     ViewController *viewController = (ViewController *)self.superview.window.contentViewController;
     [viewController onScriptChange];
 }
-
-
 
 @end

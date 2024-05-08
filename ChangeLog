@@ -7,6 +7,7 @@ This file is referred by some automatic release scripts.
 <li>Polaris Engine 1.2.20 2024/5/9
   <ul>
     <li>ファイル選択のキャンセル時にシナリオが再ロードされるバグを修正</li>
+    <li>Shift+EnterとEnterの挙動を入れ替え</li>
   </ul>
 </li>
 <!-- END-LATEST-JP -->
@@ -340,6 +341,7 @@ This file is referred by some automatic release scripts.
 <li>Polaris Engine 1.2.20 2024/5/9
   <ul>
     <li>Fixed a bug of file open dialog</li>
+    <li>Swapped the behavior of Shift+Enter and Enter</li>
   </ul>
 </li>
 <!-- END-LATEST-EN -->

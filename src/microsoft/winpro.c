@@ -355,7 +355,7 @@ static VOID OnContinue(void);
 static VOID OnNext(void);
 static VOID OnStop(void);
 static VOID OnMove(void);
-static VOID OnReturn(void);
+static VOID OnShiftEnter(void);
 static VOID OnTab(void);
 static VOID OnSave(void);
 static VOID OnNextError(void);
@@ -1745,9 +1745,9 @@ static BOOL PretranslateMessage(MSG* pMsg)
 		 * リッチエディットの編集
 		 */
 		case VK_RETURN:
-			if (!bShiftDown)
+			if (bShiftDown)
 			{
-				OnReturn();
+				OnShiftEnter();
 
 				/* このメッセージはリッチエディットに送らない(改行しない) */
 				return TRUE;
@@ -4452,8 +4452,8 @@ static VOID OnNextError(void)
 			   MB_ICONINFORMATION | MB_OK);
 }
 
-/* リッチエディットでのReturnを処理する(シフトキーなしの場合) */
-static VOID OnReturn(void)
+/* リッチエディットでのShift+Enterを処理する */
+static VOID OnShiftEnter(void)
 {
 	int nCursorLine;
 
