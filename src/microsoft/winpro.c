@@ -4527,9 +4527,11 @@ static VOID OnTab(void)
 		if (wcscmp(completion_item[i].prefix, szCmd) == 0)
 		{
 			RichEdit_InsertTextAtEnd(completion_item[i].insert);
-			break;
+			return;
 		}
 	}
+
+	RichEdit_InsertTextAtEnd(L"    ");
 }
 
 /* ポップアップを表示する */
