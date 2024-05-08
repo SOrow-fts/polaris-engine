@@ -307,7 +307,27 @@ If there's anything you want to customize, but can't, please contact the Team.
 
 You got through all the questions, thank you!
 
+Let me rain...
+
+&start-rain
+
+It's raining!
+
+&stop-rain
+
+&start-snow
+
+Oh, it's snowing!
+
+&stop-snow
+
 @goto END
+
+###
+### Include the effect library
+###
+
+using library/effect.txt
 
 ###
 ### Quit Logo

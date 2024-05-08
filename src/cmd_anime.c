@@ -155,16 +155,25 @@ static bool init(void)
 		show_namebox(true);
 
 	/* 特殊なファイル名を処理する */
-	if (strcmp(file, "reset") == 0) {
-		/* 全レイヤのアニメを強制的に完了する */
+	if (strcmp(file, "clear") == 0) {
+		/* 指定されたレイヤのアニメをクリアする */
+		for (i = 0; i < STAGE_LAYERS; i++)
+			if (opt_layer_all || opt_layer_tbl[i])
+				clear_layer_anime_sequence(i);
+	} else if (strcmp(file, "wait") == 0) {
+		/* 指定されたレイヤのアニメが完了するのを待つ */
+	} else if (strcmp(file, "reset") == 0) {
+		/* 指定されたレイヤの指定されたアニメパラメータを初期化する */
 		do_reset();
 	} else if (strcmp(file, "finish-all") == 0) {
 		/* 全レイヤのアニメ完了を待つ */
-		opt_async = false;
+		opt_layer_all = true;
 	} else if (strcmp(file, "stop-all") == 0) {
-		/* 全レイヤのアニメを強制的に完了する */
+		log_info("stop-all is deprecated. Use \"@anime clear layer-all\" instead.");
+
+		/* 全レイヤのアニメをクリアする */
 		for (i = 0; i < STAGE_LAYERS; i++)
-			finish_layer_anime(i);
+			clear_layer_anime_sequence(i);
 	} else if (strcmp(file, "unregister") == 0) {
 		/* 登録解除を行う */
 		unregister_anime(reg_index);
@@ -225,9 +234,15 @@ static void draw(void)
 /* 終了処理を行う */
 static bool cleanup(void)
 {
+	int i;
+
 	/* 同期処理の場合、アニメシーケンスをクリアする */
-	if (!opt_async)
-		clear_all_anime_sequence();
+	if (!opt_async) {
+		for (i = 0; i < STAGE_LAYERS; i++) {
+			if (opt_layer_all || opt_layer_tbl[i])
+				clear_layer_anime_sequence(i);
+		}
+	}
 
 	/* 次のコマンドに移動する */
 	if (!move_to_next_command())

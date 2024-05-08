@@ -279,7 +279,7 @@ bool new_anime_sequence(int layer)
 	cur_seq_layer = layer;
 
 	s = &sequence[layer][context[layer].seq_count];
-	memset(s, 0, sizeof(sequence[layer]));
+	memset(s, 0, sizeof(struct sequence));
 	s->from_scale_x = 1.0f;
 	s->from_scale_y = 1.0f;
 	s->to_scale_x = 1.0f;
@@ -343,40 +343,6 @@ bool start_layer_anime(int layer)
 		sequence[layer][context[layer].seq_count - 1].loop ?
 		(uint64_t)(sequence[layer][context[layer].seq_count - 1].end_time * 1000.0f) :
 		0;
-
-	return true;
-}
-
-/*
- * 指定したレイヤのアニメーションを完了する
- */
-bool finish_layer_anime(int layer)
-{
-	struct sequence *s;
-
-	assert(layer >= 0 && layer < STAGE_LAYERS);
-
-	if (!context[layer].is_running)
-		return true;
-	if (context[layer].is_finished)
-		return true;
-	if (context[layer].seq_count <= 0)
-		return true;
-
-	s = &sequence[layer][context[layer].seq_count - 1];
-	set_layer_position(layer, (int)s->to_x, (int)s->to_y);
-	set_layer_scale(layer, s->to_scale_x, s->to_scale_y);
-	set_layer_alpha(layer, (int)s->to_a);
-
-	context[layer].is_running = false;
-	context[layer].is_finished = true;
-	context[layer].cur_lap = 0;
-	context[layer].loop_ofs = 0;
-	context[layer].loop_len = 0;
-	if (context[layer].file != NULL) {
-		free(context[layer].file);
-		context[layer].file = NULL;
-	}
 
 	return true;
 }

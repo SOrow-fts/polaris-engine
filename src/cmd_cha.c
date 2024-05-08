@@ -256,7 +256,7 @@ static void process_finish(void)
 			return;
 		} else {
 			/* アニメを終了する */
-			finish_layer_anime(layer);
+			clear_layer_anime_sequence(layer);
 
 			/* 繰り返し動作を終了する */
 			stop_command_repetition();
@@ -268,7 +268,7 @@ static void process_finish(void)
 	     (is_control_pressed || is_return_pressed ||
 	      is_left_clicked || is_down_pressed)) {
 		/* アニメを終了する */
-		finish_layer_anime(layer);
+		clear_layer_anime_sequence(layer);
 
 		/* 繰り返し動作を終了する */
 		stop_command_repetition();

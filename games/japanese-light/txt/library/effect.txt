@@ -17,7 +17,7 @@
 # 雨エフェクト終了
 # - 呼び出すには、@gosub stop-rainとする
 :stop-rain
-@anime stop-all
+@anime clear layer-effect1,layer-effect2
 @anime unregister reg00
 @return
 
@@ -44,6 +44,6 @@
 # 雪エフェクト終了
 # - 呼び出すには、@gosub stop-snowとする
 :stop-snow
-@anime stop-all
+@anime clear layer-effect1,layer-effect2
 @anime unregister reg00
 @return

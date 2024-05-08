@@ -60,9 +60,6 @@ bool add_anime_sequence_property_i(const char *key, int val);
 /* 指定したレイヤのアニメーションを開始する */
 bool start_layer_anime(int layer);
 
-/* 指定したレイヤのアニメーションを完了する */
-bool finish_layer_anime(int layer);
-
 /* 実行中のアニメーションがあるか調べる */
 bool is_anime_running(void);
 
