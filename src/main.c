@@ -338,7 +338,6 @@ static void post_process(void)
 /* デバッガ用のコマンドディスパッチの前処理 */
 static bool pre_dispatch(void)
 {
-#ifdef USE_EDITOR
 	/* コマンドがない場合 */
 	if (get_command_count() == 0) {
 		dbg_request_stop = true;
@@ -347,7 +346,6 @@ static bool pre_dispatch(void)
 		/* コマンドディスパッチへ進めない */
 		return false;
 	}
-#endif
 
 	/* 実行中の場合 */
 	if (dbg_running) {
@@ -391,53 +389,6 @@ static bool pre_dispatch(void)
 			move_to_command_index(get_command_count() - 1);
 	}
 
-#ifndef USE_EDITOR
-	/* 停止中で、コマンドが更新された場合 */
-	if (is_command_updated()) {
-		update_script_line(get_command_index(), get_updated_command());
-		on_load_script();
-		on_change_position();
-	}
-
-	/* 停止中で、実行中のスクリプトがリロードされた場合 */
-	if (is_script_reloaded()) {
-		char *scr;
-		int line, cmd;
-		scr = strdup(get_script_file_name());
-		if (scr == NULL) {
-			log_memory();
-			return false;
-		}
-		if (strcmp(scr, "DEBUG") == 0) {
-			free(scr);
-			return false;
-		}
-
-		/* 現在実行中の行番号を取得する */
-		line = get_line_num();
-
-		/* 同じファイルを再度読み込みする */
-		if (!load_script(scr)) {
-			free(scr);
-			/* エラー時の仮スクリプトを読み込む */
-			if (!load_debug_script())
-				return false;
-		} else {
-			free(scr);
-		}
-
-		/* 元の行番号の最寄りコマンドを取得する */
-		cmd = get_command_index_from_line_num(line);
-		if (cmd == -1) {
-			/* 削除された末尾の場合、最終コマンドにする */
-			cmd = get_command_count() - 1;
-		}
-
-		/* ジャンプする */
-		move_to_command_index(cmd);
-	}
-#endif
-
 	/* 停止中で、続けるが押された場合 */
 	if (is_continue_pushed()) {
 		dbg_running = true;
@@ -447,7 +398,7 @@ static bool pre_dispatch(void)
 		return true;
 	}
 
-	/* 次停止中で、へが押された場合 */
+	/* 次停止中で、次へが押された場合 */
 	if (is_next_pushed()) {
 		dbg_running = true;
 		dbg_request_stop = true;
@@ -496,9 +447,9 @@ static bool dispatch_command(bool *cont)
 	command_type = get_command_type();
 	switch (command_type) {
 	case COMMAND_LABEL:
+		*cont = true;
 		if (!move_to_next_command())
 			return false;
-		*cont = true;
 		break;
 	case COMMAND_MESSAGE:
 	case COMMAND_SERIF:
