@@ -4355,7 +4355,8 @@ static const wchar_t *SelectFile(const char *pszDir)
 	}
 
 	/* ファイルダイアログを開く */
-	GetOpenFileNameW(&ofn);
+	if (!GetOpenFileNameW(&ofn))
+		return NULL;
 	if(ofn.lpstrFile[0] == L'\0')
 		return NULL;
 	if (wcswcs(wszPath, wszBase) == NULL)

@@ -72,7 +72,7 @@ make
 make install
 cd ..
 
-echo 'Building freetyp2...'
+echo 'Building freetype2...'
 tar xzf ../../libsrc/freetype-2.13.2.tar.gz
 cd freetype-2.13.2
 sed -e 's/FONT_MODULES += type1//' \

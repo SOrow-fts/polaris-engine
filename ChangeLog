@@ -4,12 +4,17 @@ This file is referred by some automatic release scripts.
 
 [Release History (Japanese)]
 <!-- BEGIN-LATEST-JP -->
+<li>Polaris Engine 1.2.20 2024/5/9
+  <ul>
+    <li>ファイル選択のキャンセル時にシナリオが再ロードされるバグを修正</li>
+  </ul>
+</li>
+<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.2.19 2024/5/9
   <ul>
     <li>シナリオ末尾がラベル等のときのチラつきを抑制</li>
   </ul>
 </li>
-<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.2.18 2024/5/8
   <ul>
     <li>シナリオを開くボタンとメニューを修正</li>
@@ -332,12 +337,17 @@ This file is referred by some automatic release scripts.
 
 [Release History (English)]
 <!-- BEGIN-LATEST-EN -->
+<li>Polaris Engine 1.2.20 2024/5/9
+  <ul>
+    <li>Fixed a bug of file open dialog</li>
+  </ul>
+</li>
+<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.2.19 2024/5/9
   <ul>
     <li>Fixed a flicker</li>
   </ul>
 </li>
-<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.2.18 2024/5/8
   <ul>
     <li>Fixed the button and menu of Open Scenario</li>
