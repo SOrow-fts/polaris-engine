@@ -951,6 +951,8 @@ bool load_script(const char *fname)
 
 	clear_last_en_command();
 
+	load_seen();
+
 	return true;
 }
 

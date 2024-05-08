@@ -54,8 +54,5 @@ bool load_command(void)
 	free(file);
 	free(label);
 
-	/* 既読フラグをロードする */
-	load_seen();
-
 	return true;
 }

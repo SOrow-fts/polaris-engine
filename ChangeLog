@@ -4,12 +4,17 @@ This file is referred by some automatic release scripts.
 
 [Release History (Japanese)]
 <!-- BEGIN-LATEST-JP -->
+<li>Polaris Engine 1.2.15 2024/5/8
+  <ul>
+    <li>既読フラグの管理を改善</li>
+  </ul>
+</li>
+<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.2.14 2024/5/8
   <ul>
     <li>アニメシステムのバグを修正</li>
   </ul>
 </li>
-<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.2.13 2024/5/7
   <ul>
     <li>iOS自動ビルドの追加</li>
@@ -307,12 +312,17 @@ This file is referred by some automatic release scripts.
 
 [Release History (English)]
 <!-- BEGIN-LATEST-EN -->
+<li>Polaris Engine 1.2.15 2024/5/8
+  <ul>
+    <li>Improved the seen flag management</li>
+  </ul>
+</li>
+<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.2.14 2024/5/8
   <ul>
     <li>Fixed a bug of the anime subsystem</li>
   </ul>
 </li>
-<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.2.13 2024/5/7
   <ul>
     <li>Added the iOS automatic build</li>
