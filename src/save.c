@@ -27,8 +27,8 @@
 #include "pro.h"
 #endif
 
-/* セーブデータの互換性バージョン(12.42で導入) */
-#define SAVE_VER	(0xabcd1735)
+/* セーブデータの互換性バージョン(Suika2 12.42で導入) */
+#define SAVE_VER	(0x010216)
 
 #ifdef POLARIS_TARGET_WASM
 #include <emscripten/emscripten.h>
@@ -739,10 +739,6 @@ static bool serialize_volumes(struct wfile *wf)
 	float vol;
 	int n;
 
-	vol = get_master_volume();
-	if (write_wfile(wf, &vol, sizeof(vol)) < sizeof(vol))
-		return false;
-
 	for (n = 0; n < MIXER_STREAMS; n++) {
 		vol = get_mixer_volume(n);
 		if (write_wfile(wf, &vol, sizeof(vol)) < sizeof(vol))
@@ -1311,10 +1307,6 @@ static bool deserialize_volumes(struct rfile *rf)
 	float vol;
 	int n;
 
-	if (read_rfile(rf, &vol, sizeof(vol)) < sizeof(vol))
-		return false;
-	set_master_volume(vol);
-
 	for (n = 0; n < MIXER_STREAMS; n++) {
 		if (read_rfile(rf, &vol, sizeof(vol)) < sizeof(vol))
 			return false;
@@ -1518,6 +1510,12 @@ static void load_global_data(void)
 	 * load_global_data()はinit_mixer()より後に呼ばれる
 	 */
 
+	/* マスターボリュームをデシリアライズする */
+	if (read_rfile(rf, &f, sizeof(f)) < sizeof(f))
+		return;
+	f = (f < 0 || f > 1.0f) ? 1.0f : f;
+	set_master_volume(f);
+
 	/* グローバルボリュームをデシリアライズする */
 	for (i = 0; i < MIXER_STREAMS; i++) {
 		if (read_rfile(rf, &f, sizeof(f)) < sizeof(f))
@@ -1578,6 +1576,11 @@ void save_global_data(void)
 	/* グローバル変数をシリアライズする */
 	write_wfile(wf, get_global_variables_pointer(),
 		    GLOBAL_VAR_SIZE * sizeof(int32_t));
+
+	/* マスターボリュームをシリアライズする */
+	f = get_master_volume();
+	if (write_wfile(wf, &f, sizeof(f)) < sizeof(f))
+		return;
 
 	/* グローバルボリュームをシリアライズする */
 	for (i = 0; i < MIXER_STREAMS; i++) {

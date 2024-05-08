@@ -30,16 +30,16 @@ bool on_event_init(void)
 	/* 変数の初期化処理を行う */
 	init_vars();
 
-	/* セーブデータの初期化処理を行う */
-	if (!init_save())
-		return false;
-
 	/* 文字レンダリングエンジンの初期化処理を行う */
 	if (!init_glyph())
 		return false;
 
 	/* ミキサの初期化処理を行う */
 	init_mixer();
+
+	/* セーブデータの初期化処理を行う */
+	if (!init_save())
+		return false;
 
 	/* ステージの初期化処理を行う */
 	if (!init_stage())
