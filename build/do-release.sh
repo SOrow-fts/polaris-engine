@@ -70,10 +70,9 @@ echo ""
 echo "Building game.exe"
 say "Windows用のエンジンをビルドしています" &
 cd engine-windows
-rm -f *.o
-if [ ! -e libroot ]; then
-    ./build-libs.sh;
-fi
+make clean
+curl -O https://polaris-engine.com/dl/libroot-windows.tar.gz
+tar xzf libroot-windows.tar.gz
 make -j16
 cp game.exe game-nosign.exe
 sign.sh game.exe
@@ -125,6 +124,9 @@ cd ..
 echo ""
 echo "Building Unity source tree."
 cd engine-unity
+make clean
+curl -O https://polaris-engine.com/dl/libroot-windows-64.tar.gz
+tar xzf libroot-windows-64.tar.gz
 make src
 cd ..
 
@@ -135,10 +137,9 @@ echo ""
 echo "Building polaris-engine.exe"
 say "Windows用の開発ツールをビルドしています" &
 cd pro-windows
-rm -f *.o
-if [ ! -e libroot ]; then
-    cp -Rav ../engine-windows/libroot .;
-fi
+make clean
+curl -O https://polaris-engine.com/dl/libroot-windows.tar.gz
+tar xzf libroot-windows.tar.gz
 make -j16 VERSION="$VERSION"
 sign.sh polaris-engine.exe
 cd ..
@@ -257,6 +258,7 @@ discord-release.sh
 echo ""
 echo "Making a release on GitHub."
 say "GitHubでリリースを作成中です"
+git push github master
 git tag -a "v$VERSION" -m "release"
 git push github "v$VERSION"
 yes "" | gh release create "v$VERSION" --title "v$VERSION"
