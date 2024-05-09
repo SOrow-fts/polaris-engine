@@ -4101,6 +4101,7 @@ static BOOL ChooseProject(void)
 {
 	static wchar_t wszPath[1024];
 	OPENFILENAMEW ofn;
+	BOOL bRet;
 
 	/* Open a file dialog. */
 	ZeroMemory(&ofn, sizeof(OPENFILENAMEW));
@@ -4116,7 +4117,8 @@ static BOOL ChooseProject(void)
 	ofn.lpstrDefExt = L".polaris";
 
 	/* This will set the working directory to the game directory. */
-	if (!GetOpenFileNameW(&ofn))
+	bRet = GetOpenFileNameW(&ofn);
+	if (!bRet)
 		return FALSE;
 
 	/* If no file was selected. */
@@ -4318,6 +4320,7 @@ static const wchar_t *SelectFile(const char *pszDir)
 	static wchar_t wszPath[1024];
 	wchar_t wszBase[1024];
 	OPENFILENAMEW ofn;
+	BOOL bRet;
 
 	ZeroMemory(&wszPath[0], sizeof(wszPath));
 	ZeroMemory(&ofn, sizeof(OPENFILENAMEW));
@@ -4366,7 +4369,8 @@ static const wchar_t *SelectFile(const char *pszDir)
 	}
 
 	/* ファイルダイアログを開く */
-	if (!GetOpenFileNameW(&ofn))
+	bRet = GetOpenFileNameW(&ofn);
+	if (!bRet)
 		return NULL;
 	if(ofn.lpstrFile[0] == L'\0')
 		return NULL;
