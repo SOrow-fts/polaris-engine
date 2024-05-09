@@ -7,6 +7,8 @@ This file is referred by some automatic release scripts.
 <li>Polaris Engine 1.2.24 2024/5/9
   <ul>
     <li>「続ける」ボタンを押したときに編集を反映するように修正</li>
+    <li>Ctrlキーのバグを修正</li>
+    <li>ファイル選択のバグを修正</li>
   </ul>
 </li>
 <!-- END-LATEST-JP -->
@@ -361,6 +363,8 @@ This file is referred by some automatic release scripts.
 <li>Polaris Engine 1.2.24 2024/5/9
   <ul>
     <li>Changed to apply scenario when the Continue button pressed</li>
+    <li>Fixed a bug of Ctrl key shortcuts</li>
+    <li>Fixed a bug of folder choice</li>
   </ul>
 </li>
 <!-- END-LATEST-EN -->

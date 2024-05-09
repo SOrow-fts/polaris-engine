@@ -741,6 +741,8 @@ static BOOL InitMainWindow(HINSTANCE hInstance, int *pnRenderWidth, int *pnRende
 	*pnRenderWidth = nRenderWidth;
 	*pnRenderHeight = nRenderHeight;
 
+	SetCursor(LoadCursor(NULL, IDC_ARROW));
+
 	return TRUE;
 }
 
@@ -1748,6 +1750,7 @@ static BOOL PretranslateMessage(MSG* pMsg)
 			if (bShiftDown)
 			{
 				OnShiftEnter();
+				bShiftDown = FALSE;
 
 				/* このメッセージはリッチエディットに送らない(改行しない) */
 				return TRUE;
@@ -1773,6 +1776,7 @@ static BOOL PretranslateMessage(MSG* pMsg)
 				pMsg->message = WM_COMMAND;
 				pMsg->wParam = ID_OPEN;
 				pMsg->lParam = 0;
+				bControlDown = FALSE;
 			}
 			break;
 		case 'L':
@@ -1783,6 +1787,7 @@ static BOOL PretranslateMessage(MSG* pMsg)
 				pMsg->message = WM_COMMAND;
 				pMsg->wParam = ID_RELOAD;
 				pMsg->lParam = 0;
+				bControlDown = FALSE;
 			}
 			break;
 		case 'S':
@@ -1793,6 +1798,7 @@ static BOOL PretranslateMessage(MSG* pMsg)
 				pMsg->message = WM_COMMAND;
 				pMsg->wParam = ID_SAVE;
 				pMsg->lParam = 0;
+				bControlDown = FALSE;
 			}
 			break;
 		case 'Q':
@@ -1803,6 +1809,7 @@ static BOOL PretranslateMessage(MSG* pMsg)
 				pMsg->message = WM_COMMAND;
 				pMsg->wParam = ID_QUIT;
 				pMsg->lParam = 0;
+				bControlDown = FALSE;
 			}
 			break;
 		case 'R':
@@ -1813,6 +1820,7 @@ static BOOL PretranslateMessage(MSG* pMsg)
 				pMsg->message = WM_COMMAND;
 				pMsg->wParam = ID_RESUME;
 				pMsg->lParam = 0;
+				bControlDown = FALSE;
 			}
 			break;
 		case 'N':
@@ -1823,6 +1831,7 @@ static BOOL PretranslateMessage(MSG* pMsg)
 				pMsg->message = WM_COMMAND;
 				pMsg->wParam = ID_NEXT;
 				pMsg->lParam = 0;
+				bControlDown = FALSE;
 			}
 			break;
 		case 'P':
@@ -1833,6 +1842,7 @@ static BOOL PretranslateMessage(MSG* pMsg)
 				pMsg->message = WM_COMMAND;
 				pMsg->wParam = ID_PAUSE;
 				pMsg->lParam = 0;
+				bControlDown = FALSE;
 			}
 			break;
 		case 'E':
@@ -1843,6 +1853,7 @@ static BOOL PretranslateMessage(MSG* pMsg)
 				pMsg->message = WM_COMMAND;
 				pMsg->wParam = ID_ERROR;
 				pMsg->lParam = 0;
+				bControlDown = FALSE;
 			}
 			break;
 		default:
@@ -4359,8 +4370,16 @@ static const wchar_t *SelectFile(const char *pszDir)
 		return NULL;
 	if(ofn.lpstrFile[0] == L'\0')
 		return NULL;
-	if (wcswcs(wszPath, wszBase) == NULL)
+	if (wcswcs(wszPath, wszBase) == NULL ||
+		wcswcs(wszPath + wcslen(wszBase) + 1, conv_utf8_to_utf16(pszDir)) != wszPath + wcslen(wszBase) + 1)
+	{
+		MessageBox(hWndMain, bEnglish ?
+				   L"Invalid folder." :
+				   L"フォルダが違います。",
+				   TITLE,
+				   MB_ICONEXCLAMATION);
 		return NULL;
+	}
 	if (wcslen(wszPath) < strlen(pszDir) + 1)
 		return NULL;
 
