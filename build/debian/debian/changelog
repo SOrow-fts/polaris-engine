@@ -1,0 +1,5 @@
+polaris-engine (1.2.22-1) bookworm; urgency=medium
+
+  * Sync upstream
+
+ -- Keiichi Tabata <ktabata@polaris-engine.com>  Thu, 09 May 2024 12:37:29 +0900

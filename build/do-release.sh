@@ -241,7 +241,8 @@ cd ../web && \
     ftp-upload.sh dl/index.html && \
     ftp-upload.sh en/dl/index.html && \
     git add -u dl/index.html en/dl/index.html && \
-    git commit -m "web: release $VERSION"
+    git commit -m "web: release $VERSION" && \
+    ftp-upload.sh ../install-polaris-engine.sh dl/ && \
 cd ..
 
 #

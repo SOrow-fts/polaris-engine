@@ -12,15 +12,8 @@ if [ $# != 0 ]; then
 	MINOR="$1";
 fi
 
-# Update the changelog for 22.04 jammy
-echo "polaris-engine ($VERSION-$MINOR) jammy; urgency=medium" > debian/changelog;
-echo '' >> debian/changelog;
-echo '  * Sync upstream' >> debian/changelog;
-echo '' >> debian/changelog;
-echo " -- Keiichi Tabata <ktabata@polaris-engine.com>  `date '+%a, %d %b %Y %T %z'`" >> debian/changelog;
-
-# Update the changelog for 24.04 noble
-echo "polaris-engine ($VERSION-$MINOR) noble; urgency=medium" > debian/changelog;
+# Update the changelog
+echo "polaris-engine ($VERSION-$MINOR) bookworm; urgency=medium" > debian/changelog;
 echo '' >> debian/changelog;
 echo '  * Sync upstream' >> debian/changelog;
 echo '' >> debian/changelog;
@@ -34,7 +27,7 @@ cd work
 # Create a source tarball.
 SAVE_DIR=`pwd`
 cd ../../../
-git archive HEAD --output=build/ppa/work/polaris-engine_$VERSION.orig.tar.gz
+git archive HEAD --output=build/debian/work/polaris-engine_$VERSION.orig.tar.gz
 cd "$SAVE_DIR"
 
 # Make a sub-directory with version number, and enter it.
@@ -46,14 +39,13 @@ tar xzf ../polaris-engine_$VERSION.orig.tar.gz
 
 # Build a source package.
 debuild -S -sa
-#debuild -b
 cd ..
 
 # Sign.
 debsign -k 9ECC850965003AE23EC2B32723D69C6FB2E053E4 "polaris-engine_${VERSION}-${MINOR}_source.changes"
 
 # Upload.
-dput ppa:ktabata/ppa polaris-engine_${VERSION}-${MINOR}_source.changes 
+#dput ppa:ktabata/ppa polaris-engine_${VERSION}-${MINOR}_source.changes 
 cd ../
 
 # Cleanup.
