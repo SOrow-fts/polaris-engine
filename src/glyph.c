@@ -1795,7 +1795,7 @@ static bool process_escape_sequence_font(struct draw_msg_context *context)
 		}
 	}
 
-	/* "\\#{" + "X" + "}" */
+	/* "\\f{" + "X" + "}" */
 	context->msg += 3 + 1 + 1;
 	return true;
 }
@@ -1863,6 +1863,19 @@ static bool process_escape_sequence_color(struct draw_msg_context *context)
 	/* '{'をチェックする */
 	if (*(p + 2) != '{')
 		return false;
+
+	/* \#{DEF} */
+	if (*(p + 3) == 'D' &&
+	    *(p + 4) == 'E' &&
+	    *(p + 5) == 'F' &&
+	    *(p + 6) == '}') {
+		context->color = make_pixel(0xff,
+					    (pixel_t)conf_font_color_r,
+					    (pixel_t)conf_font_color_g,
+					    (pixel_t)conf_font_color_b);
+		context->msg += 3 + 3 + 1;
+		return true;
+	}
 
 	/* 長さが足りない場合 */
 	if (strlen(p + 3) < 6)
