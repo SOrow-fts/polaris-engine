@@ -18,9 +18,10 @@ echo '' >> debian/changelog;
 echo '  * Sync upstream' >> debian/changelog;
 echo '' >> debian/changelog;
 echo " -- Keiichi Tabata <ktabata@polaris-engine.com>  `date '+%a, %d %b %Y %T %z'`" >> debian/changelog;
+echo ""
 
 # Update the changelog for 24.04 noble
-echo "polaris-engine ($VERSION-$MINOR) noble; urgency=medium" > debian/changelog;
+echo "polaris-engine ($VERSION-$MINOR) noble; urgency=medium" >> debian/changelog;
 echo '' >> debian/changelog;
 echo '  * Sync upstream' >> debian/changelog;
 echo '' >> debian/changelog;
