@@ -53,6 +53,7 @@ LDFLAGS = \
 	-lstrmiids \
 	-lcomctl32 \
 	-limm32 \
+	-lwinmm \
 	-L./libroot/lib \
 	-Wl,-dn,-lpng16,-ljpeg,-lwebp,-lfreetype,-lz,-lbz2,-lbrotlidec,-lbrotlicommon,-lvorbisfile,-lvorbis,-logg,-dy \
 	-Wl,--gc-sections
@@ -63,7 +64,8 @@ LDFLAGS = \
 
 SRCS_C = \
 	../../src/microsoft/winpro.c \
-	../../src/microsoft/dsound.c
+	../../src/microsoft/dsound.c \
+	../../src/microsoft/midi.c
 
 SRCS_CC = \
 	../../src/microsoft/dx9render.cc \

@@ -4,12 +4,17 @@ This file is referred by some automatic release scripts.
 
 [Release History (Japanese)]
 <!-- BEGIN-LATEST-JP -->
+<li>Polaris Engine 1.2.24 2024/5/9
+  <ul>
+    <li>「続ける」ボタンを押したときに編集を反映するように修正</li>
+  </ul>
+</li>
+<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.2.23 2024/5/9
   <ul>
     <li>Linuxでのビルドを改善 (RedHat系に対応)</li>
   </ul>
 </li>
-<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.2.22 2024/5/9
   <ul>
     <li>文字色を元に戻す装飾を追加</li>
@@ -353,12 +358,17 @@ This file is referred by some automatic release scripts.
 
 [Release History (English)]
 <!-- BEGIN-LATEST-EN -->
+<li>Polaris Engine 1.2.24 2024/5/9
+  <ul>
+    <li>Changed to apply scenario when the Continue button pressed</li>
+  </ul>
+</li>
+<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.2.23 2024/5/9
   <ul>
     <li>Improved builds on Linux (supported Fedora and RedHat)</li>
   </ul>
 </li>
-<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.2.22 2024/5/9
   <ul>
     <li>Added a modofier to change the font color to default</li>

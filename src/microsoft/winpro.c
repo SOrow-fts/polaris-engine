@@ -4403,12 +4403,14 @@ static VOID OnSave(void)
 /* 続ける */
 static VOID OnContinue(void)
 {
+	RichEdit_UpdateScriptModelFromText();
 	bContinuePressed = TRUE;
 }
 
 /* 次へ */
 static VOID OnNext(void)
 {
+	RichEdit_UpdateScriptModelFromText();
 	bNextPressed = TRUE;
 }
 

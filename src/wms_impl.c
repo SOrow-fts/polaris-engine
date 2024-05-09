@@ -57,6 +57,7 @@ static bool s2_reset_local_variables(struct wms_runtime *rt);
 static bool s2_reset_global_variables(struct wms_runtime *rt);
 static bool s2_quick_save_extra(struct wms_runtime *rt);
 static bool s2_quick_load_extra(struct wms_runtime *rt);
+static bool s2_play_midi(struct wms_runtime *rt);
 
 /*
  * FFI function table 
@@ -95,6 +96,7 @@ struct wms_ffi_func_tbl ffi_func_tbl[] = {
 	{s2_reset_global_variables, "s2_reset_global_variables", {NULL}},
 	{s2_quick_save_extra, "s2_quick_save_extra", {NULL}},
 	{s2_quick_load_extra, "s2_quick_load_extra", {NULL}},
+	{s2_play_midi, "s2_play_midi", {"file"}},
 };
 
 #define FFI_FUNC_TBL_SIZE (sizeof(ffi_func_tbl) / sizeof(ffi_func_tbl[0]))
@@ -798,6 +800,29 @@ static bool s2_quick_load_extra(struct wms_runtime *rt)
 	UNUSED_PARAMETER(rt);
 
 	quick_load(true);
+
+	return true;
+}
+
+static bool s2_play_midi(struct wms_runtime *rt)
+{
+	struct wms_value *file_name;
+	const char *file_name_s;
+
+	assert(rt != NULL);
+
+	/* Get the argument pointer. */
+	if (!wms_get_var_value(rt, "file", &file_name))
+		return false;
+
+	/* Get the argument value. */
+	if (!wms_get_str_value(rt, file_name, &file_name_s))
+		return false;
+
+#ifdef POLARIS_TARGET_WIN32
+	bool play_midi(const char *dir, const char *fname);
+	play_midi("bgm", file_name_s);
+#endif
 
 	return true;
 }
