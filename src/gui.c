@@ -946,7 +946,7 @@ static void update_runtime_props(bool is_first_time)
 	/* 初回呼び出しの場合 */
 	if (is_first_time) {
 		transient_text_speed = get_text_speed();
-		transient_auto_speed = get_auto_speed();
+		transient_auto_speed = 1.0f - get_auto_speed();
 	}
 
 	for (i = 0; i < BUTTON_COUNT; i++) {

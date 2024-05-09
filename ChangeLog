@@ -4,12 +4,17 @@ This file is referred by some automatic release scripts.
 
 [Release History (Japanese)]
 <!-- BEGIN-LATEST-JP -->
+<li>Polaris Engine 1.2.26 2024/5/10
+  <ul>
+    <li>オートモードスライダーのバグ修正</li>
+  </ul>
+</li>
+<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.2.25 2024/5/9
   <ul>
     <li>ファイル選択のバグを回避</li>
   </ul>
 </li>
-<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.2.24 2024/5/9
   <ul>
     <li>「続ける」ボタンを押したときに編集を反映するように修正</li>
@@ -365,12 +370,17 @@ This file is referred by some automatic release scripts.
 
 [Release History (English)]
 <!-- BEGIN-LATEST-EN -->
+<li>Polaris Engine 1.2.27 2024/5/10
+  <ul>
+    <li>Fixed a bug of the auto mode slider</li>
+  </ul>
+</li>
+<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.2.25 2024/5/9
   <ul>
     <li>Avoided a bug of file dialog cancel</li>
   </ul>
 </li>
-<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.2.24 2024/5/9
   <ul>
     <li>Changed to apply scenario when the Continue button pressed</li>

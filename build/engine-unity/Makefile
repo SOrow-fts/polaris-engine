@@ -149,7 +149,7 @@ macos: ../engine-macos/libroot $(SRCS) $(LIBS_MACOS)
 	rm -rf Assets/libpolaris.dylib.dSYM
 
 aarch64: libroot-aarch64
-	aarch64-none-elf-gcc -O2 -shared -fPIC -o Assets/libpolaris.so $(CPPFLAGS) -DNO_CDECL -DNO_WEBP -Ilibroot-aarch64/include -Ilibroot-aarch64/include/freetype2 $(SRCS) $(LIBS_AARCH64)
+	aarch64-elf-gcc -O2 -shared -fPIC -o Assets/libpolaris.so $(CPPFLAGS) -DNO_CDECL -DNO_WEBP -Ilibroot-aarch64/include -Ilibroot-aarch64/include/freetype2 $(SRCS) $(LIBS_AARCH64)
 
 libroot-aarch64:
 	./build-libs-aarch64.sh
