@@ -31,6 +31,10 @@ Section "Install"
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Polaris Engine" "Publisher" "Keiichi Tabata"
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Polaris Engine" "Contact" "ktabata@polaris-engine.com"
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Polaris Engine" "UninstallString" '"$INSTDIR\Uninstall.exe"'
+  WriteRegStr HKCU "Software\Classes\.polaris" "" "Polaris.project"
+  WriteRegStr HKCU "Software\Classes\Polaris.project" "" "Polaris Engine Project"
+  WriteRegStr HKCU "Software\Classes\Polaros.project\DefaultIcon" "" "$INSTDIR\polaris-engine.exe"
+  WriteRegStr HKCU "Software\Classes\Polaris.project\Shell\open\command" "" '"$INSTDIR\polaris-engine.exe" "%1"'
   SetShellVarContext current
   CreateShortCut "$DESKTOP\Polaris Engine.lnk" "$INSTDIR\polaris-engine.exe"
 SectionEnd
@@ -44,6 +48,10 @@ Section "Uninstall"
   RMDir "$SMPROGRAMS\Polaris Engine"
   DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Polaris Engine"
   Delete "$DESKTOP\Polaris Engine.lnk"
+  DeleteRegKey HKCU "Software\Classes\.polaris"
+  DeleteRegKey HKCU "Software\Classes\Polaris.project"
+  DeleteRegKey HKCU "Software\Classes\Polaris.project\DefaultIcon"
+  DeleteRegKey HKCU "Software\Classes\Polaris.project\Shell\open\command"
 SectionEnd
 
 Function .OnInstSuccess

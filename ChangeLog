@@ -4,12 +4,17 @@ This file is referred by some automatic release scripts.
 
 [Release History (Japanese)]
 <!-- BEGIN-LATEST-JP -->
+<li>Polaris Engine 1.2.31 2024/5/10
+  <ul>
+    <li>プロジェクトファイルの拡張子を関連付け</li>
+  </ul>
+</li>
+<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.2.30 2024/5/10
   <ul>
     <li>アップデートすると最後に開いたフォルダを忘れる問題を修正</li>
   </ul>
 </li>
-<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.2.29 2024/5/10
   <ul>
     <li>Look&Feel変更とコマンド挿入前にシナリオテキストをスクリプトモデルに反映するよう変更</li>
@@ -392,12 +397,17 @@ This file is referred by some automatic release scripts.
 
 [Release History (English)]
 <!-- BEGIN-LATEST-EN -->
+<li>Polaris Engine 1.2.31 2024/5/10
+  <ul
+    <li>Associated the .polaris file name extension</li>
+  </ul>
+</li>
+<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.2.30 2024/5/10
   <ul>
     <li>Fixed a problem that Polaris Engine forgets the last opened project folder on update install</li>
   </ul>
 </li>
-<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.2.29 2024/5/10
   <ul>
     <li>Changed to update a script model when a change to Look&Feel or command insertion</li>
