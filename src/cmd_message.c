@@ -360,6 +360,7 @@ static void get_button_rect(int btn, int *x, int *y, int *w, int *h);
 static void init_repetition(void);
 static void speak(void);
 static void init_lip_sync(void);
+static void cleanup_lip_sync(void);
 
 /* フレーム処理 */
 static bool frame_auto_mode(void);
@@ -2758,6 +2759,9 @@ static int get_frame_chars(void)
 		/* 繰り返し動作を停止する */
 		stop();
 
+		/* 口パクを止める */
+		cleanup_lip_sync();
+
 		/* 残りの文字をすべて描画する */
 		do_draw_all = true;
 		return total_chars - drawn_chars;
@@ -2765,6 +2769,9 @@ static int get_frame_chars(void)
 
 	/* 全部描画してクリック待ちに移行する場合 */
 	if (is_fast_forward_by_click()) {
+		/* 口パクを止める */
+		cleanup_lip_sync();
+
 		/* ビープの再生を止める */
 		if (is_beep)
 			set_mixer_input(VOICE_STREAM, NULL);
@@ -2836,8 +2843,9 @@ static bool is_fast_forward_by_click(void)
 		/* ただしメッセージボックス内のボタンの位置なら無視する */
 		if (pointed_index != BTN_NONE)
 			return false;
-		else
-			return true;
+
+		/* クリック待ちに移行する */
+		return true;
 	}
 
 	/* クリック待ちに移行しない */
@@ -3288,6 +3296,18 @@ static void init_lip_sync(void)
 		return;
 
 	run_lip_anime(chpos, msg_top);
+}
+
+/* 口パクを終了する */
+static void cleanup_lip_sync(void)
+{
+	int chpos;
+
+	chpos = get_talking_chpos();
+	if (chpos == -1)
+		return;
+
+	stop_lip_anime(chpos);
 }
 
 /*

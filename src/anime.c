@@ -1093,6 +1093,12 @@ void run_lip_anime(int chpos, const char *msg)
 			break;
 		msg += n;
 
+		if (wc == U32_C('、') || wc == U32_C('。')) {
+			ofs_time += base_time * 10;
+			word_count = WORD_COUNT;
+			continue;
+		}
+
 		if (wc == U32_C('、') || wc == U32_C('。') ||
 		    wc == U32_C('！') || wc == U32_C('？') ||
 		    wc == U32_C('・') || wc == U32_C('…') ||
