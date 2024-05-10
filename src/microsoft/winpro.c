@@ -346,6 +346,8 @@ static BOOL ChooseProject(void);
 static BOOL OpenProjectAtPath(const wchar_t *pszPath);
 static VOID ReadProjectFile(void);
 static VOID WriteProjectFile(void);
+static const wchar_t *GetLastProjectPath(void);
+static VOID RecordLastProjectPath(void);
 
 /* Command Handlers */
 static VOID OnNewProject(const wchar_t *pszTemplate);
@@ -4157,6 +4159,7 @@ static BOOL ChooseProject(void)
 	ofn.lStructSize = sizeof(OPENFILENAMEW);
 	ofn.nFilterIndex = 1;
 	ofn.lpstrFile = wszPath;
+	ofn.lpstrInitialDir = GetLastProjectPath();
 	ofn.nMaxFile = sizeof(wszPath) / sizeof(wchar_t);
 	ofn.Flags = OFN_FILEMUSTEXIST;
 	ofn.lpstrFilter = bEnglish ?
@@ -4216,6 +4219,8 @@ static BOOL OpenProjectAtPath(const wchar_t *pszPath)
 
 	/* Read a project file. */
 	ReadProjectFile();
+
+	RecordLastProjectPath();
 
 	return TRUE;
 }
@@ -4309,6 +4314,50 @@ static void WriteProjectFile(void)
 	fclose(fp);
 }
 
+static VOID RecordLastProjectPath(void)
+{
+	wchar_t path[MAX_PATH];
+	wchar_t *pSep;
+	FILE *fp;
+
+	GetModuleFileName(NULL, path, MAX_PATH);
+	pSep = wcsrchr(path, L'\\');
+	if (pSep != NULL)
+		*(pSep + 1) = L'\0';
+	wcscat(path, L"settings.txt");
+
+	fp = _wfopen(path, L"wb");
+	if (fp != NULL)
+	{
+		fprintf(fp, "%s", conv_utf16_to_utf8(wszProjectDir));
+		fclose(fp);
+	}
+}
+
+static const wchar_t *GetLastProjectPath(void)
+{
+	wchar_t path[MAX_PATH];
+	char buf[1024];
+	wchar_t *pSep;
+	FILE *fp;
+
+	GetModuleFileName(NULL, path, MAX_PATH);
+	pSep = wcsrchr(path, L'\\');
+	if (pSep != NULL)
+		*(pSep + 1) = L'\0';
+	wcscat(path, L"settings.txt");
+
+	fp = _wfopen(path, L"rb");
+	if (fp != NULL)
+	{
+		fgets(buf, sizeof(buf), fp);
+		fclose(fp);
+		return conv_utf8_to_utf16(buf);
+	}
+
+	return NULL;
+}
+
 /*
  * コマンド処理
  */
@@ -4321,6 +4370,8 @@ static VOID OnNewProject(const wchar_t *pszTemplate)
 	if (!CreateProjectFromTemplate(pszTemplate))
 		return;
 
+	RecordLastProjectPath();
+
 	StartGame();
 }
 
@@ -4331,6 +4382,8 @@ static VOID OnOpenProject(void)
 
 	if (!ChooseProject())
 		return;
+
+	RecordLastProjectPath();
 
 	StartGame();
 }
