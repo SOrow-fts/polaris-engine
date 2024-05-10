@@ -5466,6 +5466,7 @@ static VOID OnFont(void)
 	if (bProjectOpened)
 		WriteProjectFile();
 
+	RichEdit_UpdateScriptModelFromText();
 	RichEdit_SetFont();
 }
 
@@ -5485,6 +5486,7 @@ static VOID OnHighlightMode(void)
 	if (bProjectOpened)
 		WriteProjectFile();
 
+	RichEdit_UpdateScriptModelFromText();
 	RichEdit_UpdateTheme();
 }
 
@@ -5522,6 +5524,7 @@ static VOID OnDarkMode(void)
 	if (bProjectOpened)
 		WriteProjectFile();
 
+	RichEdit_UpdateScriptModelFromText();
 	RichEdit_UpdateTheme();
 }
 
@@ -5540,6 +5543,8 @@ static VOID OnHelp(void)
 
 static VOID OnInsertMessage(void)
 {
+	RichEdit_UpdateScriptModelFromText();
+
 	if (bEnglish)
 		RichEdit_InsertText(L"Edit this message and press return.");
 	else
@@ -5548,6 +5553,8 @@ static VOID OnInsertMessage(void)
 
 static VOID OnInsertSerif(void)
 {
+	RichEdit_UpdateScriptModelFromText();
+
 	if (bEnglish)
 		RichEdit_InsertText(L"*Name*Edit this line and press return.");
 	else
@@ -5561,6 +5568,8 @@ static VOID OnInsertBg(void)
 	pFile = SelectFile(BG_DIR);
 	if (pFile == NULL)
 		return;
+
+	RichEdit_UpdateScriptModelFromText();
 
 	if (bEnglish)
 		RichEdit_InsertText(L"@bg file=%ls duration=1.0", pFile);
@@ -5576,6 +5585,8 @@ static VOID OnInsertBgOnly(void)
 	if (pFile == NULL)
 		return;
 
+	RichEdit_UpdateScriptModelFromText();
+
 	if (bEnglish)
 		RichEdit_InsertText(L"@chsx bg=%ls duration=1.0", pFile);
 	else
@@ -5590,6 +5601,8 @@ static VOID OnInsertCh(void)
 	if (pFile == NULL)
 		return;
 
+	RichEdit_UpdateScriptModelFromText();
+
 	if (bEnglish)
 		RichEdit_InsertText(L"@ch position=center file=%ls duration=1.0", pFile);
 	else
@@ -5598,6 +5611,8 @@ static VOID OnInsertCh(void)
 
 static VOID OnInsertChsx(void)
 {
+	RichEdit_UpdateScriptModelFromText();
+
 	if (bEnglish)
 		RichEdit_InsertText(L"@chsx left=file-name.png center=file-name.png right=file-name.png back=file-name.png bg=file-name.png duration=1.0");
 	else
@@ -5612,6 +5627,8 @@ static VOID OnInsertBgm(void)
 	if (pFile == NULL)
 		return;
 
+	RichEdit_UpdateScriptModelFromText();
+
 	if (bEnglish)
 		RichEdit_InsertText(L"@bgm file=%ls", pFile);
 	else
@@ -5620,6 +5637,8 @@ static VOID OnInsertBgm(void)
 
 static VOID OnInsertBgmStop(void)
 {
+	RichEdit_UpdateScriptModelFromText();
+
 	if (bEnglish)
 		RichEdit_InsertText(L"@bgm stop");
 	else
@@ -5628,6 +5647,8 @@ static VOID OnInsertBgmStop(void)
 
 static VOID OnInsertVolBgm(void)
 {
+	RichEdit_UpdateScriptModelFromText();
+
 	if (bEnglish)
 		RichEdit_InsertText(L"@vol track=bgm volume=1.0 duration=1.0");
 	else
@@ -5642,6 +5663,8 @@ static VOID OnInsertSe(void)
 	if (pFile == NULL)
 		return;
 
+	RichEdit_UpdateScriptModelFromText();
+
 	if (bEnglish)
 		RichEdit_InsertText(L"@se file=%ls", pFile);
 	else
@@ -5650,6 +5673,8 @@ static VOID OnInsertSe(void)
 
 static VOID OnInsertSeStop(void)
 {
+	RichEdit_UpdateScriptModelFromText();
+
 	if (bEnglish)
 		RichEdit_InsertText(L"@se stop");
 	else
@@ -5658,6 +5683,8 @@ static VOID OnInsertSeStop(void)
 
 static VOID OnInsertVolSe(void)
 {
+	RichEdit_UpdateScriptModelFromText();
+
 	if (bEnglish)
 		RichEdit_InsertText(L"@vol track=se volume=1.0 duration=1.0");
 	else
@@ -5681,6 +5708,8 @@ static VOID OnInsertVideo(void)
 	if (pExt != NULL)
 		*pExt = L'\0';
 
+	RichEdit_UpdateScriptModelFromText();
+
 	if (bEnglish)
 		RichEdit_InsertText(L"@video file=%ls", buf);
 	else
@@ -5689,6 +5718,8 @@ static VOID OnInsertVideo(void)
 
 static VOID OnInsertShakeH(void)
 {
+	RichEdit_UpdateScriptModelFromText();
+
 	if (bEnglish)
 		RichEdit_InsertText(L"@shake direction=horizontal duration=1.0 times=3 amplitude-100");
 	else
@@ -5697,6 +5728,8 @@ static VOID OnInsertShakeH(void)
 
 static VOID OnInsertShakeV(void)
 {
+	RichEdit_UpdateScriptModelFromText();
+
 	if (bEnglish)
 		RichEdit_InsertText(L"@shake direction=vertical duration=1.0 times=3 amplitude=100");
 	else
@@ -5705,6 +5738,8 @@ static VOID OnInsertShakeV(void)
 
 static VOID OnInsertChoose3(void)
 {
+	RichEdit_UpdateScriptModelFromText();
+
 	if (bEnglish)
 		RichEdit_InsertText(L"@choose L1 \"Option1\" L2 \"Option2\" L3 \"Option3\"");
 	else
@@ -5713,6 +5748,8 @@ static VOID OnInsertChoose3(void)
 
 static VOID OnInsertChoose2(void)
 {
+	RichEdit_UpdateScriptModelFromText();
+
 	if (bEnglish)
 		RichEdit_InsertText(L"@choose L1 \"Option1\" L2 \"Option2\"");
 	else
@@ -5721,6 +5758,8 @@ static VOID OnInsertChoose2(void)
 
 static VOID OnInsertChoose1(void)
 {
+	RichEdit_UpdateScriptModelFromText();
+
 	if (bEnglish)
 		RichEdit_InsertText(L"@choose L1 \"Option1\"");
 	else
@@ -5735,6 +5774,8 @@ static VOID OnInsertGui(void)
 	if (pFile == NULL)
 		return;
 
+	RichEdit_UpdateScriptModelFromText();
+
 	if (bEnglish)
 		RichEdit_InsertText(L"@gui file=%ls", pFile);
 	else
@@ -5743,6 +5784,8 @@ static VOID OnInsertGui(void)
 
 static VOID OnInsertClick(void)
 {
+	RichEdit_UpdateScriptModelFromText();
+
 	if (bEnglish)
 		RichEdit_InsertText(L"@click");
 	else
@@ -5751,6 +5794,8 @@ static VOID OnInsertClick(void)
 
 static VOID OnInsertWait(void)
 {
+	RichEdit_UpdateScriptModelFromText();
+
 	if (bEnglish)
 		RichEdit_InsertText(L"@wait duration=1.0");
 	else
@@ -5764,6 +5809,8 @@ static VOID OnInsertLoad(void)
 	pFile = SelectFile(SCENARIO_DIR);
 	if (pFile == NULL)
 		return;
+
+	RichEdit_UpdateScriptModelFromText();
 
 	if (bEnglish)
 		RichEdit_InsertText(L"@load file=%ls", pFile);
