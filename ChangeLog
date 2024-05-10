@@ -7,6 +7,8 @@ This file is referred by some automatic release scripts.
 <li>Polaris Engine 1.2.27 2024/5/10
   <ul>
     <li>ファイル選択ダイアログの改善</li>
+    <li>Undo/Redoをいったん封印 (リッチエディットコントロールの制約)</li>
+    <li>全画面時にメニューバーを表示</li>
   </ul>
 </li>
 <!-- END-LATEST-JP -->
@@ -378,6 +380,8 @@ This file is referred by some automatic release scripts.
 <li>Polaris Engine 1.2.27 2024/5/10
   <ul>
     <li>Improved the file chooser dialogs</li>
+    <li>Disabled Undo/Redo</li>
+    <li>Changed to show the menu bar on the full screen mode</li>
   </ul>
 </li>
 <!-- END-LATEST-EN -->

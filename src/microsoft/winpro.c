@@ -1780,6 +1780,9 @@ static BOOL PretranslateMessage(MSG* pMsg)
 				pMsg->wParam = ID_OPEN;
 				pMsg->lParam = 0;
 				bControlDown = FALSE;
+
+				/* このメッセージはリッチエディットに送らない */
+				return TRUE;
 			}
 			break;
 		case 'L':
@@ -1791,6 +1794,9 @@ static BOOL PretranslateMessage(MSG* pMsg)
 				pMsg->wParam = ID_RELOAD;
 				pMsg->lParam = 0;
 				bControlDown = FALSE;
+
+				/* このメッセージはリッチエディットに送らない */
+				return TRUE;
 			}
 			break;
 		case 'S':
@@ -1802,6 +1808,9 @@ static BOOL PretranslateMessage(MSG* pMsg)
 				pMsg->wParam = ID_SAVE;
 				pMsg->lParam = 0;
 				bControlDown = FALSE;
+
+				/* このメッセージはリッチエディットに送らない */
+				return TRUE;
 			}
 			break;
 		case 'Q':
@@ -1813,6 +1822,9 @@ static BOOL PretranslateMessage(MSG* pMsg)
 				pMsg->wParam = ID_QUIT;
 				pMsg->lParam = 0;
 				bControlDown = FALSE;
+
+				/* このメッセージはリッチエディットに送らない */
+				return TRUE;
 			}
 			break;
 		case 'R':
@@ -1824,6 +1836,9 @@ static BOOL PretranslateMessage(MSG* pMsg)
 				pMsg->wParam = ID_RESUME;
 				pMsg->lParam = 0;
 				bControlDown = FALSE;
+
+				/* このメッセージはリッチエディットに送らない */
+				return TRUE;
 			}
 			break;
 		case 'N':
@@ -1835,6 +1850,9 @@ static BOOL PretranslateMessage(MSG* pMsg)
 				pMsg->wParam = ID_NEXT;
 				pMsg->lParam = 0;
 				bControlDown = FALSE;
+
+				/* このメッセージはリッチエディットに送らない */
+				return TRUE;
 			}
 			break;
 		case 'P':
@@ -1846,6 +1864,9 @@ static BOOL PretranslateMessage(MSG* pMsg)
 				pMsg->wParam = ID_PAUSE;
 				pMsg->lParam = 0;
 				bControlDown = FALSE;
+
+				/* このメッセージはリッチエディットに送らない */
+				return TRUE;
 			}
 			break;
 		case 'E':
@@ -1857,12 +1878,24 @@ static BOOL PretranslateMessage(MSG* pMsg)
 				pMsg->wParam = ID_ERROR;
 				pMsg->lParam = 0;
 				bControlDown = FALSE;
+
+				/* このメッセージはリッチエディットに送らない */
+				return TRUE;
+			}
+			break;
+		case 'Z':
+		case 'Y':
+			/* Ctrl+Z,Ctrl+Yを処理する */
+			if (bControlDown)
+			{
+				/* ハイライト操作もUNDOされるので、現状非サポート */
+				/* このメッセージはリッチエディットに送らない */
+				return TRUE;
 			}
 			break;
 		default:
 			break;
 		}
-		return FALSE;
 	}
 
 	/* このメッセージは引き続きリッチエディットで処理する */
@@ -2493,14 +2526,21 @@ static void OnSize(void)
 		dwExStyle = (DWORD)GetWindowLong(hWndMain, GWL_EXSTYLE);
 		GetWindowRect(hWndMain, &rcWindow);
 
-		SetMenu(hWndMain, NULL);
 		SetWindowLong(hWndMain, GWL_STYLE, (LONG)(WS_POPUP | WS_VISIBLE));
 		SetWindowLong(hWndMain, GWL_EXSTYLE, WS_EX_TOPMOST);
 		SetWindowPos(hWndMain, NULL, 0, 0, 0, 0,
 					 SWP_NOMOVE | SWP_NOSIZE |
 					 SWP_NOZORDER | SWP_FRAMECHANGED);
-		MoveWindow(hWndMain, rc.left, rc.top, rc.right - rc.left, rc.bottom - rc.top, TRUE);
+		MoveWindow(hWndMain,
+				   rc.left,
+				   rc.top,
+				   rc.right - rc.left,
+				   rc.bottom - rc.top,
+				   TRUE);
 		InvalidateRect(hWndMain, NULL, TRUE);
+
+		/* Update the screen offset and scale. */
+		Layout(rc.right - rc.left, rc.bottom - rc.top - GetSystemMetrics(SM_CYMENU));
 	}
 	else if (bNeedWindowed)
 	{
@@ -2516,14 +2556,17 @@ static void OnSize(void)
 		MoveWindow(hWndMain, rcWindow.left, rcWindow.top, rcWindow.right - rcWindow.left, rcWindow.bottom - rcWindow.top, TRUE);
 		InvalidateRect(hWndMain, NULL, TRUE);
 		GetClientRect(hWndMain, &rc);
+
+		/* Update the screen offset and scale. */
+		Layout(rc.right - rc.left, rc.bottom - rc.top);
 	}
 	else
 	{
 		GetClientRect(hWndMain, &rc);
-	}
 
-	/* Update the screen offset and scale. */
-	Layout(rc.right - rc.left, rc.bottom - rc.top);
+		/* Update the screen offset and scale. */
+		Layout(rc.right - rc.left, rc.bottom - rc.top);
+	}
 
 	RichEdit_SetFont();
 }
