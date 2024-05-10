@@ -156,6 +156,9 @@ static HWND hWndBtnVar;				/* 変数を反映するボタン */
 static HMENU hMenu;					/* ウィンドウのメニュー */
 static HMENU hMenuPopup;			/* ポップアップメニュー */
 
+/* プロジェクトディレクトリ */
+static wchar_t wszProjectDir[1024];
+
 /* メッセージ変換バッファ */
 static wchar_t wszMessage[CONV_MESSAGE_SIZE];
 static char szMessage[CONV_MESSAGE_SIZE];
@@ -4081,6 +4084,8 @@ static BOOL CreateProjectFromTemplate(const wchar_t *pszTemplate)
 			continue;
 		}
 
+		GetCurrentDirectory(sizeof(wszProjectDir), wszProjectDir);
+
 		/* Finish choosing a directory. */
 		break;
 	}
@@ -4125,6 +4130,8 @@ static BOOL ChooseProject(void)
 	if(ofn. lpstrFile[0] == L'\0')
 		return FALSE;
 
+	GetCurrentDirectory(sizeof(wszProjectDir), wszProjectDir);
+
 	/* Read a project file. */
 	ReadProjectFile();
 
@@ -4162,6 +4169,7 @@ static BOOL OpenProjectAtPath(const wchar_t *pszPath)
 				   MB_OK | MB_ICONERROR);
 		return FALSE;
 	}
+	GetCurrentDirectory(sizeof(wszProjectDir), wszProjectDir);
 
 	/* Read a project file. */
 	ReadProjectFile();
@@ -4325,8 +4333,10 @@ static const wchar_t *SelectFile(const char *pszDir)
 	ZeroMemory(&wszPath[0], sizeof(wszPath));
 	ZeroMemory(&ofn, sizeof(OPENFILENAMEW));
 
-	/* ゲームのベースディレクトリを取得する */
-	GetCurrentDirectory(sizeof(wszBase) / sizeof(wchar_t), wszBase);
+	SetCurrentDirectory(wszProjectDir);
+	wcscpy(wszBase, wszProjectDir);
+	wcscat(wszBase, L"\\");
+	wcscat(wszBase, conv_utf8_to_utf16(pszDir));
 
 	/* ファイルダイアログの準備を行う */
 	ofn.lStructSize = sizeof(OPENFILENAMEW);
@@ -4334,7 +4344,7 @@ static const wchar_t *SelectFile(const char *pszDir)
 	ofn.nFilterIndex = 1;
 	ofn.lpstrFile = wszPath;
 	ofn.nMaxFile = sizeof(wszPath);
-	ofn.lpstrInitialDir = conv_utf8_to_utf16(pszDir);
+	ofn.lpstrInitialDir = wszBase;
 	ofn.Flags = OFN_FILEMUSTEXIST | OFN_NOCHANGEDIR;
 	if (strcmp(pszDir, BG_DIR) == 0 ||
 		strcmp(pszDir, CH_DIR) == 0)
@@ -4370,12 +4380,12 @@ static const wchar_t *SelectFile(const char *pszDir)
 
 	/* ファイルダイアログを開く */
 	bRet = GetOpenFileNameW(&ofn);
+	SetCurrentDirectory(wszProjectDir);
 	if (!bRet)
 		return NULL;
 	if(ofn.lpstrFile[0] == L'\0')
 		return NULL;
-	if (wcswcs(wszPath, wszBase) == NULL ||
-		wcswcs(wszPath + wcslen(wszBase) + 1, conv_utf8_to_utf16(pszDir)) != wszPath + wcslen(wszBase) + 1)
+	if (wcswcs(wszPath, wszBase) != wszPath)
 	{
 		MessageBox(hWndMain, bEnglish ?
 				   L"Invalid folder." :
@@ -4384,11 +4394,18 @@ static const wchar_t *SelectFile(const char *pszDir)
 				   MB_ICONEXCLAMATION);
 		return NULL;
 	}
-	if (wcslen(wszPath) < strlen(pszDir) + 1)
+	if (wcslen(wszPath) <= wcslen(wszBase) + 1)
+	{
+		MessageBox(hWndMain, bEnglish ?
+				   L"No file chosen." :
+				   L"ファイルが選択されませんでした。",
+				   TITLE,
+				   MB_ICONEXCLAMATION);
 		return NULL;
+	}
 
 	/* 素材ディレクトリ内の相対パスを返す */
-	return wszPath + wcslen(wszBase) + 1 + strlen(pszDir) + 1;
+	return wszPath + wcslen(wszBase) + 1 ;
 }
 
 /* 上書き保存 */
