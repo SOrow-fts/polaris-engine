@@ -40,12 +40,15 @@ Section "Uninstall"
   Delete "$INSTDIR\polaris-engine.exe"
   Delete "$INSTDIR\games"
   Delete "$INSTDIR\tools"
-  RMDir /r "$INSTDIR"
   Delete "$SMPROGRAMS\Polaris Engine\Polaris Engine.lnk"
   RMDir "$SMPROGRAMS\Polaris Engine"
   DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\Polaris Engine"
   Delete "$DESKTOP\Polaris Engine.lnk"
 SectionEnd
+
+Function .OnInstSuccess
+  Exec "$INSTDIR\polaris-engine.exe"
+FunctionEnd
 
 !insertmacro MUI_LANGUAGE "English"
 !insertmacro MUI_LANGUAGE "Japanese"
