@@ -64,11 +64,16 @@ void init_mixer(void)
 	int n;
 
 	vol_master = 1.0f;
+	vol_global[BGM_STREAM] = conf_sound_vol_bgm;
+	vol_global[VOICE_STREAM] = conf_sound_vol_voice;
+	vol_global[SE_STREAM] = conf_sound_vol_se;
+	vol_global[SYS_STREAM] = conf_sound_vol_se;
+
 	for (n = 0; n < MIXER_STREAMS; n++) {
 		vol_cur[n] = 1.0f;
 		vol_local[n] = 1.0f;
-		vol_global[n] = 1.0f;
-		set_sound_volume(n, vol_global[n] * vol_master);
+
+		set_sound_volume(n, vol_master * vol_global[n]);
 
 		/* Androidでは再利用されるので初期化する */
 		is_fading[n] = false;
