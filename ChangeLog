@@ -4,13 +4,18 @@ This file is referred by some automatic release scripts.
 
 [Release History (Japanese)]
 <!-- BEGIN-LATEST-JP -->
+<li>Polaris Engine 1.2.33 2024/5/10
+  <ul>
+    <li>リップシンクを改善</li>
+  </ul>
+</li>
+<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.2.32 2024/5/10
   <ul>
     <li>リップシンクを改善</li>
     <li>目パチ画像の追加</li>
   </ul>
 </li>
-<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.2.31 2024/5/10
   <ul>
     <li>プロジェクトファイルの拡張子を関連付け</li>
@@ -403,13 +408,18 @@ This file is referred by some automatic release scripts.
 
 [Release History (English)]
 <!-- BEGIN-LATEST-EN -->
+<li>Polaris Engine 1.2.33 2024/5/10
+  <ul>
+    <li>Improved the lip sync</li>
+  </ul>
+</li>
+<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.2.32 2024/5/10
   <ul>
     <li>Improved the lip sync</li>
     <li>Added the missing eye blink images</li>
   </ul>
 </li>
-<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.2.31 2024/5/10
   <ul>
     <li>Associated the .polaris file name extension</li>

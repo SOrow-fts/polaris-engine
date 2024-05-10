@@ -2563,6 +2563,10 @@ static void blit_frame(void)
 			/* 本文を描画する */
 			blit_msgbox();
 		}
+		if (is_end_of_msg()) {
+			/* 口パクを止める */
+			cleanup_lip_sync();
+		}
 	} else {
 		/*
 		 * 本文の描画が完了してさらに描画しようとしているので、
