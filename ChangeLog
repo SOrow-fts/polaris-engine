@@ -7,6 +7,7 @@ This file is referred by some automatic release scripts.
 <li>Polaris Engine 1.2.32 2024/5/10
   <ul>
     <li>リップシンクを改善</li>
+    <li>目パチ画像の追加</li>
   </ul>
 </li>
 <!-- END-LATEST-JP -->
@@ -405,6 +406,7 @@ This file is referred by some automatic release scripts.
 <li>Polaris Engine 1.2.32 2024/5/10
   <ul>
     <li>Improved the lip sync</li>
+    <li>Added the missing eye blink images</li>
   </ul>
 </li>
 <!-- END-LATEST-EN -->
