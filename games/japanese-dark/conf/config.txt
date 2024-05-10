@@ -794,6 +794,9 @@ character.eyeblink.frame=0.1
 # 口パクの1コマの時間(秒)
 character.lipsync.frame=0.02
 
+# 何文字ごとに口パクするか(文字数)
+character.lipsync.chars=3
+
 ###
 ### ステージの設定
 ###

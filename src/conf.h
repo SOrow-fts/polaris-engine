@@ -411,6 +411,7 @@ extern float conf_character_eyeblink_frame;
  */
 
 extern float conf_character_lipsync_frame;
+extern int conf_character_lipsync_chars;
 
 /*
  * ステージのマージン(キャラクタレイヤの位置補正)

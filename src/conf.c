@@ -390,6 +390,7 @@ float conf_character_eyeblink_frame;
  */
 
 float conf_character_lipsync_frame;
+int conf_character_lipsync_chars;
 
 /*
  * ステージのマージン(キャラクタレイヤの位置補正)
@@ -1377,6 +1378,7 @@ static struct rule {
 	{"character.eyeblink.interval", 'f', &conf_character_eyeblink_interval, OPTIONAL, NOSAVE},
 	{"character.eyeblink.frame", 'f', &conf_character_eyeblink_frame, OPTIONAL, NOSAVE},
 	{"character.lipsync.frame", 'f', &conf_character_lipsync_frame, OPTIONAL, NOSAVE},
+	{"character.lipsync.chars", 'i', &conf_character_lipsync_chars, OPTIONAL, NOSAVE},
 	{"stage.ch.margin.bottom", 'i', &conf_stage_ch_margin_bottom, OPTIONAL, SAVE},
 	{"stage.ch.margin.left", 'i', &conf_stage_ch_margin_left, OPTIONAL, SAVE},
 	{"stage.ch.margin.right", 'i', &conf_stage_ch_margin_right, OPTIONAL, SAVE},

@@ -1063,7 +1063,7 @@ void run_lip_anime(int chpos, const char *msg)
 {
 	float ofs_time, base_time;
 	int i, x, y, base_layer, lip_layer, frame_count, word_count;
-	int WORD_COUNT = 3;
+	int WORD_COUNT;
 
 	base_layer = chpos_to_layer(chpos);
 	lip_layer = chpos_to_lip_layer(chpos);
@@ -1077,6 +1077,9 @@ void run_lip_anime(int chpos, const char *msg)
 
 	/* 口パクレイヤーの位置を設定する */
 	set_layer_position(lip_layer, x, y);
+
+	/* 何文字ごとに口パクするかを決める */
+	WORD_COUNT = conf_character_lipsync_chars == 0 ? 3 : conf_character_lipsync_chars;
 
 	/* 口パクのアニメを開始する */
 	frame_count = get_layer_image(lip_layer)->width / get_layer_image(base_layer)->width;
