@@ -6,15 +6,10 @@
 	<string>upload</string>
 	<key>method</key>
 	<string>developer-id</string>
-	<key>provisioningProfiles</key>
-	<dict>
-		<key>com.polaris-engine.app</key>
-		<string>com.polaris-engine.macos-autorelease</string>
-	</dict>
 	<key>signingCertificate</key>
 	<string>Developer ID Application</string>
 	<key>signingStyle</key>
-	<string>manual</string>
+	<string>automatic</string>
 	<key>teamID</key>
 	<string>DT727R68TR</string>
 </dict>
