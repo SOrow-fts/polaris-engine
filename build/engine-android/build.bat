@@ -25,8 +25,8 @@ echo "ndk.dir=%ANDROID_SDK_ROOT%\ndk\25.2.9519653" >> local.properties
 echo Building app...
 call gradlew.bat --no-daemon --stacktrace build
 
-copy app\build\outputs\apk\debug\app-debug-unsigned.apk .
+copy app\build\outputs\apk\debug\app-debug.apk .
 
-echo Please check the file app-debug-unsigned.apk
+echo Please check the file app-debug.apk
 
 exit

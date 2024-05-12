@@ -4,12 +4,17 @@ This file is referred by some automatic release scripts.
 
 [Release History (Japanese)]
 <!-- BEGIN-LATEST-JP -->
+<li>Polaris Engine 1.2.40 2024/5/12
+  <ul>
+    <li>APKの自動ビルドを修正</li>
+  </ul>
+</li>
+<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.2.39 2024/5/12
   <ul>
     <li>IPAとAPKの自動ビルドを修正</li>
   </ul>
 </li>
-<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.2.38 2024/5/12
   <ul>
     <li>Android APKビルドの修正</li>
@@ -438,12 +443,17 @@ This file is referred by some automatic release scripts.
 
 [Release History (English)]
 <!-- BEGIN-LATEST-EN -->
+<li>Polaris Engine 1.2.40 2024/5/12
+  <ul>
+    <li>Fixed the APK automatic build</li>
+  </ul>
+</li>
+<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.2.39 2024/5/12
   <ul>
     <li>Fixed the IPA and APK automatic build</li>
   </ul>
 </li>
-<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.2.38 2024/5/12
   <ul>
     <li>Fixed the Android apk build</li>
