@@ -146,6 +146,7 @@ src:
 	@cp -R gradlew.bat android-src/
 	@cp -R gradle android-src/
 	@cp -R build.bat android-src/
+	@cp -R build.sh android-src/
 	@
 	@cp ../../src/google/ndkmain.h android-src/app/src/main/cpp/
 	@cp ../../src/google/ndkmain.c android-src/app/src/main/cpp/

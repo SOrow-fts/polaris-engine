@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="QDa-Uy-LJl">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="QDa-Uy-LJl">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22689"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -80,7 +80,7 @@
                                 <rect key="frame" x="0.0" y="315" width="856" height="405"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
-                                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4WV-uO-TSw">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4WV-uO-TSw">
                                         <rect key="frame" x="20" y="320" width="371" height="16"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Or select a template:" id="kw6-Qf-ReF">
@@ -223,7 +223,7 @@
                                             <action selector="onOpenScriptButton:" target="rdk-rJ-M5M" id="yTo-7w-aqh"/>
                                         </connections>
                                     </button>
-                                    <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vcA-e7-8fq">
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vcA-e7-8fq">
                                         <rect key="frame" x="20" y="651" width="334" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="Lvg-TU-u5j">
@@ -245,7 +245,6 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <size key="minSize" width="384" height="515"/>
                                                     <size key="maxSize" width="389" height="10000000"/>
-                                                    <color key="insertionPointColor" name="textInsertionPointColor" catalog="System" colorSpace="catalog"/>
                                                 </textView>
                                             </subviews>
                                         </clipView>
@@ -258,7 +257,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                     </scrollView>
-                                    <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e6P-a3-plD">
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e6P-a3-plD">
                                         <rect key="frame" x="20" y="20" width="297" height="71"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="4dU-oN-Bbm">
@@ -278,7 +277,7 @@
                                             <action selector="onUpdateVariablesButton:" target="rdk-rJ-M5M" id="VWj-33-XPA"/>
                                         </connections>
                                     </button>
-                                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="09a-2y-TLU">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="09a-2y-TLU">
                                         <rect key="frame" x="20" y="99" width="267" height="16"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Changed Variables (non-initial values only):" id="wJ8-Id-DCW">
@@ -852,34 +851,34 @@
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <menu key="submenu" title="Export" autoenablesItems="NO" id="pLM-KL-ZJW">
                                 <items>
-                                    <menuItem title="Export for macOS" enabled="NO" id="5Ow-a0-jLH">
-                                        <modifierMask key="keyEquivalentModifierMask"/>
-                                        <connections>
-                                            <action selector="onMenuExportForMac:" target="rdk-rJ-M5M" id="tvC-SB-Dd7"/>
-                                        </connections>
-                                    </menuItem>
                                     <menuItem title="Export for iOS (iPhone, iPad and Vision Pro)" enabled="NO" id="XWR-OQ-8Gs">
                                         <modifierMask key="keyEquivalentModifierMask"/>
                                         <connections>
                                             <action selector="onMenuExportForIOS:" target="rdk-rJ-M5M" id="LpB-S6-qk3"/>
                                         </connections>
                                     </menuItem>
-                                    <menuItem title="Export for non-iOS Various Phones" enabled="NO" id="Vq6-BU-x0v">
+                                    <menuItem title="Export for Android" enabled="NO" id="Vq6-BU-x0v">
                                         <modifierMask key="keyEquivalentModifierMask"/>
                                         <connections>
                                             <action selector="onMenuExportForAndroid:" target="rdk-rJ-M5M" id="dlx-Aw-NiE"/>
+                                        </connections>
+                                    </menuItem>
+                                    <menuItem title="Export for macOS" enabled="NO" id="5Ow-a0-jLH">
+                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                        <connections>
+                                            <action selector="onMenuExportForMac:" target="rdk-rJ-M5M" id="tvC-SB-Dd7"/>
+                                        </connections>
+                                    </menuItem>
+                                    <menuItem title="Export for Windows" enabled="NO" id="Sgm-Aw-pWh">
+                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                        <connections>
+                                            <action selector="onMenuExportForPC:" target="rdk-rJ-M5M" id="I3E-OB-tso"/>
                                         </connections>
                                     </menuItem>
                                     <menuItem title="Export for Web Browsers" enabled="NO" id="K8O-sG-ldc">
                                         <modifierMask key="keyEquivalentModifierMask"/>
                                         <connections>
                                             <action selector="onMenuExportForWeb:" target="rdk-rJ-M5M" id="VAA-WV-qFm"/>
-                                        </connections>
-                                    </menuItem>
-                                    <menuItem title="Export for PC" enabled="NO" id="Sgm-Aw-pWh">
-                                        <modifierMask key="keyEquivalentModifierMask"/>
-                                        <connections>
-                                            <action selector="onMenuExportForPC:" target="rdk-rJ-M5M" id="I3E-OB-tso"/>
                                         </connections>
                                     </menuItem>
                                     <menuItem isSeparatorItem="YES" id="aBW-mc-ysy"/>

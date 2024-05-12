@@ -108,36 +108,18 @@ add_subdirectory(src/main/cpp/libvorbis)
 include_directories(src/main/cpp/libvorbis/include)
 
 # Link all into a DLL
-if(AWK)
-  # On the Mac and Linux versions of Android Studio
-  target_link_libraries(
-    polaris
-    GLESv3
-    png
-    jpeg
-    webp
-    freetype
-    bz2
-    z
-    ogg
-    vorbis
-    OpenSLES
-    ${log-lib}
-  )
-else()
-  # On the Windows version of Android Studio
-  target_link_libraries(
-    polaris
-    GLESv3
-    png_shared
-    jpeg
-    webp
-    freetype
-    bz2
-    z
-    ogg
-    vorbis
-    OpenSLES
-    ${log-lib}
-  )
-endif()
+target_link_libraries(
+  polaris
+  GLESv3
+  $<TARGET_NAME_IF_EXISTS:png>
+  $<TARGET_NAME_IF_EXISTS:png_shared>
+  jpeg
+  webp
+  freetype
+  bz2
+  z
+  ogg
+  vorbis
+  OpenSLES
+  ${log-lib}
+)

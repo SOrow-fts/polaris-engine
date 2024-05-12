@@ -1255,9 +1255,8 @@ static ViewController *theViewController;
         return;
     }
 
-    system("cd export-ios && sh ./build.sh && cd ..");
-
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL fileURLWithPath:[[fileManager currentDirectoryPath] stringByAppendingString:@"/export-ios/app"]]];
+    NSString *command = [NSString stringWithFormat:@"osascript -e \'tell application \"Terminal\" to do script \"%@/build.sh\"\'", exportPath];
+    system([command UTF8String]);
 }
 
 - (IBAction)onMenuExportForAndroid:(id)sender {
@@ -1274,7 +1273,7 @@ static ViewController *theViewController;
         return;
     }
 
-    NSArray *appArray = @[@"app", @"gradle", @"gradlew", @"settings.gradle", @"build.gradle", @"gradle.properties", @"gradlew.bat"];
+    NSArray *appArray = @[@"app", @"gradle", @"gradlew", @"settings.gradle", @"build.gradle", @"gradle.properties", @"gradlew.bat", @"build.sh"];
     for (NSString *sub in appArray) {
         if (![fileManager copyItemAtPath:[NSString stringWithFormat:@"%@/Contents/Resources/android-src/%@", [[NSBundle  mainBundle] bundlePath], sub]
                                   toPath:[NSString stringWithFormat:@"%@/%@", exportPath, sub]
@@ -1300,8 +1299,22 @@ static ViewController *theViewController;
     }
  
     log_info(_isEnglish ? "Successflully exported" : "エクスポートに成功しました。");
-    
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL fileURLWithPath:[[fileManager currentDirectoryPath] stringByAppendingString:@"/export-android"]]];
+
+    // IPA作成の確認のダイアログを開く
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert setMessageText:self.isEnglish ?
+           @"Would you like to build an APK file?" :
+           @"APKファイルをビルドしますか？"];
+    [alert addButtonWithTitle:!self.isEnglish ? @"はい" : @"Yes"];
+    [alert addButtonWithTitle:!self.isEnglish ? @"いいえ" : @"No"];
+    [alert setAlertStyle:NSAlertStyleWarning];
+    if([alert runModal] != NSAlertFirstButtonReturn) {
+        [[NSWorkspace sharedWorkspace] openURL:[NSURL fileURLWithPath:[[fileManager currentDirectoryPath] stringByAppendingString:@"/export-android"]]];
+        return;
+    }
+
+    NSString *command = [NSString stringWithFormat:@"osascript -e \'tell application \"Terminal\" to do script \"%@/build.sh\"\'", exportPath];
+    system([command UTF8String]);
 }
 
 - (IBAction)onMenuExportPackage:(id)sender {

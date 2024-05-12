@@ -185,10 +185,10 @@
 "Ig0-JE-SUJ.title" = "スマートリンク";
 
 /* Class = "NSMenuItem"; title = "Export for Web Browsers"; ObjectID = "K8O-sG-ldc"; */
-"K8O-sG-ldc.title" = "Webブラウザゲームをエクスポート";
+"K8O-sG-ldc.title" = "Web用にエクスポート";
 
 /* Class = "NSMenuItem"; title = "Export for Mac (Source)"; ObjectID = "5Ow-a0-jLH"; */
-"5Ow-a0-jLH.title" = "Macのゲームをエクスポート";
+"5Ow-a0-jLH.title" = "macOS用にエクスポート";
 
 /* Class = "NSMenuItem"; title = "Open Script"; ObjectID = "KMv-ZU-nCb"; */
 "KMv-ZU-nCb.title" = "スクリプトを開く";
@@ -248,7 +248,7 @@
 "RMT-gu-6DZ.title" = "ウィンドウ";
 
 /* Class = "NSMenuItem"; title = "Export for Desktop"; ObjectID = "Sgm-Aw-pWh"; */
-"Sgm-Aw-pWh.title" = "デスクトップゲームをエクスポート";
+"Sgm-Aw-pWh.title" = "Windows用にエクスポート";
 
 /* Class = "NSMenuItem"; title = "Stop"; ObjectID = "UDI-5d-E9L"; */
 "UDI-5d-E9L.title" = "停止";
@@ -260,7 +260,7 @@
 "VbE-Hx-f71.title" = "削除";
 
 /* Class = "NSMenuItem"; title = "Export for non-iOS phones"; ObjectID = "Vq6-BU-x0v"; */
-"Vq6-BU-x0v.title" = "iOSでない電話のゲームをエクスポート";
+"Vq6-BU-x0v.title" = "Android用にエクスポート";
 
 /* Class = "NSMenuItem"; title = "Save…"; ObjectID = "Vws-wD-PaF"; */
 "Vws-wD-PaF.title" = "保存…";
@@ -290,7 +290,7 @@
 "XTj-Xt-vvH.title" = "Polaris Engine";
 
 /* Class = "NSMenuItem"; title = "Export for iPhone and iPad"; ObjectID = "XWR-OQ-8Gs"; */
-"XWR-OQ-8Gs.title" = "iPhoneのゲームをエクスポート (iPadとVision Proにも対応)";
+"XWR-OQ-8Gs.title" = "iOS用にエクスポート (iPhone, iPad, Vision Pro)";
 
 /* Class = "NSButtonCell"; title = "Stop"; ObjectID = "YDs-Um-wfM"; */
 "YDs-Um-wfM.title" = "停止";

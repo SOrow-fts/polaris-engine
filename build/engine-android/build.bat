@@ -2,7 +2,7 @@
 
 set CURRENT_DIR=%~dp0
 
-echo Downloading JDK..
+echo Downloading JDK...
 curl -L -O https://aka.ms/download-jdk/microsoft-jdk-17.0.11-windows-x64.zip
 call powershell -command "Expand-Archive microsoft-jdk-17.0.11-windows-x64.zip"
 set JAVA_HOME=%CURRENT_DIR%microsoft-jdk-17.0.11-windows-x64\jdk-17.0.11+9
