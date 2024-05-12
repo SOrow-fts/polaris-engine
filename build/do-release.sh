@@ -240,6 +240,8 @@ cd ../web && \
     ./update-version.sh && \
     ftp-upload.sh dl/index.html && \
     ftp-upload.sh en/dl/index.html && \
+    echo "$VERSION" > dl/latest.txt && \
+    ftp-upload.sh dl/latest.txt && \
     git add -u dl/index.html en/dl/index.html && \
     git commit -m "web: release $VERSION" && \
     ftp-upload.sh ../install-polaris-engine.sh dl/ && \

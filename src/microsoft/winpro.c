@@ -101,8 +101,8 @@
 #define CONV_MESSAGE_SIZE	(65536)
 
 /* タイマー */
-#define ID_TIMER_BEGINNER	(1)
-#define ID_TIMER_FORMAT		(2)
+#define ID_TIMER_FORMAT		(1)
+#define ID_TIMER_UPDATE		(2)
 
 /* Colors */
 #define LIGHT_BG_DEFAULT	0x00ffffff
@@ -338,9 +338,7 @@ static VOID RichEdit_DelayedHighligth(void);
 static VOID __stdcall OnTimerFormat(HWND hWnd, UINT nID, UINT_PTR uTime, DWORD dwParam);
 
 /* Project */
-#if 0
-static VOID __stdcall OnTimerBeginner(HWND hWnd, UINT nID, UINT_PTR uTime, DWORD dwParam);
-#endif
+static VOID __stdcall OnTimerUpdate(HWND hWnd, UINT nID, UINT_PTR uTime, DWORD dwParam);
 static BOOL CreateProjectFromTemplate(const wchar_t *pszTemplate);
 static BOOL ChooseProject(void);
 static BOOL OpenProjectAtPath(const wchar_t *pszPath);
@@ -381,6 +379,7 @@ static VOID OnFont(void);
 static VOID OnHighlightMode(void);
 static VOID OnDarkMode(void);
 static VOID OnHelp(void);
+static VOID OnAutoUpdate(BOOL bSilent);
 
 /* Export Helpers */
 static VOID RecreateDirectory(const wchar_t *path);
@@ -505,7 +504,10 @@ static BOOL InitApp(HINSTANCE hInstance, int nCmdShow)
 				return FALSE;
 		}
 		if (OpenProjectAtPath(__wargv[1]))
+		{
 			StartGame();
+			SetTimer(hWndMain, ID_TIMER_UPDATE, 1000 * 60 * 5, OnTimerUpdate);
+		}
 	}
 
 	SetTimer(hWndMain, ID_TIMER_FORMAT, 1000, OnTimerFormat);
@@ -1450,6 +1452,12 @@ static VOID InitMenu(HWND hWnd)
 	mi.dwTypeData = bEnglish ? L"Version" : L"バージョン";
 	InsertMenuItem(hMenuHelp, nOrder++, TRUE, &mi);
 
+	/* バージョンを作成する */
+	mi.wID = ID_AUTOUPDATE;
+	mi.dwTypeData = bEnglish ? L"Check Update" : L"アップデートをチェックする";
+	InsertMenuItem(hMenuHelp, nOrder++, TRUE, &mi);
+	EnableMenuItem(hMenu, ID_AUTOUPDATE, MF_GRAYED);
+
 	/* メインメニューをセットする */
 	SetMenu(hWnd, hMenu);
 }
@@ -1564,6 +1572,7 @@ static VOID StartGame(void)
 		EnableMenuItem(hMenu, ID_CMD_CHOOSE_2, MF_ENABLED);
 		EnableMenuItem(hMenu, ID_CMD_CHOOSE_1, MF_ENABLED);
 		EnableMenuItem(hMenu, ID_CMD_CLICK, MF_ENABLED);
+		EnableMenuItem(hMenu, ID_AUTOUPDATE, MF_ENABLED);
 	} while (0);
 }
 
@@ -2361,6 +2370,9 @@ static void OnCommand(WPARAM wParam, LPARAM lParam)
 	/* ヘルプ */
 	case ID_VERSION:
 		OnHelp();
+		break;
+	case ID_AUTOUPDATE:
+		OnAutoUpdate(FALSE);
 		break;
 	/* ボタン */
 	case ID_VARS:
@@ -4031,37 +4043,23 @@ static VOID __stdcall OnTimerFormat(HWND hWnd, UINT nID, UINT_PTR uTime, DWORD d
 	SetFocus(hWndRichEdit);
 }
 
-/*
- * Project
- */
-
-#if 0
-/* Create a new project or choose an existing project. */
-static VOID __stdcall OnTimerBeginner(HWND hWnd, UINT nID, UINT_PTR uTime, DWORD dwParam)
+static VOID __stdcall OnTimerUpdate(HWND hWnd, UINT nID, UINT_PTR uTime, DWORD dwParam)
 {
 	UNUSED_PARAMETER(hWnd);
 	UNUSED_PARAMETER(nID);
 	UNUSED_PARAMETER(uTime);
 	UNUSED_PARAMETER(dwParam);
 
-	KillTimer(hWndMain, ID_TIMER_BEGINNER);
+	KillTimer(hWndMain, ID_TIMER_UPDATE);
 	if (bProjectOpened)
 		return;
 
-	MessageBox(hWndMain,
-			   bEnglish ?
-			   L"May I help you?\n"
-			   L"\n"
-			   L"Press File->New game to create a new game.\n"
-			   L"Press File->Open game to open an existing game." :
-			   L"お困りですか？\n"
-			   L"\n"
-			   L"メニューの「ファイル」→「新規ゲーム」を押すと新規ゲームを作成します。\n"
-			   L"メニューの「ファイル」→「ゲームを開く」を押すと既存ゲームを開きます。\n",
-			   TITLE,
-			   MB_OK);
+	OnAutoUpdate(TRUE);
 }
-#endif
+
+/*
+ * Project
+ */
 
 /* Create a new project from a template. */
 static BOOL CreateProjectFromTemplate(const wchar_t *pszTemplate)
@@ -4365,27 +4363,25 @@ static const wchar_t *GetLastProjectPath(void)
 /* 新規ゲームプロジェクト作成 */
 static VOID OnNewProject(const wchar_t *pszTemplate)
 {
-	KillTimer(hWndMain, ID_TIMER_BEGINNER);
-
 	if (!CreateProjectFromTemplate(pszTemplate))
 		return;
 
 	RecordLastProjectPath();
 
 	StartGame();
+	SetTimer(hWndMain, ID_TIMER_UPDATE, 1000 * 60 * 5, OnTimerUpdate);
 }
 
 /* ゲームプロジェクトを開く */
 static VOID OnOpenProject(void)
 {
-	KillTimer(hWndMain, ID_TIMER_BEGINNER);
-
 	if (!ChooseProject())
 		return;
 
 	RecordLastProjectPath();
 
 	StartGame();
+	SetTimer(hWndMain, ID_TIMER_UPDATE, 1000 * 60 * 5, OnTimerUpdate);
 }
 
 /* ゲームフォルダオープン */
@@ -5535,6 +5531,115 @@ static VOID OnHelp(void)
 	swprintf(buf, sizeof(buf) / sizeof(wchar_t), L"%s %s\n%s", PROGRAM, VERSION_STR(VERSION), COPYRIGHT);
 
 	MessageBox(hWndMain, buf, TITLE, MB_OK | MB_ICONINFORMATION);
+}
+
+static VOID OnAutoUpdate(BOOL bSilent)
+{
+	STARTUPINFOW si;
+	PROCESS_INFORMATION pi;
+	wchar_t szMsg[1024];
+	wchar_t szURL[1024];
+	char szVer[1024];
+	FILE *fp;
+	char *lf;
+
+	if (URLDownloadToFileW(NULL, L"https://polaris-engine.com/dl/latest.txt", L".\\latest.txt", 0, NULL) != S_OK)
+	{
+		if (bSilent)
+			return;
+		MessageBox(hWndMain,
+				   bEnglish ?
+				   L"Failed to get update information." :
+				   L"アップデート情報の取得に失敗しました。",
+				   TITLE,
+				   MB_OK | MB_ICONEXCLAMATION);
+		return;
+	}
+	fp = fopen("latest.txt", "rb");
+	do {
+		if (fp == NULL)
+		{
+			if (bSilent)
+				return;
+			MessageBox(hWndMain,
+					   bEnglish ?
+					   L"Failed to open latest.txt" :
+					   L"latest.txtのオープンに失敗しました。",
+					   TITLE,
+					   MB_OK | MB_ICONEXCLAMATION);
+			break;
+		}
+		if (fgets(szVer, sizeof(szVer) - 1, fp) == NULL)
+			break;
+		lf = strstr(szVer, "\n");
+		if (lf != NULL)
+			*lf = '\0';
+		if (strcmp(szVer, VERSION_STR(VERSION)) == 0)
+		{
+			if (bSilent)
+				return;
+			MessageBox(hWndMain,
+					   bEnglish ?
+					   L"This app is the latest version." :
+					   L"このバージョンは最新版です。",
+					   TITLE,
+					   MB_OK | MB_ICONINFORMATION);
+			break;
+		}
+
+		swprintf(szMsg,
+				 sizeof(szMsg) / sizeof(wchar_t),
+				 bEnglish ?
+				 L"You are using %s and the latest is %s.\n"
+				 L"Do you want to download and install the update?" :
+				 L"現在ご利用中のバージョンは %s で、最新版は %s です。\n"
+				 L"アップデートをダウンロードしてインストールしますか？",
+				 VERSION_STR(VERSION), szVer);
+		if (MessageBox(hWndMain, szMsg, TITLE, MB_YESNO | MB_ICONQUESTION) == IDNO)
+			break;
+
+		/* インストーラをダウンロードする */
+		swprintf(szURL, sizeof(szURL) / sizeof(wchar_t), L"https://polaris-engine.com/dl/polaris-engine-%s.exe", szVer);
+		if (URLDownloadToFileW(NULL, szURL, L"installer.exe", 0, NULL) != S_OK)
+		{
+			MessageBox(hWndMain,
+					   bEnglish ?
+					   L"Failed to download the installer." :
+					   L"インストーラのダウンロードに失敗しました。",
+					   TITLE,
+					   MB_OK | MB_ICONEXCLAMATION);
+			break;
+		}
+
+		if (MessageBox(hWndMain,
+					   bEnglish ?
+					   L"Will close the app for the update." :
+					   L"アップデートのためアプリを終了します。",
+					   TITLE,
+					   MB_OK | MB_ICONINFORMATION) != IDOK)
+			break;
+
+		/* プロセスを実行する */
+		ZeroMemory(&si, sizeof(STARTUPINFOW));
+		si.cb = sizeof(STARTUPINFOW);
+		CreateProcessW(L".\\installer.exe",	/* lpApplication */
+					   NULL,	/* lpCommandLine */
+					   NULL,	/* lpProcessAttribute */
+					   NULL,	/* lpThreadAttributes */
+					   FALSE,	/* bInheritHandles */
+					   NORMAL_PRIORITY_CLASS | CREATE_NEW_CONSOLE | CREATE_NEW_PROCESS_GROUP,
+					   NULL,	/* lpEnvironment */
+					   L".\\",	/* working directory */
+					   &si,
+					   &pi);
+		if (pi.hProcess != NULL)
+			CloseHandle(pi.hThread);
+		if (pi.hProcess != NULL)
+			CloseHandle(pi.hProcess);
+		exit(0);
+	} while (0);
+	if (fp != NULL)
+		fclose(fp);
 }
 
 /*
