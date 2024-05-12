@@ -241,6 +241,11 @@
 			<li>Graphics: Direct3D 9</li>
 		</ul>
 	</li>
+	<li>詳細
+		<ul>
+			<li>SDK: C with Win32 API using MSVCRT.DLL</li>
+		</ul>
+	</li>
 </ul>
 <br>
 <h3>macOS</h3>
@@ -270,7 +275,7 @@
 	<li>詳細
 		<ul>
 			<li>CPU: Apple Silicon, Intel Core</li>
-			<li>Framework: AppKit / Metal</li>
+			<li>Frameworks: AppKit (Objective-C) with Metal</li>
 		</ul>
 	</li>
 </ul>
@@ -279,12 +284,14 @@
 <ul>
 	<li>開発ツール
 		<ul>
+			<li>CPU: Any</li>
 			<li>OS: Linux / FreeBSD / NetBSD
-			<li>Graphics: Qt6 OpenGL 3.0
+			<li>Graphics: Qt6 OpenGL 3.0 (Wayland or XCB)
 		</ul>
 	</li>
 	<li>出力ゲーム
 		<ul>
+			<li>CPU: Any</li>
 			<li>OS: Linux / FreeBSD / NetBSD
 			<li>Graphics: X11 OpenGL 3.0
 		</ul>
@@ -320,7 +327,7 @@
 	</li>
 	<li>詳細
 		<ul>
-			<li>Framework: UIKit / Metal</li>
+			<li>Frameworks: UIKit (Objective-C) with Metal</li>
 		</ul>
 	</li>
 </ul>
@@ -353,8 +360,8 @@
 	</li>
 	<li>詳細
 		<ul>
-			<li>Gprahcics: OpenGL ES 2.0</li>
-			<li>SDK: Java / Android NDK</li>
+			<li>Graphics: OpenGL ES 2.0</li>
+			<li>SDK: Android NDK (ANSI C) with a thin Java wrapper</li>
 		</ul>
 	</li>
 </ul>
@@ -363,7 +370,7 @@
 <ul>
 	<li>開発ツール (まだ制作中)
 		<ul>
-			<li><a href="/vls/">Google Chromeのみ対応</a>, フォルダの入れ子に非対応</li>
+			<li><a href="/vls/">File System APIの都合でGoogle Chromeのみ対応</a>, フォルダの入れ子に非対応</li>
 		</ul>
 	</li>
 	<li>出力ゲーム
@@ -377,8 +384,8 @@
 	</li>
 	<li>詳細
 		<ul>
-			<li>Graphics: WebGL 2</li>
-			<li>SDK: Emscripten</li>
+			<li>Graphics: WebGL2</li>
+			<li>SDK: C / Emscripten</li>
 		</ul>
 	</li>
 </ul>
@@ -396,14 +403,14 @@
 		<ul>
 			<li>Unity版
 				<ul>
-					<li>Unityを利用</li>
-					<li>現在はネイティブコードを併用(.soファイル)</li>
-					<li>直近でC#トランスレータを開発してネイティブコード不要化の予定</li>
+					<li>UnityのC#ソースコードを出力</li>
+					<li>現在はネイティブコードのDLLを併用(.dll/.dylib/.so)</li>
+					<li>直近でC#トランスレータを開発してネイティブコード不要化の計画</li>
 				</ul>
 			</li>
 			<li>ネイティブ版
 				<ul>
-					<li>各社SDKを直接利用 (非OSS)</li>
+					<li>契約を締結したゲーム機ベンダのローレベルAPIを利用 (非OSS/各ゲーム機ベンダからの提供を想定)</li>
 				</ul>
 			</li>
 		</ul>
