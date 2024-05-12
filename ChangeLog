@@ -4,12 +4,17 @@ This file is referred by some automatic release scripts.
 
 [Release History (Japanese)]
 <!-- BEGIN-LATEST-JP -->
+<li>Polaris Engine 1.2.37 2024/5/12
+  <ul>
+    <li>ソローさんが日本語ノベルと英語ノベルのテンプレートを刷新</li>
+  </ul>
+</li>
+<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.2.36 2024/5/11
   <ul>
     <li>キャラの目パチと口パクの画像を改善</li>
   </ul>
 </li>
-<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.2.35 2024/5/10
   <ul>
     <li>音量の初期値が適用されないバグを修正</li>
@@ -423,12 +428,17 @@ This file is referred by some automatic release scripts.
 
 [Release History (English)]
 <!-- BEGIN-LATEST-EN -->
+<li>Polaris Engine 1.2.37 2024/5/12
+  <ul>
+    <li>SOrow renewed the Japanese and English novel style template</li>
+  </ul>
+</li>
+<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.2.36 2024/5/11
   <ul>
     <li>Improved the eye-blink and lip-sync images</li>
   </ul>
 </li>
-<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.2.35 2024/5/10
   <ul>
     <li>Fixed a bug where the initial volumes are not applied</li>

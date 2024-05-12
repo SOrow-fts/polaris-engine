@@ -32,9 +32,9 @@ BACK {
     type: cancel;
 
     # 座標とサイズ
-    x: 1140;
-    y: 625;
-    width: 139;
+    x: 1144;
+    y: 22;
+    width: 80;
     height: 80;
 
     # ポイントされたときの効果音
@@ -55,22 +55,22 @@ HISTORYSLOT1 {
     # 履歴スロット0番目
     index: 0;
 
-    # 座標とサイズ
-    x: 26;
-    y: 122;
-    width: 1110;
-    height: 152;
-
-    # テキストのマージン
-    margin: 20;
-
-    # ポイントされたときの効果音
-    pointse: btn-change.ogg;
-
-    # クリア用の色(背景色を設定しないと擬似的なフォントのふちどりが生じる)
+    # 背景色
     clear-r: 255;
     clear-g: 255;
     clear-b: 255;
+
+    # 座標とサイズ
+    x: 200;
+    y: 140;
+    width: 900;
+    height: 160;
+
+    # テキストのマージン
+    margin: 15;
+
+    # ポイントされたときの効果音
+    pointse: btn-change.ogg;
 
     # 読み上げテキスト
     alt: ヒストリーの1番目のスロットです。リターンキーを押すと読み上げます。;
@@ -84,22 +84,22 @@ HISTORYSLOT2 {
     # 履歴スロット1番目
     index: 1;
 
-    # 座標とサイズ
-    x: 26;
-    y: 285;
-    width: 1110;
-    height: 152;
-
-    # テキストのマージン
-    margin: 20;
-
-    # ポイントされたときの効果音
-    pointse: btn-change.ogg;
-
-    # クリア用の色(背景色を設定しないと擬似的なフォントのふちどりが生じる)
+    # 背景色
     clear-r: 255;
     clear-g: 255;
     clear-b: 255;
+
+    # 座標とサイズ
+    x: 200;
+    y: 310;
+    width: 900;
+    height: 160;
+
+    # テキストのマージン
+    margin: 15;
+
+    # ポイントされたときの効果音
+    pointse: btn-change.ogg;
 
     # 読み上げテキスト
     alt: ヒストリーの2番目のスロットです。リターンキーを押すと読み上げます。;
@@ -113,22 +113,22 @@ HISTORYSLOT3 {
     # 履歴スロット2番目
     index: 2;
 
-    # 座標とサイズ
-    x: 26;
-    y: 447;
-    width: 1110;
-    height: 152;
-
-    # テキストのマージン
-    margin: 20;
-
-    # ポイントされたときの効果音
-    pointse: btn-change.ogg;
-
-    # クリア用の色(背景色を設定しないと擬似的なフォントのふちどりが生じる)
+    # 背景色
     clear-r: 255;
     clear-g: 255;
     clear-b: 255;
+
+    # 座標とサイズ
+    x: 200;
+    y: 484;
+    width: 900;
+    height: 160;
+
+    # テキストのマージン
+    margin: 15;
+
+    # ポイントされたときの効果音
+    pointse: btn-change.ogg;
 
     # 読み上げテキスト
     alt: ヒストリーの3番目のスロットです。リターンキーを押すと読み上げます。;
@@ -140,10 +140,10 @@ SCROLL {
     type: historyscroll;
 
     # 座標とサイズ
-    x: 1152;
-    y: 120;
-    width: 118;
-    height: 478;
+    x: 1150;
+    y: 153;
+    width: 68;
+    height: 492;
 
     # ポイントされたときの効果音
     pointse: btn-change.ogg;
@@ -153,25 +153,25 @@ SCROLL {
 }
 
 # タイトルへ戻るボタン
-TITLE {
-    # 種類:タイトルへ戻る
-    type: title;
-
-    # 移動先のスクリプトファイル
-    file: init.txt;
-
-    # 座標とサイズ
-    x: 967;
-    y: 625;
-    width: 174;
-    height: 80;
-
-    # ポイントされたときの効果音
-    pointse: btn-change.ogg;
-
-    # クリックされたときの効果音
-    clickse: click.ogg;
-
-    # 読み上げテキスト
-    alt: このボタンはゲームのタイトル画面に戻るものです。;
-}
+#TITLE {
+#    # 種類:タイトルへ戻る
+#    type: title;
+#
+#    # 移動先のスクリプトファイル
+#    file: init.txt;
+#
+#    # 座標とサイズ
+#    x: 967;
+#    y: 625;
+#    width: 174;
+#    height: 80;
+#
+#    # ポイントされたときの効果音
+#    pointse: btn-change.ogg;
+#
+#    # クリックされたときの効果音
+#    clickse: click.ogg;
+#
+#    # 読み上げテキスト
+#    alt: このボタンはゲームのタイトル画面に戻るものです。;
+#}

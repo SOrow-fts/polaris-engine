@@ -5,6 +5,7 @@
 # このファイルの基本設定
 global {
     # 下記の画像を使用する
+    base:   system/config/base.png;
     idle:   system/config/idle.png;
     hover:  system/config/hover.png;
     active: system/config/active.png;
@@ -28,9 +29,9 @@ BACK {
     type: cancel;
 
     # 座標とサイズ
-    x: 1140;
-    y: 625;
-    width: 139;
+    x: 1142;
+    y: 22;
+    width: 80;
     height: 80;
 
     # ポイントされたときの効果音
@@ -49,10 +50,10 @@ TEXTSPEED {
     type: textspeed;
 
     # 座標とサイズ
-    x: 68;
-    y: 250;
-    width: 266;
-    height: 21;
+    x: 445;
+    y: 320;
+    width: 542;
+    height: 50;
 
     # ポイントされたときの効果音
     pointse: btn-change.ogg;
@@ -67,13 +68,13 @@ AUTOSPEED {
     type: autospeed;
 
     # 座標とサイズ
-    x: 68;
-    y: 339;
-    width: 266;
-    height: 21;
+    x: 445;
+    y: 400;
+    width: 542;
+    height: 50;
 
     # ポイントされたときの効果音
-    pointse: btn-change.ogg;    
+    pointse: btn-change.ogg;
 
     # 読み上げテキスト
     alt: このボタンはオートモードのスピードを調整するものです。;
@@ -88,9 +89,9 @@ PREVIEW {
     msg: "これはメッセージのプレビューです。スピードはよろしいですか？";
 
     # 座標とサイズ
-    x: 442;
-    y: 453;
-    width: 590;
+    x: 322;
+    y: 472;
+    width: 600;
     height: 120;
 
     # 読み上げテキスト
@@ -98,15 +99,33 @@ PREVIEW {
 }
 
 # BGMのボリュームスライダー
+#MASTER {
+#    # 種類:BGMボリューム
+#    type: mastervol;
+#
+#    # 座標とサイズ
+#    x: 445;
+#    y: 250;
+#    width: 542;
+#    height: 50;
+#
+#    # ポイントされたときの効果音
+#    pointse: btn-change.ogg;
+#
+#    # 読み上げテキスト
+#    alt: このボタンはBGMの音量を調整するものです。;
+#}
+
+# BGMのボリュームスライダー
 BGM {
     # 種類:BGMボリューム
     type: bgmvol;
 
     # 座標とサイズ
-    x: 420;
-    y: 249;
-    width: 266;
-    height: 21;
+    x: 445;
+    y: 160;
+    width: 542;
+    height: 50;
 
     # ポイントされたときの効果音
     pointse: btn-change.ogg;
@@ -124,10 +143,10 @@ SE {
     file: click.ogg;
 
     # 座標とサイズ
-    x: 420;
-    y: 339;
-    width: 266;
-    height: 20;
+    x: 445;
+    y: 240;
+    width: 542;
+    height: 50;
 
     # ポイントされたときの効果音
     pointse: btn-change.ogg;
@@ -137,73 +156,73 @@ SE {
 }
 
 # ボイスのボリュームスライダー
-VOICE {
-    # Voice volume type
-    type: voicevol;
-
-    # スライダーが変更されたときに再生するCVファイル
-    file: 025.ogg;
-
-    # 座標とサイズ
-    x: 68;
-    y: 498;
-    width: 266;
-    height: 21;
-
-    # ポイントされたときの効果音
-    pointse: btn-change.ogg;
-
-    # 読み上げテキスト
-    alt: このボタンはボイスの音量を調整するものです。;
-}
-
-# フォント選択ボタン1
-FONT1 {
-    # 種類:フォント
-    type: font;
-
-    # 押されたときに変更するフォント
-    file: 07LogoTypeGothic7.ttf;
-
-    # 座標とサイズ
-    x: 770;
-    y: 328;
-    width: 87;
-    height: 30;
-
-    # ポイントされたときの効果音
-    pointse: btn-change.ogg;
-
-    # クリックされたときの効果音
-    clickse: click.ogg;
-
-    # 読み上げテキスト
-    alt: このボタンはフォント1を選択するものです。;
-}
+#VOICE {
+#    # Voice volume type
+#    type: voicevol;
+#
+#    # スライダーが変更されたときに再生するCVファイル
+#    file: 025.ogg;
+#
+#    # 座標とサイズ
+#    x: 445;
+#    y: 250;
+#    width: 542;
+#    height: 50;
+#
+#    # ポイントされたときの効果音
+#    pointse: btn-change.ogg;
+#
+#    # 読み上げテキスト
+#    alt: このボタンはボイスの音量を調整するものです。;
+#}
 
 # フォント選択ボタン1
-FONT2 {
-    # 種類:フォント
-    type: font;
+#FONT1 {
+#    # 種類:フォント
+#    type: font;
+#
+#    # 押されたときに変更するフォント
+#    file: 07LogoTypeGothic7.ttf;
+#
+#    # 座標とサイズ
+#    x: 700;
+#    y: 394;
+#    width: 210;
+#    height: 70;
+#
+#    # ポイントされたときの効果音
+#    pointse: btn-change.ogg;
+#
+#    # クリックされたときの効果音
+#    clickse: click.ogg;
+#
+#    # 読み上げテキスト
+#   alt: このボタンはフォント1を選択するものです。;
+#}
 
-    # 押されたときに変更するフォント
-    file: 07LogoTypeGothic7.ttf;
-
-    # 座標とサイズ
-    x: 900;
-    y: 328;
-    width: 95;
-    height: 27;
-
-    # ポイントされたときの効果音
-    pointse: btn-change.ogg;
-
-    # クリックされたときの効果音
-    clickse: click.ogg;
-
-    # 読み上げテキスト
-    alt: このボタンはフォント2を選択するものです。;
-}
+# フォント選択ボタン1
+#FONT2 {
+#    # 種類:フォント
+#    type: font;
+#
+#    # 押されたときに変更するフォント
+#    file: yasashisa.ttf;
+#
+#    # 座標とサイズ
+#    x: 930;
+#    y: 394;
+#    width: 210;
+#    height: 70;
+#
+#    # ポイントされたときの効果音
+#    pointse: btn-change.ogg;
+#
+#    # クリックされたときの効果音
+#    clickse: click.ogg;
+#
+#    # 読み上げテキスト
+#    alt: このボタンはフォント2を選択するものです。;
+#}
 
 # フルスクリーンモードへの切り替えボタン
 FULLSCREEN {
@@ -211,10 +230,10 @@ FULLSCREEN {
     type: fullscreen;
 
     # 座標とサイズ
-    x: 750;
-    y: 206;
-    width: 200;
-    height: 25;
+    x: 667;
+    y: 600;
+    width: 210;
+    height: 70;
 
     # ポイントされたときの効果音
     pointse: btn-change.ogg;
@@ -232,10 +251,10 @@ WINDOW {
     type: window;
 
     # 座標とサイズ
-    x: 995;
-    y: 206;
-    width: 200;
-    height: 25;
+    x: 397;
+    y: 600;
+    width: 210;
+    height: 70;
 
     # ポイントされたときの効果音
     pointse: btn-change.ogg;
@@ -251,12 +270,11 @@ WINDOW {
 DEFAULT {
     # 種類:既定値
     type: default;
-
     # 座標とサイズ
-    x: 1131;
-    y: 61;
-    width: 115;
-    height: 40;
+    x: 572;
+    y: 30;
+    width: 210;
+    height: 70;
 
     # ポイントされたときの効果音
     pointse: btn-change.ogg;
@@ -277,10 +295,10 @@ TITLE {
     file: init.txt;
 
     # 座標とサイズ
-    x: 967;
-    y: 625;
-    width: 174;
-    height: 80;
+    x: 802;
+    y: 30;
+    width: 210;
+    height: 70;
 
     # ポイントされたときの効果音
     pointse: btn-change.ogg;
