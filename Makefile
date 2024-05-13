@@ -47,7 +47,7 @@ polaris-engine:
 		rm -rf build && \
 		mkdir build && \
 		cd build && \
-		cmake .. && \
+		cmake .. $(CMAKE_FLAGS) && \
 		make && \
 		cp polaris-engine ../../../ && \
 		cd ../../..

@@ -484,7 +484,7 @@ void MainWindow::on_actionNew_Project_English_triggered()
 //
 void MainWindow::on_actionNew_Project_English_Novel_triggered()
 {
-    startWithTemplateGame("english-nvl");
+    startWithTemplateGame("english-novel");
 }
 
 //
@@ -900,7 +900,7 @@ bool MainWindow::copyFiles(QString src, QString dst)
 
         printf("Copyng %s to %s\n", srcPath.toUtf8().data(), dstPath.toUtf8().data());
         if (!QFile::copy(srcPath, dstPath)) {
-            log_error("Copy failed.\n");
+            log_error("Copy failed. (%s to %s)\n", srcPath.toUtf8().data(), dstPath.toUtf8().data());
             return false;
         }
     }
