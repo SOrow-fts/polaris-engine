@@ -698,7 +698,7 @@ int get_line_count(void);
 int get_command_count(void);
 
 /*
- * For Polaris2 Pro
+ * For the Editor
  */
 #if defined(USE_EDITOR)
 

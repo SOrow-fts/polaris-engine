@@ -11,7 +11,7 @@
  *  - 2005-04-11 Updated. (style)
  *  - 2013-08-11 Updated. (fb)
  *  - 2014-06-12 Updated. (conskit)
- *  - 2016-05-27 Updated. (polaris2)
+ *  - 2016-05-27 Updated. (Suika2)
  *  - 2022-07-22 Add OpenGL support.
  *  - 2023-07-17 Add capture/replay support.
  *  - 2023-12-11 Drop non-OpenGL code.
@@ -31,26 +31,26 @@
 #include <sys/time.h>	/* gettimeofday() */
 #include <unistd.h>	/* usleep(), access() */
 
-/* Polaris2 Base */
+/* Polaris Engine Base */
 #include "../polaris.h"
 
-/* Polaris2 HAL implementation for sound output */
+/* Polaris Engine HAL implementation for sound output */
 #include "asound.h"
 
-/* Polaris2 HAL implementation for video playback */
+/* Polaris Engine HAL implementation for video playback */
 #include "gstplay.h"
 
-/* Polaris2 HAL implementation for graphics */
+/* Polaris Engine HAL implementation for graphics */
 #include <GL/gl.h>
 #include <GL/glx.h>
 #include "../khronos/glrender.h"
 
-/* Polaris2 Capture */
+/* Polaris Engine Capture */
 #ifdef USE_CAPTURE
 #include "capture.h"
 #endif
 
-/* Polaris2 Replay */
+/* Polaris Engine Replay */
 #ifdef USE_REPLAY
 #include "replay.h"
 #endif

@@ -13,13 +13,13 @@
  *  - 2024-04-11 Polaris Engine
  */
 
-/* Polaris2 Base */
+/* Polaris Engine Base */
 #include "../polaris.h"
 
-/* Polaris2 Graphics HAL for OpenGL */
+/* Polaris Engine Graphics HAL for OpenGL */
 #include "../khronos/glrender.h"
 
-/* Polaris2 Sound HAL for Emscripten OpenAL */
+/* Polaris Engine Sound HAL for Emscripten OpenAL */
 #include "alsound.h"
 
 /* Emscripten Core */
@@ -840,7 +840,7 @@ void update_window_title(void)
 	chapter = get_chapter_name();
 
 	EM_ASM_({
-		document.title = 'Polaris2 Studio WASM - ' + Module.UTF8ToString($0) + Module.UTF8ToString($1) + Module.UTF8ToString($2);
+		document.title = 'Polaris Engin WASM - ' + Module.UTF8ToString($0) + Module.UTF8ToString($1) + Module.UTF8ToString($2);
 	}, conf_window_title, separator, chapter);
 }
 

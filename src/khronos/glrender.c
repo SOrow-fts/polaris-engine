@@ -341,7 +341,7 @@ static void draw_elements_3d(float x1,
 static void update_texture_if_needed(struct image *img);
 
 /*
- * Initialize the Polaris2's OpenGL rendering subsystem.
+ * Initialize the Polaris Engine's OpenGL rendering subsystem.
  */
 bool init_opengl(void)
 {
@@ -581,7 +581,7 @@ cleanup_fragment_shader(
 #endif	/* ifndef USE_QT */
 
 /*
- * Cleanup the Polaris2's OpenGL rendering subsystem.
+ * Cleanup the Polaris Engine's OpenGL rendering subsystem.
  *  - Note: On Emscripten, this will never be called
  */
 void cleanup_opengl(void)
@@ -649,10 +649,9 @@ void opengl_end_rendering(void)
 
 /*
  * Texture manipulation:
- *  - "Texture" here is a GPU backend of an image
- *  - Polaris2 abstracts modifications of textures by "lock/unlock" operations
- *  - However, OpenGL doesn't have a mechanism to lock pixels
- *  - Thus, we need to call glTexImage2D() to update entire texture for every "unlock" operations
+ *  - "Texture" here is a GPU backend of an image.
+ *  - Polaris Engine abstracts modifications of textures by "notify" operations.
+ *  - Updated textures will be uploaded to GPU using glTexImage2D() when they are rendered.
  */
 
 /*

@@ -48,7 +48,7 @@ static dispatch_semaphore_t in_flight_semaphore;
 //
 // Forward declarations
 //
-static BOOL runPolaris2Frame(void);
+static BOOL runPolarisEngineFrame(void);
 static void drawPrimitives(int dst_left, int dst_top, int dst_width, int dst_height,
                            struct image *src_image,
                            struct image *rule_image,
@@ -186,7 +186,7 @@ static void drawPrimitives3D(float x1, float y1, float x2, float y2, float x3, f
     if(view.currentRenderPassDescriptor == nil)
         return;
     if([theViewController isVideoPlaying]) {
-            if(!runPolaris2Frame())
+            if(!runPolarisEngineFrame())
                     exit(0);
             return;
     }
@@ -213,8 +213,8 @@ static void drawPrimitives3D(float x1, float y1, float x2, float y2, float x3, f
     // Create an array for textures to be destroyed.
     thePurgeArrayCount = 0;
     
-    // Run a Polaris2 frame event and do rendering.
-    if(!runPolaris2Frame())
+    // Run a Polaris Engine frame event and do rendering.
+    if(!runPolarisEngineFrame())
         exit(0);
 
     // End encodings.
@@ -251,9 +251,9 @@ static void drawPrimitives3D(float x1, float y1, float x2, float y2, float x3, f
 //
 
 //
-// Run a Polaris2 frame.
+// Run a Polaris Engine frame.
 //
-static BOOL runPolaris2Frame(void)
+static BOOL runPolarisEngineFrame(void)
 {
     if(!on_event_frame()) {
         save_global_data();

@@ -188,7 +188,7 @@ bool set_call_argument(int index, const char *val);
 const char *get_call_argument(int index);
 
 /*
- * Debugging Support For Polaris2 Pro
+ * Editing/Debugging Support
  */
 #ifdef USE_EDITOR
 

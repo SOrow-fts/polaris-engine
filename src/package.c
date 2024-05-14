@@ -11,7 +11,7 @@
  * [Changes]
  *  - 2016-07-14 Created
  *  - 2022-05-24 Add obfuscation
- *  - 2022-06-14 Move to Polaris2 Pro for Creators
+ *  - 2022-06-14 Move to Suika2 Pro for Creators
  *  - 2024-04-11 Polaris Engine
  */
 

@@ -9,7 +9,7 @@
  * HAL API definition for Polaris Engine's runtime (engine-*)
  *
  * [HAL]
- *  HAL (Hardware Abstraction Layer) is a thin layer to port Polaris2 to
+ *  HAL (Hardware Abstraction Layer) is a thin layer to port Polaris Engine to
  *  various platforms. For a porting, only the functions listed in this
  *  header file need to be implemented.
  *

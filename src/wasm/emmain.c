@@ -78,8 +78,8 @@ int main(void)
 
 	/* IDBFSのセーブデータをマウントする */
 	EM_ASM_({
-		FS.mkdir("polaris2-sav");
-		FS.mount(IDBFS, {}, "polaris2-sav");
+		FS.mkdir("polaris-engine-sav");
+		FS.mount(IDBFS, {}, "polaris-engine-sav");
 		FS.syncfs(true, function (err) { Module.ccall('main_continue', 'v'); });
 	});
 
@@ -747,7 +747,7 @@ char *make_valid_path(const char *dir, const char *fname)
 		if (conf_sav_name[0] == '/')
 			conf_sav_name[0] = '_';
 
-		snprintf(buf, sizeof(buf), "polaris2-sav/%s-%s", conf_sav_name, fname);
+		snprintf(buf, sizeof(buf), "polaris-engine-sav/%s-%s", conf_sav_name, fname);
 		ret = strdup(buf);
 		if (ret == NULL) {
 			log_memory();

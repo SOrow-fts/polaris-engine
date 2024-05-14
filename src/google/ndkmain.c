@@ -73,7 +73,7 @@ Java_com_polarisengine_engineandroid_MainActivity_nativeInitGame(
 	/* Clear the video state. */
 	state_video = false;
 
-	/* Init Polaris2 engine. */
+	/* Init Polaris Engine engine. */
 	init_locale_code();
 	if (!init_conf()) {
 		log_error("Failed to initialize config.");

@@ -172,7 +172,7 @@ bool reparse_script_for_structured_syntax(void);
 #endif
 
 /*
- * For Polaris2 Pro
+ * For the Editor
  */
 #ifdef USE_EDITOR
 
@@ -2969,7 +2969,7 @@ static void show_parse_error_footer(int index, const char *raw)
 }
 
 /*
- * For Polaris2 Pro
+ * For the Editor
  */
 #ifdef USE_EDITOR
 

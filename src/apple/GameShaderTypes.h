@@ -6,7 +6,7 @@
  */
 
 //
-// GameShaderTypes: The Metal version of the shaders for Polaris2
+// GameShaderTypes: The Metal version of the shaders for Polaris Engine
 //
 
 #ifndef POLARIS_GAMESHADERTYPES_H

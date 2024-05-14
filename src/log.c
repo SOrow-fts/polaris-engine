@@ -15,7 +15,7 @@
  *  - 2021-06-12 @shakeの移動タイプ名エラーを追加
  *  - 2021-06-15 @setsaveのパラメタのエラーを追加
  *  - 2021-07-07 @goto $SAVEのエラーを追加
- *  - 2022-06-14 Polaris2 Pro for Creators
+ *  - 2022-06-14 Suika2 Pro for Creators
  *  - 2022-11-06 UTF-8
  *  - 2023-01-06 パラメータ名のエラーを追加
  *  - 2024-04-11 Polaris Engine

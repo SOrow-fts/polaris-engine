@@ -14,7 +14,7 @@
  *  - 2024-04-11 Polaris Engine
  */
 
-/* Polaris2 Base */
+/* Polaris Engine Base */
 #if !defined(USE_QT)
 #include "../polaris.h"
 #else

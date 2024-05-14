@@ -826,7 +826,7 @@ const char *get_call_argument(int index)
 }
 
 /*
- * For Polaris2 Pro
+ * For the Editor
  */
 #ifdef USE_EDITOR
 
