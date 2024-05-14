@@ -18,6 +18,14 @@ echo '' >> debian/changelog;
 echo '  * Sync upstream' >> debian/changelog;
 echo '' >> debian/changelog;
 echo " -- Keiichi Tabata <ktabata@polaris-engine.com>  `date '+%a, %d %b %Y %T %z'`" >> debian/changelog;
+echo "\n"
+
+# Append the changelog for 24.04 noble
+echo "polaris-engine ($VERSION-$MINOR) noble; urgency=medium" >> debian/changelog;
+echo '' >> debian/changelog;
+echo '  * Sync upstream' >> debian/changelog;
+echo '' >> debian/changelog;
+echo " -- Keiichi Tabata <ktabata@polaris-engine.com>  `date '+%a, %d %b %Y %T %z'`" >> debian/changelog;
 
 # Make a directory and enter it.
 rm -rf work
