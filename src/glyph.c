@@ -288,21 +288,21 @@ int utf8_to_utf32(const char *mbs, uint32_t *wc)
 		return 0;
 
 	/* 1バイト目をチェックしてオクテット数を求める */
-	if(mbs[0] == '\0')
+	if (mbs[0] == '\0')
 		octets = 0;
-	else if((mbs[0] & 0x80) == 0)
+	else if ((mbs[0] & 0x80) == 0)
 		octets = 1;
-	else if((mbs[0] & 0xe0) == 0xc0)
+	else if ((mbs[0] & 0xe0) == 0xc0)
 		octets = 2;
-	else if((mbs[0] & 0xf0) == 0xe0)
+	else if ((mbs[0] & 0xf0) == 0xe0)
 		octets = 3;
-	else if((mbs[0] & 0xf8) == 0xf0)
+	else if ((mbs[0] & 0xf8) == 0xf0)
 		octets = 4;
 	else
 		return -1;	/* 解釈できない */
 
 	/* sの長さをチェックする */
-	if(mbslen < octets)
+	if (mbslen < octets)
 		return -1;	/* mbsの長さが足りない */
 
 	/* 2-4バイト目をチェックする */
@@ -312,7 +312,7 @@ int utf8_to_utf32(const char *mbs, uint32_t *wc)
 	}
 
 	/* 各バイトを合成してUTF-32文字を求める */
-	switch(octets) {
+	switch (octets) {
 	case 0:
 		ret = 0;
 		break;

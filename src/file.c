@@ -78,9 +78,7 @@ const wchar_t *conv_utf8_to_utf16(const char *s);
 /*
  * 前方参照
  */
-#if 0
-static bool check_file_name(const char *file);
-#endif
+static void warn_file_name_case(const char *dir, const char *file);
 static void ungetc_rfile(struct rfile *rf, char c);
 static void set_random_seed(uint64_t index, uint64_t *next_random);
 static char get_next_random(uint64_t *next_random, uint64_t *prev_random);
@@ -96,7 +94,7 @@ static void rewind_random(uint64_t *next_random, uint64_t *prev_random);
 bool init_file(void)
 {
 #if defined(USE_EDITOR)
-	/* ユーザの気持ちを考えて、デバッガ版ではパッケージを開けない */
+	/* ユーザの気持ちを考えて、エディタではパッケージを開けない */
 	return true;
 #else
 	FILE *fp;
@@ -230,6 +228,8 @@ struct rfile *open_rfile(
 	struct rfile *rf;
 	uint64_t i;
 
+	warn_file_name_case(dir, file);
+
 	/* rfile構造体のメモリを確保する */
 	rf = malloc(sizeof(struct rfile));
 	if (rf == NULL) {
@@ -323,6 +323,43 @@ struct rfile *open_rfile(
 	rf->prev_random = 0;
 
 	return rf;
+}
+
+/* ファイル名に大文字が含まれていれば警告する */
+static void warn_file_name_case(const char *dir, const char *file)
+{
+	const char *c;
+	bool after_dot;
+
+	c = file;
+	after_dot = false;
+	while (*c != '\0') {
+		if (((*c) & 0x80) == 0) {
+			if (!after_dot) {
+				if (*c == '.')
+					after_dot = true;
+			} else {
+				/* 1-byte */
+				if (*c >= 'A' && *c <= 'Z') {
+					log_file_name_case(dir, file);
+					return;
+				}
+			}
+			c++;
+		} else if(((*c) & 0xe0) == 0xc0) {
+			/* 2-byte */
+			c += 2;
+		} else if(((*c) & 0xf0) == 0xe0) {
+			/* 3-byte */
+			c += 3;
+		} else if (((*c) & 0xf8) == 0xf0) {
+			/* 4-byte */
+			c += 4;
+		} else {
+			/* Encode Error */
+			return;
+		}
+	}
 }
 
 /*

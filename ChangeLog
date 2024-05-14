@@ -4,12 +4,17 @@ This file is referred by some automatic release scripts.
 
 [Release History (Japanese)]
 <!-- BEGIN-LATEST-JP -->
+<li>Polaris Engine 1.2.43 2024/5/14
+  <ul>
+    <li>大文字拡張子への警告を追加 (Androidでの混乱を回避)</li>
+  </ul>
+</li>
+<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.2.42 2024/5/12
   <ul>
     <li>自動アップデート機能のテスト</li>
   </ul>
 </li>
-<!-- END-LATEST-JP -->
 <li>Polaris Engine 1.2.41 2024/5/12
   <ul>
     <li>自動アップデート機能</li>
@@ -453,12 +458,17 @@ This file is referred by some automatic release scripts.
 
 [Release History (English)]
 <!-- BEGIN-LATEST-EN -->
+<li>Polaris Engine 1.2.43 2024/5/14
+  <ul>
+    <li>Added a warning to CAPITAL file name extensions to avoid confusion on Android</li>
+  </ul>
+</li>
+<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.2.42 2024/5/12
   <ul>
     <li>自動アップデート機能のテスト</li>
   </ul>
 </li>
-<!-- END-LATEST-EN -->
 <li>Polaris Engine 1.2.41 2024/5/12
   <ul>
     <li>自動アップデート機能</li>

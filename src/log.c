@@ -66,16 +66,18 @@ void log_audio_file_error(const char *dir, const char *file)
 }
 
 /*
- * ファイル名に英数字以外が含まれるエラーを記録する
+ * ファイル名に大文字が含まれる旨の警告を記録する
  */
-void log_file_name(const char *dir, const char *file)
+void log_file_name_case(const char *dir, const char *file)
 {
 	if (is_english_mode()) {
-		log_error("File name includes non-ASCII character(s). "
-			  "\"%s/%s\"\n", dir, file);
+		log_warn("File name includes CAPITAL character(s). "
+			 "Some exported versions are case-sensitive. "
+			 "\"%s/%s\"\n", dir, file);
 	} else {
-		log_error(U8("ファイル名に半角英数字以外の文字が使われています。 ")
-			  U8("\"%s/%s\"\n"), dir, file);
+		log_warn(U8("ファイル名に半角の大文字が含まれています。")
+			 U8("大文字と小文字が区別されることに注意してください。")
+			 U8("\"%s/%s\"\n"), dir, file);
 	}
 }
 
