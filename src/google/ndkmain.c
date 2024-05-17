@@ -574,7 +574,7 @@ bool is_video_playing(void)
 {
 	if (state_video) {
 		jclass cls = (*jni_env)->FindClass(jni_env, "com/polarisengine/engineandroid/MainActivity");
-		jmethodID mid = (*jni_env)->GetMethodID(jni_env, cls, "bridgeIsVideoPlaying", "()V");
+		jmethodID mid = (*jni_env)->GetMethodID(jni_env, cls, "bridgeIsVideoPlaying", "()Z");
 		if (!(*jni_env)->CallBooleanMethod(jni_env, main_activity, mid)) {
 			state_video = false;
 			return false;
