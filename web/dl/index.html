@@ -106,9 +106,9 @@
 <h4>ダウンロード</h4>
 <p>
 <!-- ※ここはリリース時に自動で更新されます -->
-<!-- LATEST-VERSION-AND-DATE -->最新版 Polaris Engine 1.2.44 (2024/5/17):<br>
-<!-- LATEST-EXE --><a href="/dl/polaris-engine-1.2.44.exe">Windows版 Polaris Engine</a><br>
-<!-- LATEST-DMG --><a href="/dl/polaris-engine-1.2.44.dmg">Mac版 Polaris Engine</a><br>
+<!-- LATEST-VERSION-AND-DATE -->最新版 Polaris Engine 1.2.43 (2024/5/17):<br>
+<!-- LATEST-EXE --><a href="/dl/polaris-engine-1.2.43.exe">Windows版 Polaris Engine</a><br>
+<!-- LATEST-DMG --><a href="/dl/polaris-engine-1.2.43.dmg">Mac版 Polaris Engine</a><br>
 <a href="/dl/install-polaris-engine.sh" download>Linux/BSD版 Polaris Engine</a> (Ubuntu, Debian, Fedora, RedHat, FreeBSD)<br>
 <br>
 モバイル版 (編集/プレビューのみ):<br>
@@ -378,19 +378,17 @@
 <ul>
 	<li>出力ゲーム
 		<ul>
-			<li>Nintendo Switch, PlayStation 4/5, Xbox Series X|Sを想定 (ただし各社と契約はない))</li>
+			<li>Nintendo Switch, PlayStation 4/5, Xbox Series X|Sを想定しています (ただし各社と契約はないです)</li>
+			<li>作者自身は各社のSDKを持っていないので、Windows 64bit版のUnityでテストしています</li>
+			<li>家庭用ゲーム機でゲームのリリースを行うには、ご自身でSDKを入手するか、ゲーム会社にご相談ください</li>
 		</ul>
 	</li>
 	<li>詳細
 		<ul>
-			<li>Unity版
-				<ul>
-					<li>UnityのC#ソースコードを出力します</li>
-					<li>現在はネイティブコードのDLLを併用しています(.dll/.dylib/.so)</li>
-					<li>DLLのビルドには各社のSDKが必要ですので、リリース元のゲーム会社に依頼してください (ソースコードの build/engine-llvm/Makefile を参照)</li>
-					<li>直近でC#トランスレータを開発してネイティブコード不要化の計画</li>
-				</ul>
-			</li>
+			<li>UnityのC#ソースコードを出力します</li>
+			<li>現在はネイティブコードのDLLを併用しています(.dllや.so)</li>
+			<li>DLLのビルドには各社のSDKが必要で、ソースコードの build/engine-unity/Makefile を参照すれば方法がわかります</li>
+			<li>直近でC#トランスレータを開発するつもりであり、ネイティブコードを不要化する計画です</li>
 		</ul>
 	</li>
 </ul>
@@ -413,7 +411,6 @@
         <ul>
 <!-- ここに自動でリリースノートが挿入されます -->
 <!-- LATEST-RELEASE-NOTE -->
-<li>Polaris Engine 1.2.44 2024/5/17 <ul> <li>Android版の動画再生を修正</li> </ul> </li>
 <li>Polaris Engine 1.2.43 2024/5/17 <ul> <li>大文字拡張子への警告を追加 (Androidでの混乱を回避)</li> <li>目パチ/口パク画像を使用時にallコマンドでnoneを指定した場合のバグを修正</li> </ul> </li>
 <li>Polaris Engine 1.2.42 2024/5/12 <ul> <li>自動アップデート機能のテスト</li> </ul> </li>
 <li>Polaris Engine 1.2.41 2024/5/12 <ul> <li>自動アップデート機能</li> </ul> </li>
