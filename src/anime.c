@@ -923,10 +923,12 @@ static void synthesis_eye_anime(int chpos)
 	float ofs_time, base_time;
 	int x, y, i, frame_count, repeat_count;
 	int base_layer, eye_layer;
-	
+
 	base_layer = chpos_to_layer(chpos);
 	eye_layer = chpos_to_eye_layer(chpos);
 
+	if (get_layer_image(base_layer) == NULL)
+		return;
 	if (get_layer_image(eye_layer) == NULL)
 		return;
 
@@ -1068,6 +1070,8 @@ void run_lip_anime(int chpos, const char *msg)
 	base_layer = chpos_to_layer(chpos);
 	lip_layer = chpos_to_lip_layer(chpos);
 
+	if (get_layer_image(base_layer) == NULL)
+		return;
 	if (get_layer_image(lip_layer) == NULL)
 		return;
 

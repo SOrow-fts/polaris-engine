@@ -4,9 +4,10 @@ This file is referred by some automatic release scripts.
 
 [Release History (Japanese)]
 <!-- BEGIN-LATEST-JP -->
-<li>Polaris Engine 1.2.43 2024/5/14
+<li>Polaris Engine 1.2.43 2024/5/17
   <ul>
     <li>大文字拡張子への警告を追加 (Androidでの混乱を回避)</li>
+    <li>目パチ/口パク画像を使用時にallコマンドでnoneを指定した場合のバグを修正</li>
   </ul>
 </li>
 <!-- END-LATEST-JP -->
@@ -461,6 +462,7 @@ This file is referred by some automatic release scripts.
 <li>Polaris Engine 1.2.43 2024/5/14
   <ul>
     <li>Added a warning to CAPITAL file name extensions to avoid confusion on Android</li>
+    <li>Fixed a bug of the all command with eye-blink and or lip-sync</li>
   </ul>
 </li>
 <!-- END-LATEST-EN -->
